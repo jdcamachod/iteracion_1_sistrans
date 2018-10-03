@@ -7,7 +7,8 @@ public class Producto {
 	private long id;
 	private String calidad;
 	private String codigoBarras;
-	private String especificacionEmpacado;
+	private int peso;
+	private int volumen;
 	private String marca;
 	private int nivelReorden;
 	private String nombre;
@@ -15,14 +16,29 @@ public class Producto {
 	private int presentacion;
 	private String unidadMedida;
 	private long idCategoria;
-	public Producto(long id, String calidad, String codigoBarras, String especificacionEmpacado, String marca,
+	
+	public Producto()
+	{
+		this.id = 0;
+		this.calidad = "";
+		this.codigoBarras = "";
+		this.marca = "";
+		this.nivelReorden = 0;
+		this.nombre = "";
+		this.precioUnitario = 0;
+		this.presentacion = 0;
+		this.unidadMedida = "";
+		this.idCategoria = 0;
+		this.peso = 0;
+		this.volumen = 0;
+	}
+	public Producto(long id, String calidad, String codigoBarras, int peso, int volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, int presentacion, String unidadMedida,
 			long idCategoria) {
 	
 		this.id = id;
 		this.calidad = calidad;
 		this.codigoBarras = codigoBarras;
-		this.especificacionEmpacado = especificacionEmpacado;
 		this.marca = marca;
 		this.nivelReorden = nivelReorden;
 		this.nombre = nombre;
@@ -30,6 +46,8 @@ public class Producto {
 		this.presentacion = presentacion;
 		this.unidadMedida = unidadMedida;
 		this.idCategoria = idCategoria;
+		this.peso = peso;
+		this.volumen = volumen;
 	}
 	public long getId() {
 		return id;
@@ -49,11 +67,18 @@ public class Producto {
 	public void setCodigoBarras(String codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
-	public String getEspecificacionEmpacado() {
-		return especificacionEmpacado;
+
+	public int getPeso() {
+		return peso;
 	}
-	public void setEspecificacionEmpacado(String especificacionEmpacado) {
-		this.especificacionEmpacado = especificacionEmpacado;
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+	public int getVolumen() {
+		return volumen;
+	}
+	public void setVolumen(int volumen) {
+		this.volumen = volumen;
 	}
 	public String getMarca() {
 		return marca;
