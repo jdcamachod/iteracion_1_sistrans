@@ -1,5 +1,4 @@
 package uniandes.superAndes.persistencia;
-
-public class SQLFactura {
+class SQLFactura {
 
 }

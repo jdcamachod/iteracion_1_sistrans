@@ -1,21 +1,24 @@
 package uniandes.superAndes.negocio;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Producto {
 	
 	private long id;
 	private String calidad;
 	private String codigoBarras;
-	private int peso;
-	private int volumen;
+	private double peso;
+	private double volumen;
 	private String marca;
 	private int nivelReorden;
 	private String nombre;
 	private double precioUnitario;
 	private int presentacion;
+	private double precioUnidadMedida;
 	private String unidadMedida;
 	private long idCategoria;
+	private Date fechaVencimiento;
 	
 	public Producto()
 	{
@@ -31,10 +34,12 @@ public class Producto {
 		this.idCategoria = 0;
 		this.peso = 0;
 		this.volumen = 0;
+		this.fechaVencimiento = new Date();
+		this.precioUnidadMedida =0;
 	}
 	public Producto(long id, String calidad, String codigoBarras, int peso, int volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, int presentacion, String unidadMedida,
-			long idCategoria) {
+			long idCategoria, Date fechaVencimiento, double precioUnidadMedida) {
 	
 		this.id = id;
 		this.calidad = calidad;
@@ -48,6 +53,8 @@ public class Producto {
 		this.idCategoria = idCategoria;
 		this.peso = peso;
 		this.volumen = volumen;
+		this.fechaVencimiento =fechaVencimiento;
+		this.precioUnidadMedida = precioUnidadMedida;
 	}
 	public long getId() {
 		return id;
@@ -68,16 +75,16 @@ public class Producto {
 		this.codigoBarras = codigoBarras;
 	}
 
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
-	public void setPeso(int peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
-	public int getVolumen() {
+	public double getVolumen() {
 		return volumen;
 	}
-	public void setVolumen(int volumen) {
+	public void setVolumen(double volumen) {
 		this.volumen = volumen;
 	}
 	public String getMarca() {
@@ -121,6 +128,18 @@ public class Producto {
 	}
 	public void setIdCategoria(long idCategoria) {
 		this.idCategoria = idCategoria;
+	}
+	public double getPrecioUnidadMedida() {
+		return precioUnidadMedida;
+	}
+	public void setPrecioUnidadMedida(double precioUnidadMedida) {
+		this.precioUnidadMedida = precioUnidadMedida;
+	}
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
 	}
 	
 	

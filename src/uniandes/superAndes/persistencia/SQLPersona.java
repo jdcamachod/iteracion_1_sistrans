@@ -1,5 +1,5 @@
 package uniandes.superAndes.persistencia;
 
-public class SQLPersona {
+ class SQLPersona {
 
 }

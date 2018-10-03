@@ -1,5 +1,5 @@
 package uniandes.superAndes.persistencia;
 
-public class SQLTipoProducto {
+ class SQLTipoProducto {
 
 }
