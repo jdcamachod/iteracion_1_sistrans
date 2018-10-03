@@ -4,10 +4,7 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
-
-import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Categoria;
-import uniandes.superAndes.negocio.Producto;
 
 class SQLCategoria {
 	/* ****************************************************************
@@ -89,7 +86,7 @@ class SQLCategoria {
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS BODEGAS de la 
 	 * base de datos de SuperAndes
-	 * @param pm - El manejador de persistencia
+	 * @param pm - El manejador de persistenci
 	 * @return Una lista de objetos CATEGORIA
 	 */
 	public List<Categoria> darCategorias (PersistenceManager pm)
