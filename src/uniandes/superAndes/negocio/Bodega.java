@@ -21,7 +21,7 @@ public class Bodega {
 	/**
 	 * La capacidad en peso que tiene la bodega
 	 */
-	private int peso;
+	private double peso;
 	
 	/**
 	 * El identificador de la categoria de producto que almacena la bodega
@@ -31,7 +31,7 @@ public class Bodega {
 	/**
 	 * Capacidad en volumen que soporta la bodega
 	 */
-	private int volumen;
+	private double volumen;
 	
 	/**
 	 * El identificador de la sucursal a la que pertenece la bodega
@@ -60,7 +60,7 @@ public class Bodega {
 	 * @param volumen - volumen capacidad de la bodega
 	 * @param idSucursal - identificador de la sucursal de la bodega
 	 */
-	public Bodega(long id, String direccion, int peso, long idCategoria, int volumen, long idSucursal) {
+	public Bodega(long id, String direccion, double peso, long idCategoria, double volumen, long idSucursal) {
 		
 		this.id = id;
 		this.direccion = direccion;
@@ -106,7 +106,7 @@ public class Bodega {
 	 * Retorna el peso capacidad de la bodega
 	 * @return el peso de la bodega
 	 */
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
 
@@ -114,7 +114,7 @@ public class Bodega {
 	 * Asigna un nuevo peso a la bodega
 	 * @param peso peso a asignar
 	 */
-	public void setPeso(int peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
 
@@ -138,7 +138,7 @@ public class Bodega {
 	 * Retorna el volumen capacidad de la bodega
 	 * @return volumen de la bodega
 	 */
-	public int getVolumen() {
+	public double getVolumen() {
 		return volumen;
 	}
 
@@ -146,7 +146,7 @@ public class Bodega {
 	 * Asigna un nuevo volumen a la bodega
 	 * @param volumen volumen a asignar
 	 */
-	public void setVolumen(int volumen) {
+	public void setVolumen(double volumen) {
 		this.volumen = volumen;
 	}
 
