@@ -99,7 +99,7 @@ class SQLBodega {
 	public List<Bodega> darBodegas (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega() );
-		q.setResultClass(Producto.class);
+		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();
 	}
 }
