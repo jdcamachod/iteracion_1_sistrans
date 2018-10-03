@@ -208,13 +208,13 @@ public class PersistenciaSuperAndes {
 		tablas.add ("SUCURSAL");
 		tablas.add ("PROVEEDOR");
 		tablas.add ("EMPRESA");
-		tablas.add ("PERSONA");
+		tablas.add ("PERSONA_NATURAL");
 		tablas.add ("CLIENTE");
 		tablas.add ("BODEGA");
 		tablas.add ("CATEGORIA");
 		tablas.add ("TIPO_PRODUCTO");
 		tablas.add ("DESCUENTO_PORCENTAJE");
-		tablas.add ("PAGUE_1_LLEVE_2_PORCENTAJE");
+		tablas.add ("PAGUE_1_LLEVE_SEG_PORCENTAJE");
 		tablas.add ("PAGUE_N_LLEVE_M");
 		tablas.add ("PAGUE_X_LLEVE_Y");
 		tablas.add ("PROMOCION");
@@ -222,14 +222,14 @@ public class PersistenciaSuperAndes {
 		tablas.add ("FACTURA");
 		tablas.add ("PRODUCTO");
 		tablas.add ("ORDEN_PEDIDO");
-		tablas.add ("ORDENES_PRODUCTOS");
-		tablas.add ("PRODUCTOS_BODEGAS");
-		tablas.add ("PRODUCTOS_ESTANTES");
-		tablas.add ("PRODUCTOS_FACTURAS");
-		tablas.add ("PRODUCTOS_PROMOCIONES");
-		tablas.add ("PRODUCTOS_PROVEEDORES");
+		tablas.add ("PRODUCTOS_ORDEN");
+		tablas.add ("PRODUCTOS_BODEGA");
+		tablas.add ("PRODUCTOS_ESTANTE");
+		tablas.add ("PRODUCTOS_FACTURA");
+		tablas.add ("PROMOCIONES_PRODUCTOS");
+		tablas.add ("PRODUCTOS_PROVEEDOR");
 		tablas.add ("PROMOCIONES_FACTURAS");
-		tablas.add ("SUCURSALES_CLIENTES");
+		tablas.add ("CLIENTES_SUCURSALES");
 		tablas.add("PROMOCION_PAQUETE");
 		}
 	/**

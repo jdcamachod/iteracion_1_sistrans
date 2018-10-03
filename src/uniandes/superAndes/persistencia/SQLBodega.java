@@ -53,10 +53,10 @@ class SQLBodega {
 	 * @param idSucursal
 	 * @return
 	 */
-	public long adicionarBodega (PersistenceManager pm, long idBodega, String direccion, double peso, double volumen, long idSucursal) 
+	public long adicionarBodega (PersistenceManager pm, long idBodega, long tipo,String direccion, double peso, double volumen, long idSucursal) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id, direccion, peso, volumen, idSucursal) values (?, ?, ?, ?,?)");
-        q.setParameters(idBodega, direccion, peso, volumen, idSucursal);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id,tipo ,direccion, peso, volumen, idSucursal) values (?, ?,?, ?, ?,?)");
+        q.setParameters(idBodega, tipo,direccion, peso, volumen, idSucursal);
         return (long) q.executeUnique();
 	}
 
@@ -67,7 +67,7 @@ class SQLBodega {
 	 * @param idBodega - El identificador de la bodega
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarProveedorPorId (PersistenceManager pm, long idBodega)
+	public long eliminarBodegaPorId (PersistenceManager pm, long idBodega)
 	{
         Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBodega() + " WHERE id = ?");
         q.setParameters(idBodega);
@@ -75,7 +75,7 @@ class SQLBodega {
 	}
 
 	/**
-	 * Crea y ejecuta la sentencia SQL para encontrar la información de UN PROVEEDOR de la 
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de UNA BODEGA de la 
 	 * base de datos de SuperAndes, por su identificador
 	 * @param pm - El manejador de persistencia
 	 * @param idBodega - El identificador de la bodega
@@ -99,7 +99,7 @@ class SQLBodega {
 	public List<Bodega> darBodegas (PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega() );
-		q.setResultClass(Producto.class);
+		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();
 	}
 }
