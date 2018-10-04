@@ -11,7 +11,7 @@ public class DescuentoPorcentaje extends Promocion {
 	/**
 	 * El porcentaje a descontar
 	 */
-	private int porcentaje;
+	private double porcentaje;
 	
 	private long idDescuentoPorcentaje;
 
@@ -33,7 +33,7 @@ public class DescuentoPorcentaje extends Promocion {
 	 * @param precio - precio de la promocion
 	 * @param porcentaje - porcentaje a descontar con la promocion
 	 */
-	public DescuentoPorcentaje(long id, Date fechaInicial, Date fechaFinal, int precio, int porcentaje, long idDescuentoPorcentaje) {
+	public DescuentoPorcentaje(long id, Date fechaInicial, Date fechaFinal, int precio, double porcentaje, long idDescuentoPorcentaje) {
 		super(id, fechaInicial, fechaFinal, precio,idDescuentoPorcentaje, 0,0,0);
 		this.porcentaje = porcentaje;
 	}
@@ -42,7 +42,7 @@ public class DescuentoPorcentaje extends Promocion {
 	 * Retorna el porcentaje a descontar
 	 * @return porcentaje a descontar
 	 */
-	public int getPorcentaje() {
+	public double getPorcentaje() {
 		return porcentaje;
 	}
 
@@ -50,7 +50,7 @@ public class DescuentoPorcentaje extends Promocion {
 	 * Asigna un porcentaje en la promocion
 	 * @param porcentaje porcentaje a asignar
 	 */
-	public void setPorcentaje(int porcentaje) {
+	public void setPorcentaje(double porcentaje) {
 		this.porcentaje = porcentaje;
 	}
 

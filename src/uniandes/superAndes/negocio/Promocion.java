@@ -24,6 +24,7 @@ public abstract class Promocion {
 		idPagueNLleveM=0;
 		idPagueXLleveY=0;
 	}
+	
 	public Promocion(long id, Date fechaInicial, Date fechaFinal, int precio, long idDescuentoPorcentaje, long idPague1Lleve2Porcentaje, long idPagueNLleveM, long idPagueXLleveY) {
 		
 		this.id = id;

@@ -47,10 +47,10 @@ class SQLOrdenesProductos {
 		 * @param idOrdenesProductos - El identificador de la OrdenesProductos	
 		 * @return
 		 */
-		public long adicionarOrdenesProductos (PersistenceManager pm, long idOrdenesProductos, long idProducto, long idOrden) 
+		public long adicionarOrdenesProductos (PersistenceManager pm, long idOrdenesProductos, long idProducto, long idOrden, double precioProveedor) 
 		{
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenesProductos() + "(id, idProducto, idOrden) values (?, ?, ?)");
-			q.setParameters(idOrdenesProductos, idProducto, idOrden);
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenesProductos() + "(id, idProducto, idOrden, precioProveedor) values (?, ?, ?, ?)");
+			q.setParameters(idOrdenesProductos, idProducto, idOrden, precioProveedor);
 			return (long) q.executeUnique();
 		}
 

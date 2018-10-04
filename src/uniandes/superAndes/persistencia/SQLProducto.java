@@ -72,7 +72,7 @@ class SQLProducto {
 		 * @param nombrePro - El nombre del bar
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarBaresPorNombre (PersistenceManager pm, String nombrePro)
+		public long eliminarProductosPorNombre (PersistenceManager pm, String nombrePro)
 		{
 	        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProducto()  + " WHERE nombre = ?");
 	        q.setParameters(nombrePro);
@@ -85,7 +85,7 @@ class SQLProducto {
 		 * @param idPro - El identificador del producto
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarBarPorId (PersistenceManager pm, long idPro)
+		public long eliminarProductoPorId (PersistenceManager pm, long idPro)
 		{
 	        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaProducto() + " WHERE id = ?");
 	        q.setParameters(idPro);
@@ -99,7 +99,7 @@ class SQLProducto {
 		 * @param idPro - El identificador del producto
 		 * @return El objeto PRODUCTO que tiene el identificador dado
 		 */
-		public Producto darBarPorId (PersistenceManager pm, long idPro) 
+		public Producto darProductoPorId (PersistenceManager pm, long idPro) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProducto()  + " WHERE id = ?");
 			q.setResultClass(Producto.class);

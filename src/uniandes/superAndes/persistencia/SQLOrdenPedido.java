@@ -49,15 +49,21 @@ class SQLOrdenPedido {
 		 * @param nombre nombre que se desea adicionar a la categoria
 		 * @return
 		 */
-		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido, String estado,Date fechaEsperadaDeEntrega, Date fechaEntrega, String calificacionPedido , long proveedor
-  ) 
+		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido,Date fechaEsperadaDeEntrega, int estado  , long proveedor) 
 		{
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenPedido() + "(id, estado, fechaEsperadaDeEntrega,  fechaEntrega, calificacionPedido, proveedor) values (?, ?,?,?,?,?)");
-			q.setParameters(idOrdenPedido, estado, fechaEsperadaDeEntrega, fechaEntrega, calificacionPedido, proveedor);
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenPedido() + "(id, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor) values (?, ?,?,?,?)");
+			q.setParameters(idOrdenPedido, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor);
 			return (long) q.executeUnique();
 		}
 
 
+		public long registrarLlegadaOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido, int estado, Date fechaEntrega) 
+		{
+			Query q = pm.newQuery(SQL, "UPDATE " +  pp.darTablaOrdenPedido() + " SET estado="+ estado +", calificacionPedido="+calificacionPedido+ ", fechaentrega="+fechaEntrega+" WHERE id = "+idOrdenPedido);
+			return (long) q.executeUnique();
+		}
+
+		
 		/**
 		 * Crea y ejecuta la sentencia SQL para eliminar UNA OrdenPedido de la base de datos de SuperAndes, por su identificador
 		 * @param pm - El manejador de persistencia
@@ -99,4 +105,6 @@ class SQLOrdenPedido {
 			q.setResultClass(OrdenPedido.class);
 			return (List<OrdenPedido>) q.executeList();
 		}
+		
+		 
 }

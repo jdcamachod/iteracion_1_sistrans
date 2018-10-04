@@ -89,6 +89,13 @@ class SQLBodega {
 		return (Bodega) q.executeUnique();
 	}
 
+	public Bodega darBodegaConTipoYEspacioParaUno (PersistenceManager pm, long idTipo ) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega()  + " WHERE tipo = ? ");
+		q.setResultClass(Bodega.class);
+		q.setParameters(idTipo);
+		return (Bodega) q.executeUnique();
+	}
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS BODEGAS de la 

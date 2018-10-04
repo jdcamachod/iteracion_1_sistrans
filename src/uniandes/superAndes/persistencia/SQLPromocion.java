@@ -42,11 +42,11 @@ class SQLPromocion {
 			this.pp = pp;
 		}
 		
-		public long adicionarPromocion (PersistenceManager pm, long idPromocion, Date fechaInicial, Date fechaFinal, int precio, long idPague1Lleve2Porcentaje, long idPagueNLleveM, long idPagueXLleveY, long idDescuentoPorcentaje) 
+		public Long adicionarPromocion (PersistenceManager pm, Long idPromocion, Date fechaInicial, Date fechaFinal, int precio, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY, Long idDescuentoPorcentaje) 
 		{
 	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)");
 	        q.setParameters(idPromocion, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje);
-	        return (long) q.executeUnique();
+	        return (Long) q.executeUnique();
 		}
 
 
@@ -56,11 +56,11 @@ class SQLPromocion {
 		 * @param idPromocion - El identificador de la promocion
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarPromocionPorId (PersistenceManager pm, long idPromocion)
+		public Long eliminarPromocionPorId (PersistenceManager pm, Long idPromocion)
 		{
 	        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaPromocion() + " WHERE id = ?");
 	        q.setParameters(idPromocion);
-	        return (long) q.executeUnique();
+	        return (Long) q.executeUnique();
 		}
 
 		/**
@@ -70,7 +70,7 @@ class SQLPromocion {
 		 * @param idPromocion - El identificador de la promocion
 		 * @return El objeto Promocion que tiene el identificador dado
 		 */
-		public Promocion darPromocionPorId (PersistenceManager pm, long idPromocion) 
+		public Promocion darPromocionPorId (PersistenceManager pm, Long idPromocion) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPromocion()  + " WHERE id = ?");
 			q.setResultClass(Promocion.class);

@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Pague1Lleve2Porcentaje extends Promocion {
 
-	private int porcentaje2;
+	private double porcentaje2;
 	
 	
 
 
 
 	public Pague1Lleve2Porcentaje(long id, Date fechaInicial, Date fechaFinal, int precio, 
-			long idPague1Lleve2Porcentaje, int porcentaje2
+			long idPague1Lleve2Porcentaje, double porcentaje2
 			) {
 		super(id, fechaInicial, fechaFinal, precio, 0, idPague1Lleve2Porcentaje, 0,
 				0);
@@ -19,7 +19,7 @@ public class Pague1Lleve2Porcentaje extends Promocion {
 		
 	}
 
-	public int getPorcentaje2() {
+	public double getPorcentaje2() {
 		return porcentaje2;
 	}
 
