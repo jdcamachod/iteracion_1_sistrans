@@ -1,0 +1,34 @@
+{
+	"title": "Nombres de las tablas de SuperAndes para la aplicación A",
+	"unidadPersistencia": "SuperAndes",
+	"tablas":
+	[
+		"BODEGA",
+		"CATEGORIA",
+		"CLIENTE",
+		"CLIENTES_SUCURSALES",
+		"DESCUENTO_PORCENTAJE",
+		"EMPRESA",
+		"ESTANTE",
+		"FACTURA",
+		"ORDEN_PEDIDO",
+		"PAGUE_1_LLEVE_SEG_PORCENTAJE",
+		"PAGUE_N_LLEVE_M",
+		"PAGUE_X_LLEVE_Y",
+		"PERSONA_NATURAL",
+		"PRODUCTO",
+		"PRODUCTOS_BODEGA",
+		"PRODUCTOS_ESTANTE",
+		"PRODUCTOS_FACTURA",
+		"PRODUCTOS_ORDEN",
+		"PRODUCTOS_PROVEEDOR",
+		"PROMOCION",
+		"PROMOCION_PAQUETE",
+		"PROMOCIONES_FACTURA",
+		"PROMOCIONES_PRODUCTOS",
+		"PROVEEDOR",
+		"SUCURSAL",
+		"TIPO_PRODUCTO"
+
+	]
+}

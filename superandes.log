@@ -1,0 +1,5 @@
+23:50:53,712 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Probando el acceso a la base de datos con datos válidos (BD, credenciales, esquema
+23:50:53,761 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Se encontró un archivo de configuración de tablas válido
+23:50:55,066 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Conexión realizada correstamente
+23:50:55,066 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Cerrando la conexión
+23:50:55,071 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Conexión cerrada
