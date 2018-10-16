@@ -6,10 +6,10 @@ public class Sucursal {
 	
 	private long id;
 	private String nombre;
-	private int tamanio;
+	private double tamanio;
 	private String direccion;
 	private String ciudad;
-	public Sucursal(long id, String nombre, int tamanio, String direccion, String ciudad) {
+	public Sucursal(long id, String nombre, double tamanio, String direccion, String ciudad) {
 		
 		this.id = id;
 		this.nombre = nombre;
@@ -29,10 +29,10 @@ public class Sucursal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getTamanio() {
+	public double getTamanio() {
 		return tamanio;
 	}
-	public void setTamanio(int tamanio) {
+	public void setTamanio(double tamanio) {
 		this.tamanio = tamanio;
 	}
 	public String getDireccion() {

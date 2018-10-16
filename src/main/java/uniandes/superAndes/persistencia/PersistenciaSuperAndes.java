@@ -24,7 +24,7 @@ import uniandes.superAndes.negocio.Pague1Lleve2Porcentaje;
 import uniandes.superAndes.negocio.PagueNLleveM;
 import uniandes.superAndes.negocio.PagueXLleveY;
 import uniandes.superAndes.negocio.Promocion;
-
+import uniandes.superAndes.negocio.Sucursal;
 
 
 
@@ -243,6 +243,24 @@ public class PersistenciaSuperAndes {
 		tablas.add ("PROMOCIONES_FACTURAS");
 		tablas.add ("CLIENTES_SUCURSALES");
 		tablas.add("PROMOCION_PAQUETE");
+		
+		tablas.add("BODEGA_SEQ");
+		tablas.add("CATEGORIA_SEQ");
+		tablas.add("CLIENTE_SEQ");
+		tablas.add("DESCUENTO_PORCENTAJE_SEQ");
+		tablas.add("EMPRESA_SEQ");
+		tablas.add("ESTANTE_SEQ");
+		tablas.add("FACTURA_SEQ");
+		tablas.add("ORDEN_PEDIDO_SEQ");
+		tablas.add("PAGUE_1_LLEVE_SEG_PORCENTAJE_SEQ");
+		tablas.add("PAGUE_N_LLEVE_M_SEQ");
+		tablas.add("PAGUE_X_LLEVE_Y_SEQ");
+		tablas.add("PERSONA_NATURAL_SEQ");
+		tablas.add("PRODUCTO_SEQ");
+		tablas.add("PROMOCION_SEQ");
+		tablas.add("PROVEEDOR_SEQ");
+		tablas.add("SUCURSAL_SEQ");
+		tablas.add("TIPO_PRODUCTO_SEQ");
 	}
 	/**
 	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
@@ -559,6 +577,139 @@ public class PersistenciaSuperAndes {
 	{
 		return tablas.get (26);
 	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqBodega ()
+	{
+		return tablas.get(27);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqCategoria()
+	{
+		return tablas.get(28);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqCliente ()
+	{
+		return tablas.get(29);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqDescuentoPorcentaje ()
+	{
+		return tablas.get(30);
+	}
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqEmpresa()
+	{
+		return tablas.get(31);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqEstante ()
+	{
+		return tablas.get(32);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqFactura ()
+	{
+		return tablas.get(33);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqOrdenPedido()
+	{
+		return tablas.get(34);
+	}
+
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqPaque1LleveSegPorcentaje ()
+	{
+		return tablas.get(35);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqPaqueNLleveM ()
+	{
+		return tablas.get(36);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqPaqueXLleveY ()
+	{
+		return tablas.get(37);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqPersonaNatural ()
+	{
+		return tablas.get(38);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqProducto ()
+	{
+		return tablas.get(39);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqPromocion ()
+	{
+		return tablas.get(40);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqProveedor ()
+	{
+		return tablas.get(41);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqSucursal()
+	{
+		return tablas.get(42);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
+	 */
+	public String darSeqTipoProducto()
+	{
+		return tablas.get(43);
+	}
+
 
 	/**
 	 * Transacción para el generador de secuencia de SuperAndes
@@ -587,6 +738,131 @@ public class PersistenciaSuperAndes {
 		}
 		return resp;
 	}
+
+
+
+	/* ****************************************************************
+	 * 			Métodos para manejar las SUCURSALES
+	 *****************************************************************/
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public Sucursal darSucursalPorNombre (String nombre)
+	{
+		return sqlSucursal.darSucursalPorNombre(pmf.getPersistenceManager(), nombre);
+	}
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * 
+	 * @return El objeto Sucursal adicionado. null si ocurre alguna Excepción
+	 */
+	public Sucursal adicionarSucursal(String nombre, String direccion, double tamano, String ciudad)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlSucursal.adicionarSucursal(pm, id, nombre, direccion, ciudad, tamano);
+			tx.commit();
+
+			log.trace ("Inserción de sucursal: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+
+			return new Sucursal(id, nombre, tamano, direccion, ciudad);
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Sucursal, dado el nombre del Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarSucursalPorNombre (String nombreSucursal) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlSucursal.eliminarSucursalesPorNombre(pm, nombreSucursal);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el identificador del tipo de bebida
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoBebida - El identificador del tipo de bebida
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarSucursalPorId (long idSucursal) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlSucursal.eliminarSucursalesPorId(pm, idSucursal);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+	
+	
+	
+
 	/**
 	 * MEtodo que agrega una promocion junto con su requerimiento el tipo de la promocion 
 	 * @param fechaInicial fecha donde inicia la promocion
@@ -665,11 +941,11 @@ public class PersistenciaSuperAndes {
 
 
 	}
-/**
- * Eliminar una promocion 
- * @param idPromocion promocion a eliminar
- * @return resultado de la eliminacion
- */
+	/**
+	 * Eliminar una promocion 
+	 * @param idPromocion promocion a eliminar
+	 * @return resultado de la eliminacion
+	 */
 	public long eliminarPromocion(long idPromocion) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -696,14 +972,14 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
-/**
- * Proceso para solicitar a un proveedor un producto
- * @param idProveedor el proveedor que se le va a solicitar el producto
- * @param idProducto el producto a solicitar
- * @param fechaEsperadaDeEntrega la feche en la que se cree que sera entregado el producto
- * @param precioProveedor el precio que el proveedor acordo para la compra
- * @return
- */
+	/**
+	 * Proceso para solicitar a un proveedor un producto
+	 * @param idProveedor el proveedor que se le va a solicitar el producto
+	 * @param idProducto el producto a solicitar
+	 * @param fechaEsperadaDeEntrega la feche en la que se cree que sera entregado el producto
+	 * @param precioProveedor el precio que el proveedor acordo para la compra
+	 * @return
+	 */
 	public OrdenPedido solicitarProductoProveedor (long idProveedor, long idProducto, Date fechaEsperadaDeEntrega, double precioProveedor) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -762,16 +1038,16 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long idOrdenPedido = orden.getId();
 			long actualizarOrden = sqlOrdenPedido.registrarLlegadaOrdenPedido(pm, idOrdenPedido , calificacionPedido, estado, fechaEntrega);
-			
+
 			for (int i = 0; i < productosEnLaOrden.size(); i++) {
-				
+
 				long actualizarBodega = sqlProductosBodegas.adicionarProductoBodega(pm, productosEnLaOrden.get(i).getIdOrden(), bodegasDisponibles.get(i).getId());
 				log.trace ("Actualizar bodega  : " +  bodegasDisponibles.get(i).getId() + ". " + actualizarBodega + " tuplas insertadas");
 			}
 			tx.commit();
-				
+
 			log.trace ("Actualizar Orden  : " + idOrdenPedido + ". " + actualizarOrden + " tuplas insertadas");
-			
+
 			return actualizarOrden;
 		}
 		catch (Exception e)
@@ -789,9 +1065,10 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 
-		
-		
+
+
 	}
-	
+
+
 
 }

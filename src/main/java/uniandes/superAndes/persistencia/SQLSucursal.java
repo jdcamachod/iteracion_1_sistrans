@@ -52,10 +52,10 @@ class SQLSucursal {
 		 * @param tamanio
 		 * @return
 		 */
-		public long adicionarSucursal (PersistenceManager pm, long idSucursal, String nombre, String direccion, String ciudad, int tamanio) 
+		public long adicionarSucursal (PersistenceManager pm,long id, String nombre, String direccion, String ciudad, double tamanio) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal() + "(id, nombre, direccion, ciudad, tamanio) values (?, ?, ?, ?,?)");
-	        q.setParameters(idSucursal, nombre, direccion, ciudad, tamanio);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal() + "( nombre, direccion, ciudad, tamanio) values (?, ?, ?, ?,?)");
+	        q.setParameters(nombre, direccion, ciudad, tamanio);
 	        return (long) q.executeUnique();
 		}
 
@@ -107,12 +107,12 @@ class SQLSucursal {
 		 * @param nombreSucursal - El nombre de la sucursal buscado
 		 * @return Una lista de objetos Sucursales que tienen el nombre dado
 		 */
-		public List<Sucursal> darSucursalesPorNombre (PersistenceManager pm, String nombreSucursal) 
+		public Sucursal darSucursalPorNombre (PersistenceManager pm, String nombreSucursal) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSucursal()  + " WHERE nombre = ?");
 			q.setResultClass(Sucursal.class);
 			q.setParameters(nombreSucursal);
-			return (List<Sucursal>) q.executeList();
+			return (Sucursal) q.executeList();
 		}
 
 		/**
