@@ -20,7 +20,9 @@ public class Producto {
 	private Date fechaVencimiento;
 	private int cantidad;
 	private double cantidadPresentacion;
+	private long idProveedor;
 	
+
 	public Producto()
 	{
 		this.id = 0;
@@ -37,6 +39,7 @@ public class Producto {
 		this.fechaVencimiento = new Date();
 		this.precioUnidadMedida =0;
 		this.cantidadPresentacion=0;
+		this.idProveedor = 0;
 	}
 	public Producto(long id, int cantidad, String codigoBarras, double peso, double volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, String presentacion, 
@@ -143,6 +146,12 @@ public class Producto {
 	}
 	public void setCantidadPresentacion(double cantidadPresentacion) {
 		this.cantidadPresentacion = cantidadPresentacion;
+	}
+	public long getIdProveedor() {
+		return idProveedor;
+	}
+	public void setIdProveedor(long idProveedor) {
+		this.idProveedor = idProveedor;
 	}
 	
 	

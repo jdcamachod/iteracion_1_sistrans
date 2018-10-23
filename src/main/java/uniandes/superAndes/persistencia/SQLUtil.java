@@ -37,7 +37,7 @@ class SQLUtil {
 	 */
 	public long nextval (PersistenceManager pm)
 	{
-        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqSucursal() + ".nextval FROM DUAL");
+        Query q = pm.newQuery(SQL, "SELECT "+ pp.darSeqSuperAndes() + ".nextval FROM DUAL");
         q.setResultClass(Long.class);
         long resp = (long) q.executeUnique();
         return resp;

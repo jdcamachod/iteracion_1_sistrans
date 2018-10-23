@@ -164,11 +164,6 @@ public class PersistenciaSuperAndes {
 	private SQLProductosPromociones sqlProductosPromociones;
 
 	/**
-	 * Atributo para el acceso a la tabla PRODUCTOS_PROVEEDORES de la base de datos
-	 */
-	private SQLProductosProveedores sqlProductosProveedores;
-
-	/**
 	 * Atributo para el acceso a la tabla PROMOCION de la base de datos
 	 */
 	private SQLPromocion sqlPromocion;
@@ -359,8 +354,6 @@ public class PersistenciaSuperAndes {
 		sqlProductosEstantes = new SQLProductosEstantes(this);
 		sqlProductosFacturas = new SQLProductosFacturas(this);
 		sqlProductosPromociones = new SQLProductosPromociones(this);
-		sqlProductosProveedores = new SQLProductosProveedores(this);
-		sqlProductosProveedores = new SQLProductosProveedores(this);
 		sqlPromocionesFacturas = new SQLPromocionesFacturas(this);
 		sqlPromocionPaquete= new SQLPromocionPaquete(this);
 		sqlSucursalesClientes= new SQLSucursalesClientes(this);
@@ -549,20 +542,13 @@ public class PersistenciaSuperAndes {
 		return tablas.get (22);
 	}
 
-	/**
-	 * @return La cadena de caracteres con el nombre de la tabla de ProductosProveedores
-	 */
-	public String darTablaProductosProveedores ()
-	{
-		return tablas.get (23);
-	}
 
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de PomocionesFacturas
 	 */
 	public String darTablaPromocionesFacturas ()
 	{
-		return tablas.get (24);
+		return tablas.get (23);
 	}
 
 	/**
@@ -570,7 +556,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaSucursalesClientes ()
 	{
-		return tablas.get (25);
+		return tablas.get (24);
 	}
 
 	/**
@@ -578,140 +564,9 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPromocionPaquete ()
 	{
-		return tablas.get (26);
+		return tablas.get (25);
 	}
 	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqBodega ()
-	{
-		return tablas.get(27);
-	}
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqCategoria()
-	{
-		return tablas.get(28);
-	}
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqCliente ()
-	{
-		return tablas.get(29);
-	}
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqDescuentoPorcentaje ()
-	{
-		return tablas.get(30);
-	}
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqEmpresa()
-	{
-		return tablas.get(31);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqEstante ()
-	{
-		return tablas.get(32);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqFactura ()
-	{
-		return tablas.get(33);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqOrdenPedido()
-	{
-		return tablas.get(34);
-	}
-
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqPaque1LleveSegPorcentaje ()
-	{
-		return tablas.get(35);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqPaqueNLleveM ()
-	{
-		return tablas.get(36);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqPaqueXLleveY ()
-	{
-		return tablas.get(37);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqPersonaNatural ()
-	{
-		return tablas.get(38);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqProducto ()
-	{
-		return tablas.get(39);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqPromocion ()
-	{
-		return tablas.get(40);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqProveedor ()
-	{
-		return tablas.get(41);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqSucursal()
-	{
-		return tablas.get(42);
-	}
-	
-	/**
-	 * @return La cadena de caracteres con el nombre del secuenciador de superAndes
-	 */
-	public String darSeqTipoProducto()
-	{
-		return tablas.get(43);
-	}
 
 
 	/**
