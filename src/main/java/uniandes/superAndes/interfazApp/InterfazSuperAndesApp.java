@@ -18,6 +18,7 @@ package uniandes.superAndes.interfazApp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
@@ -29,6 +30,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,6 +38,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import org.apache.log4j.Logger;
@@ -128,7 +132,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
      	   crearMenu( guiConfig.getAsJsonArray("menuBar") );
         }
         
-        tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
+        tableConfig = openConfig ("Tablas BD_A", CONFIG_TABLAS);
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
@@ -249,13 +253,29 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
     {
     	try 
     	{
-    		String nombre = JOptionPane.showInputDialog (this, "Nombre del proveedor?", "Registrar Proveedor", JOptionPane.QUESTION_MESSAGE);
-    		if (nombre != null)
+    		
+    	      JTextField nombreField = new JTextField(10);
+    	      JTextField nitField = new JTextField(10);
+    	      JPanel myPanel = new JPanel(new GridLayout(2,2));
+    	      myPanel.add(new JLabel("Nombre:"));
+    	      myPanel.add(nombreField);
+    	      myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+    	      myPanel.add(new JLabel("Nit:"));
+    	      myPanel.add(nitField);
+
+    	       int result = JOptionPane.showConfirmDialog(null, myPanel, 
+    	               "Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+    		
+    		if (result == JOptionPane.OK_OPTION) {
+    			
+    			String nombre = nombreField.getText();
+    			String nit = nitField.getText();
+    					
+    		if (!nombre.isEmpty())
     		{
-    			String nit = JOptionPane.showInputDialog(this, "Nit del proveedor?", "Registrar Proveedor", JOptionPane.QUESTION_MESSAGE);
-    			if(nit!=null)
+    			if(!nit.isEmpty())
     			{
-    				Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "buena");
+    				Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
             		if (prov == null)
             		{
             			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombre);
@@ -267,9 +287,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
     			}
     			else
     			{
-    				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    				panelDatos.actualizarInterfaz("Nit no puede ser vacio");
     			}
         		
+    		}
+    		else
+			{
+				panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+			}
+    		
     		}
     		else
     		{

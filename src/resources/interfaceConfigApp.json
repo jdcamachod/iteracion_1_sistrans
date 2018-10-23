@@ -5,11 +5,11 @@
 	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
-		{ "menuTitle": "TipoBebida",
+		{ "menuTitle": "Proveedor",
 		  "options":
 			[
 				{
-					"label": "Adicionar",
+					"label": "Registrar",
 					"event": "registrarProveedor"
 				},
 				{
