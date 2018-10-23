@@ -14,12 +14,12 @@ public class Producto {
 	private int nivelReorden;
 	private String nombre;
 	private double precioUnitario;
-	private int presentacion;
+	private String presentacion;
 	private double precioUnidadMedida;
 	private long idCategoria;
 	private Date fechaVencimiento;
 	private int cantidad;
-	private int cantidadPresentacion;
+	private double cantidadPresentacion;
 	
 	public Producto()
 	{
@@ -30,7 +30,7 @@ public class Producto {
 		this.nivelReorden = 0;
 		this.nombre = "";
 		this.precioUnitario = 0;
-		this.presentacion = 0;
+		this.presentacion = "";
 		this.idCategoria = 0;
 		this.peso = 0;
 		this.volumen = 0;
@@ -38,9 +38,9 @@ public class Producto {
 		this.precioUnidadMedida =0;
 		this.cantidadPresentacion=0;
 	}
-	public Producto(long id, int cantidad, String codigoBarras, int peso, int volumen, String marca,
-			int nivelReorden, String nombre, double precioUnitario, int presentacion, 
-			long idCategoria, Date fechaVencimiento, double precioUnidadMedida, int cantidadPresentacion) {
+	public Producto(long id, int cantidad, String codigoBarras, double peso, double volumen, String marca,
+			int nivelReorden, String nombre, double precioUnitario, String presentacion, 
+			long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion) {
 	
 		this.id = id;
 		this.cantidad = cantidad;
@@ -113,10 +113,10 @@ public class Producto {
 	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
-	public int getPresentacion() {
+	public String getPresentacion() {
 		return presentacion;
 	}
-	public void setPresentacion(int presentacion) {
+	public void setPresentacion(String presentacion) {
 		this.presentacion = presentacion;
 	}
 
@@ -138,10 +138,10 @@ public class Producto {
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
-	public int getCantidadPresentacion() {
+	public double getCantidadPresentacion() {
 		return cantidadPresentacion;
 	}
-	public void setCantidadPresentacion(int cantidadPresentacion) {
+	public void setCantidadPresentacion(double cantidadPresentacion) {
 		this.cantidadPresentacion = cantidadPresentacion;
 	}
 	
