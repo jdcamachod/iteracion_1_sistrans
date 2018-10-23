@@ -2,7 +2,7 @@
 	"title": "Aplicación transaccional de Parranderos Uniandes",
 	"frameH": 600,
 	"frameW": 800,
-	"bannerPath": "./src/resources/config/logo.png",
+	"bannerPath": "./src/main/resources/config/logo.png",
 	"menuBar":
 	[
 		{ "menuTitle": "TipoBebida",
@@ -10,7 +10,7 @@
 			[
 				{
 					"label": "Adicionar",
-					"event": "adicionarTipoBebida"
+					"event": "registrarProveedor"
 				},
 				{
 					"label": "Listar",
@@ -92,4 +92,3 @@
 		
 	]
 }
-	

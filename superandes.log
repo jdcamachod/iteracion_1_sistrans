@@ -3,3 +3,37 @@
 23:50:55,066 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Conexi�n realizada correstamente
 23:50:55,066 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Cerrando la conexi�n
 23:50:55,071 (main) INFO  [uniandes.superAndes.test.testSuperAndes] - Conexi�n cerrada
+09:42:08,766 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+09:42:08,768 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+09:42:08,925 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:35:01,425 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+13:35:07,368 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+13:35:07,387 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:38:08,273 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+13:38:20,934 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+13:38:20,950 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:41:52,918 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+13:42:00,257 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+13:42:00,279 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:50:10,899 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+13:50:13,451 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+13:50:13,459 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:56:02,832 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+13:56:06,133 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+13:56:06,145 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+13:58:21,619 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:58:21,620 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:58:21,648 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:00:32,707 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+14:01:21,458 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - NO se encontró un archivo de configuración válido
+14:01:26,258 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración por defecto
+14:01:26,271 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:07:03,730 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:07:03,731 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:07:03,753 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:09:48,972 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:09:48,973 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:09:49,008 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD
+14:12:17,107 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:12:17,108 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:12:17,130 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD

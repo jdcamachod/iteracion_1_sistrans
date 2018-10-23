@@ -6,7 +6,7 @@ import java.util.Date;
 public class Producto {
 	
 	private long id;
-	private String calidad;
+	
 	private String codigoBarras;
 	private double peso;
 	private double volumen;
@@ -16,45 +16,47 @@ public class Producto {
 	private double precioUnitario;
 	private int presentacion;
 	private double precioUnidadMedida;
-	private String unidadMedida;
 	private long idCategoria;
 	private Date fechaVencimiento;
+	private int cantidad;
+	private int cantidadPresentacion;
 	
 	public Producto()
 	{
 		this.id = 0;
-		this.calidad = "";
+		this.cantidad = 0;
 		this.codigoBarras = "";
 		this.marca = "";
 		this.nivelReorden = 0;
 		this.nombre = "";
 		this.precioUnitario = 0;
 		this.presentacion = 0;
-		this.unidadMedida = "";
 		this.idCategoria = 0;
 		this.peso = 0;
 		this.volumen = 0;
 		this.fechaVencimiento = new Date();
 		this.precioUnidadMedida =0;
+		this.cantidadPresentacion=0;
 	}
-	public Producto(long id, String calidad, String codigoBarras, int peso, int volumen, String marca,
-			int nivelReorden, String nombre, double precioUnitario, int presentacion, String unidadMedida,
-			long idCategoria, Date fechaVencimiento, double precioUnidadMedida) {
+	public Producto(long id, int cantidad, String codigoBarras, int peso, int volumen, String marca,
+			int nivelReorden, String nombre, double precioUnitario, int presentacion, 
+			long idCategoria, Date fechaVencimiento, double precioUnidadMedida, int cantidadPresentacion) {
 	
 		this.id = id;
-		this.calidad = calidad;
+		this.cantidad = cantidad;
 		this.codigoBarras = codigoBarras;
 		this.marca = marca;
 		this.nivelReorden = nivelReorden;
 		this.nombre = nombre;
 		this.precioUnitario = precioUnitario;
 		this.presentacion = presentacion;
-		this.unidadMedida = unidadMedida;
+	
 		this.idCategoria = idCategoria;
 		this.peso = peso;
 		this.volumen = volumen;
 		this.fechaVencimiento =fechaVencimiento;
 		this.precioUnidadMedida = precioUnidadMedida;
+		this.cantidadPresentacion = cantidadPresentacion;
 	}
 	public long getId() {
 		return id;
@@ -62,11 +64,11 @@ public class Producto {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCalidad() {
-		return calidad;
+	public int getCantidad() {
+		return cantidad;
 	}
-	public void setCalidad(String calidad) {
-		this.calidad = calidad;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 	public String getCodigoBarras() {
 		return codigoBarras;
@@ -117,12 +119,7 @@ public class Producto {
 	public void setPresentacion(int presentacion) {
 		this.presentacion = presentacion;
 	}
-	public String getUnidadMedida() {
-		return unidadMedida;
-	}
-	public void setUnidadMedida(String unidadMedida) {
-		this.unidadMedida = unidadMedida;
-	}
+
 	public long getIdCategoria() {
 		return idCategoria;
 	}
@@ -140,6 +137,12 @@ public class Producto {
 	}
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
+	}
+	public int getCantidadPresentacion() {
+		return cantidadPresentacion;
+	}
+	public void setCantidadPresentacion(int cantidadPresentacion) {
+		this.cantidadPresentacion = cantidadPresentacion;
 	}
 	
 	

@@ -99,5 +99,16 @@ public class SuperAndes {
         log.info ("\"Buscando sucursal por nombre: " + resp + " tuplas eliminadas");
         return resp;
 	}
+	
+	//--------------------------------------------------------------------------
+	// Proveedores
+	//--------------------------------------------------------------------------
+	public Proveedor adicionarProveedor(String nombre, String nit, String calificacion)
+	{
+		log.info("Adicionando proveedor: "+nombre);
+		Proveedor proveedor = pp.adicionarProveedor(nombre, nit, calificacion);
+		log.info("/Adicionando proveedor: "+nombre);
+		return proveedor;
+	}
 
 }

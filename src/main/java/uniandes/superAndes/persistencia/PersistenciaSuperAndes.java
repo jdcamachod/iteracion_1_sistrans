@@ -16,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.OrdenPedido;
@@ -23,7 +24,9 @@ import uniandes.superAndes.negocio.OrdenesProductos;
 import uniandes.superAndes.negocio.Pague1Lleve2Porcentaje;
 import uniandes.superAndes.negocio.PagueNLleveM;
 import uniandes.superAndes.negocio.PagueXLleveY;
+import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Promocion;
+import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 
 
@@ -739,7 +742,36 @@ public class PersistenciaSuperAndes {
 		return resp;
 	}
 
-
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los PROVEEDORES
+	 *****************************************************************/
+	public Proveedor adicionarProveedor(String nombre, String nit, String calificacion)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, nit, calificacion);
+			tx.commit();
+			log.trace("Insercion del proveedor " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new Proveedor(nombre, id, nit, calificacion);
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar las SUCURSALES
@@ -858,6 +890,129 @@ public class PersistenciaSuperAndes {
         }
 	}
 
+	/* ****************************************************************
+	 * 			Métodos para manejar las BODEGAS
+	 *****************************************************************/
+	
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipo - El identificador del tipo de pproductos de la bodega
+	 * @param direccion - direccion de la bodega
+	 * @param peso - el peso que soporta la bodega
+	 * @param volumen - el volumen que soporta la bodega
+	 * @param idSucursal - el id de la sucursal en la que está la bodega
+	 * @return El objeto Bebida adicionado. null si ocurre alguna Excepción
+	 */
+	public Bodega adicionarBodega( long idTipo, String direccion, double peso, double volumen,long idSucursal) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();            
+            long idBodega = nextval ();
+            long tuplasInsertadas = sqlBodega.adicionarBodega(pm,idBodega, idTipo, direccion, peso, volumen, idSucursal);
+            tx.commit();
+            
+            log.trace ("Inserción bodega: " + idBodega +" "+ idSucursal+" "+ direccion+  ": " + tuplasInsertadas + " tuplas insertadas");
+            return new Bodega (idBodega,direccion, peso, idTipo, volumen, idSucursal);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el nombre de la bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombreBebida - El nombre de la bebida
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	/*public long eliminarBebidaPorNombre (String nombreBebida) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlBebida.eliminarBebidaPorNombre(pm, nombreBebida);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}*/
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idBodega - El identificador de la bodega
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarBodegaPorId (long idBodega) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlBodega.eliminarBodegaPorId (pm, idBodega);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	
+ 
+	/**
+	 * Método que consulta todas las tuplas en la tabla Bodega
+	 * @return La lista de objetos Bodega, construidos con base en las tuplas de la tabla BODEGA
+	 */
+	public List<Bodega> darBodegas ()
+	{
+		return sqlBodega.darBodegas (pmf.getPersistenceManager());
+	}
+ 
 	
 	
 	
@@ -1067,6 +1222,16 @@ public class PersistenciaSuperAndes {
 
 
 
+	}
+	public Producto registrarProducto(int cantidad, String codigoDeBarras, double peso, double volumen,String marca, int nivelReorden,String nombre, double precioUnitario, int presentacion, double precioUnidadMedida, String unidadMedida, long idCategoria, Date fechaVencimiento)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long idProducto = nextval();
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, idProducto, cantidad, cantidadPresentacion, fechaVencimiento, codigoDeBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen);
+		}
 	}
 
 

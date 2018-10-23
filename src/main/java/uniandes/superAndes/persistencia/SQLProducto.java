@@ -59,10 +59,10 @@ class SQLProducto {
 		 * @param volumen
 		 * @return
 		 */
-		public long adicionarProducto (PersistenceManager pm, long idProducto, int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelDeReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen) 
+		public long adicionarProducto (PersistenceManager pm, long idProducto, int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelDeReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, long idCategoria) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProducto () + "(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-	        q.setParameters(idProducto, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden,nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProducto () + "(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+	        q.setParameters(idProducto, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden,nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
 	        return (long) q.executeUnique();
 		}
 

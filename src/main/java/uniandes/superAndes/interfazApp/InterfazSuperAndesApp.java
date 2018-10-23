@@ -46,12 +46,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+
+import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
+import uniandes.superAndes.negocio.SuperAndes;
 
 
 /**
  * Clase principal de la interfaz
- * @author Germ谩n Bravo
+ * 
  */
 @SuppressWarnings("serial")
 
@@ -86,7 +89,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
     /**
      * Asociaci贸n a la clase principal del negocio.
      */
-    private Sucursal sucursal;
+    private SuperAndes superAndes;
     
 	/* ****************************************************************
 	 * 			Atributos de interfaz
@@ -158,7 +161,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e)
 		{
-//			e.printStackTrace ();
+			e.printStackTrace ();
 			log.info ("NO se encontr贸 un archivo de configuraci贸n v谩lido");			
 			JOptionPane.showMessageDialog(null, "No se encontr贸 un archivo de configuraci贸n de interfaz v谩lido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
 		}	
@@ -236,9 +239,52 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
     }
     
 	/* ****************************************************************
-	 * 			CRUD de TipoBebida
+	 * 			CRUD de Proveedor
 	 *****************************************************************/
-
+    /**
+     * Adiciona un tipo de bebida con la informaci髇 dada por el usuario
+     * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no exist韆
+     */
+    public void registrarProveedor( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre del proveedor?", "Registrar Proveedor", JOptionPane.QUESTION_MESSAGE);
+    		if (nombre != null)
+    		{
+    			String nit = JOptionPane.showInputDialog(this, "Nit del proveedor?", "Registrar Proveedor", JOptionPane.QUESTION_MESSAGE);
+    			if(nit!=null)
+    			{
+    				Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "buena");
+            		if (prov == null)
+            		{
+            			throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombre);
+            		}
+            		String resultado = "En registrarProveedor\n\n";
+            		resultado += "Proveedor adicionado exitosamente: " + prov;
+        			resultado += "\n Operaci髇 terminada";
+        			panelDatos.actualizarInterfaz(resultado);
+    			}
+    			else
+    			{
+    				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+    			}
+        		
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operaci髇 cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+  
 
 	/* ****************************************************************
 	 * 			M茅todos administrativos
