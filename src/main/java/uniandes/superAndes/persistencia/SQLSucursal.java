@@ -54,7 +54,7 @@ class SQLSucursal {
 		 */
 		public long adicionarSucursal (PersistenceManager pm,long id, String nombre, String direccion, String ciudad, double tamanio) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal() + "( nombre, direccion, ciudad, tamanio) values (?, ?, ?, ?,?)");
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaSucursal() + "( nombre, direccion, ciudad, tamano) values (?, ?, ?, ?)");
 	        q.setParameters(nombre, direccion, ciudad, tamanio);
 	        return (long) q.executeUnique();
 		}

@@ -2,18 +2,36 @@ package uniandes.superAndes.negocio;
 
 import java.util.ArrayList;
 
-public class Sucursal {
+
+
+public class Sucursal implements VOSucursal {
 	
 	private long id;
 	private String nombre;
-	private double tamanio;
+	private double tamano;
 	private String direccion;
 	private String ciudad;
-	public Sucursal(long id, String nombre, double tamanio, String direccion, String ciudad) {
+	
+	
+	
+	/**
+	 * Constructor por defecto
+	 */
+	public Sucursal() 
+	{
+		this.id = 0;
+		this.nombre = "Default";
+		this.direccion = "Default";
+		this.ciudad = "Default";
+		this.tamano = 0.0;
+
+	}
+	
+	public Sucursal(long id, String nombre, double tamano, String direccion, String ciudad) {
 		
 		this.id = id;
 		this.nombre = nombre;
-		this.tamanio = tamanio;
+		this.tamano = tamano;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
 	}
@@ -29,11 +47,11 @@ public class Sucursal {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public double getTamanio() {
-		return tamanio;
+	public double getTamano() {
+		return tamano;
 	}
-	public void setTamanio(double tamanio) {
-		this.tamanio = tamanio;
+	public void setTamano(double tamanio) {
+		this.tamano = tamanio;
 	}
 	public String getDireccion() {
 		return direccion;
@@ -49,7 +67,24 @@ public class Sucursal {
 	}
 	
 	
-	
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Sucursal [id=" + id + ", nombre=" + nombre + ", tamanio=" + tamano + " , direccion=" + direccion + ", ciudad=" + ciudad + "]";
+	}
+
+	/**
+	 * @param tipo - El TipoBebida a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipo) 
+	{
+		Sucursal tb = (Sucursal) tipo;
+		return id == tb.id && nombre.equalsIgnoreCase (tb.nombre);
+	}
 	
 	
 

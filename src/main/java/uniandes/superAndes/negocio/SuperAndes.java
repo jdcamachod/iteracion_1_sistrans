@@ -1,10 +1,14 @@
 package uniandes.superAndes.negocio;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
+
 
 import uniandes.superAndes.persistencia.PersistenciaSuperAndes;
 
@@ -98,6 +102,18 @@ public class SuperAndes {
 		Sucursal resp = pp.darSucursalPorNombre(nombre);		
         log.info ("\"Buscando sucursal por nombre: " + resp + " tuplas eliminadas");
         return resp;
+	}
+	
+	public List<VOSucursal> darVOSucursales ()
+	{
+		log.info ("Generando los VO de Tipos de bebida");        
+        List<VOSucursal> voSucursales = new LinkedList<VOSucursal> ();
+        for (Sucursal tb : pp.darSucursales())
+        {
+        	voSucursales.add(tb);
+        }
+        log.info ("Generando los VO de Tipos de bebida: " + voSucursales.size() + " existentes");
+        return voSucursales;
 	}
 	
 	//--------------------------------------------------------------------------

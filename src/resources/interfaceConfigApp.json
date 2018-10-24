@@ -26,6 +26,25 @@
 				}
 			]
 		},
+		
+		{ "menuTitle": "Sucursal",
+		  "options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarSucursal"
+				},
+				{
+					"label": "Listar",
+					"event": "listarSucursal"
+				},
+				{
+					"label": "Borrar por Id",
+					"event": "eliminarSucursal"
+				}
+			]
+		},
+		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

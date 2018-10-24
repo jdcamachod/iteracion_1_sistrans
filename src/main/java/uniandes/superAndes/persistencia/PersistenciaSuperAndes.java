@@ -17,7 +17,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.OrdenPedido;
@@ -624,6 +623,7 @@ public class PersistenciaSuperAndes {
 	{
 		return sqlSucursal.darSucursalPorNombre(pmf.getPersistenceManager(), nombre);
 	}
+	
 	/**
 	 * Método que inserta, de manera transaccional, una tupla en la tabla Sucursal
 	 * Adiciona entradas al log de la aplicación
@@ -726,6 +726,15 @@ public class PersistenciaSuperAndes {
             }
             pm.close();
         }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<Sucursal> darSucursales ()
+	{
+		return sqlSucursal.darSucursales(pmf.getPersistenceManager());
 	}
 
 	/* ****************************************************************
