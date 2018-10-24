@@ -134,6 +134,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
         
         tableConfig = openConfig ("Tablas BD_A", CONFIG_TABLAS);
         
+        superAndes = new SuperAndes(tableConfig);
+        
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
 

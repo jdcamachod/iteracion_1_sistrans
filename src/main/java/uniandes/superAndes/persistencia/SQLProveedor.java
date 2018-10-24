@@ -53,7 +53,7 @@ class SQLProveedor {
 		 */
 		public long adicionarProveedor (PersistenceManager pm, long idProveedor, String nombre, String nit, String calificacionCalidad) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor() + "(id, nombre, nit, calificacionCalidad) values (?, ?, ?, ?)");
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProveedor() + "(id, nombre, nit, calificacion) values (?, ?, ?, ?)");
 	        q.setParameters(idProveedor, nombre, nit, calificacionCalidad);
 	        return (long) q.executeUnique();
 		}

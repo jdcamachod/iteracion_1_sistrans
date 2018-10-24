@@ -1,6 +1,7 @@
 package uniandes.superAndes.persistencia;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -212,8 +213,7 @@ public class PersistenciaSuperAndes {
 		crearClasesSQL ();
 
 		// Define los nombres por defecto de las tablas de la base de datos
-		tablas = new LinkedList<String> ();
-
+		tablas = new ArrayList<String>();
 		tablas.add ("SuperAndes_sequence");
 		tablas.add ("SUCURSAL");
 		tablas.add ("PROVEEDOR");
@@ -241,24 +241,7 @@ public class PersistenciaSuperAndes {
 		tablas.add ("PROMOCIONES_FACTURAS");
 		tablas.add ("CLIENTES_SUCURSALES");
 		tablas.add("PROMOCION_PAQUETE");
-		
-		tablas.add("BODEGA_SEQ");
-		tablas.add("CATEGORIA_SEQ");
-		tablas.add("CLIENTE_SEQ");
-		tablas.add("DESCUENTO_PORCENTAJE_SEQ");
-		tablas.add("EMPRESA_SEQ");
-		tablas.add("ESTANTE_SEQ");
-		tablas.add("FACTURA_SEQ");
-		tablas.add("ORDEN_PEDIDO_SEQ");
-		tablas.add("PAGUE_1_LLEVE_SEG_PORCENTAJE_SEQ");
-		tablas.add("PAGUE_N_LLEVE_M_SEQ");
-		tablas.add("PAGUE_X_LLEVE_Y_SEQ");
-		tablas.add("PERSONA_NATURAL_SEQ");
-		tablas.add("PRODUCTO_SEQ");
-		tablas.add("PROMOCION_SEQ");
-		tablas.add("PROVEEDOR_SEQ");
-		tablas.add("SUCURSAL_SEQ");
-		tablas.add("TIPO_PRODUCTO_SEQ");
+	
 	}
 	/**
 	 * Constructor privado, que recibe los nombres de las tablas en un objeto Json - Patrón SINGLETON
