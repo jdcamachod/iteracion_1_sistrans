@@ -1,6 +1,7 @@
 package uniandes.superAndes.negocio;
 
-public class SucursalesClientes {
+public class SucursalesClientes implements VOSucursalesClientes
+{
 
 	private long idSucursal;
 	private long idCliente;

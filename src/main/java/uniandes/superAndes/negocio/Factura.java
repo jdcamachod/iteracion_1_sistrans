@@ -2,7 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.util.Date;
 
-public class Factura {
+public class Factura implements VOFactura {
 	
 	private long id;
 	private Date fecha;

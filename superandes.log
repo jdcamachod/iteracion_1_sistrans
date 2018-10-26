@@ -11,3 +11,11 @@
 22:16:55,014 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
 22:16:59,257 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Tipos de bebida
 22:16:59,428 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Tipos de bebida: 1 existentes
+17:34:19,108 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+17:34:19,110 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+17:34:19,138 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+17:34:47,977 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: sgsgfgf
+17:34:48,501 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROVEEDOR(id, nombre, nit, calificacion) values (?, ?, ?, ?)".
+ORA-01722: n鷐ero no v醠ido
+
+17:34:48,514 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: sgsgfgf

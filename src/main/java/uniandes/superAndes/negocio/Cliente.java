@@ -4,7 +4,8 @@ package uniandes.superAndes.negocio;
  * Representa un cliente
  *
  */
-public abstract class Cliente {
+public abstract class Cliente implements VOCliente
+{
 
 	/**
 	 * El correo electronico del cliente

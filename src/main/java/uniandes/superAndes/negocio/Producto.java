@@ -3,7 +3,7 @@ package uniandes.superAndes.negocio;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Producto {
+public class Producto implements VOProducto {
 	
 	private long id;
 	

@@ -2,7 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.util.Date;
 
-public abstract class Promocion {
+public abstract class Promocion implements VOPromocion {
 
 	private long id;
 	private Date fechaInicial;

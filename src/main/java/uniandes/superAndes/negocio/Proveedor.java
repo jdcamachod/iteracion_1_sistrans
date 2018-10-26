@@ -1,6 +1,7 @@
 package uniandes.superAndes.negocio;
 
-public class Proveedor {
+public class Proveedor implements VOProveedor
+{
 
 	private String calificacionCalidad;
 	private long id;

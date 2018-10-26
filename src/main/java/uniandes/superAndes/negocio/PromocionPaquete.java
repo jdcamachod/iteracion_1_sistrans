@@ -2,7 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.util.Date;
 
-public class PromocionPaquete {
+public class PromocionPaquete implements VOPromocionPaquete{
 
 	private long idProductoOrigen;
 	private long idProductoPaquete;

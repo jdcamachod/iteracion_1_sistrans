@@ -2,7 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.util.Date;
 
-public class Pague1Lleve2Porcentaje extends Promocion {
+public class Pague1Lleve2Porcentaje extends Promocion implements VOPague1Lleve2Porcentaje {
 
 	private double porcentaje2;
 	

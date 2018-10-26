@@ -6,7 +6,7 @@ import java.util.Date;
  * Representa una promocion de un descuento de un porcentaje sobre un producto
  *
  */
-public class DescuentoPorcentaje extends Promocion {
+public class DescuentoPorcentaje extends Promocion implements VODescuentoPorcentaje{
 
 	/**
 	 * El porcentaje a descontar

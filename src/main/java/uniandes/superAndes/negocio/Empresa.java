@@ -1,6 +1,7 @@
 package uniandes.superAndes.negocio;
 
-public class Empresa extends Cliente{
+public class Empresa extends Cliente implements VOEmpresa
+{
 
 	/**
 	 * Direccion de la empresa

@@ -1,6 +1,6 @@
 package uniandes.superAndes.negocio;
 
-public class OrdenesProductos {
+public class OrdenesProductos implements VOOrdenesProductos {
 
 	private long idProducto;
 	private long idOrden;

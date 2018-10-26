@@ -1,6 +1,6 @@
 package uniandes.superAndes.negocio;
 
-public class Persona extends Cliente {
+public class Persona extends Cliente implements VOPersona {
 
 	private String tipoDocumento;
 	private int numeroDocumento;

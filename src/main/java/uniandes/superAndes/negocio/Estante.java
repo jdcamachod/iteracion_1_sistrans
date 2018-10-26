@@ -1,6 +1,6 @@
 package uniandes.superAndes.negocio;
 
-public class Estante {
+public class Estante implements VOEstante {
 	
 	private long id;
 	private int nivelAbastecimiento;

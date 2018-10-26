@@ -2,7 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.util.Date;
 
-public class OrdenPedido {
+public class OrdenPedido implements VOOrdenPedido {
 
 	private long id;
 	private String calificacionPedido;

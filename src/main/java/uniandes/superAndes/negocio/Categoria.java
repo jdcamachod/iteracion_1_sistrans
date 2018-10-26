@@ -3,7 +3,8 @@ package uniandes.superAndes.negocio;
 /**
  *Clase que representa la categoria de un producto
  */
-public class Categoria {
+public class Categoria implements VOCategoria
+{
 
 	/**
 	 * Identificador unico de la categoria

@@ -1,6 +1,6 @@
 package uniandes.superAndes.negocio;
 
-public class PromocionesFacturas {
+public class PromocionesFacturas implements VOPromocionesFacturas {
 
 	private long idPromocion;
 	private long idFactura;

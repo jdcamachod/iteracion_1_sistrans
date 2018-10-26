@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Clase que representa una bodega de una sucursal
  *
  */
-public class Bodega {
+public class Bodega implements VOBodega{
 
 	/**
 	 * Identificador único de la bodega
