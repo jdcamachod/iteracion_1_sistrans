@@ -1,5 +1,7 @@
 package uniandes.superAndes.negocio;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -159,6 +161,52 @@ public class SuperAndes {
         }
         log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
         return vOProveedor;
+	}
+	
+	//--------------------------------------------------------------------------
+	// Metodos para manejar los productos
+	//--------------------------------------------------------------------------
+	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, long idCategoria )
+	{
+		log.info("Adicionando producto: "+nombre);
+		Producto producto = pp.adicionarProducto(cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
+		log.info("/Adicionando producto: "+nombre);
+		return producto;
+	}
+	
+	/**
+	 * Elimina un Sucursal por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProductos(String nombre)
+	{
+		log.info ("Eliminando productos por nombre: " + nombre);
+        long resp = pp.eliminarProductosPorNombre (nombre);		
+        log.info ("EliminandoProductos por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	public List<Producto> darProductosPorNombre (String nombre) {
+		
+		log.info ("Buscando Productos por nombre: " + nombre);
+		ArrayList<Producto> resp = new ArrayList<Producto>();
+		resp = (ArrayList<Producto>) pp.darProductosPorNombre(nombre);		
+        log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	public List<VOProducto> darVOProductos ()
+	{
+		log.info ("Generando los VO de Productos");        
+        List<VOProducto> voProducto = new LinkedList<VOProducto> ();
+        for (Producto tb : pp.darProductos())
+        {
+        	voProducto.add(tb);
+        }
+        log.info ("Generando los VO de Productos: " + voProducto.size() + " existentes");
+        return voProducto;
 	}
 	
 

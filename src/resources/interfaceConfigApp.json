@@ -48,6 +48,27 @@
 				}
 			]
 		},
+		{ "menuTitle": "Producto",
+		  "options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarProducto"
+				},
+				{
+					"label": "Listar",
+					"event": "listarSucursal"
+				},
+				{
+					"label": "Borrar por nombre",
+					"event": "eliminarSucursalPorNombre"
+				},
+								{
+					"label": "Buscar por Nombre",
+					"event": "buscarSucursalPorNombre"
+				}
+			]
+		},
 		
 		{ "menuTitle": "Mantenimiento",
 		  "options":

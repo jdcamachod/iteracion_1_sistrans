@@ -573,32 +573,66 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	}
 
 
-//	/* ****************************************************************
-//	 * 			CRUD de Proveedor
-//	 *****************************************************************/
-//	/**
-//	 * Adiciona un tipo de bebida con la información dada por el usuario
-//	 * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
-//	 */
-//	public void registrarProveedor( )
-//	{
-//		try 
-//		{
+	/* ****************************************************************
+	 * 			CRUD de Producto
+	 *****************************************************************/
+	/**
+	 * Adiciona un tipo de bebida con la información dada por el usuario
+	 * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
+	 */
+	public void registrarProducto( )
+	{
+		try 
+		{
+
+			JTextField nombreField = new JTextField(10);
+			JTextField marcaField = new JTextField(10);
+			JTextField precioUnField = new JTextField(10);
+			JTextField presentacionField = new JTextField(10);
+			JTextField precioUnMedField = new JTextField(10);
+			JTextField cantidadPresenField = new JTextField(10);
+			JTextField unMedField = new JTextField(10);
+			JTextField volumenField = new JTextField(10);
+			JTextField pesoField = new JTextField(10);
+			JTextField codigoBarrasField = new JTextField(10);
+			JTextField fechaVenField = new JTextField(10);
+			JTextField cantidadField = new JTextField(10);
+			JTextField nombreProvField = new JTextField(10);
+			
+			JPanel myPanel = new JPanel(new GridLayout(13,2));
+			myPanel.add(new JLabel("Nombre:"));
+			myPanel.add(nombreField);
+			myPanel.add(new JLabel("Marca:"));
+			myPanel.add(marcaField);
+			myPanel.add(new JLabel("Precio unitario:"));
+			myPanel.add(precioUnField);
+			myPanel.add(new JLabel("Presentacion:"));
+			myPanel.add(presentacionField);
+			myPanel.add(new JLabel("Precio por unidad de medida:"));
+			myPanel.add(precioUnMedField);
+			myPanel.add(new JLabel("Cantidad en la presentacion:"));
+			myPanel.add(cantidadPresenField);
+			myPanel.add(new JLabel("Unidad de medida (gr o ml):"));
+			myPanel.add(unMedField);
+			myPanel.add(new JLabel("volumen en centimetros cubicos:"));
+			myPanel.add(volumenField);
+			myPanel.add(new JLabel("peso en gramos:"));
+			myPanel.add(pesoField);
+			myPanel.add(new JLabel("codigo de barras en hexadecimal:"));
+			myPanel.add(codigoBarrasField);
+			myPanel.add(new JLabel("Fecha de vencimiento (dd/mm/aa):"));
+			myPanel.add(fechaVenField);
+			myPanel.add(new JLabel("cantidad:"));
+			myPanel.add(cantidadField);
+			myPanel.add(new JLabel("nombre del proveedor (no escriba nada si no tiene proveedor):"));
+			myPanel.add(nombreProvField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese los datos del producto", JOptionPane.OK_CANCEL_OPTION);
+
+// 		if (result == JOptionPane.OK_OPTION) {
 //
-//			JTextField nombreField = new JTextField(10);
-//			JTextField nitField = new JTextField(10);
-//			JPanel myPanel = new JPanel(new GridLayout(2,2));
-//			myPanel.add(new JLabel("Nombre:"));
-//			myPanel.add(nombreField);
-//			myPanel.add(new JLabel("Nit:"));
-//			myPanel.add(nitField);
-//
-//			int result = JOptionPane.showConfirmDialog(null, myPanel, 
-//					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
-//
-//			if (result == JOptionPane.OK_OPTION) {
-//
-//				String nombre = nombreField.getText();
+//			String nombre = nombreField.getText();
 //				String nit = nitField.getText();
 //
 //				if (!nombre.isEmpty())
@@ -607,7 +641,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 //					{
 //						Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
 //						if (prov == null)
-//						{
+//					{
 //							throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombre);
 //						}
 //						String resultado = "En registrarProveedor\n\n";
@@ -617,7 +651,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 //					}
 //					else
 //					{
-//						panelDatos.actualizarInterfaz("Nit no puede ser vacio");
+//					panelDatos.actualizarInterfaz("Nit no puede ser vacio");
 //					}
 //
 //				}
@@ -631,73 +665,74 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 //			{
 //				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
 //			}
-//		} 
-//		catch (Exception e) 
-//		{
-//			//			e.printStackTrace();
-//			String resultado = generarMensajeError(e);
-//			panelDatos.actualizarInterfaz(resultado);
-//		}
-//	}
-//
-//	/**
-//	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
-//	 */
-//	public void listarProveedor( )
-//	{
-//		try 
-//		{
-//			List <VOProveedor> lista = superAndes.darVOProveedores();
-//
-//			String resultado = "En Proveedor";
-//			resultado +=  "\n" + listarVO(lista);
-//			panelDatos.actualizarInterfaz(resultado);
-//			resultado += "\n Operación terminada";
-//		} 
-//		catch (Exception e) 
-//		{
-//			//			e.printStackTrace();
-//			String resultado = generarMensajeError(e);
-//			panelDatos.actualizarInterfaz(resultado);
-//		}
-//	}
-//
-//
-//	/**
-//	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
-//	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
-//	 */
-//	public void eliminarProveedorPorNombre( )
-//	{
-//		try 
-//		{
-//			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-//			if (nombre != null)
-//			{
-//				long tbEliminados = superAndes.eliminarProveedor(nombre);
-//
-//				String resultado = "En eliminar Proveedor\n\n";
-//				resultado += tbEliminados + " Proveedor eliminados\n";
-//				resultado += "\n Operación terminada";
-//				panelDatos.actualizarInterfaz(resultado);
-//			}
-//			else
-//			{
-//				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-//			}
-//		} 
-//		catch (Exception e) 
-//		{
-//			e.printStackTrace();
-//			String resultado = generarMensajeError(e);
-//			panelDatos.actualizarInterfaz(resultado);
-//		}
-//	}
-//
-//
-//	/**
-//	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
-//	 */
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	
+/*	public void listarProveedor( )
+	{
+		try 
+		{
+			List <VOProveedor> lista = superAndes.darVOProveedores();
+
+			String resultado = "En Proveedor";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}*/
+
+
+	/**
+	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
+	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	/*public void eliminarProveedorPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				long tbEliminados = superAndes.eliminarProveedor(nombre);
+
+				String resultado = "En eliminar Proveedor\n\n";
+				resultado += tbEliminados + " Proveedor eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+*/
+
+	/**
+	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
+	 */
 //	public void buscarProveedorPorNombre( )
 //	{
 //		try 
@@ -732,13 +767,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 //	}
 
 
-
-
-
 	/* ****************************************************************
-	 * 			MÃ©todos administrativos
-	 *****************************************************************/
-	/**
+ * 			MÃ©todos administrativos
+ *****************************************************************/
+/**
 	 * Muestra el log de Parranderos
 	 */
 	public void mostrarLogParranderos ()

@@ -947,7 +947,122 @@ public class PersistenciaSuperAndes {
 		return sqlBodega.darBodegas (pmf.getPersistenceManager());
 	}
  
+	/* ****************************************************************
+	 * 			Métodos para manejar los PRODUCTOS
+	 *****************************************************************/
+	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, long idCategoria)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, cantidad, cantidadPresentacion,fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
+			tx.commit();
+			log.trace("Insercion del proveedor " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new Producto(id, cantidad, codigoBarras, peso, volumen, marca, nivelReorden, nombre, precioUnitario, presentacion, idCategoria, fechaVencimiento, precioUnidadMedida, cantidadPresentacion);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<Producto> darProductosPorNombre (String nombreProducto)
+	{
+		return sqlProducto.darProductosPorNombre(pmf.getPersistenceManager(), nombreProducto);
+	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Sucursal, dado el nombre del Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long  eliminarProductosPorNombre(String nombreProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlProducto.eliminarProductosPorNombre(pm, nombreProducto);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el identificador del tipo de bebida
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoBebida - El identificador del tipo de bebida
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarProductoPorId (long idProducto) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlProducto.eliminarProductoPorId(pm, idProducto);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<Producto> darProductos ()
+	{
+		return sqlProducto.darProductos(pmf.getPersistenceManager());
+	}
 	
 	
 	
