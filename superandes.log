@@ -63,3 +63,37 @@ ORA-00001: restricci髇 鷑ica (ISIS2304C061820.PROVEEDOR_UK_NOMBRE) violada
 21:20:04,186 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 1 existentes
 21:20:07,836 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: asdd
 21:20:07,847 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Sucursal [id=52, nombre=asdd, nit=123123 , calificacionCalidad=null] tuplas eliminadas
+10:55:42,640 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+10:55:42,641 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+10:55:42,674 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+10:56:00,230 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: dasd
+10:56:00,631 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: dasd
+10:56:51,909 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando Tipo de bebida: las
+10:56:51,947 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando sucursal: Sucursal [id=62, nombre=las, tamanio=500.0 , direccion=cra23 #11-1, ciudad=Bogota]
+10:58:44,349 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedores
+10:58:44,420 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 2 existentes
+10:59:09,489 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - EliminandoProveedor por nombre: asdd
+10:59:09,518 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - EliminandoProveedor por nombre: 1 tuplas eliminadas
+10:59:12,845 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedores
+10:59:12,855 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 1 existentes
+11:03:54,707 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Sucursales
+11:03:54,722 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Sucursales: 2 existentes
+11:04:21,437 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: hola
+11:04:21,462 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: hola
+11:08:04,667 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+11:08:04,669 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+11:08:04,701 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+11:08:17,247 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: hola
+11:08:17,523 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROVEEDOR(id, nombre, nit, calificacion) values (?, ?, ?, ?)".
+ORA-00001: restricci髇 鷑ica (ISIS2304C061820.PROVEEDOR_UK_NOMBRE) violada
+
+11:08:17,530 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: hola
+11:08:49,395 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: hola1
+11:08:49,424 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: hola1
+11:11:46,746 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+11:11:46,747 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+11:11:46,804 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+11:12:47,798 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: hola2
+11:12:48,032 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: hola2
+11:12:54,118 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedores
+11:12:54,162 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 4 existentes
