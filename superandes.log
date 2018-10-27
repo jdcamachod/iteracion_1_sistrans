@@ -63,3 +63,13 @@ ORA-00001: restricci髇 鷑ica (ISIS2304C061820.PROVEEDOR_UK_NOMBRE) violada
 21:20:04,186 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 1 existentes
 21:20:07,836 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: asdd
 21:20:07,847 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Sucursal [id=52, nombre=asdd, nit=123123 , calificacionCalidad=null] tuplas eliminadas
+11:17:54,651 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+11:17:54,672 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+11:17:54,729 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+11:18:08,395 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: asdasd
+11:18:08,686 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: asdasd
+11:37:14,412 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Interfaz
+11:37:14,413 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuraci贸n indicada en el archivo de configuraci贸n
+11:37:14,435 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontr贸 un archivo de configuraci贸n v谩lido: Tablas BD_A
+11:37:30,746 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando proveedor: asdasdu
+11:37:50,254 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando proveedor: asdasdu
