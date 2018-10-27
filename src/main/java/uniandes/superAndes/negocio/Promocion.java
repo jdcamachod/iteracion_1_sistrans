@@ -9,6 +9,7 @@ public abstract class Promocion implements VOPromocion {
 	private Date fechaFinal;
 	private int precio;
 	private long idPague1Lleve2Porcentaje;
+	
 	private long idPagueNLleveM;
 	private long idPagueXLleveY;
 	private long idDescuentoPorcentaje;
@@ -59,6 +60,37 @@ public abstract class Promocion implements VOPromocion {
 	}
 	public void setPrecio(int precio) {
 		this.precio = precio;
+	}
+	public long getIdPague1Lleve2Porcentaje() {
+		return idPague1Lleve2Porcentaje;
+	}
+
+	public void setIdPague1Lleve2Porcentaje(long idPague1Lleve2Porcentaje) {
+		this.idPague1Lleve2Porcentaje = idPague1Lleve2Porcentaje;
+	}
+
+	public long getIdPagueNLleveM() {
+		return idPagueNLleveM;
+	}
+
+	public void setIdPagueNLleveM(long idPagueNLleveM) {
+		this.idPagueNLleveM = idPagueNLleveM;
+	}
+
+	public long getIdPagueXLleveY() {
+		return idPagueXLleveY;
+	}
+
+	public void setIdPagueXLleveY(long idPagueXLleveY) {
+		this.idPagueXLleveY = idPagueXLleveY;
+	}
+
+	public long getIdDescuentoPorcentaje() {
+		return idDescuentoPorcentaje;
+	}
+
+	public void setIdDescuentoPorcentaje(long idDescuentoPorcentaje) {
+		this.idDescuentoPorcentaje = idDescuentoPorcentaje;
 	}
 	
 	
