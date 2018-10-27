@@ -106,12 +106,12 @@ class SQLProveedor {
 		 * @param nombreProveedor - El nombre de proveedor buscado
 		 * @return Una lista de objetos PROVEEDOR que tienen el nombre dado
 		 */
-		public List<Proveedor> darProveedoresPorNombre (PersistenceManager pm, String nombreProveedor) 
+		public Proveedor darProveedorPorNombre (PersistenceManager pm, String nombreProveedor) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProveedor()  + " WHERE nombre = ?");
 			q.setResultClass(Proveedor.class);
 			q.setParameters(nombreProveedor);
-			return (List<Proveedor>) q.executeList();
+			return (Proveedor) q.executeUnique();
 		}
 
 		/**
@@ -123,7 +123,7 @@ class SQLProveedor {
 		public List<Proveedor> darProveedores (PersistenceManager pm)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProveedor() );
-			q.setResultClass(Producto.class);
+			q.setResultClass(Proveedor.class);
 			return (List<Proveedor>) q.executeList();
 		}
 }

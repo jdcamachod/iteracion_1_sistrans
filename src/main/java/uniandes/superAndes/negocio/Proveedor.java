@@ -3,22 +3,31 @@ package uniandes.superAndes.negocio;
 public class Proveedor implements VOProveedor
 {
 
-	private String calificacionCalidad;
+	private String calificacion;
 	private long id;
 	private String nit;
 	private String nombre;
+	
+	public Proveedor () {
+		
+		this.calificacion = "DEFAULT";
+		this.id = 0;
+		this.nit = "DEFAULT";
+		this.nombre = "DEFAULT";
+	}
+	
 	public Proveedor(String calificacionCalidad, long id, String nit, String nombre) {
 		super();
-		this.calificacionCalidad = calificacionCalidad;
+		this.calificacion = calificacionCalidad;
 		this.id = id;
 		this.nit = nit;
 		this.nombre = nombre;
 	}
-	public String getCalificacionCalidad() {
-		return calificacionCalidad;
+	public String getCalificacion() {
+		return calificacion;
 	}
-	public void setCalificacionCalidad(String calificacionCalidad) {
-		this.calificacionCalidad = calificacionCalidad;
+	public void setCalificacion(String calificacionCalidad) {
+		this.calificacion = calificacionCalidad;
 	}
 	public long getId() {
 		return id;
@@ -39,5 +48,24 @@ public class Proveedor implements VOProveedor
 		this.nombre = nombre;
 	}
 	
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Proveedor [id=" + id + ", nombre=" + nombre + ", nit=" + nit + " , calificacionCalidad=" +calificacion + "]";
+	}
+
+	/**
+	 * @param tipo - El TipoBebida a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipo) 
+	{
+		Proveedor tb = (Proveedor) tipo;
+		return id == tb.id && nombre.equalsIgnoreCase (tb.nombre);
+	}
+
 	
 }

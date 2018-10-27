@@ -112,7 +112,7 @@ class SQLSucursal {
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSucursal()  + " WHERE nombre = ?");
 			q.setResultClass(Sucursal.class);
 			q.setParameters(nombreSucursal);
-			return (Sucursal) q.executeList();
+			return (Sucursal) q.executeUnique();
 		}
 
 		/**

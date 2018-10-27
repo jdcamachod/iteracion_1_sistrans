@@ -14,15 +14,15 @@
 				},
 				{
 					"label": "Listar",
-					"event": "listarTipoBebida"
+					"event": "listarProveedor"
 				},
 				{
-					"label": "Borrar por Id",
-					"event": "eliminarTipoBebidaPorId"
+					"label": "Borrar por nombre",
+					"event": "eliminarProveedorPorNombre"
 				},
 				{
 					"label": "Buscar por Nombre",
-					"event": "buscarTipoBebidaPorNombre"
+					"event": "buscarProveedorPorNombre"
 				}
 			]
 		},
@@ -39,8 +39,12 @@
 					"event": "listarSucursal"
 				},
 				{
-					"label": "Borrar por Id",
-					"event": "eliminarSucursal"
+					"label": "Borrar por nombre",
+					"event": "eliminarSucursalPorNombre"
+				},
+								{
+					"label": "Buscar por Nombre",
+					"event": "buscarSucursalPorNombre"
 				}
 			]
 		},

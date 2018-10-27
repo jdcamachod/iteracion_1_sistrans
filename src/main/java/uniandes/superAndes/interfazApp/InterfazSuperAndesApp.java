@@ -53,6 +53,7 @@ import com.google.gson.stream.JsonReader;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
+import uniandes.superAndes.negocio.VOProveedor;
 import uniandes.superAndes.negocio.VOSucursal;
 
 
@@ -329,8 +330,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		{
 			List <VOSucursal> lista = superAndes.darVOSucursales();
 
-			String resultado = "En listarTipoBebida";
-			resultado +=  "\n" + listarSucursales(lista);
+			String resultado = "En Sucursales";
+			resultado +=  "\n" + listarVO(lista);
 			panelDatos.actualizarInterfaz(resultado);
 			resultado += "\n Operación terminada";
 		} 
@@ -341,6 +342,75 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	
+    /**
+     * Borra de la base de datos Sucursal con el identificador dado po el usuario
+     * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
+     */
+    public void eliminarSucursalPorNombre( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Id de la sucursal?", "Borrar Sucursal por nombre", JOptionPane.QUESTION_MESSAGE);
+    		if (nombre != null)
+    		{
+    			long tbEliminados = superAndes.eliminarSucursal(nombre);
+
+    			String resultado = "En eliminar Sucursal\n\n";
+    			resultado += tbEliminados + " Sucursales eliminados\n";
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    
+    /**
+     * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
+     */
+    public void buscarSucursalPorNombre( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre de la Sucursal?", "Buscar Sucursal por nombre", JOptionPane.QUESTION_MESSAGE);
+    		if (nombre != null)
+    		{
+    			VOSucursal sucursal = superAndes.darSucursalPorNombre(nombre);
+    			String resultado = "En buscar Sucursal por nombre\n\n";
+    			if (sucursal != null)
+    			{
+        			resultado += "La Sucursal es: " + sucursal;
+    			}
+    			else
+    			{
+        			resultado += "Una Sucursal con nombre: " + nombre + " NO EXISTE\n";    				
+    			}
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
 
 
 
@@ -410,6 +480,98 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	/**
+	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarProveedor( )
+	{
+		try 
+		{
+			List <VOProveedor> lista = superAndes.darVOProveedores();
+
+			String resultado = "En Proveedor";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
+    /**
+     * Borra de la base de datos Sucursal con el identificador dado po el usuario
+     * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
+     */
+    public void eliminarProveedorPorNombre( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+    		if (nombre != null)
+    		{
+    			long tbEliminados = superAndes.eliminarProveedor(nombre);
+
+    			String resultado = "En eliminar Proveedor\n\n";
+    			resultado += tbEliminados + " Proveedor eliminados\n";
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+		e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+    
+    
+    /**
+     * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
+     */
+    public void buscarProveedorPorNombre( )
+    {
+    	try 
+    	{
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+    		if (nombre != null)
+    		{
+    			VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
+    			String resultado = "En buscar Proveedor por nombre\n\n";
+    			if (sucursal != null)
+    			{
+        			resultado += "La Proveedor es: " + sucursal;
+    			}
+    			else
+    			{
+        			resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
+    			}
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+    }
+
 
 
 
@@ -545,14 +707,15 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
     /**
      * Genera una cadena de caracteres con la lista de los tipos de bebida recibida: una línea por cada tipo de bebida
+     * @param <E>
      * @param lista - La lista con los tipos de bebida
      * @return La cadena con una líea para cada tipo de bebida recibido
      */
-    private String listarSucursales(List<VOSucursal> lista) 
+    private <E> String listarVO(List<E> lista) 
     {
-    	String resp = "Los tipos de bebida existentes son:\n";
+    	String resp = "Los Elementos  son:\n";
     	int i = 1;
-        for (VOSucursal tb : lista)
+        for (Object tb : lista)
         {
         	resp += i++ + ". " + tb.toString() + "\n";
         }

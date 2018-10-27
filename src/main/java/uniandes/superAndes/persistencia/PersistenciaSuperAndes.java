@@ -609,6 +609,92 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public Proveedor darProveedorPorNombre (String nombreProveedor)
+	{
+		return sqlProveedor.darProveedorPorNombre(pmf.getPersistenceManager(), nombreProveedor);
+	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Sucursal, dado el nombre del Sucursal
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarProveedorPorNombre (String nombreProveedor) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlProveedor.eliminarProveedoresPorNombre(pm, nombreProveedor);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla TipoBebida, dado el identificador del tipo de bebida
+	 * Adiciona entradas al log de la aplicación
+	 * @param idTipoBebida - El identificador del tipo de bebida
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarProveedorPorId (long idProveedor) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlProveedor.eliminarProveedorPorId(pm, idProveedor);
+            tx.commit();
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<Proveedor> darProveedores ()
+	{
+		return sqlProveedor.darProveedores(pmf.getPersistenceManager());
+	}
 
 	/* ****************************************************************
 	 * 			Métodos para manejar las SUCURSALES

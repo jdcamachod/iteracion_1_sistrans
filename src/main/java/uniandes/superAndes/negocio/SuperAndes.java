@@ -106,13 +106,13 @@ public class SuperAndes {
 	
 	public List<VOSucursal> darVOSucursales ()
 	{
-		log.info ("Generando los VO de Tipos de bebida");        
+		log.info ("Generando los VO de Sucursales");        
         List<VOSucursal> voSucursales = new LinkedList<VOSucursal> ();
         for (Sucursal tb : pp.darSucursales())
         {
         	voSucursales.add(tb);
         }
-        log.info ("Generando los VO de Tipos de bebida: " + voSucursales.size() + " existentes");
+        log.info ("Generando los VO de Sucursales: " + voSucursales.size() + " existentes");
         return voSucursales;
 	}
 	
@@ -126,5 +126,40 @@ public class SuperAndes {
 		log.info("/Adicionando proveedor: "+nombre);
 		return proveedor;
 	}
+	
+	/**
+	 * Elimina un Sucursal por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProveedor(String nombre)
+	{
+		log.info ("EliminandoProveedor por nombre: " + nombre);
+        long resp = pp.eliminarProveedorPorNombre (nombre);		
+        log.info ("EliminandoProveedor por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	public Proveedor darProveedorPorNombre (String nombre) {
+		
+		log.info ("Buscando Proveedor por nombre: " + nombre);
+		Proveedor resp = pp.darProveedorPorNombre(nombre);		
+        log.info ("\"Buscando Proveedor por nombre: " + resp + " tuplas eliminadas");
+        return resp;
+	}
+	
+	public List<VOProveedor> darVOProveedores ()
+	{
+		log.info ("Generando los VO de Proveedores");        
+        List<VOProveedor> vOProveedor = new LinkedList<VOProveedor> ();
+        for (Proveedor tb : pp.darProveedores())
+        {
+        	vOProveedor.add(tb);
+        }
+        log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
+        return vOProveedor;
+	}
+	
 
 }
