@@ -2,15 +2,29 @@ package uniandes.superAndes.negocio;
 
 public interface VOSucursal {
 
-	
+	/**
+	 * @return El identificador de la sucursal 
+	 */
 	public long getId();
 	
+	/**
+	 * @return El nombre de la sucursal
+	 */
 	public String getNombre();
 	
+	/**
+	 * @return El tamaño de la sucursal
+	 */
 	public double getTamano();
 	
+	/**
+	 * @return La direccion de la sucursal
+	 */
 	public String getDireccion();
 	
+	/**
+	 * @return la ciudad de la sucursal
+	 */
 	public String getCiudad();
 
 	/**

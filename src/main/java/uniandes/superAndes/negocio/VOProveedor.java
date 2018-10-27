@@ -3,10 +3,24 @@ package uniandes.superAndes.negocio;
 public interface VOProveedor {
 	
 	
-	
+	/**
+	 * @return la calificacion de calidad del proveedor
+	 */
 	public String getCalificacion();
+	
+	/**
+	 * @return el identificador del proveedor
+	 */
 	public long getId();
+	
+	/**
+	 * @return el nit del proveedor
+	 */
 	public String getNit();
+	
+	/**
+	 * @return el nombre del proveedor
+	 */
 	public String getNombre();
 	
 	/**
