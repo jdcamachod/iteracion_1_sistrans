@@ -593,7 +593,8 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlProveedor.adicionarProveedor(pm, id, nombre, nit, calificacion);
 			tx.commit();
 			log.trace("Insercion del proveedor " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
-			return new Proveedor(calificacion, id, nit, nombre);
+			return new Proveedor( id, nombre, nit, calificacion);
+
 		}
 		catch(Exception e)
 		{

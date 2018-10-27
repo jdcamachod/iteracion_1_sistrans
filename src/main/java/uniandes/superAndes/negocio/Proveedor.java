@@ -16,9 +16,9 @@ public class Proveedor implements VOProveedor
 		this.nombre = "DEFAULT";
 	}
 	
-	public Proveedor(String calificacionCalidad, long id, String nit, String nombre) {
+	public Proveedor( long id, String nombre, String nit, String calificacion) {
 		super();
-		this.calificacion = calificacionCalidad;
+		this.calificacion = calificacion;
 		this.id = id;
 		this.nit = nit;
 		this.nombre = nombre;
@@ -26,8 +26,8 @@ public class Proveedor implements VOProveedor
 	public String getCalificacion() {
 		return calificacion;
 	}
-	public void setCalificacion(String calificacionCalidad) {
-		this.calificacion = calificacionCalidad;
+	public void setCalificacion(String calificacion) {
+		this.calificacion = calificacion;
 	}
 	public long getId() {
 		return id;
