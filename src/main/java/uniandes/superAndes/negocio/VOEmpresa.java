@@ -12,6 +12,8 @@ public interface VOEmpresa {
 	 */
 	public String getNit();
 	
+	
+	public long getId();
 	/**
 	 * @return Una cadena de caracteres con la información de la empresa
 	 */

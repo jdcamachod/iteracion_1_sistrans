@@ -48,6 +48,27 @@
 				}
 			]
 		},
+			{ "menuTitle": "Cliente",
+		  "options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarCliente"
+				},
+				{
+					"label": "Listar",
+					"event": "listarClientes"
+				},
+				{
+					"label": "Borrar por correo",
+					"event": "eliminarClientePorCorreo"
+				},
+								{
+					"label": "Buscar por correo",
+					"event": "buscarClientePorNombre"
+				}
+			]
+		},
 		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
