@@ -83,6 +83,11 @@ public class Empresa extends Cliente implements VOEmpresa
 		this.nit = nit;
 	}
 	
+	public String toString2()
+	{
+		return "Empresa [id=" + id + ", nombre=" + getNombre() + ", correo=" + getCorreoElectronico() + " , puntos=" +getPuntos()  +", Empresa id:" + id +
+				", Direccion= "+ direccion +", NIT = "+ nit +" ]";
+	}
 	
 	
 	

@@ -51,10 +51,10 @@ class SQLCliente {
 	 * @param puntos
 	 * @return
 	 */
-	public long adicionarCliente (PersistenceManager pm, long idCliente, String nombre, String correoElectronico, double puntos) 
+	public long adicionarCliente (PersistenceManager pm, long idCliente, String nombre, String correoElectronico, double puntos, Long idEmpresa, Long idPersona) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCliente () + "(id, nombre, correoElectronico, puntos) values (?, ?, ?, ?)");
-        q.setParameters(idCliente, nombre, correoElectronico, puntos);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCliente () + "(id, nombre, correoElectronico, puntos, empresa, personanatural) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(idCliente, nombre, correoElectronico, puntos, idEmpresa, idPersona);
         return (long) q.executeUnique();
 	}
 

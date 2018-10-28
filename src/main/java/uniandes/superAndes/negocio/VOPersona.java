@@ -10,7 +10,7 @@ public interface VOPersona {
 	/**
 	 * @return EL numero de documento de la persona
 	 */
-	public int getNumeroDocumento();
+	public int getDocumentoIdentificacion();
 	/**
 	 * @return Una cadena de caracteres con la información de la persona
 	 */

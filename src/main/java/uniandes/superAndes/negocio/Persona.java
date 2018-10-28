@@ -9,32 +9,37 @@ public class Persona extends Cliente implements VOPersona {
 	
 	private String tipoDocumento;
 	
-	private int numeroDocumento;
+	private int documentoIdentificacion;
 	
 	public Persona () {
-		super ("DEFAULT", 0, "DEFAULT", 0, null,null);
 		id= 0;
 		tipoDocumento = "DEFAULT";
-		numeroDocumento = 0;
+		documentoIdentificacion = 0;
 	}
 	
 	public Persona(String correoElectronico, long idCliente, String nombre, double puntos,Long idPersona, String tipoDocumento, int numeroDocumento) {
 		super(correoElectronico, idCliente, nombre, puntos, idPersona, null);
 		this.tipoDocumento = tipoDocumento;
-		this.numeroDocumento = numeroDocumento;
+		this.documentoIdentificacion = numeroDocumento;
 		this.id = idPersona;
 	}
+	public Persona (long id , String tipoDocumento, int documetoIdentificacion) {
+		this.id = id;
+		this.documentoIdentificacion = documetoIdentificacion;
+		this.tipoDocumento = tipoDocumento;
+	}
+	
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	public int getNumeroDocumento() {
-		return numeroDocumento;
+	public int getDocumentoIdentificacion() {
+		return documentoIdentificacion;
 	}
-	public void setNumeroDocumento(int numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+	public void setDocumentoIdentificacion(int numeroDocumento) {
+		this.documentoIdentificacion = numeroDocumento;
 	}
 	public long getId() {
 		return id;
@@ -42,6 +47,13 @@ public class Persona extends Cliente implements VOPersona {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "Persona natural [Persona natural id:" + id +", Tipo de documento= "+ tipoDocumento +", Numero Documento = "+ documentoIdentificacion +" ]";
+	}
+	
 	
 	
 }

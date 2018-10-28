@@ -1,5 +1,5 @@
 {
-	"title": "Aplicaci贸n transaccional de Parranderos Uniandes",
+	"title": "Aplicaci髇 transaccional de Parranderos Uniandes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
@@ -48,8 +48,31 @@
 				}
 			]
 		},
-			{ "menuTitle": "Cliente",
+		{ "menuTitle": "Producto",
 		  "options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarProducto"
+				},
+				{
+					"label": "Listar",
+					"event": "listarSucursal"
+				},
+				{
+					"label": "Borrar por nombre",
+					"event": "eliminarSucursalPorNombre"
+				},
+								{
+					"label": "Buscar por Nombre",
+					"event": "buscarSucursalPorNombre"
+				}
+			]
+		},
+		
+	
+		{ "menuTitle": "Cliente",
+				"options":
 			[
 				{
 					"label": "Registrar",
@@ -65,10 +88,10 @@
 				},
 								{
 					"label": "Buscar por correo",
-					"event": "buscarClientePorNombre"
-				}
+					"event": "buscarClientePorNombre"		
+									}
 			]
-		},
+		},	
 		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
@@ -95,11 +118,11 @@
 				}
 			]
 		},		
-		{ "menuTitle": "Documentaci贸n",
+		{ "menuTitle": "Documentaci髇",
 		  "options":
 			[
 				{
-					"label": "Presentaci贸n general",
+					"label": "Presentaci髇 general",
 					"event": "mostrarPresentacionGeneral"
 				},
 				{
@@ -111,7 +134,7 @@
 					"event": "mostrarEsquemaBD"
 				},
 				{
-					"label": "Script creaci贸n de la BD",
+					"label": "Script creaci髇 de la BD",
 					"event": "mostrarScriptBD"
 				},
 				{
