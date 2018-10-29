@@ -1,6 +1,6 @@
 package uniandes.superAndes.persistencia;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import uniandes.superAndes.negocio.Bodega;
+import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.OrdenPedido;
 import uniandes.superAndes.negocio.OrdenesProductos;
@@ -28,6 +29,7 @@ import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Promocion;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
+import uniandes.superAndes.negocio.TipoProducto;
 
 
 
@@ -950,14 +952,14 @@ public class PersistenciaSuperAndes {
 	/* ****************************************************************
 	 * 			Métodos para manejar los PRODUCTOS
 	 *****************************************************************/
-	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, long idCategoria)
+	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, String unidadMedida, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
 			long id = nextval();
-			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, cantidad, cantidadPresentacion,fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, cantidad, cantidadPresentacion,fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, unidadMedida, idCategoria);
 			tx.commit();
 			log.trace("Insercion del proveedor " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
 			return new Producto(id, cantidad, codigoBarras, peso, volumen, marca, nivelReorden, nombre, precioUnitario, presentacion, idCategoria, fechaVencimiento, precioUnidadMedida, cantidadPresentacion);
@@ -965,6 +967,7 @@ public class PersistenciaSuperAndes {
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1062,6 +1065,82 @@ public class PersistenciaSuperAndes {
 	public List<Producto> darProductos ()
 	{
 		return sqlProducto.darProductos(pmf.getPersistenceManager());
+	}
+	
+	public Categoria adicionarCategoria(String nombre)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlCategoria.adicionarCategoria(pm, id, nombre);
+			tx.commit();
+			log.trace("Insercion de la categoria " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new Categoria( id, nombre);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public TipoProducto adicionarTipoProducto(String nombre, long idCategoria)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlTipoProducto.adicionarTipoProducto(pm, id, nombre, idCategoria);
+			tx.commit();
+			log.trace("Insercion del tipoProducto " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new TipoProducto( id, nombre, idCategoria);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public Categoria darCategoriaPorNombre (String nombreCategoria)
+	{
+		return sqlCategoria.darCategoriaPorNombre(pmf.getPersistenceManager(), nombreCategoria);
+	}
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public TipoProducto darTipoProductoPorNombre (String nombreTipoProducto)
+	{
+		return sqlTipoProducto.darTipoProductoPorNombre(pmf.getPersistenceManager(), nombreTipoProducto);
 	}
 	
 	
@@ -1192,7 +1271,7 @@ public class PersistenciaSuperAndes {
 			tx.begin();
 			long idOrdenPedido = nextval();
 			String calificacionPedido= "En proceso";
-			long creacionOrden = sqlOrdenPedido.adicionarOrdenPedido(pm, idOrdenPedido,calificacionPedido , fechaEsperadaDeEntrega, 0, idProveedor);
+			long creacionOrden = sqlOrdenPedido.adicionarOrdenPedido(pm, idOrdenPedido,calificacionPedido ,fechaEsperadaDeEntrega, 0, idProveedor);
 
 			long idOrdenesProductos = nextval();
 			long creacionProductosOrden = sqlOrdenesProducto.adicionarOrdenesProductos(pm, idOrdenesProductos , idProducto, idOrdenPedido,precioProveedor);
@@ -1241,7 +1320,8 @@ public class PersistenciaSuperAndes {
 		{ 
 			tx.begin();
 			long idOrdenPedido = orden.getId();
-			long actualizarOrden = sqlOrdenPedido.registrarLlegadaOrdenPedido(pm, idOrdenPedido , calificacionPedido, estado, fechaEntrega);
+			java.sql.Date sqlDate = new java.sql.Date(fechaEntrega.getTime());
+			long actualizarOrden = sqlOrdenPedido.registrarLlegadaOrdenPedido(pm, idOrdenPedido , calificacionPedido, estado, sqlDate);
 
 			for (int i = 0; i < productosEnLaOrden.size(); i++) {
 
@@ -1279,7 +1359,7 @@ public class PersistenciaSuperAndes {
 		try {
 			tx.begin();
 			long idProducto = nextval();
-			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, idProducto, cantidad, cantidadPresentacion, fechaVencimiento, codigoDeBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
+			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, idProducto, cantidad, cantidadPresentacion, fechaVencimiento, codigoDeBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen,unidadMedida, idCategoria);
 			tx.commit();
             
             log.trace ("Inserción producto: " + nombre+  ": " + tuplasInsertadas + " tuplas insertadas");

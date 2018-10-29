@@ -3,6 +3,7 @@ package uniandes.superAndes.persistencia;
 import java.sql.Date;
 import java.util.List;
 
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -49,10 +50,11 @@ class SQLOrdenPedido {
 		 * @param nombre nombre que se desea adicionar a la categoria
 		 * @return
 		 */
-		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido,Date fechaEsperadaDeEntrega, int estado  , long proveedor) 
+		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido,java.util.Date fechaEsperadaDeEntrega, int estado  , long proveedor) 
 		{
+			java.sql.Date sqlDate = new java.sql.Date(fechaEsperadaDeEntrega.getTime());
 			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenPedido() + "(id, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor) values (?, ?,?,?,?)");
-			q.setParameters(idOrdenPedido, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor);
+			q.setParameters(idOrdenPedido, estado, sqlDate, calificacionPedido, proveedor);
 			return (long) q.executeUnique();
 		}
 

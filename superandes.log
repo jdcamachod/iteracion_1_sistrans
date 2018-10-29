@@ -113,3 +113,168 @@ ORA-00001: restricci�n �nica (ISIS2304C061820.PROVEEDOR_UK_NOMBRE) violada
 15:39:49,044 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
 15:39:49,047 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
 15:39:49,094 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+06:40:12,881 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+06:40:12,938 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+06:40:12,970 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+06:42:48,938 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedores
+06:42:49,922 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 6 existentes
+06:44:21,570 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+06:44:21,780 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+06:44:21,781 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: perecederos
+06:44:22,022 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+06:44:22,022 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: perecederos
+06:44:23,282 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: perecederos
+06:44:23,282 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: enlatados
+07:26:25,746 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+07:26:25,749 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+07:26:25,803 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+07:27:16,778 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:27:16,975 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:27:16,975 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cas
+07:27:17,033 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+07:27:17,033 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: cas
+07:27:17,492 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: cas
+07:27:17,492 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: cda
+07:27:17,563 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+07:27:17,564 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: cda
+07:27:17,719 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: cda
+07:27:17,719 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:27:17,782 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:27:17,783 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cas
+07:27:17,844 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@1c1f3311 tuplas eliminadas
+07:27:17,844 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: asda
+07:27:17,965 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PRODUCTO(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)".
+Tipo de columna no v�lido
+07:27:18,015 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: asda
+07:45:24,825 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+07:45:24,827 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+07:45:24,862 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+07:46:47,254 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:46:47,443 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:46:47,444 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+07:46:47,509 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+07:46:47,510 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: cat
+07:46:48,024 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: cat
+07:46:48,024 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: CAT
+07:46:48,169 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+07:46:48,170 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: CAT
+07:46:48,452 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: CAT
+07:46:48,452 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:46:48,595 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:46:48,598 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+07:46:48,675 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@12aa0a5c tuplas eliminadas
+07:46:48,675 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: hola
+07:46:48,916 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PRODUCTO(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)".
+ORA-00904: "IDCATEGORIA": identificador no v�lido
+
+07:46:48,982 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: hola
+07:47:07,456 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+07:47:07,458 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+07:47:07,506 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+07:48:40,774 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:48:41,151 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:48:41,152 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: car
+07:48:41,210 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+07:48:41,210 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: car
+07:48:41,638 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: car
+07:48:41,638 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: cat
+07:48:41,702 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+07:48:41,702 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: cat
+07:48:41,803 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: cat
+07:48:41,803 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:48:41,871 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:48:41,874 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: car
+07:48:41,943 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@78695afc tuplas eliminadas
+07:48:41,944 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: hola
+07:48:42,159 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PRODUCTO(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)".
+ORA-00904: "IDCATEGORIA": identificador no v�lido
+
+07:48:42,195 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: hola
+07:52:01,017 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:52:01,110 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:52:01,110 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+07:52:01,162 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@3b7f2709 tuplas eliminadas
+07:52:01,162 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: tp
+07:52:01,220 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+07:52:01,220 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: tp
+07:52:01,361 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: tp
+07:52:01,361 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:52:01,426 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:52:01,426 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+07:52:01,486 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@668019e1 tuplas eliminadas
+07:52:01,486 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: hola
+07:52:01,590 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PRODUCTO(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)".
+ORA-00904: "IDCATEGORIA": identificador no v�lido
+
+07:52:01,628 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: hola
+07:52:36,848 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+07:52:36,850 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+07:52:36,922 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+07:54:23,483 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:54:23,851 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:54:29,911 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: hola
+07:54:29,981 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+07:54:36,386 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: hola
+07:54:36,809 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: hola
+07:54:48,069 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: hola
+07:54:48,187 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+07:54:59,364 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: hola
+07:54:59,542 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: hola
+07:55:13,151 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+07:55:13,234 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+07:56:02,241 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: hola
+07:56:02,321 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@1a2f4c45 tuplas eliminadas
+07:56:02,321 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: hola
+07:56:02,478 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PRODUCTO(id, cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelDeReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion,volumen, idCategoria) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)".
+ORA-00904: "IDCATEGORIA": identificador no v�lido
+
+07:56:02,512 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: hola
+08:07:24,463 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+08:07:24,465 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+08:07:24,540 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+08:10:55,230 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+08:10:55,505 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+08:10:55,505 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: hola
+08:10:55,634 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@bcfa693 tuplas eliminadas
+08:10:55,634 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: hola
+08:13:20,722 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+08:13:20,724 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+08:13:20,761 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+08:14:25,255 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+08:14:25,593 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+08:14:25,593 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+08:14:25,732 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@4b69800a tuplas eliminadas
+08:14:25,733 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: TP
+08:14:25,834 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+08:14:25,834 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: TP
+08:14:26,289 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: TP
+08:14:40,211 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+08:14:40,296 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+08:14:40,297 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+08:14:40,379 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@6abaf547 tuplas eliminadas
+08:14:48,692 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: hola
+08:28:25,788 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+08:28:25,789 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+08:28:25,822 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+08:29:11,951 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+08:29:18,092 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+08:29:18,093 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+08:29:18,495 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@3073fbab tuplas eliminadas
+08:29:18,495 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: tp
+08:29:47,173 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+08:29:47,175 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+08:29:47,248 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+08:33:04,745 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+08:33:04,747 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+08:33:04,831 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+09:45:42,809 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+09:45:42,813 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+09:45:42,885 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+09:48:29,516 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+09:48:29,517 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+09:48:29,558 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+09:49:22,916 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+09:49:23,302 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null] tuplas eliminadas
+09:49:23,302 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: cat
+09:49:23,837 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@75e77740 tuplas eliminadas
+09:49:23,837 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: tp

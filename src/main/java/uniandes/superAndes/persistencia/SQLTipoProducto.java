@@ -7,6 +7,7 @@ import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Producto;
+import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.TipoProducto;
 
 class SQLTipoProducto {
@@ -49,10 +50,10 @@ class SQLTipoProducto {
 		 * @param nombre
 		 * @return
 		 */
-		public long adicionarTipoProducto (PersistenceManager pm, long idTipoProducto, String nombre) 
+		public long adicionarTipoProducto (PersistenceManager pm, long idTipoProducto, String nombre, long idCategoria) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoProducto() + "(id,nombre) values (?, ?)");
-	        q.setParameters(idTipoProducto, nombre);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaTipoProducto() + "(id,nombreTipo, categoria) values (?, ?, ?)");
+	        q.setParameters(idTipoProducto, nombre, idCategoria);
 	        return (long) q.executeUnique();
 		}
 
@@ -85,6 +86,20 @@ class SQLTipoProducto {
 			return (TipoProducto) q.executeUnique();
 		}
 
+		/**
+		 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS PROVEEDORES de la 
+		 * base de datos de SuperAndes, por su nombre
+		 * @param pm - El manejador de persistencia
+		 * @param nombreProveedor - El nombre de proveedor buscado
+		 * @return Una lista de objetos PROVEEDOR que tienen el nombre dado
+		 */
+		public TipoProducto darTipoProductoPorNombre (PersistenceManager pm, String nombreTipoProducto) 
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaTipoProducto()  + " WHERE nombreTipo = ?");
+			q.setResultClass(TipoProducto.class);
+			q.setParameters(nombreTipoProducto);
+			return (TipoProducto) q.executeUnique();
+		}
 
 		/**
 		 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS TIPOS DE PRODUCTO de la 

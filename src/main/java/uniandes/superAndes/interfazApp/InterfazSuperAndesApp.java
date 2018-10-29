@@ -27,11 +27,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -50,9 +54,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import uniandes.superAndes.negocio.Categoria;
+import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
+import uniandes.superAndes.negocio.TipoProducto;
 import uniandes.superAndes.negocio.VOProveedor;
 import uniandes.superAndes.negocio.VOSucursal;
 
@@ -598,8 +605,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			JTextField fechaVenField = new JTextField(10);
 			JTextField cantidadField = new JTextField(10);
 			JTextField nombreProvField = new JTextField(10);
+			JTextField categoriaField = new JTextField(10);
+			JTextField tipoProductoField = new JTextField(10);
 			
-			JPanel myPanel = new JPanel(new GridLayout(13,2));
+			JPanel myPanel = new JPanel(new GridLayout(15,2));
 			myPanel.add(new JLabel("Nombre:"));
 			myPanel.add(nombreField);
 			myPanel.add(new JLabel("Marca:"));
@@ -620,55 +629,87 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			myPanel.add(pesoField);
 			myPanel.add(new JLabel("codigo de barras en hexadecimal:"));
 			myPanel.add(codigoBarrasField);
-			myPanel.add(new JLabel("Fecha de vencimiento (dd/mm/aa):"));
+			myPanel.add(new JLabel("Fecha de vencimiento (dd/mm/aaaa):"));
 			myPanel.add(fechaVenField);
 			myPanel.add(new JLabel("cantidad:"));
 			myPanel.add(cantidadField);
 			myPanel.add(new JLabel("nombre del proveedor (no escriba nada si no tiene proveedor):"));
 			myPanel.add(nombreProvField);
+			myPanel.add(new JLabel("Categoria del producto:"));
+			myPanel.add(categoriaField);
+			myPanel.add(new JLabel("Tipo de producto:"));
+			myPanel.add(tipoProductoField);
+			
+			
 
 			int result = JOptionPane.showConfirmDialog(null, myPanel, 
 					"Ingrese los datos del producto", JOptionPane.OK_CANCEL_OPTION);
 
-// 		if (result == JOptionPane.OK_OPTION) {
-//
-//			String nombre = nombreField.getText();
-//				String nit = nitField.getText();
-//
-//				if (!nombre.isEmpty())
-//				{
-//					if(!nit.isEmpty())
-//					{
-//						Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
-//						if (prov == null)
-//					{
-//							throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombre);
-//						}
-//						String resultado = "En registrarProveedor\n\n";
-//						resultado += "Proveedor adicionado exitosamente: " + prov;
-//						resultado += "\n Operación terminada";
-//						panelDatos.actualizarInterfaz(resultado);
-//					}
-//					else
-//					{
-//					panelDatos.actualizarInterfaz("Nit no puede ser vacio");
-//					}
-//
-//				}
-//				else
-//				{
-//					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
-//				}
-//
-//			}
-//			else
-//			{
-//				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-//			}
+	if (result == JOptionPane.OK_OPTION) {
+		
+			String nombre = nombreField.getText();
+			String marca = marcaField.getText();
+			double precioUnitario = Double.parseDouble(precioUnField.getText());
+			String presentacion = presentacionField.getText();
+			double precioUnidadMedida = Double.parseDouble(precioUnMedField.getText());
+			int cantidadPresentacion = Integer.parseInt(cantidadPresenField.getText());
+			String unidadMedida = unMedField.getText();
+			double volumen = Double.parseDouble(volumenField.getText());
+			double peso = Double.parseDouble(pesoField.getText());
+			String codigoBarras = codigoBarrasField.getText();
+			String fechaVencimiento = fechaVenField.getText();
+			int cantidad = Integer.parseInt(cantidadField.getText());
+			String nombreProv = nombreProvField.getText();
+			String categoria = categoriaField.getText();
+			String tipoProducto = tipoProductoField.getText();
+			/*if(nombre.isEmpty() || marca.isEmpty() || precioUnitario.isEmpty() || presentacion.isEmpty() 
+				||precioUnidadMedida.isEmpty() || cantidadPresentacion.isEmpty() || unidadMedida.isEmpty() ||
+				volumen.isEmpty() || peso.isEmpty() || codigoBarras.isEmpty() || fechaVencimiento.isEmpty() ||
+				cantidad.isEmpty())
+			{
+				panelDatos.actualizarInterfaz("Uno de los campos está vacio");
+			}*/
+			//else {
+				if(superAndes.darProveedorPorNombre(nombreProv)==null)
+				{
+					panelDatos.actualizarInterfaz("El proveedor no existe");
+				}
+				else {
+					Categoria cat = superAndes.darCategoriaPorNombre(categoria);
+					if(cat==null)
+					{
+						cat = superAndes.adicionarCategoria(categoria);
+					}
+					TipoProducto tp = superAndes.darTipoProductoPorNombre(tipoProducto);
+					if(tp == null)
+					{
+						tp = superAndes.adicionarTipoProducto(tipoProducto, cat.getId());
+					}
+					long idProv = superAndes.darProveedorPorNombre(nombreProv).getId();
+					Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(fechaVencimiento);
+					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+					Producto prod =superAndes.adicionarProducto(cantidad, cantidadPresentacion,
+							sqlDate, codigoBarras, marca, 0, nombre, peso, precioUnidadMedida,
+							precioUnitario, presentacion, volumen,unidadMedida, superAndes.darCategoriaPorNombre(categoria).getId());
+					
+					if(prod == null)
+					{
+						throw new Exception ("No se pudo crear un producto con nombre "+nombre);
+					}
+					String resultado= "En registrarProducto \n\n";
+					resultado += "Producto adicionado exitosamente:  "+prod;
+					resultado += "\n Operacion terminada ";
+					panelDatos.actualizarInterfaz(resultado);
+					
+				}
+			}
+			//}
+
+			
 		} 
 		catch (Exception e) 
 		{
-			//			e.printStackTrace();
+					//	e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}

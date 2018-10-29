@@ -166,10 +166,10 @@ public class SuperAndes {
 	//--------------------------------------------------------------------------
 	// Metodos para manejar los productos
 	//--------------------------------------------------------------------------
-	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, long idCategoria )
+	public Producto adicionarProducto(int cantidad, double cantidadPresentacion, Date fechaVencimiento, String codigoBarras, String marca, int nivelReorden, String nombre, double peso, double precioUnidadMedida, double precioUnitario, String presentacion, double volumen, String unidadMedida, long idCategoria )
 	{
 		log.info("Adicionando producto: "+nombre);
-		Producto producto = pp.adicionarProducto(cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, idCategoria);
+		Producto producto = pp.adicionarProducto(cantidad, cantidadPresentacion, fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, unidadMedida, idCategoria);
 		log.info("/Adicionando producto: "+nombre);
 		return producto;
 	}
@@ -184,7 +184,7 @@ public class SuperAndes {
 	{
 		log.info ("Eliminando productos por nombre: " + nombre);
         long resp = pp.eliminarProductosPorNombre (nombre);		
-        log.info ("EliminandoProductos por nombre: " + resp + " tuplas eliminadas");
+        log.info ("Eliminando Productos por nombre: " + resp + " tuplas eliminadas");
         return resp;
 	}
 	
@@ -208,6 +208,41 @@ public class SuperAndes {
         log.info ("Generando los VO de Productos: " + voProducto.size() + " existentes");
         return voProducto;
 	}
+	
+	public Categoria adicionarCategoria(String nombre)
+	{
+		log.info("Adicionando categoria: "+nombre);
+		Categoria categoria = pp.adicionarCategoria(nombre);
+		log.info("/Adicionando categoria: "+nombre);
+		return categoria;
+	}
+	
+	public TipoProducto adicionarTipoProducto(String nombre, long idCategoria)
+	{
+		log.info("Adicionando tipoProducto: "+nombre);
+		TipoProducto tipoProducto = pp.adicionarTipoProducto(nombre, idCategoria);
+		log.info("/Adicionando tipoProducto: "+nombre);
+		return tipoProducto;
+	}
+	public Categoria darCategoriaPorNombre (String nombre) {
+		
+		log.info ("Buscando categoria por nombre: " + nombre);
+		Categoria resp = pp.darCategoriaPorNombre(nombre);		
+        log.info ("\"Buscando categoria por nombre: " + resp + " tuplas eliminadas");
+        return  resp;
+	}
+	
+	public TipoProducto darTipoProductoPorNombre (String nombre) {
+		
+		log.info ("Buscando tipo producto por nombre: " + nombre);
+		TipoProducto resp = pp.darTipoProductoPorNombre(nombre);		
+        log.info ("\"Buscando tipoProducto por nombre: " + resp + " tuplas eliminadas");
+        return  resp;
+	}
+	
+	
+	
+	
 	
 
 }

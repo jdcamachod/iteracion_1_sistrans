@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import uniandes.superAndes.negocio.Categoria;
+import uniandes.superAndes.negocio.Proveedor;
 
 class SQLCategoria {
 	/* ****************************************************************
@@ -82,6 +83,20 @@ class SQLCategoria {
 		return (Categoria) q.executeUnique();
 	}
 
+	/**
+	 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS PROVEEDORES de la 
+	 * base de datos de SuperAndes, por su nombre
+	 * @param pm - El manejador de persistencia
+	 * @param nombreProveedor - El nombre de proveedor buscado
+	 * @return Una lista de objetos PROVEEDOR que tienen el nombre dado
+	 */
+	public Categoria darCategoriaPorNombre (PersistenceManager pm, String nombreCategoria) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCategoria()  + " WHERE nombre = ?");
+		q.setResultClass(Categoria.class);
+		q.setParameters(nombreCategoria);
+		return (Categoria) q.executeUnique();
+	}
 
 	/**
 	 * Crea y ejecuta la sentencia SQL para encontrar la información de LAS BODEGAS de la 

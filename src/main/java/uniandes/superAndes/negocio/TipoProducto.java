@@ -4,10 +4,13 @@ public class TipoProducto implements VOTipoProducto {
 	
 	private long id;
 	private String nombre;
-	public TipoProducto(long id, String nombre) {
+	private long  idCategoria;
+	
+	public TipoProducto(long id, String nombre, long idCategoria) {
 		
 		this.id = id;
 		this.nombre = nombre;
+		this.idCategoria = idCategoria;
 	}
 	public long getId() {
 		return id;
@@ -21,6 +24,11 @@ public class TipoProducto implements VOTipoProducto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+	public long getIdCategoria() {
+		return idCategoria;
+	}
+	public void setIdCategoria(long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
 	
 }
