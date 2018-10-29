@@ -4,6 +4,10 @@ public class Empresa extends Cliente implements VOEmpresa
 {
 
 	/**
+	 * Identificador unico de la Empresa
+	 */
+	private long id;
+	/**
 	 * Direccion de la empresa
 	 */
 	private String direccion;
@@ -12,11 +16,13 @@ public class Empresa extends Cliente implements VOEmpresa
 	 */
 	private String nit;
 	
+	
+	
 	/**
 	 * Crea una nueva empresa, constructor vacio
 	 */
 	public Empresa() {
-		super();
+		super ("DEFAULT", 0, "DEFAULT", 0, null,null);
 		this.direccion = "";
 		this.nit = "";
 	}
@@ -30,10 +36,19 @@ public class Empresa extends Cliente implements VOEmpresa
 	 * @param direccion - direccion de la empresa
 	 * @param nit - nit de la empresa
 	 */
-	public Empresa(String correoElectronico, long id, String nombre, double puntos, String direccion, String nit) {
-		super(correoElectronico, id, nombre, puntos);
+	public Empresa(String correoElectronico, long idCliente, String nombre, double puntos, Long idEmpresa,  String direccion, String nit) {
+		super(correoElectronico, idCliente, nombre, puntos, null, idEmpresa);
 		this.direccion = direccion;
 		this.nit = nit;
+		this.id= idEmpresa;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	/**
@@ -68,6 +83,11 @@ public class Empresa extends Cliente implements VOEmpresa
 		this.nit = nit;
 	}
 	
+	public String toString2()
+	{
+		return "Empresa [id=" + id + ", nombre=" + getNombre() + ", correo=" + getCorreoElectronico() + " , puntos=" +getPuntos()  +", Empresa id:" + id +
+				", Direccion= "+ direccion +", NIT = "+ nit +" ]";
+	}
 	
 	
 	

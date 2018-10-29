@@ -4,7 +4,7 @@ package uniandes.superAndes.negocio;
  * Representa un cliente
  *
  */
-public abstract class Cliente implements VOCliente
+public class Cliente implements VOCliente
 {
 
 	/**
@@ -30,12 +30,22 @@ public abstract class Cliente implements VOCliente
 	/**
 	 * Crea un nuevo cliente, constructor vacio
 	 */
+	
+	private Long empresa;
+	
+	private Long personaNatural;
+	
+	
+	
 	public Cliente()
 	{
-		correoElectronico = "";
-		id =0;
-		nombre = "";
-		puntos = 0;
+		this.correoElectronico = "";
+		this.id =0;
+		this.nombre = "";
+		this.puntos = 0.0;
+		this.empresa =  null;
+		this.personaNatural = null;
+		
 	}
 	
 	/**
@@ -45,12 +55,14 @@ public abstract class Cliente implements VOCliente
 	 * @param nombre - nombre del cliente
 	 * @param puntos - puntos del cliente
 	 */
-	public Cliente(String correoElectronico, long id, String nombre, double puntos) {
+	public Cliente(String correoElectronico, long id, String nombre, double puntos, Long idPersona,Long idEmpresa) {
 	
 		this.correoElectronico = correoElectronico;
 		this.id = id;
 		this.nombre = nombre;
 		this.puntos = puntos;
+		empresa = idEmpresa;
+		personaNatural = idPersona;
 	}
 	/**
 	 * Retorna el correo electronico del cliente
@@ -115,8 +127,43 @@ public abstract class Cliente implements VOCliente
 	public void setPuntos(double puntos) {
 		this.puntos = puntos;
 	}
+
+	public Long getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Long empresa) {
+		this.empresa = empresa;
+	}
+
+	public Long getPersonaNatural() {
+		return personaNatural;
+	}
+
+	public void setPersonaNatural(Long personanatural) {
+		this.personaNatural = personanatural;
+	}
 	
 	
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", correo=" + correoElectronico + " , puntos=" +puntos + ", empresa= "+ empresa +", persona natural:" + personaNatural + " ]";
+	}
+	
+	/**
+	 * @param tipo - El TipoBebida a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipo) 
+	{
+		Cliente tb = (Cliente) tipo;
+		return id == tb.id && correoElectronico.equalsIgnoreCase (tb.correoElectronico);
+	}
+
 	
 	
 }

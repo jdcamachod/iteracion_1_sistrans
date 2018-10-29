@@ -59,10 +59,10 @@ class SQLPersona {
 		 * @param volumen
 		 * @return
 		 */
-		public long adicionarPersona  (PersistenceManager pm, long idProducto, String tipoDocumento, int documentoIdentificacion ) 
+		public long adicionarPersona  (PersistenceManager pm, long idPersona, String tipoDocumento, int documentoIdentificacion ) 
 		{
 	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPersona () + "(id, tipoDocumento, documentoIdentificacion) values (?, ?, ?)");
-	        q.setParameters(idProducto, tipoDocumento, documentoIdentificacion);
+	        q.setParameters(idPersona, tipoDocumento, documentoIdentificacion);
 	        return (long) q.executeUnique();
 		}
 

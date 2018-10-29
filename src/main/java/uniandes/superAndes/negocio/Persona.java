@@ -2,25 +2,58 @@ package uniandes.superAndes.negocio;
 
 public class Persona extends Cliente implements VOPersona {
 
-	private String tipoDocumento;
-	private int numeroDocumento;
-	public Persona(String tipoDocumento, int numeroDocumento) {
+	/**
+	 * Identificador unico del Persona
+	 */
+	private long id;
 	
-		this.tipoDocumento = tipoDocumento;
-		this.numeroDocumento = numeroDocumento;
+	private String tipoDocumento;
+	
+	private int documentoIdentificacion;
+	
+	public Persona () {
+		id= 0;
+		tipoDocumento = "DEFAULT";
+		documentoIdentificacion = 0;
 	}
+	
+	public Persona(String correoElectronico, long idCliente, String nombre, double puntos,Long idPersona, String tipoDocumento, int numeroDocumento) {
+		super(correoElectronico, idCliente, nombre, puntos, idPersona, null);
+		this.tipoDocumento = tipoDocumento;
+		this.documentoIdentificacion = numeroDocumento;
+		this.id = idPersona;
+	}
+	public Persona (long id , String tipoDocumento, int documetoIdentificacion) {
+		this.id = id;
+		this.documentoIdentificacion = documetoIdentificacion;
+		this.tipoDocumento = tipoDocumento;
+	}
+	
 	public String getTipoDocumento() {
 		return tipoDocumento;
 	}
 	public void setTipoDocumento(String tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	public int getNumeroDocumento() {
-		return numeroDocumento;
+	public int getDocumentoIdentificacion() {
+		return documentoIdentificacion;
 	}
-	public void setNumeroDocumento(int numeroDocumento) {
-		this.numeroDocumento = numeroDocumento;
+	public void setDocumentoIdentificacion(int numeroDocumento) {
+		this.documentoIdentificacion = numeroDocumento;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Persona natural [Persona natural id:" + id +", Tipo de documento= "+ tipoDocumento +", Numero Documento = "+ documentoIdentificacion +" ]";
+	}
+	
 	
 	
 }

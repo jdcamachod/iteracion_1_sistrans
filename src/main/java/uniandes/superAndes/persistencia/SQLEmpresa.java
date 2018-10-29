@@ -49,7 +49,7 @@ class SQLEmpresa {
 	 * @param direccion direccion de la empresa
 	 * @return
 	 */
-	public long adicionarEmpresa  (PersistenceManager pm, long idEmpresa, double nit,String direccion ) 
+	public long adicionarEmpresa  (PersistenceManager pm, long idEmpresa, String nit,String direccion ) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaEmpresa() + "(id, nit, direccion ) values (?, ?, ?)");
 		q.setParameters(idEmpresa, nit, direccion);

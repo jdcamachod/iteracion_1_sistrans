@@ -51,10 +51,10 @@ class SQLCliente {
 	 * @param puntos
 	 * @return
 	 */
-	public long adicionarCliente (PersistenceManager pm, long idCliente, String nombre, String correoElectronico, double puntos) 
+	public long adicionarCliente (PersistenceManager pm, long idCliente, String nombre, String correoElectronico, double puntos, Long idEmpresa, Long idPersona) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCliente () + "(id, nombre, correoElectronico, puntos) values (?, ?, ?, ?)");
-        q.setParameters(idCliente, nombre, correoElectronico, puntos);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCliente () + "(id, nombre, correoElectronico, puntos, empresa, personanatural) values (?, ?, ?, ?, ?, ?)");
+        q.setParameters(idCliente, nombre, correoElectronico, puntos, idEmpresa, idPersona);
         return (long) q.executeUnique();
 	}
 
@@ -64,10 +64,10 @@ class SQLCliente {
 	 * @param nombreCliente - El nombre del cliente
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarClientesPorNombre (PersistenceManager pm, String nombreCliente)
+	public long eliminarClientePorCorreo (PersistenceManager pm, String correoCliente)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCliente()  + " WHERE nombre = ?");
-        q.setParameters(nombreCliente);
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCliente()  + " WHERE correoelectronico = ?");
+        q.setParameters(correoCliente);
         return (long) q.executeUnique();
 	}
 
@@ -112,6 +112,15 @@ class SQLCliente {
 		q.setResultClass(Cliente.class);
 		q.setParameters(nombreCliente);
 		return (List<Cliente>) q.executeList();
+	}
+	
+	
+	public Cliente darClientesPorCorreo (PersistenceManager pm, String correoCliente) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCliente()  + " WHERE correoelectronico = ?");
+		q.setResultClass(Cliente.class);
+		q.setParameters(correoCliente);
+		return (Cliente) q.executeUnique();
 	}
 
 	/**
