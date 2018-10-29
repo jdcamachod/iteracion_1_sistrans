@@ -30,6 +30,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -73,7 +74,7 @@ import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
 import uniandes.superAndes.negocio.VOCliente;
-
+import uniandes.superAndes.negocio.VOProducto;
 import uniandes.superAndes.negocio.VOProveedor;
 import uniandes.superAndes.negocio.VOSucursal;
 
@@ -706,14 +707,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			String nombreProv = nombreProvField.getText();
 			String categoria = categoriaField.getText();
 			String tipoProducto = tipoProductoField.getText();
-			/*if(nombre.isEmpty() || marca.isEmpty() || precioUnitario.isEmpty() || presentacion.isEmpty() 
-				||precioUnidadMedida.isEmpty() || cantidadPresentacion.isEmpty() || unidadMedida.isEmpty() ||
-				volumen.isEmpty() || peso.isEmpty() || codigoBarras.isEmpty() || fechaVencimiento.isEmpty() ||
-				cantidad.isEmpty())
-			{
-				panelDatos.actualizarInterfaz("Uno de los campos está vacio");
-			}*/
-			//else {
+			
 				if(superAndes.darProveedorPorNombre(nombreProv)==null)
 				{
 					panelDatos.actualizarInterfaz("El proveedor no existe");
@@ -748,45 +742,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 					
 				}
 			}
-			//}
-
-			
-
-			//		if (result == JOptionPane.OK_OPTION) {
-			//
-			//		String nombre = nombreField.getText();
-			//			String nit = nitField.getText();
-			//
-			//			if (!nombre.isEmpty())
-			//			{
-			//				if(!nit.isEmpty())
-			//				{
-			//					Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
-			//					if (prov == null)
-			//				{
-			//						throw new Exception ("No se pudo crear un tipo de bebida con nombre: " + nombre);
-			//					}
-			//					String resultado = "En registrarProveedor\n\n";
-			//					resultado += "Proveedor adicionado exitosamente: " + prov;
-			//					resultado += "\n Operación terminada";
-			//					panelDatos.actualizarInterfaz(resultado);
-			//				}
-			//				else
-			//				{
-			//				panelDatos.actualizarInterfaz("Nit no puede ser vacio");
-			//				}
-			//
-			//			}
-			//			else
-			//			{
-			//				panelDatos.actualizarInterfaz("Nombre no se permite vacio");
-			//			}
-			//
-			//		}
-			//		else
-			//		{
-			//			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			//		}
+		
 		} 
 		catch (Exception e) 
 		{
@@ -800,38 +756,38 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
 	 */
 
-	/*	public void listarProveedor( )
-{
-	try 
+	public void listarProductos( )
 	{
-		List <VOProveedor> lista = superAndes.darVOProveedores();
-		String resultado = "En Proveedor";
-		resultado +=  "\n" + listarVO(lista);
-		panelDatos.actualizarInterfaz(resultado);
-		resultado += "\n Operación terminada";
-	} 
-	catch (Exception e) 
-	{
-		//			e.printStackTrace();
-		String resultado = generarMensajeError(e);
-		panelDatos.actualizarInterfaz(resultado);
+		try 
+		{
+			List <VOProducto> lista = superAndes.darVOProductos();
+			String resultado = "En Productos";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
-}*/
 
 
 	/**
 	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
 	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	/*public void eliminarProveedorPorNombre( )
-{
+	public void eliminarProductoPorNombre( )
+	{
 	try 
 	{
-		String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+		String nombre = JOptionPane.showInputDialog (this, "Nombre del producto?", "Borrar Producto por nombre", JOptionPane.QUESTION_MESSAGE);
 		if (nombre != null)
 		{
-			long tbEliminados = superAndes.eliminarProveedor(nombre);
-			String resultado = "En eliminar Proveedor\n\n";
+			long tbEliminados = superAndes.eliminarProductos(nombre);
+			String resultado = "En eliminar Producto\n\n";
 			resultado += tbEliminados + " Proveedor eliminados\n";
 			resultado += "\n Operación terminada";
 			panelDatos.actualizarInterfaz(resultado);
@@ -848,43 +804,47 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		panelDatos.actualizarInterfaz(resultado);
 	}
 }
-	 */
+	 
 
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	//public void buscarProveedorPorNombre( )
-	//{
-	//	try 
-	//	{
-	//		String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-	//		if (nombre != null)
-	//		{
-	//			VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
-	//			String resultado = "En buscar Proveedor por nombre\n\n";
-	//			if (sucursal != null)
-	//			{
-	//				resultado += "La Proveedor es: " + sucursal;
-	//			}
-	//			else
-	//			{
-	//				resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
-	//			}
-	//			resultado += "\n Operación terminada";
-	//			panelDatos.actualizarInterfaz(resultado);
-	//		}
-	//		else
-	//		{
-	//			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-	//		}
-	//	} 
-	//	catch (Exception e) 
-	//	{
-	//		e.printStackTrace();
-	//		String resultado = generarMensajeError(e);
-	//		panelDatos.actualizarInterfaz(resultado);
-	//	}
-	//}
+	public void buscarProductoPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Nombre del producto?", "Buscar Producto por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				List<Producto> producto = superAndes.darProductosPorNombre(nombre);
+				String resultado = "En buscar Producto por nombre\n\n";
+				if (producto != null)
+				{
+					resultado += "La Proveedor es: \n" ;
+					for(VOProducto pr: producto)
+					{
+						resultado +=pr+"\n";
+					}
+				}
+				else
+				{
+					resultado += "Un Producto con nombre: " + nombre + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+	   {
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 	/* ****************************************************************
 	 * 			CRUD de Cliente
 	 * ****************************************************************

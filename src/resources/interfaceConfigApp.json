@@ -57,15 +57,15 @@
 				},
 				{
 					"label": "Listar",
-					"event": "listarSucursal"
+					"event": "listarProductos"
 				},
 				{
 					"label": "Borrar por nombre",
-					"event": "eliminarSucursalPorNombre"
+					"event": "eliminarProductoPorNombre"
 				},
 								{
 					"label": "Buscar por Nombre",
-					"event": "buscarSucursalPorNombre"
+					"event": "buscarProductoPorNombre"
 				}
 			]
 		},

@@ -1143,7 +1143,7 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlProducto.adicionarProducto(pm, id, cantidad, cantidadPresentacion,fechaVencimiento, codigoBarras, marca, nivelReorden, nombre, peso, precioUnidadMedida, precioUnitario, presentacion, volumen, unidadMedida, idCategoria, idProveedor);
 			tx.commit();
 			log.trace("Insercion del proveedor " + nombre + ": "+ tuplasInsertadas+" tuplas insertadas");
-			return new Producto(id, cantidad, codigoBarras, peso, volumen, marca, nivelReorden, nombre, precioUnitario, presentacion, idCategoria, fechaVencimiento, precioUnidadMedida, cantidadPresentacion);
+			return new Producto(id, cantidad, codigoBarras, peso, volumen, marca, nivelReorden, nombre, precioUnitario, presentacion, idCategoria, fechaVencimiento, precioUnidadMedida, cantidadPresentacion, idProveedor, unidadMedida);
 
 		}
 		catch(Exception e)

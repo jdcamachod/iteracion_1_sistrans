@@ -16,11 +16,13 @@ public class Producto implements VOProducto {
 	private double precioUnitario;
 	private String presentacion;
 	private double precioUnidadMedida;
-	private long idCategoria;
+	private Long categoria;
 	private Date fechaVencimiento;
 	private int cantidad;
-	private double cantidadPresentacion;
+	private double cantidadEnLaPresentacion;
 	private Long idProveedor;
+	private String unidadMedida;
+	private String calidad;
 	
 
 	public Producto()
@@ -33,17 +35,19 @@ public class Producto implements VOProducto {
 		this.nombre = "";
 		this.precioUnitario = 0;
 		this.presentacion = "";
-		this.idCategoria = 0;
+		this.categoria = (long) 0;
 		this.peso = 0;
 		this.volumen = 0;
 		this.fechaVencimiento = new Date();
 		this.precioUnidadMedida =0;
-		this.cantidadPresentacion=0;
+		this.cantidadEnLaPresentacion=0;
 		this.idProveedor = (long) 0;
+		this.unidadMedida= "";
+		this.calidad = "";
 	}
 	public Producto(long id, int cantidad, String codigoBarras, double peso, double volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, String presentacion, 
-			Long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion) {
+			Long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion, Long idProveedor, String unidadMedida) {
 	
 		this.id = id;
 		this.cantidad = cantidad;
@@ -54,12 +58,14 @@ public class Producto implements VOProducto {
 		this.precioUnitario = precioUnitario;
 		this.presentacion = presentacion;
 	
-		this.idCategoria = idCategoria;
+		this.categoria = idCategoria;
 		this.peso = peso;
 		this.volumen = volumen;
 		this.fechaVencimiento =fechaVencimiento;
 		this.precioUnidadMedida = precioUnidadMedida;
-		this.cantidadPresentacion = cantidadPresentacion;
+		this.cantidadEnLaPresentacion = cantidadPresentacion;
+		this.idProveedor = idProveedor;
+		this.unidadMedida=unidadMedida;
 	}
 	public long getId() {
 		return id;
@@ -123,11 +129,11 @@ public class Producto implements VOProducto {
 		this.presentacion = presentacion;
 	}
 
-	public Long getIdCategoria() {
-		return idCategoria;
+	public Long getCategoria() {
+		return categoria;
 	}
-	public void setIdCategoria(long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(long idCategoria) {
+		this.categoria = idCategoria;
 	}
 	public double getPrecioUnidadMedida() {
 		return precioUnidadMedida;
@@ -141,11 +147,11 @@ public class Producto implements VOProducto {
 	public void setFechaVencimiento(Date fechaVencimiento) {
 		this.fechaVencimiento = fechaVencimiento;
 	}
-	public double getCantidadPresentacion() {
-		return cantidadPresentacion;
+	public double getCantidadEnLaPresentacion() {
+		return cantidadEnLaPresentacion;
 	}
-	public void setCantidadPresentacion(double cantidadPresentacion) {
-		this.cantidadPresentacion = cantidadPresentacion;
+	public void setCantidadEnLaPresentacion(double cantidadPresentacion) {
+		this.cantidadEnLaPresentacion = cantidadPresentacion;
 	}
 	public long getIdProveedor() {
 		return idProveedor;
@@ -153,7 +159,39 @@ public class Producto implements VOProducto {
 	public void setIdProveedor(Long idProveedor) {
 		this.idProveedor = idProveedor;
 	}
+
+	public String getUnidadMedida() {
+		return unidadMedida;
+	}
+	public void setUnidadMedida(String unidadMedida) {
+		this.unidadMedida = unidadMedida;
+	}
 	
+	
+	public String getCalidad() {
+		return calidad;
+	}
+	public void setCalidad(String calidad) {
+		this.calidad = calidad;
+	}
+	@Override
+	public String toString() 
+	{
+		return "Producto [id=" + id + ", nombre=" + nombre + ", codigoBarras= " + codigoBarras + " , peso= " + peso + ", volumen= " + volumen + " , marca= " + marca +
+				" , nivelReorden= " + nivelReorden + " , precioUnitario= " + precioUnitario + " , presentacion= " + presentacion + " , precioUnidadMedida= " + precioUnidadMedida +
+				" , idCategoria= " + categoria + " , fechaVencimiento= " + fechaVencimiento + " , cantidad= " + cantidad + " , cantidadPresentacion= " + cantidadEnLaPresentacion +
+				" , idProveedor= " + idProveedor + " , unidadMedida= " + unidadMedida +"]";
+	}
+
+	/**
+	 * @param tipo - El TipoBebida a comparar
+	 * @return True si tienen el mismo nombre
+	 */
+	public boolean equals(Object tipo) 
+	{
+		Producto tb = (Producto) tipo;
+		return id == tb.id && nombre.equalsIgnoreCase (tb.nombre);
+	}
 	
 	
 	

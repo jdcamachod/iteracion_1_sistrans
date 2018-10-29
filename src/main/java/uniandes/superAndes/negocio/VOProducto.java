@@ -57,14 +57,18 @@ public interface VOProducto {
 	/**
 	 * @return El identificador de la categoria a la que pertenece el producto
 	 */
-	public Long getIdCategoria();
+	public Long getCategoria();
 	
 	/**
 	 * @return fecha de vencimiento del producto
 	 */
 	public Date getFechaVencimiento();
 	public int getCantidad();
-	public double getCantidadPresentacion();
+	public double getCantidadEnLaPresentacion();
 	public long getIdProveedor();
+	
+	@Override
+	public String toString();
+	
 	
 }

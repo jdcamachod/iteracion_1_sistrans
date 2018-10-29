@@ -265,8 +265,8 @@ public class SuperAndes {
 	public List<Producto> darProductosPorNombre (String nombre) {
 		
 		log.info ("Buscando Productos por nombre: " + nombre);
-		ArrayList<Producto> resp = new ArrayList<Producto>();
-		resp = (ArrayList<Producto>) pp.darProductosPorNombre(nombre);		
+		List<Producto> resp = new LinkedList<Producto>();
+		resp = (List<Producto>) pp.darProductosPorNombre(nombre);		
         log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
         return resp;
 	}

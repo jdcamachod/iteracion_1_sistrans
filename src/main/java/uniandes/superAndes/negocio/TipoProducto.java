@@ -3,21 +3,21 @@ package uniandes.superAndes.negocio;
 public class TipoProducto implements VOTipoProducto {
 	
 	private long id;
-	private String nombre;
-	private Long  idCategoria;
+	private String nombreTipo;
+	private Long  categoria;
 	
 	
-	public TipoProducto(long id, String nombre, Long idCategoria)
+	public TipoProducto()
 	{
 		this.id = 0;
-		this.nombre = "";
-		this.idCategoria = null;
+		this.nombreTipo = "";
+		this.categoria = null;
 	}
 	public TipoProducto(long id, String nombre, long idCategoria) {
 		
 		this.id = id;
-		this.nombre = nombre;
-		this.idCategoria = idCategoria;
+		this.nombreTipo = nombre;
+		this.categoria = idCategoria;
 	}
 	public long getId() {
 		return id;
@@ -25,17 +25,17 @@ public class TipoProducto implements VOTipoProducto {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombreTipo() {
+		return nombreTipo;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreTipo(String nombre) {
+		this.nombreTipo = nombre;
 	}
-	public Long getIdCategoria() {
-		return idCategoria;
+	public Long getCategoria() {
+		return categoria;
 	}
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(Long idCategoria) {
+		this.categoria = idCategoria;
 	}
 	
 }
