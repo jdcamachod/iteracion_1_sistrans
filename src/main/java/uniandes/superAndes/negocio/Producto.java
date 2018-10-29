@@ -20,7 +20,7 @@ public class Producto implements VOProducto {
 	private Date fechaVencimiento;
 	private int cantidad;
 	private double cantidadPresentacion;
-	private long idProveedor;
+	private Long idProveedor;
 	
 
 	public Producto()
@@ -39,11 +39,11 @@ public class Producto implements VOProducto {
 		this.fechaVencimiento = new Date();
 		this.precioUnidadMedida =0;
 		this.cantidadPresentacion=0;
-		this.idProveedor = 0;
+		this.idProveedor = (long) 0;
 	}
 	public Producto(long id, int cantidad, String codigoBarras, double peso, double volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, String presentacion, 
-			long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion) {
+			Long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion) {
 	
 		this.id = id;
 		this.cantidad = cantidad;
@@ -123,7 +123,7 @@ public class Producto implements VOProducto {
 		this.presentacion = presentacion;
 	}
 
-	public long getIdCategoria() {
+	public Long getIdCategoria() {
 		return idCategoria;
 	}
 	public void setIdCategoria(long idCategoria) {
@@ -150,7 +150,7 @@ public class Producto implements VOProducto {
 	public long getIdProveedor() {
 		return idProveedor;
 	}
-	public void setIdProveedor(long idProveedor) {
+	public void setIdProveedor(Long idProveedor) {
 		this.idProveedor = idProveedor;
 	}
 	

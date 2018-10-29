@@ -57,7 +57,7 @@ public interface VOProducto {
 	/**
 	 * @return El identificador de la categoria a la que pertenece el producto
 	 */
-	public long getIdCategoria();
+	public Long getIdCategoria();
 	
 	/**
 	 * @return fecha de vencimiento del producto

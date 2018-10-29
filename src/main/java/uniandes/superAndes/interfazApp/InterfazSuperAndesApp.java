@@ -729,12 +729,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 					{
 						tp = superAndes.adicionarTipoProducto(tipoProducto, cat.getId());
 					}
-					long idProv = superAndes.darProveedorPorNombre(nombreProv).getId();
+					Long idProv = superAndes.darProveedorPorNombre(nombreProv).getId();
 					Date utilDate = new SimpleDateFormat("dd/MM/yyyy").parse(fechaVencimiento);
 					java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+					Long cate = cat.getId();
 					Producto prod =superAndes.adicionarProducto(cantidad, cantidadPresentacion,
 							sqlDate, codigoBarras, marca, 0, nombre, peso, precioUnidadMedida,
-							precioUnitario, presentacion, volumen,unidadMedida, superAndes.darCategoriaPorNombre(categoria).getId());
+							precioUnitario, presentacion, volumen,unidadMedida, cate, idProv);
 					
 					if(prod == null)
 					{

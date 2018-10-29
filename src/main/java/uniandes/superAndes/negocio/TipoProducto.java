@@ -4,8 +4,15 @@ public class TipoProducto implements VOTipoProducto {
 	
 	private long id;
 	private String nombre;
-	private long  idCategoria;
+	private Long  idCategoria;
 	
+	
+	public TipoProducto(long id, String nombre, Long idCategoria)
+	{
+		this.id = 0;
+		this.nombre = "";
+		this.idCategoria = null;
+	}
 	public TipoProducto(long id, String nombre, long idCategoria) {
 		
 		this.id = id;
@@ -24,10 +31,10 @@ public class TipoProducto implements VOTipoProducto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public long getIdCategoria() {
+	public Long getIdCategoria() {
 		return idCategoria;
 	}
-	public void setIdCategoria(long idCategoria) {
+	public void setIdCategoria(Long idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 	
