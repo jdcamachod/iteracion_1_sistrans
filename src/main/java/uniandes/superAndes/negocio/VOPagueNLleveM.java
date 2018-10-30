@@ -12,6 +12,8 @@ public interface VOPagueNLleveM {
 	 */
 	public int getM();
 	
+	public long getIdPagueNLleveM();
+	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de promocion
 	 */

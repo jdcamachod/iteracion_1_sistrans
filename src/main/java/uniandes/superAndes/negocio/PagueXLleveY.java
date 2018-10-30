@@ -6,12 +6,14 @@ public class PagueXLleveY extends Promocion implements VOPagueXLleveY{
 
 	private int x;
 	private int y;
+	private long idPagueXLleveY;
 	
 	public PagueXLleveY(long id, Date fechaInicial, Date fechaFinal, int precio, long idPagueXLleveY, int x, int y) {
-		super(id, fechaInicial, fechaFinal, precio, 0, 0, 0,
+		super(id, fechaInicial, fechaFinal, precio, null, null, null,
 				idPagueXLleveY);
 		this.x = x;
 		this.y = y;
+		this.idPagueXLleveY=idPagueXLleveY;
 	}
 	public int getX() {
 		return x;
@@ -24,6 +26,12 @@ public class PagueXLleveY extends Promocion implements VOPagueXLleveY{
 	}
 	public void setY(int y) {
 		this.y = y;
+	}
+	public long getIdPagueXLleveY() {
+		return idPagueXLleveY;
+	}
+	public void setIdPagueXLleveY(long idPagueXLleveY) {
+		this.idPagueXLleveY = idPagueXLleveY;
 	}
 	
 	

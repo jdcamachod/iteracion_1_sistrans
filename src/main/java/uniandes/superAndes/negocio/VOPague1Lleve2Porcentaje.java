@@ -7,6 +7,8 @@ public interface VOPague1Lleve2Porcentaje {
 	 */
 	public double getPorcentaje2();
 	
+	public long getIdPague1Lleve2Porcentaje();
+	
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de promocion
 	 */

@@ -12,6 +12,7 @@ public interface VOPagueXLleveY {
 	 */
 	public int getY();
 	
+	public long getIdPagueXLleveY();
 	/**
 	 * @return Una cadena de caracteres con la información del tipo de promocion
 	 */

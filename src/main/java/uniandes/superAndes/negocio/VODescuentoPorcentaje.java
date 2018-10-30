@@ -12,7 +12,7 @@ public interface VODescuentoPorcentaje {
 	 * Retorna el identificador de la proomocion del descuento por porcentaje
 	 * @return identificador de este tipo de promocion
 	 */
-	public long getIdDescuentoPorcentaje();
+	public long getId();
 	
 	/**
 	 * @return Una cadena de caracteres con la información del descuento porcentaje
