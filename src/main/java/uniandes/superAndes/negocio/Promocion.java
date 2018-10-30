@@ -62,6 +62,29 @@ public abstract class Promocion implements VOPromocion {
 		this.precio = precio;
 	}
 	
+	public String toString()
+	{
+		String tipo = "";
+		if(pague1Lleve2Porcentaje!=null)
+		{
+			tipo = "Pague 1 lleve el segundo por porcentaje menor"+", idTipoPromocion=" + pague1Lleve2Porcentaje;
+		}
+		else if(pagueNLleveM!=null)
+		{
+			tipo = "Pague n productos de producto lleve m productos"+", idTipoPromocion=" + pagueNLleveM;
+		}
+		else if(pagueXLleveY!=null)
+		{
+			tipo = "Pague x cantidad lleve y cantidad"+", idTipoPromocion=" + pagueXLleveY;
+		}
+		else if(descuentoPorcentaje!=null)
+		{
+			tipo = "Lleve el producto por un porcentaje menor"+", idTipoPromocion=" + descuentoPorcentaje;
+		}
+		return "Promocion [id= "+id+ ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal +
+				", precio=" + precio + ", "+ tipo;
+	}
+	
 	
 	
 }

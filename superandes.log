@@ -613,3 +613,152 @@ ORA-02291: restricci�n de integridad (ISIS2304C061820.FK_P_CATEGORIA) violada - 
 15:52:09,290 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Eliminando Productos por nombre: 1 tuplas eliminadas
 15:52:11,589 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
 15:52:11,605 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 0 existentes
+13:49:19,717 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+13:49:19,722 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+13:49:19,740 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:16:13,649 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:16:13,665 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:16:13,681 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:17:14,610 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:17:14,610 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:17:14,625 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:17:20,845 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:17:21,267 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 0 existentes
+14:17:35,081 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:17:35,081 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 0 existentes
+14:18:18,807 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+14:18:18,838 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null]
+14:18:18,838 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: ccc
+14:18:18,870 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@2edfaad6 tuplas eliminadas
+14:18:18,870 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: ttt
+14:18:18,901 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: uniandes.superAndes.negocio.TipoProducto@3c1d0810 tuplas eliminadas
+14:18:18,901 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Proveedor por nombre: hola
+14:18:18,901 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando Proveedor por nombre: Proveedor [id=63, nombre=hola, nit=123445 , calificacionCalidad=null]
+14:18:18,901 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando producto: Hola
+14:18:19,026 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando producto: Hola
+14:18:34,153 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:18:34,184 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:18:37,513 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:18:37,528 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:26:10,674 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:26:10,674 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:26:10,690 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:26:22,988 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:26:23,238 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:26:50,874 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:26:50,906 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:26:50,921 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:26:50,921 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:26:50,937 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:26:51,015 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO DESCUENTO_PORCENTAJE(id, procentaje) values (?, ?)".
+ORA-00904: "PROCENTAJE": identificador no v�lido
+
+14:26:51,030 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO BODEGA(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)".
+ORA-00904: "IDDESCUENTOPORCENTAJE": identificador no v�lido
+
+14:26:51,046 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:31:21,429 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:31:21,445 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:31:21,461 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:31:27,399 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:31:27,914 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:31:42,705 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:31:42,752 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:31:42,752 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:31:42,752 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:31:42,799 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:31:43,283 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO DESCUENTO_PORCENTAJE(id, procentaje) values (?, ?)".
+ORA-00904: "PROCENTAJE": identificador no v�lido
+
+14:31:43,314 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROMOCION(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)".
+ORA-00904: "IDDESCUENTOPORCENTAJE": identificador no v�lido
+
+14:31:43,330 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:39:36,125 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:39:36,125 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:39:36,140 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:39:43,563 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:39:44,235 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:40:00,520 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:40:00,755 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:40:00,755 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:40:00,755 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:40:00,786 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:40:00,864 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO DESCUENTO_PORCENTAJE(idDescuentoPorcentaje, procentaje) values (?, ?)".
+ORA-00904: "PROCENTAJE": identificador no v�lido
+
+14:40:01,099 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROMOCION(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)".
+ORA-00904: "IDDESCUENTOPORCENTAJE": identificador no v�lido
+
+14:40:01,099 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:40:53,005 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:40:53,005 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:40:53,021 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:41:00,600 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:41:01,334 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:41:13,695 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:41:13,914 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:41:13,914 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:41:13,914 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:41:13,945 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:41:14,289 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROMOCION(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)".
+ORA-00904: "IDDESCUENTOPORCENTAJE": identificador no v�lido
+
+14:41:14,289 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:45:01,675 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:45:01,675 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:45:01,690 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:45:13,207 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:45:14,129 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:45:35,967 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:45:36,201 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:45:36,201 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:45:36,201 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:45:36,264 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:45:36,467 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO PROMOCION(id, fechaInicial, fechaFinal, precio, pague1Lleve2Porcentaje, pagueNLleveM, pagueXLleveY, descuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)".
+ORA-00904: "PAGUE1LLEVE2PORCENTAJE": identificador no v�lido
+
+14:45:36,483 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:46:26,803 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:46:26,803 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:46:26,818 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:46:34,554 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:46:35,116 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:46:46,665 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:46:46,696 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:46:46,711 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:46:46,711 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:46:46,758 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:46:46,899 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:57:51,827 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:57:51,827 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:57:51,842 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+14:57:57,233 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+14:57:57,499 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+14:58:31,557 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+14:58:31,604 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+14:58:31,604 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+14:58:31,604 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+14:58:31,635 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+14:58:31,729 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+14:59:54,813 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+14:59:54,813 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+14:59:54,829 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+15:00:02,048 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+15:00:02,314 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+15:00:19,206 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id: 161
+15:00:19,238 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando producto por id: Producto [id=161, nombre=Hola, codigoBarras= 123 , peso= 123.0, volumen= 123.0 , marca= h , nivelReorden= 0 , precioUnitario= 123.0 , presentacion= 123 , precioUnidadMedida= 123.0 , idCategoria= 139 , fechaVencimiento= 2019-10-12 00:00:00.0 , cantidad= 123 , cantidadPresentacion= 123.0 , idProveedor= 63 , unidadMedida= gr]
+15:00:19,238 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando promocion de tipo descuento porcentaje 
+15:00:19,238 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando producto por id
+15:00:19,269 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Buscando producto por id
+15:00:19,363 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando promocion de tipo descuento porcentaje
+15:02:42,104 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:02:42,104 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:02:42,120 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+15:02:51,137 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+15:02:51,402 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes
+15:17:51,962 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+15:17:51,962 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+15:17:51,977 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+15:18:01,463 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
+15:18:01,666 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 1 existentes

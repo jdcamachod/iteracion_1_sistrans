@@ -62,6 +62,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
+import uniandes.superAndes.negocio.Promocion;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
@@ -108,6 +109,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	private static final String EMPRESARB = "empresaRB";
 
 	private static final String CLIENTERB = "clienteRB"; 
+	
+	private static final String TIPO1 = "Aplica descuento con un porcentaje dado al producto escogido";
+	private static final String TIPO2 = "Paga 1 y lleva el segundo producto por un porcentaje menor";
+	private static final String TIPO3 = "Paga N numero de productos y lleva M (N<M)";
+	private static final String TIPO4 = "Paga X cantidad del producto escogido y lleva Y cantidad (Son unidades de medida)";
 
 	/* ****************************************************************
 	 * 			Atributos
@@ -159,6 +165,8 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	private JLabel labelDireccionEmpresa;
 
 	private JLabel labelNit;
+	
+	private JComboBox productos;
 
 	/* ****************************************************************
 	 * 			M茅todos
@@ -365,6 +373,97 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+	}
+	
+	public void registrarPromocion()
+	{
+		try{
+		JPanel myPanel = new JPanel(new GridLayout(2,1));
+		myPanel.add(new JLabel("Seleccione el tipo de promocion"));
+		JComboBox tipo = new JComboBox();
+		tipo.addItem(TIPO1);
+		tipo.addItem(TIPO2);
+		tipo.addItem(TIPO3);
+		tipo.addItem(TIPO4);
+		myPanel.add(tipo);
+		int res = JOptionPane.showConfirmDialog(null, myPanel, 
+				"Escoja la promocion", JOptionPane.OK_CANCEL_OPTION);
+		if (res == JOptionPane.OK_OPTION) 
+		{
+			JTextField dateInicialField = new JTextField(10);
+			JTextField dateFinalField = new JTextField(10);
+			myPanel = new JPanel(new GridLayout(4,2));
+			JTextField porcentajeField = new JTextField(10);
+			myPanel.add(new JLabel("porcentaje"));
+			myPanel.add(porcentajeField);
+			myPanel.add(new JLabel("Fecha inicio Promocion:"));
+			myPanel.add(dateInicialField);
+			myPanel.add(new JLabel("Fecha de finalizaci髇 de la promocion:"));
+			myPanel.add(dateFinalField);
+			productos = new JComboBox<String>();
+			for(VOProducto p: superAndes.darVOProductos())
+			{
+				productos.addItem(p.getId()+": "+p.getNombre()+", $"+p.getPrecioUnitario());
+			}
+			myPanel.add(new JLabel("Seleccione el producto"));
+			myPanel.add(productos);
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
+			
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String fechaIn = dateInicialField.getText();
+				String fechaFin = dateFinalField.getText();
+				double porcentaje  = Double.parseDouble(porcentajeField.getText());
+				String ac= (String) productos.getSelectedItem();
+				long id = Long.parseLong(ac.split(":")[0]);
+				Producto producto = superAndes.darProductoPorId(id);
+				
+
+				if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
+				{
+					Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
+					java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
+					Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+					java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
+					Promocion prom = superAndes.adicionarDescuentoPorcentaje(porcentaje, sqlDateIn, sqlDateFin, producto.getId());
+					if (prom == null)
+					{
+						throw new Exception ("No se pudo crear la Promocion ");
+					}
+					String resultado = "En registrar promocion\n\n";
+					resultado += "Promocion adicionado exitosamente: " + prom;
+					resultado += "\n Operaci髇 terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operaci髇 cancelada por el usuario");
+			} 
+		}
+		else
+		{
+			panelDatos.actualizarInterfaz("Operaci髇 cancelada por el usuario");
+		} 
+		
+		
+		}
+		catch(Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
 	}
 
 	/**
@@ -1097,7 +1196,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 */
 	public void mostrarLogParranderos ()
 	{
-		mostrarArchivo ("parranderos.log");
+		mostrarArchivo ("superAndes.log");
 	}
 
 	/**
@@ -1115,10 +1214,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void limpiarLogParranderos ()
 	{
 		// Ejecuci贸n de la operaci贸n y recolecci贸n de los resultados
-		boolean resp = limpiarArchivo ("parranderos.log");
+		boolean resp = limpiarArchivo ("superAndes.log");
 
 		// Generaci贸n de la cadena de caracteres con la traza de la ejecuci贸n de la demo
-		String resultado = "\n\n************ Limpiando el log de parranderos ************ \n";
+		String resultado = "\n\n************ Limpiando el log de superAndes ************ \n";
 		resultado += "Archivo " + (resp ? "limpiado exitosamente" : "NO PUDO ser limpiado !!");
 		resultado += "\nLimpieza terminada";
 

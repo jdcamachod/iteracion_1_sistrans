@@ -50,7 +50,7 @@ class SQLDescuentoPorcentaje {
 	 */
 	public long adicionarDescuentoPorcentaje (PersistenceManager pm, Long idDescuentoPorcentaje, double porcentaje) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaDescuentoPorcentaje() + "(id, procentaje) values (?, ?)");
+		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaDescuentoPorcentaje() + "(idDescuentoPorcentaje, porcentaje) values (?, ?)");
 		q.setParameters(idDescuentoPorcentaje, porcentaje);
 		return (long) q.executeUnique();
 	}

@@ -91,6 +91,27 @@
 					"event": "buscarClientePorNombre"		
 									}
 			]
+		},
+		{ "menuTitle": "Promocion",
+				"options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarPromocion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarClientes"
+				},
+				{
+					"label": "Borrar por correo",
+					"event": "eliminarClientePorCorreo"
+				},
+								{
+					"label": "Buscar por correo",
+					"event": "buscarClientePorNombre"		
+									}
+			]
 		},	
 		
 		{ "menuTitle": "Mantenimiento",
