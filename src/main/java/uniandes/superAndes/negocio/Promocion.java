@@ -7,7 +7,7 @@ public abstract class Promocion implements VOPromocion {
 	private long id;
 	private Date fechaInicial;
 	private Date fechaFinal;
-	private int precio;
+	private double precio;
 	private Long pague1Lleve2Porcentaje;
 	
 	private Long pagueNLleveM;
@@ -26,7 +26,7 @@ public abstract class Promocion implements VOPromocion {
 		pagueXLleveY=null;
 	}
 	
-	public Promocion(long id, Date fechaInicial, Date fechaFinal, int precio, Long idDescuentoPorcentaje, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY) {
+	public Promocion(long id, Date fechaInicial, Date fechaFinal, double precio, Long idDescuentoPorcentaje, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY) {
 		
 		this.id = id;
 		this.fechaInicial = fechaInicial;
@@ -55,10 +55,10 @@ public abstract class Promocion implements VOPromocion {
 	public void setFechaFinal(Date fechaFinal) {
 		this.fechaFinal = fechaFinal;
 	}
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 	

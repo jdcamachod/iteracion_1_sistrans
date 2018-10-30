@@ -314,6 +314,17 @@ public class SuperAndes {
         return  resp;
 	}
 	
+	public Promocion adicionarDescuentoPorcentaje(double porcentaje, Date fechaInicial, Date fechaFinal, Long idProducto)
+	{
+		log.info("Adicionando promocion de tipo descuento porcentaje ");
+		double prp= pp.darProductoPorId(idProducto).getPrecioUnitario();
+		double precio = (prp*porcentaje)/100;
+		DescuentoPorcentaje descuentoPorcentaje = pp.adicionarDescuentoPorcentaje(porcentaje);
+		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, descuentoPorcentaje, null, null, precio);
+		return promocion;
+		
+	}
+	
 	
 	
 	

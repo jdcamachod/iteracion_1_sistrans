@@ -8,7 +8,7 @@ public class PagueNLleveM extends Promocion implements VOPagueNLleveM {
 	private int n;
 	private long idPagueNLleveM;
 	
-	public PagueNLleveM(long id, Date fechaInicial, Date fechaFinal, int precio, long idPagueNLleveM,  int m, int n) {
+	public PagueNLleveM(long id, Date fechaInicial, Date fechaFinal, double precio, long idPagueNLleveM,  int m, int n) {
 		super(id, fechaInicial, fechaFinal, precio, null, null, idPagueNLleveM,
 				null);
 		this.m = m;

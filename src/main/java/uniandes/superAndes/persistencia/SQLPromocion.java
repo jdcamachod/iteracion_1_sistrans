@@ -42,7 +42,7 @@ class SQLPromocion {
 			this.pp = pp;
 		}
 		
-		public Long adicionarPromocion (PersistenceManager pm, Long idPromocion, Date fechaInicial, Date fechaFinal, int precio, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY, Long idDescuentoPorcentaje) 
+		public Long adicionarPromocion (PersistenceManager pm, long idPromocion, Date fechaInicial, Date fechaFinal, double precio, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY, Long idDescuentoPorcentaje) 
 		{
 	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)");
 	        q.setParameters(idPromocion, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje);

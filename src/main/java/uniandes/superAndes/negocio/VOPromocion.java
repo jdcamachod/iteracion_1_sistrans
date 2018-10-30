@@ -22,7 +22,7 @@ public interface VOPromocion {
 	/**
 	 * @return El precio de la promocion
 	 */
-	public int getPrecio();
+	public double getPrecio();
 	
 	
 	/**

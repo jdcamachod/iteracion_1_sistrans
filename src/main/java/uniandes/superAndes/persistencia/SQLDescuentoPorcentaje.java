@@ -48,7 +48,7 @@ class SQLDescuentoPorcentaje {
 	 * @param porcentaje porcentaje para el Descuento Porcentaje
 	 * @return
 	 */
-	public long adicionarDescuentoPorcentaje (PersistenceManager pm, long idDescuentoPorcentaje, double porcentaje) 
+	public long adicionarDescuentoPorcentaje (PersistenceManager pm, Long idDescuentoPorcentaje, double porcentaje) 
 	{
 		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaDescuentoPorcentaje() + "(id, procentaje) values (?, ?)");
 		q.setParameters(idDescuentoPorcentaje, porcentaje);
@@ -62,7 +62,7 @@ class SQLDescuentoPorcentaje {
 	 * @param idDescuentoPorcentaje - El identificador de la DescuentoPorcentaje
 	 * @return EL número de tuplas eliminadas
 	 */
-	public long eliminarCDescuentoPorcentajePorId (PersistenceManager pm, long idDescuentoPorcentaje)
+	public long eliminarCDescuentoPorcentajePorId (PersistenceManager pm, Long idDescuentoPorcentaje)
 	{
 		Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaDescuentoPorcentaje() + " WHERE id = ?");
 		q.setParameters(idDescuentoPorcentaje);
@@ -76,7 +76,7 @@ class SQLDescuentoPorcentaje {
 	 * @param idDescuentoPorcentaje - El identificador de la Descuento Porcentaje
 	 * @return El objeto CATEGORIA que tiene el identificador dado
 	 */
-	public DescuentoPorcentaje darDescuentoPorcentajePorId (PersistenceManager pm, long idDescuentoPorcentaje) 
+	public DescuentoPorcentaje darDescuentoPorcentajePorId (PersistenceManager pm, Long idDescuentoPorcentaje) 
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaDescuentoPorcentaje()  + " WHERE id = ?");
 		q.setResultClass(DescuentoPorcentaje.class);

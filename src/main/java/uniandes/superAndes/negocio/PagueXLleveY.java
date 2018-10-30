@@ -8,7 +8,7 @@ public class PagueXLleveY extends Promocion implements VOPagueXLleveY{
 	private int y;
 	private long idPagueXLleveY;
 	
-	public PagueXLleveY(long id, Date fechaInicial, Date fechaFinal, int precio, long idPagueXLleveY, int x, int y) {
+	public PagueXLleveY(long id, Date fechaInicial, Date fechaFinal, double precio, long idPagueXLleveY, int x, int y) {
 		super(id, fechaInicial, fechaFinal, precio, null, null, null,
 				idPagueXLleveY);
 		this.x = x;

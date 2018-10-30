@@ -11,7 +11,7 @@ public class Pague1Lleve2Porcentaje extends Promocion implements VOPague1Lleve2P
 
 
 
-	public Pague1Lleve2Porcentaje(long id, Date fechaInicial, Date fechaFinal, int precio, 
+	public Pague1Lleve2Porcentaje(long id, Date fechaInicial, Date fechaFinal, double precio, 
 			long idPague1Lleve2Porcentaje, double porcentaje2
 			) {
 		super(id, fechaInicial, fechaFinal, precio, null, idPague1Lleve2Porcentaje, null,
