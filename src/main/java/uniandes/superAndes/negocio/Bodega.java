@@ -26,7 +26,7 @@ public class Bodega implements VOBodega{
 	/**
 	 * El identificador de la categoria de producto que almacena la bodega
 	 */
-	private long idCategoria;
+	private long categoria;
 	
 	/**
 	 * Capacidad en volumen que soporta la bodega
@@ -36,7 +36,7 @@ public class Bodega implements VOBodega{
 	/**
 	 * El identificador de la sucursal a la que pertenece la bodega
 	 */
-	private long idSucursal;
+	private long sucursal;
 	
 	/**
 	 * Crea una bodega, constructor vacío
@@ -46,9 +46,9 @@ public class Bodega implements VOBodega{
 		id=0;
 		direccion = "";
 		peso = 0;
-		idCategoria=0;
+		categoria=0;
 		volumen = 0;
-		idSucursal = 0;
+		sucursal = 0;
 	}
 	
 	/**
@@ -65,9 +65,9 @@ public class Bodega implements VOBodega{
 		this.id = id;
 		this.direccion = direccion;
 		this.peso = peso;
-		this.idCategoria = idCategoria;
+		this.categoria = idCategoria;
 		this.volumen = volumen;
-		this.idSucursal = idSucursal;
+		this.sucursal = idSucursal;
 	}
 
 	/**
@@ -122,16 +122,16 @@ public class Bodega implements VOBodega{
 	 * Retorna el identificador de la categoria de los productos de la bodega
 	 * @return id de la categoria de la bodega
 	 */
-	public long getIdCategoria() {
-		return idCategoria;
+	public long getCategoria() {
+		return categoria;
 	}
 
 	/**
 	 * Asigna una nueva categoria de productos a la bodega
 	 * @param idCategoria id a asignar
 	 */
-	public void setIdCategoria(long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(long idCategoria) {
+		this.categoria = idCategoria;
 	}
 
 	/**
@@ -154,16 +154,25 @@ public class Bodega implements VOBodega{
 	 * Retorna el identificador de la sucursal de la bodega
 	 * @return id de la sucursal
 	 */
-	public long getIdSucursal() {
-		return idSucursal;
+	public long getSucursal() {
+		return sucursal;
 	}
 
 	/**
 	 * Asigna un nuevo identificador a la sucursal
 	 * @param idSucursal identificador de la sucursal 
 	 */
-	public void setIdSucursal(long idSucursal) {
-		this.idSucursal = idSucursal;
+	public void setSucursal(long idSucursal) {
+		this.sucursal = idSucursal;
+	}
+	
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Bodega [id=" + id + ", sucursal=" + sucursal + ", tipo=" + categoria + " , direccion=" + direccion + ", volumen=" + volumen + ", peso=" + peso + "]";
 	}
 	
 }

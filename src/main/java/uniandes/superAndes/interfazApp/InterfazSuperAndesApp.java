@@ -59,14 +59,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
-
+import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
 import uniandes.superAndes.negocio.TipoProducto;
-
+import uniandes.superAndes.negocio.VOBodega;
 import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Persona;
@@ -1085,6 +1085,346 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+
+	
+	
+	
+	/* ****************************************************************
+	 * 			CRUD de Estantes
+	 *****************************************************************/
+	/**
+	 * Adiciona un tipo de bebida con la información dada por el usuario
+	 * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
+	 */
+	public void registrarProveedor( )
+	{
+		try 
+		{
+
+			JTextField nombreField = new JTextField(10);
+			JTextField nitField = new JTextField(10);
+			JPanel myPanel = new JPanel(new GridLayout(2,2));
+			myPanel.add(new JLabel("Nombre:"));
+			myPanel.add(nombreField);
+			myPanel.add(new JLabel("Nit:"));
+			myPanel.add(nitField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String nombre = nombreField.getText();
+				String nit = nitField.getText();
+
+				if (!nombre.isEmpty())
+				{
+					if(!nit.isEmpty())
+					{
+						Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
+						if (prov == null)
+						{
+							throw new Exception ("No se pudo crear un Proveedor con nombre: " + nombre);
+						}
+						String resultado = "En registrarProveedor\n\n";
+						resultado += "Proveedor adicionado exitosamente: " + prov;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					else
+					{
+						panelDatos.actualizarInterfaz("Nit no puede ser vacio");
+					}
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarProveedor( )
+	{
+		try 
+		{
+			List <VOProveedor> lista = superAndes.darVOProveedores();
+
+			String resultado = "En Proveedor";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
+	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarProveedorPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				long tbEliminados = superAndes.eliminarProveedor(nombre);
+
+				String resultado = "En eliminar Proveedor\n\n";
+				resultado += tbEliminados + " Proveedor eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarProveedorPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
+				String resultado = "En buscar Proveedor por nombre\n\n";
+				if (sucursal != null)
+				{
+					resultado += "La Proveedor es: " + sucursal;
+				}
+				else
+				{
+					resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
+	/* ****************************************************************
+	 * 			CRUD de Bodega
+	 *****************************************************************/
+	/**
+	 * Adiciona un tipo de bebida con la información dada por el usuario
+	 * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
+	 */
+	public void registrarBodega( )
+	{
+		try 
+		{
+
+			JTextField direccionField = new JTextField(10);
+			JTextField tipoField = new JTextField(10);
+			JTextField volumenField = new JTextField(10);
+			JTextField pesoField = new JTextField(10);
+			JTextField sucursalField = new JTextField(10);	
+			
+			
+			JPanel myPanel = new JPanel(new GridLayout(5,2));
+			myPanel.add(new JLabel("Sucursal:"));
+			myPanel.add(sucursalField);
+			myPanel.add(new JLabel("Direccion:"));
+			myPanel.add(direccionField);
+			myPanel.add(new JLabel("Tipo:"));
+			myPanel.add(tipoField);
+			myPanel.add(new JLabel("Volumen:"));
+			myPanel.add(volumenField);
+			myPanel.add(new JLabel("Peso:"));
+			myPanel.add(pesoField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String nombreSucursal = sucursalField.getText();
+				String direccion = direccionField.getText();
+				String nombreTipo = tipoField.getText();
+				String volumen = volumenField.getText();
+				String peso = pesoField.getText();
+
+
+				if (!nombreSucursal.isEmpty() && !direccion.isEmpty() && !nombreTipo.isEmpty() && !volumen.isEmpty() && !peso.isEmpty())
+				{
+					try {
+							double pesoNumero = Double.parseDouble(peso);
+							double volumenNumero = Double.parseDouble(volumen);
+							
+					
+						Bodega bodega = superAndes.adicionarBodega(nombreTipo, direccion, pesoNumero, volumenNumero, nombreSucursal);
+						if (bodega == null)
+						{
+							throw new Exception ("No se pudo crear una Bodega con direccion: " + direccion);
+						}
+						String resultado = "En registrarBodega\n\n";
+						resultado += "bodega adicionado exitosamente: " + bodega;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					catch (NumberFormatException e) {
+						panelDatos.actualizarInterfaz("Ingrese campos validos ");
+					}
+				}
+
+				
+				else
+				{
+					panelDatos.actualizarInterfaz("Los campos no pueden ser vacios ");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	/**
+	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
+	 */
+	public void listarBodegas( )
+	{
+		try 
+		{
+			List <VOBodega> lista = superAndes.darVOBodegas();
+
+			String resultado = "En Bodegas";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
+	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
+	 */
+	public void eliminarProveedorPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				long tbEliminados = superAndes.eliminarProveedor(nombre);
+
+				String resultado = "En eliminar Proveedor\n\n";
+				resultado += tbEliminados + " Proveedor eliminados\n";
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
+	/**
+	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
+	 */
+	public void buscarProveedorPorNombre( )
+	{
+		try 
+		{
+			String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
+			if (nombre != null)
+			{
+				VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
+				String resultado = "En buscar Proveedor por nombre\n\n";
+				if (sucursal != null)
+				{
+					resultado += "La Proveedor es: " + sucursal;
+				}
+				else
+				{
+					resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+
 
 
 

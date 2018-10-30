@@ -93,6 +93,28 @@
 			]
 		},	
 		
+				{ "menuTitle": "Bodega",
+				"options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarBodega"
+				},
+				{
+					"label": "Listar",
+					"event": "listarBodegas"
+				},
+				{
+					"label": "Borrar por correo",
+					"event": "eliminarClientePorCorreo"
+				},
+								{
+					"label": "Buscar por correo",
+					"event": "buscarClientePorNombre"		
+									}
+			]
+		},
+		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

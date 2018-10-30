@@ -613,3 +613,118 @@ ORA-02291: restricci�n de integridad (ISIS2304C061820.FK_P_CATEGORIA) violada - 
 15:52:09,290 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Eliminando Productos por nombre: 1 tuplas eliminadas
 15:52:11,589 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos
 15:52:11,605 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Productos: 0 existentes
+23:44:57,046 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:44:57,047 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:44:57,068 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:45:47,390 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:45:47,390 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:45:47,412 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:46:22,062 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:46:22,062 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:46:22,085 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:46:37,043 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:46:37,043 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:46:37,067 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:47:43,320 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:47:43,321 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:47:43,342 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:47:59,571 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:47:59,571 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:47:59,595 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:48:56,749 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+23:48:56,749 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+23:48:56,773 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+23:49:14,634 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Sucursales
+23:49:14,923 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Sucursales: 2 existentes
+23:49:49,318 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 1
+23:49:49,318 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+23:49:49,334 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+23:49:49,334 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: pruebaTipo
+23:49:49,348 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: null tuplas eliminadas
+23:49:49,348 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+23:49:49,359 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: null tuplas eliminadas
+23:49:49,359 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando categoria: PRUEBA
+23:49:49,504 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando categoria: PRUEBA
+23:49:49,504 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando tipoProducto: pruebaTipo
+23:49:49,530 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando tipoProducto: pruebaTipo
+23:49:49,595 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO BODEGA(id,tipo ,direccion, peso, volumen, idSucursal) values (?, ?,?, ?, ?,?)".
+ORA-00904: "IDSUCURSAL": identificador no v�lido
+
+23:49:49,602 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 1
+00:00:10,365 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:00:10,366 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:00:10,387 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:00:33,526 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 1
+00:00:33,527 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+00:00:33,625 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+00:00:33,625 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: pruebaTipo
+00:00:33,637 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: uniandes.superAndes.negocio.TipoProducto@3466ef45 tuplas eliminadas
+00:00:33,637 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+00:00:33,649 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@1d3f3d57 tuplas eliminadas
+00:00:33,752 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO BODEGA(id,tipo ,direccion, peso, volumen, idSucursal) values (?, ?,?, ?, ?,?)".
+ORA-00904: "IDSUCURSAL": identificador no v�lido
+
+00:00:33,761 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 1
+00:01:11,839 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:01:11,840 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:01:11,860 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:02:39,425 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 1
+00:02:39,426 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+00:02:39,524 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+00:02:39,524 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando tipo producto por nombre: pruebaTipo
+00:02:39,535 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando tipoProducto por nombre: uniandes.superAndes.negocio.TipoProducto@6540fdb8 tuplas eliminadas
+00:02:39,535 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+00:02:39,548 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@51f7fb28 tuplas eliminadas
+00:02:39,684 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO BODEGA(id,tipo ,direccion, peso, volumen, sucursal) values (?, ?,?, ?, ?,?)".
+ORA-02291: restricci�n de integridad (ISIS2304C061820.FK_B_CATEGORIA) violada - clave principal no encontrada
+
+00:02:39,693 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 1
+00:13:02,426 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:13:02,427 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:13:02,450 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:13:36,610 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 1
+00:13:36,610 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+00:13:36,696 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+00:13:36,696 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+00:13:36,711 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@f431f33 tuplas eliminadas
+00:13:36,811 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 1
+00:13:40,780 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Clientes
+00:13:40,806 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Clientes: 1 existentes
+00:13:40,807 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Persona por id: 105
+00:22:15,332 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:22:15,333 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:22:15,355 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:22:38,090 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 2
+00:22:38,090 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+00:22:38,187 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+00:22:38,187 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+00:22:38,199 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@3d942219 tuplas eliminadas
+00:22:38,303 (AWT-EventQueue-0) ERROR [uniandes.superAndes.persistencia.PersistenciaSuperAndes] - Exception : Error con la ejecucion de Query de SQL "INSERT INTO BODEGA(id,categoria ,direccion, peso, volumen, sucursal) values (?, ?,?, ?, ?,?)".
+ORA-00904: "CATEGORIA": identificador no v�lido
+
+00:22:38,311 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 2
+00:24:33,057 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:24:33,058 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:24:33,081 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:24:46,153 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Adicionando bodega con direccion : 12
+00:24:46,154 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando sucursal por nombre: asd
+00:24:46,253 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando sucursal por nombre: Sucursal [id=62, nombre=asd, tamanio=12312.0 , direccion=asd, ciudad=asd]
+00:24:46,253 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando categoria por nombre: PRUEBA
+00:24:46,265 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - "Buscando categoria por nombre: uniandes.superAndes.negocio.Categoria@4d2b7319 tuplas eliminadas
+00:24:46,371 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Adicionando bodega con direccion: 12
+00:24:59,005 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Clientes
+00:24:59,018 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Clientes: 1 existentes
+00:24:59,018 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Buscando Persona por id: 105
+00:26:36,622 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:26:36,622 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:26:36,643 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:27:52,533 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:27:52,534 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:27:52,556 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:28:00,358 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Bodega
+00:28:00,447 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 2 existentes
+00:30:58,862 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+00:30:58,862 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuración indicada en el archivo de configuración
+00:30:58,884 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+00:31:02,942 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Bodega
+00:31:03,037 (AWT-EventQueue-0) INFO  [uniandes.superAndes.negocio.SuperAndes] - Generando los VO de Proveedor: 2 existentes

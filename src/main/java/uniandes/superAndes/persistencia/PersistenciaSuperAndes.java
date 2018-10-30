@@ -1036,7 +1036,7 @@ public class PersistenciaSuperAndes {
 		}
 		catch (Exception e)
 		{
-			//        	e.printStackTrace();
+			        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1050,39 +1050,17 @@ public class PersistenciaSuperAndes {
 		}
 	}
 
-	/**
-	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el nombre de la bodega
-	 * Adiciona entradas al log de la aplicación
-	 * @param nombreBebida - El nombre de la bebida
-	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
-	 */
-	/*public long eliminarBebidaPorNombre (String nombreBebida) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlBebida.eliminarBebidaPorNombre(pm, nombreBebida);
-            tx.commit();
+	public Bodega darBodegaPorId(long id) {
+		// TODO Auto-generated method stub
+		return sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
+	}
+	
+	
+	public Bodega darBodegaPorDireccion(String direccion) {
+		// TODO Auto-generated method stub
+		return sqlBodega.darBodegaPorDireccion(pmf.getPersistenceManager(), direccion);
+	}
 
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}*/
 
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
@@ -1117,6 +1095,42 @@ public class PersistenciaSuperAndes {
 			pm.close();
 		}
 	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idBodega - El identificador de la bodega
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarBodegaPorDireccion (String direccion) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlBodega.eliminarBodegaPorDireccion (pm, direccion);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
 
 
 

@@ -315,6 +315,110 @@ public class SuperAndes {
 	}
 	
 	
+	//--------------------------------------------------------------------------
+	// Estantes
+	//--------------------------------------------------------------------------
+	public Proveedor adicionarProveedor(String nombre, String nit, String calificacion)
+	{
+		log.info("Adicionando proveedor: "+nombre);
+		Proveedor proveedor = pp.adicionarProveedor(nombre, nit, calificacion);
+		log.info("/Adicionando proveedor: "+nombre);
+		return proveedor;
+	}
+
+	/**
+	 * Elimina un Sucursal por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param nombre - El nombre del Sucursal a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarProveedor(String nombre)
+	{
+		log.info ("EliminandoProveedor por nombre: " + nombre);
+		long resp = pp.eliminarProveedorPorNombre (nombre);		
+		log.info ("EliminandoProveedor por nombre: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	public Proveedor darProveedorPorNombre (String nombre) {
+
+		log.info ("Buscando Proveedor por nombre: " + nombre);
+		Proveedor resp = pp.darProveedorPorNombre(nombre);		
+		log.info ("\"Buscando Proveedor por nombre: " + resp );
+		return resp;
+	}
+
+	public List<VOProveedor> darVOProveedores ()
+	{
+		log.info ("Generando los VO de Proveedores");        
+		List<VOProveedor> vOProveedor = new LinkedList<VOProveedor> ();
+		for (Proveedor tb : pp.darProveedores())
+		{
+			vOProveedor.add(tb);
+		}
+		log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
+		return vOProveedor;
+	}
+	
+	
+	
+	
+	
+	//--------------------------------------------------------------------------
+	// Bodega
+	//--------------------------------------------------------------------------
+	public Bodega adicionarBodega( String nombreTipo, String direccion, double peso, double volumen,String nombreSucursal)
+	{
+		log.info("Adicionando bodega con direccion : "+direccion);
+		 
+		
+		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
+		Categoria cat = darCategoriaPorNombre("PRUEBA");
+		if(cat==null)
+		{
+			cat =adicionarCategoria("PRUEBA");
+		}
+
+		
+		Bodega bodega = pp.adicionarBodega(cat.getId() , direccion, peso, volumen, idSucursal);
+		log.info("/Adicionando bodega con direccion: "+direccion);
+		return bodega;
+	}
+
+	/**
+	 * Elimina un Sucursal por su nombre
+	 * Adiciona entradas al log de la aplicación
+	 * @param direccion - El nombre del Sucursal a eliminar
+	 * @return El número de tuplas eliminadas
+	 */
+	public long eliminarBodega(String direccion)
+	{
+		log.info ("EliminandoProveedor por nombre: " + direccion);
+		long resp = pp.eliminarBodegaPorDireccion(direccion);
+		log.info ("EliminandoProveedor por nombre: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
+	public Bodega darBodegaPorDireccion (String direccion) {
+
+		log.info ("Buscando Bodega por direccion: " + direccion);
+		Bodega resp = pp.darBodegaPorDireccion(direccion);
+		log.info ("\"Buscando Bodega por direccion: " + resp );
+		return resp;
+	}
+
+	public List<VOBodega> darVOBodegas ()
+	{
+		log.info ("Generando los VO de Bodega");        
+		List<VOBodega> vOProveedor = new LinkedList<VOBodega> ();
+		for (Bodega tb : pp.darBodegas())
+		{
+			vOProveedor.add(tb);
+		}
+		log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
+		return vOProveedor;
+	}
+
 	
 	
 	

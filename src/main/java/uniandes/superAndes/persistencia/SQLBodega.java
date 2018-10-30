@@ -55,7 +55,7 @@ class SQLBodega {
 	 */
 	public long adicionarBodega (PersistenceManager pm, long idBodega, long tipo,String direccion, double peso, double volumen, long idSucursal) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id,tipo ,direccion, peso, volumen, idSucursal) values (?, ?,?, ?, ?,?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaBodega() + "(id,categoria ,direccion, peso, volumen, sucursal) values (?, ?,?, ?, ?,?)");
         q.setParameters(idBodega, tipo,direccion, peso, volumen, idSucursal);
         return (long) q.executeUnique();
 	}
@@ -109,4 +109,23 @@ class SQLBodega {
 		q.setResultClass(Bodega.class);
 		return (List<Bodega>) q.executeList();
 	}
+
+
+
+		public long eliminarBodegaPorDireccion(PersistenceManager pm, String direccion) {
+		// TODO Auto-generated method stub
+		   Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaBodega() + " WHERE direccion = ?");
+	        q.setParameters(direccion);
+	        return (long) q.executeUnique();
+	}
+
+
+
+		public Bodega darBodegaPorDireccion(PersistenceManager pm, String direccion) {
+			// TODO Auto-generated method stub
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaBodega()  + " WHERE direccion = ?");
+			q.setResultClass(Bodega.class);
+			q.setParameters(direccion);
+			return (Bodega) q.executeUnique();
+		}
 }

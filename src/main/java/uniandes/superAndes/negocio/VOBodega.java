@@ -24,7 +24,7 @@ public interface VOBodega {
 	 * Retorna la categoria de los productos en la bodega
 	 * @return categoria de los productos en la bodega
 	 */
-	public long getIdCategoria();
+	public long getCategoria();
 	
 	/**
 	 * Retorna el volumen capacidad de la bodega
@@ -36,7 +36,7 @@ public interface VOBodega {
 	 * Retorna el id de la succursal a la que corresponde la bodega
 	 * @return id de la sucursal de la bodega
 	 */
-	public long getIdSucursal();
+	public long getSucursal();
 	
 	/**
 	 * @return Una cadena de caracteres con la información de la bodega
