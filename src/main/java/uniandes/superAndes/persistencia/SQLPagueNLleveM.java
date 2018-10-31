@@ -48,7 +48,7 @@ class SQLPagueNLleveM {
 		 * @param m nombre que se desea adicionar a la PagueNLleveM
 		 * @return
 		 */
-		public long adicionarPagueNLleveM (PersistenceManager pm, long idPagueNLleveM, double m , double n) 
+		public long adicionarPagueNLleveM (PersistenceManager pm, Long idPagueNLleveM, double m , double n) 
 		{
 			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPagueNLleveM() + "(id, m,n) values (?, ?. ?)");
 			q.setParameters(idPagueNLleveM, m,n);
@@ -62,7 +62,7 @@ class SQLPagueNLleveM {
 		 * @param idPagueNLleveM - El identificador de la PagueNLleveM
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarPague1Lleve2PorcentajePorId (PersistenceManager pm, long idPagueNLleveM)
+		public long eliminarPague1Lleve2PorcentajePorId (PersistenceManager pm, Long idPagueNLleveM)
 		{
 			Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaPagueNLleveM() + " WHERE id = ?");
 			q.setParameters(idPagueNLleveM);
@@ -76,7 +76,7 @@ class SQLPagueNLleveM {
 		 * @param idCategoria - El identificador de la OrdenPedido
 		 * @return El objeto OrdenPedido que tiene el identificador dado
 		 */
-		public PagueNLleveM darPagueNLleveMPorId (PersistenceManager pm, long idPagueNLleveM) 
+		public PagueNLleveM darPagueNLleveMPorId (PersistenceManager pm, Long idPagueNLleveM) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPagueNLleveM()  + " WHERE id = ?");
 			q.setResultClass(PagueNLleveM.class);
@@ -91,7 +91,7 @@ class SQLPagueNLleveM {
 		 * @param pm - El manejador de persistencia
 		 * @return Una lista de objetos PagueNLleveM
 		 */
-		public List<PagueNLleveM> darCategorias (PersistenceManager pm)
+		public List<PagueNLleveM> darPromociones (PersistenceManager pm)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaPagueNLleveM() );
 			q.setResultClass(PagueNLleveM.class);

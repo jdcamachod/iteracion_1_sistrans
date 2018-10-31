@@ -1480,9 +1480,40 @@ public class PersistenciaSuperAndes {
 		return sqlTipoProducto.darTipoProductoPorNombre(pmf.getPersistenceManager(), nombreTipoProducto);
 	}
 	
+	public Producto darProductoPorId(long id)
+	{
+		return sqlProducto.darProductoPorId(pmf.getPersistenceManager(), id);
+	}
 	
 	
+	
+	public DescuentoPorcentaje adicionarDescuentoPorcentaje(double porcentaje)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlDescuentoPorcentaje.adicionarDescuentoPorcentaje(pm, id, porcentaje);
+			tx.commit();
+			log.trace("Insercion de la promocion descuento porcentaje" + id + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new DescuentoPorcentaje(0, new Date(), new Date(), 0, porcentaje, id);
 
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 	/**
 	 * MEtodo que agrega una promocion junto con su requerimiento el tipo de la promocion 
@@ -1494,7 +1525,7 @@ public class PersistenciaSuperAndes {
 	 * @param pague1Lleve2Porcentaje tipo de promocion
 	 * @return la promocion junto con su tipo
 	 */
-	public Promocion adicionarPromocion (Date fechaInicial, Date fechaFinal,PagueNLleveM pagueNLleveM, DescuentoPorcentaje descuentoPorcentaje, PagueXLleveY pagueXLleveY , Pague1Lleve2Porcentaje pague1Lleve2Porcentaje  ) {
+	public Promocion adicionarPromocion (Date fechaInicial, Date fechaFinal,PagueNLleveM pagueNLleveM, DescuentoPorcentaje descuentoPorcentaje, PagueXLleveY pagueXLleveY , Pague1Lleve2Porcentaje pague1Lleve2Porcentaje, double precio  ) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
@@ -1507,7 +1538,6 @@ public class PersistenciaSuperAndes {
 			Long idDescuentoPorcentaje = null;
 			long id = nextval ();
 			long tipoPromocion;
-			int precio = 0;
 			String elTipoEs = "";
 
 			Promocion laPromocion = null ;
@@ -1529,8 +1559,7 @@ public class PersistenciaSuperAndes {
 				laPromocion = new PagueXLleveY(id, fechaInicial, fechaFinal, precio, idPagueXLleveY, pagueXLleveY.getX(), pagueXLleveY.getY());
 			}else if(descuentoPorcentaje != null) {
 				elTipoEs = "descuentoPorcentaje";
-				idDescuentoPorcentaje = descuentoPorcentaje.getId();
-				tipoPromocion =sqlDescuentoPorcentaje.adicionarDescuentoPorcentaje(pm, idDescuentoPorcentaje, descuentoPorcentaje.getPorcentaje());
+				idDescuentoPorcentaje = descuentoPorcentaje.getIdDescuentoPorcentaje();
 				laPromocion = new DescuentoPorcentaje(id, fechaInicial, fechaFinal, precio, descuentoPorcentaje.getPorcentaje(), idDescuentoPorcentaje);
 			}
 			else {
@@ -1541,7 +1570,7 @@ public class PersistenciaSuperAndes {
 			tx.commit();
 
 			log.trace ("Inserción de promocion : " + id + ": " + tuplasInsertadas + " tuplas insertadas");
-			log.trace ("Inserción de Tipo promocion : " + elTipoEs  + ": " + tipoPromocion + " tuplas insertadas");
+
 
 			return laPromocion;
 		}

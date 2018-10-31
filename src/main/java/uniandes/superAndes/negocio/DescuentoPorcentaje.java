@@ -33,9 +33,11 @@ public class DescuentoPorcentaje extends Promocion implements VODescuentoPorcent
 	 * @param precio - precio de la promocion
 	 * @param porcentaje - porcentaje a descontar con la promocion
 	 */
-	public DescuentoPorcentaje(long id, Date fechaInicial, Date fechaFinal, int precio, double porcentaje, long idDescuentoPorcentaje) {
-		super(id, fechaInicial, fechaFinal, precio,idDescuentoPorcentaje, 0,0,0);
+	public DescuentoPorcentaje(long id, Date fechaInicial, Date fechaFinal, double precio, double porcentaje, long idDescuentoPorcentaje) {
+		super(id, fechaInicial, fechaFinal, precio,idDescuentoPorcentaje, null,null,null);
 		this.porcentaje = porcentaje;
+		this.idDescuentoPorcentaje = idDescuentoPorcentaje;
+		
 	}
 
 	/**

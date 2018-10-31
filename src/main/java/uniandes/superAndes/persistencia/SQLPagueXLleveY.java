@@ -53,7 +53,7 @@ class SQLPagueXLleveY {
 		 * @param idSucursal
 		 * @return
 		 */
-		public long adicionarPagueXLleveY (PersistenceManager pm, long idPagueXLleveY, int x, int y) 
+		public long adicionarPagueXLleveY (PersistenceManager pm, Long idPagueXLleveY, int x, int y) 
 		{
 	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPagueXLleveY() + "(id, x, y) values (?, ?, ?)");
 	        q.setParameters(idPagueXLleveY, x, y);
@@ -67,7 +67,7 @@ class SQLPagueXLleveY {
 		 * @param idBodega - El identificador de la bodega
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarPagueXLleveYPorId (PersistenceManager pm, long idPagueXLleveY)
+		public long eliminarPagueXLleveYPorId (PersistenceManager pm, Long idPagueXLleveY)
 		{
 	        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaPagueXLleveY() + " WHERE id = ?");
 	        q.setParameters(idPagueXLleveY);
@@ -81,7 +81,7 @@ class SQLPagueXLleveY {
 		 * @param idBodega - El identificador de la bodega
 		 * @return El objeto BODEGA que tiene el identificador dado
 		 */
-		public PagueXLleveY darPagueXLleveY (PersistenceManager pm, long idPagueXLleveY) 
+		public PagueXLleveY darPagueXLleveY (PersistenceManager pm, Long idPagueXLleveY) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPagueXLleveY()  + " WHERE id = ?");
 			q.setResultClass(PagueXLleveY.class);

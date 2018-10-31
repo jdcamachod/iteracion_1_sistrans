@@ -8,13 +8,15 @@ public class PromocionPaquete implements VOPromocionPaquete{
 	private long idProductoPaquete;
 	private Date fechaInicial;
 	private Date fechaFinal;
+	private double precioPromocion;
 	
-	public PromocionPaquete(long idProductoOrigen, long idProductoPaquete, Date fechaInicial, Date fechaFinal) {
+	public PromocionPaquete(long idProductoOrigen, long idProductoPaquete, Date fechaInicial, Date fechaFinal, double precioPromocion) {
 		
 		this.idProductoOrigen = idProductoOrigen;
 		this.idProductoPaquete = idProductoPaquete;
 		this.fechaFinal = fechaFinal;
 		this.fechaInicial = fechaInicial;
+		this.setPrecioPromocion(precioPromocion);
 	}
 
 	public long getIdProductoOrigen() {
@@ -47,6 +49,14 @@ public class PromocionPaquete implements VOPromocionPaquete{
 
 	public void setFechaFinal(Date fechaFinal) {
 		this.fechaFinal = fechaFinal;
+	}
+
+	public double getPrecioPromocion() {
+		return precioPromocion;
+	}
+
+	public void setPrecioPromocion(double precioPromocion) {
+		this.precioPromocion = precioPromocion;
 	}
 	
 	

@@ -50,7 +50,7 @@ class SQLPague1Lleve2Porcentaje {
 		 * @param nombre nombre que se desea adicionar a la Pague1Lleve2Porcentaje
 		 * @return
 		 */
-		public long adicionarPague1Lleve2Porcentaje(PersistenceManager pm, long idPague1Lleve2Porcentaje, double porcentaje ) 
+		public long adicionarPague1Lleve2Porcentaje(PersistenceManager pm, Long idPague1Lleve2Porcentaje, double porcentaje ) 
 		{
 			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPague1Lleve2Porcentaje() + "(id, porcentaje) values (?, ?)");
 			q.setParameters(idPague1Lleve2Porcentaje, porcentaje);
@@ -64,7 +64,7 @@ class SQLPague1Lleve2Porcentaje {
 		 * @param idCategoria - El identificador de la Pague1Lleve2Porcentaje
 		 * @return EL número de tuplas eliminadas
 		 */
-		public long eliminarPague1Lleve2PorcentajePorId (PersistenceManager pm, long idPague1Lleve2Porcentaje)
+		public long eliminarPague1Lleve2PorcentajePorId (PersistenceManager pm, Long idPague1Lleve2Porcentaje)
 		{
 			Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaPague1Lleve2Porcentaje() + " WHERE id = ?");
 			q.setParameters(idPague1Lleve2Porcentaje);
@@ -78,7 +78,7 @@ class SQLPague1Lleve2Porcentaje {
 		 * @param idCategoria - El identificador de la OrdenPedido
 		 * @return El objeto OrdenPedido que tiene el identificador dado
 		 */
-		public Pague1Lleve2Porcentaje darPague1Lleve2PorcentajePorId (PersistenceManager pm, long idPague1Lleve2Porcentaje) 
+		public Pague1Lleve2Porcentaje darPague1Lleve2PorcentajePorId (PersistenceManager pm, Long idPague1Lleve2Porcentaje) 
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPague1Lleve2Porcentaje()  + " WHERE id = ?");
 			q.setResultClass(Pague1Lleve2Porcentaje.class);
@@ -93,7 +93,7 @@ class SQLPague1Lleve2Porcentaje {
 		 * @param pm - El manejador de persistencia
 		 * @return Una lista de objetos Pague1Lleve2Porcentaje
 		 */
-		public List<Pague1Lleve2Porcentaje> darCategorias (PersistenceManager pm)
+		public List<Pague1Lleve2Porcentaje> darPromociones (PersistenceManager pm)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaPague1Lleve2Porcentaje() );
 			q.setResultClass(Pague1Lleve2Porcentaje.class);

@@ -7,12 +7,12 @@ public abstract class Promocion implements VOPromocion {
 	private long id;
 	private Date fechaInicial;
 	private Date fechaFinal;
-	private int precio;
-	private long idPague1Lleve2Porcentaje;
+	private double precio;
+	private Long pague1Lleve2Porcentaje;
 	
-	private long idPagueNLleveM;
-	private long idPagueXLleveY;
-	private long idDescuentoPorcentaje;
+	private Long pagueNLleveM;
+	private Long pagueXLleveY;
+	private Long descuentoPorcentaje;
 	
 	public Promocion()
 	{
@@ -20,22 +20,22 @@ public abstract class Promocion implements VOPromocion {
 		fechaInicial = new Date();
 		fechaFinal = new Date();
 		precio = 0;
-		idDescuentoPorcentaje =0;
-		idPague1Lleve2Porcentaje=0;
-		idPagueNLleveM=0;
-		idPagueXLleveY=0;
+		descuentoPorcentaje =null;
+		pague1Lleve2Porcentaje=null;
+		pagueNLleveM=null;
+		pagueXLleveY=null;
 	}
 	
-	public Promocion(long id, Date fechaInicial, Date fechaFinal, int precio, long idDescuentoPorcentaje, long idPague1Lleve2Porcentaje, long idPagueNLleveM, long idPagueXLleveY) {
+	public Promocion(long id, Date fechaInicial, Date fechaFinal, double precio, Long idDescuentoPorcentaje, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY) {
 		
 		this.id = id;
 		this.fechaInicial = fechaInicial;
 		this.fechaFinal = fechaFinal;
 		this.precio = precio;
-		this.idPague1Lleve2Porcentaje=idPague1Lleve2Porcentaje;
-		this.idPagueNLleveM=idPagueNLleveM;
-		this.idPagueXLleveY=idPagueXLleveY;
-		this.idDescuentoPorcentaje=idDescuentoPorcentaje;
+		this.pague1Lleve2Porcentaje=idPague1Lleve2Porcentaje;
+		this.pagueNLleveM=idPagueNLleveM;
+		this.pagueXLleveY=idPagueXLleveY;
+		this.descuentoPorcentaje=idDescuentoPorcentaje;
 	}
 	public long getId() {
 		return id;
@@ -55,43 +55,36 @@ public abstract class Promocion implements VOPromocion {
 	public void setFechaFinal(Date fechaFinal) {
 		this.fechaFinal = fechaFinal;
 	}
-	public int getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(int precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public long getIdPague1Lleve2Porcentaje() {
-		return idPague1Lleve2Porcentaje;
+	
+	public String toString()
+	{
+		String tipo = "";
+		if(pague1Lleve2Porcentaje!=null)
+		{
+			tipo = "Pague 1 lleve el segundo por porcentaje menor"+", idTipoPromocion=" + pague1Lleve2Porcentaje;
+		}
+		else if(pagueNLleveM!=null)
+		{
+			tipo = "Pague n productos de producto lleve m productos"+", idTipoPromocion=" + pagueNLleveM;
+		}
+		else if(pagueXLleveY!=null)
+		{
+			tipo = "Pague x cantidad lleve y cantidad"+", idTipoPromocion=" + pagueXLleveY;
+		}
+		else if(descuentoPorcentaje!=null)
+		{
+			tipo = "Lleve el producto por un porcentaje menor"+", idTipoPromocion=" + descuentoPorcentaje;
+		}
+		return "Promocion [id= "+id+ ", fechaInicial=" + fechaInicial + ", fechaFinal=" + fechaFinal +
+				", precio=" + precio + ", "+ tipo;
 	}
-
-	public void setIdPague1Lleve2Porcentaje(long idPague1Lleve2Porcentaje) {
-		this.idPague1Lleve2Porcentaje = idPague1Lleve2Porcentaje;
-	}
-
-	public long getIdPagueNLleveM() {
-		return idPagueNLleveM;
-	}
-
-	public void setIdPagueNLleveM(long idPagueNLleveM) {
-		this.idPagueNLleveM = idPagueNLleveM;
-	}
-
-	public long getIdPagueXLleveY() {
-		return idPagueXLleveY;
-	}
-
-	public void setIdPagueXLleveY(long idPagueXLleveY) {
-		this.idPagueXLleveY = idPagueXLleveY;
-	}
-
-	public long getIdDescuentoPorcentaje() {
-		return idDescuentoPorcentaje;
-	}
-
-	public void setIdDescuentoPorcentaje(long idDescuentoPorcentaje) {
-		this.idDescuentoPorcentaje = idDescuentoPorcentaje;
-	}
+	
 	
 	
 }
