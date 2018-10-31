@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Estante;
 
@@ -62,8 +63,8 @@ class SQLEstante {
 	 */
 	public long adicionarEstante (PersistenceManager pm, long idEstante, long tipo, double volumen, double peso, String direccion, int nivelAbastecimiento,long idSucursal) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEstante() + "(id, tipo,direccion, peso, volumen, idSucursal) values (?, ?,?, ?, ?,?)");
-        q.setParameters(idEstante, tipo,direccion, peso, volumen, idSucursal);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEstante() + "(id, categoria,direccion, peso, volumen, sucursal, nivelAbastecimiento) values (?, ?,?, ?, ?,?, ?)");
+        q.setParameters(idEstante, tipo,direccion, peso, volumen, idSucursal, nivelAbastecimiento);
         return (long) q.executeUnique();
 	}
 
@@ -108,5 +109,24 @@ class SQLEstante {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaEstante() );
 		q.setResultClass(Estante.class);
 		return (List<Estante>) q.executeList();
+	}
+
+
+
+	public long eliminarEstantePorDireccion(PersistenceManager pm, String direccion) {
+	// TODO Auto-generated method stub
+	   Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaEstante()+ " WHERE direccion = ?");
+        q.setParameters(direccion);
+        return (long) q.executeUnique();
+}
+
+
+
+	public Estante darEstantePorDireccion(PersistenceManager pm, String direccion) {
+		// TODO Auto-generated method stub
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaEstante()  + " WHERE direccion = ?");
+		q.setResultClass(Bodega.class);
+		q.setParameters(direccion);
+		return (Estante) q.executeUnique();
 	}
 }

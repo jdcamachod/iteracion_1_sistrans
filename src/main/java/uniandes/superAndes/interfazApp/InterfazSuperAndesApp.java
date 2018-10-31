@@ -69,11 +69,13 @@ import uniandes.superAndes.negocio.TipoProducto;
 import uniandes.superAndes.negocio.VOBodega;
 import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.Empresa;
+import uniandes.superAndes.negocio.Estante;
 import uniandes.superAndes.negocio.Persona;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
 import uniandes.superAndes.negocio.VOCliente;
+import uniandes.superAndes.negocio.VOEstante;
 import uniandes.superAndes.negocio.VOProducto;
 import uniandes.superAndes.negocio.VOProveedor;
 import uniandes.superAndes.negocio.VOSucursal;
@@ -1090,56 +1092,79 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	
 	
 	/* ****************************************************************
-	 * 			CRUD de Estantes
+	 * 			CRUD de Estante
 	 *****************************************************************/
 	/**
 	 * Adiciona un tipo de bebida con la información dada por el usuario
 	 * Se crea una nueva tupla de tipoBebida en la base de datos, si un tipo de bebida con ese nombre no existía
 	 */
-	public void registrarProveedor( )
+	public void registrarEstante( )
 	{
 		try 
 		{
 
-			JTextField nombreField = new JTextField(10);
-			JTextField nitField = new JTextField(10);
-			JPanel myPanel = new JPanel(new GridLayout(2,2));
-			myPanel.add(new JLabel("Nombre:"));
-			myPanel.add(nombreField);
-			myPanel.add(new JLabel("Nit:"));
-			myPanel.add(nitField);
+			JTextField direccionField = new JTextField(10);
+			JTextField categoriaField = new JTextField(10);
+			JTextField volumenField = new JTextField(10);
+			JTextField pesoField = new JTextField(10);
+			JTextField nivelAbastecimientoField = new JTextField(10);
+			JTextField sucursalField = new JTextField(10);	
+			
+			
+			JPanel myPanel = new JPanel(new GridLayout(6,2));
+			myPanel.add(new JLabel("Sucursal:"));
+			myPanel.add(sucursalField);
+			myPanel.add(new JLabel("Direccion:"));
+			myPanel.add(direccionField);
+			myPanel.add(new JLabel("Categoria:"));
+			myPanel.add(categoriaField);
+			myPanel.add(new JLabel("Volumen:"));
+			myPanel.add(volumenField);
+			myPanel.add(new JLabel("Peso:"));
+			myPanel.add(pesoField);
+			myPanel.add(new JLabel("Nivel de reorden:"));
+			myPanel.add(nivelAbastecimientoField);			
 
 			int result = JOptionPane.showConfirmDialog(null, myPanel, 
 					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
 
 			if (result == JOptionPane.OK_OPTION) {
 
-				String nombre = nombreField.getText();
-				String nit = nitField.getText();
+				String nombreSucursal = sucursalField.getText();
+				String direccion = direccionField.getText();
+				String nombreCategoria = categoriaField.getText();
+				String volumen = volumenField.getText();
+				String peso = pesoField.getText();
+				String nivelAbastecimiento = nivelAbastecimientoField.getText();
 
-				if (!nombre.isEmpty())
+
+				if (!nombreSucursal.isEmpty() && !direccion.isEmpty() && !nombreCategoria.isEmpty() && !volumen.isEmpty() && !peso.isEmpty())
 				{
-					if(!nit.isEmpty())
-					{
-						Proveedor prov = superAndes.adicionarProveedor (nombre,nit, "");
-						if (prov == null)
+					try {
+							double pesoNumero = Double.parseDouble(peso);
+							double volumenNumero = Double.parseDouble(volumen);
+							int nivelAbastecimientoNumero = Integer.parseInt(nivelAbastecimiento);
+							
+					
+						Estante estante = superAndes.adicionarEstante(nombreCategoria, direccion, pesoNumero, volumenNumero, nombreSucursal, nivelAbastecimientoNumero);
+						if (estante == null)
 						{
-							throw new Exception ("No se pudo crear un Proveedor con nombre: " + nombre);
+							throw new Exception ("No se pudo crear un estante con direccion: " + direccion);
 						}
-						String resultado = "En registrarProveedor\n\n";
-						resultado += "Proveedor adicionado exitosamente: " + prov;
+						String resultado = "En registrar estante\n\n";
+						resultado += "estante adicionado exitosamente: " + estante;
 						resultado += "\n Operación terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
-					else
-					{
-						panelDatos.actualizarInterfaz("Nit no puede ser vacio");
+					catch (NumberFormatException e) {
+						panelDatos.actualizarInterfaz("Ingrese campos validos ");
 					}
-
 				}
+
+				
 				else
 				{
-					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+					panelDatos.actualizarInterfaz("Los campos no pueden ser vacios ");
 				}
 
 			}
@@ -1159,13 +1184,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarProveedor( )
+	public void listarEstantes( )
 	{
 		try 
 		{
-			List <VOProveedor> lista = superAndes.darVOProveedores();
+			List <VOEstante> lista = superAndes.darVOEstantes();
 
-			String resultado = "En Proveedor";
+			String resultado = "En Estantes";
 			resultado +=  "\n" + listarVO(lista);
 			panelDatos.actualizarInterfaz(resultado);
 			resultado += "\n Operación terminada";
@@ -1183,17 +1208,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
 	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void eliminarProveedorPorNombre( )
+	public void eliminarEstantePorDireccion( )
 	{
 		try 
 		{
-			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
+			String direccion = JOptionPane.showInputDialog (this, "Direccion del Estante?", "Borrar Estante por direccion", JOptionPane.QUESTION_MESSAGE);
+			if (direccion != null)
 			{
-				long tbEliminados = superAndes.eliminarProveedor(nombre);
+				long tbEliminados = superAndes.eliminarEstante(direccion);
 
-				String resultado = "En eliminar Proveedor\n\n";
-				resultado += tbEliminados + " Proveedor eliminados\n";
+				String resultado = "En eliminar Estante\n\n";
+				resultado += tbEliminados + " Estante eliminada\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1214,22 +1239,22 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarProveedorPorNombre( )
+	public void buscarEstantePorDireccion( )
 	{
 		try 
 		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
+			String direccion = JOptionPane.showInputDialog (this, "Direccion del Estante?", "Buscar Estante por direccion", JOptionPane.QUESTION_MESSAGE);
+			if (direccion != null)
 			{
-				VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
-				String resultado = "En buscar Proveedor por nombre\n\n";
+				VOEstante sucursal = superAndes.darEstantePorDireccion(direccion);
+				String resultado = "En buscar Bodega por direccion\n\n";
 				if (sucursal != null)
 				{
-					resultado += "La Proveedor es: " + sucursal;
+					resultado += "El Estante es: " + sucursal;
 				}
 				else
 				{
-					resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
+					resultado += "Un Estante con direccion: " + direccion + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
@@ -1246,6 +1271,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+
 	
 	
 	/* ****************************************************************
@@ -1261,19 +1287,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		{
 
 			JTextField direccionField = new JTextField(10);
-			JTextField tipoField = new JTextField(10);
+			JTextField categoriaField = new JTextField(10);
 			JTextField volumenField = new JTextField(10);
 			JTextField pesoField = new JTextField(10);
 			JTextField sucursalField = new JTextField(10);	
 			
 			
-			JPanel myPanel = new JPanel(new GridLayout(5,2));
+			JPanel myPanel = new JPanel(new GridLayout(6,2));
 			myPanel.add(new JLabel("Sucursal:"));
 			myPanel.add(sucursalField);
 			myPanel.add(new JLabel("Direccion:"));
 			myPanel.add(direccionField);
-			myPanel.add(new JLabel("Tipo:"));
-			myPanel.add(tipoField);
+			myPanel.add(new JLabel("Categoria:"));
+			myPanel.add(categoriaField);
 			myPanel.add(new JLabel("Volumen:"));
 			myPanel.add(volumenField);
 			myPanel.add(new JLabel("Peso:"));
@@ -1286,19 +1312,19 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 				String nombreSucursal = sucursalField.getText();
 				String direccion = direccionField.getText();
-				String nombreTipo = tipoField.getText();
+				String nombreCategoria = categoriaField.getText();
 				String volumen = volumenField.getText();
 				String peso = pesoField.getText();
 
 
-				if (!nombreSucursal.isEmpty() && !direccion.isEmpty() && !nombreTipo.isEmpty() && !volumen.isEmpty() && !peso.isEmpty())
+				if (!nombreSucursal.isEmpty() && !direccion.isEmpty() && !nombreCategoria.isEmpty() && !volumen.isEmpty() && !peso.isEmpty())
 				{
 					try {
 							double pesoNumero = Double.parseDouble(peso);
 							double volumenNumero = Double.parseDouble(volumen);
 							
 					
-						Bodega bodega = superAndes.adicionarBodega(nombreTipo, direccion, pesoNumero, volumenNumero, nombreSucursal);
+						Bodega bodega = superAndes.adicionarBodega(nombreCategoria, direccion, pesoNumero, volumenNumero, nombreSucursal);
 						if (bodega == null)
 						{
 							throw new Exception ("No se pudo crear una Bodega con direccion: " + direccion);
@@ -1360,17 +1386,17 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Borra de la base de datos Sucursal con el identificador dado po el usuario
 	 * Cuando dicho Sucursal no existe, se indica que se borraron 0 registros de la base de datos
 	 */
-	public void eliminarProveedorPorNombre( )
+	public void eliminarBodegaPorDireccion( )
 	{
 		try 
 		{
-			String nombre = JOptionPane.showInputDialog (this, "Id de la Proveedor?", "Borrar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
+			String direccion = JOptionPane.showInputDialog (this, "Direccion del bodega?", "Borrar bodega por direccion", JOptionPane.QUESTION_MESSAGE);
+			if (direccion != null)
 			{
-				long tbEliminados = superAndes.eliminarProveedor(nombre);
+				long tbEliminados = superAndes.eliminarBodega(direccion);
 
-				String resultado = "En eliminar Proveedor\n\n";
-				resultado += tbEliminados + " Proveedor eliminados\n";
+				String resultado = "En eliminar Bodega\n\n";
+				resultado += tbEliminados + " Bodega eliminada\n";
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);
 			}
@@ -1391,22 +1417,22 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarProveedorPorNombre( )
+	public void buscarBodegaPorDireccion( )
 	{
 		try 
 		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre de la Proveedor?", "Buscar Proveedor por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
+			String direccion = JOptionPane.showInputDialog (this, "Direccion de la Bodega?", "Buscar Bodega por direccion", JOptionPane.QUESTION_MESSAGE);
+			if (direccion != null)
 			{
-				VOProveedor sucursal = superAndes.darProveedorPorNombre(nombre);
-				String resultado = "En buscar Proveedor por nombre\n\n";
+				VOBodega sucursal = superAndes.darBodegaPorDireccion(direccion);
+				String resultado = "En buscar Bodega por direccion\n\n";
 				if (sucursal != null)
 				{
-					resultado += "La Proveedor es: " + sucursal;
+					resultado += "La Bodega es: " + sucursal;
 				}
 				else
 				{
-					resultado += "Una Proveedor con nombre: " + nombre + " NO EXISTE\n";    				
+					resultado += "Una Bodega con direccion: " + direccion + " NO EXISTE\n";    				
 				}
 				resultado += "\n Operación terminada";
 				panelDatos.actualizarInterfaz(resultado);

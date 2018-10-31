@@ -15,12 +15,12 @@ public interface VOEstante {
 	/**
 	 * @return el peso capacidad del estante
 	 */
-	public int getPeso();
+	public double getPeso();
 	
 	/**
 	 * @return el volumen capacidad del  estante
 	 */
-	public int getVolumen();
+	public double getVolumen();
 	
 	/**
 	 * @return la direccion del estante
@@ -30,7 +30,7 @@ public interface VOEstante {
 	/**
 	 * @return el identificador de la categoria
 	 */
-	public long getIdCategoria();
+	public long getCategoria();
 	
 	/**
 	 * @return Una cadena de caracteres con la información del estante

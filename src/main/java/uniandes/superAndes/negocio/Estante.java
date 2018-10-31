@@ -4,10 +4,11 @@ public class Estante implements VOEstante {
 	
 	private long id;
 	private int nivelAbastecimiento;
-	private int peso;
-	private int volumen;
+	private double peso;
+	private double volumen;
 	private String direccion;
-	private long idCategoria;
+	private long categoria;
+	private long sucursal;
 	
 	
 	public Estante()
@@ -17,20 +18,23 @@ public class Estante implements VOEstante {
 		peso = 0;
 		volumen = 0;
 		direccion = "";
-		idCategoria = 0;
+		categoria = 0;
+		sucursal = 0;
 		
 			
 	}
-	public Estante(long id, int nivelAbastecimiento, int peso, int volumen, String direccion, long idCategoria) {
+	public Estante(long id, int nivelAbastecimiento, double peso, double volumen, String direccion, long idCategoria, long sucursal) {
 		
 		this.id = id;
 		this.nivelAbastecimiento = nivelAbastecimiento;
 		this.peso = peso;
 		this.volumen = volumen;
 		this.direccion = direccion;
-		this.idCategoria = idCategoria;
-		
+		this.categoria = idCategoria;
+		this.sucursal = sucursal;
 	}
+
+	
 	public long getId() {
 		return id;
 	}
@@ -43,16 +47,16 @@ public class Estante implements VOEstante {
 	public void setNivelAbastecimiento(int nivelAbastecimiento) {
 		this.nivelAbastecimiento = nivelAbastecimiento;
 	}
-	public int getPeso() {
+	public double getPeso() {
 		return peso;
 	}
-	public void setPeso(int peso) {
+	public void setPeso(double peso) {
 		this.peso = peso;
 	}
-	public int getVolumen() {
+	public double getVolumen() {
 		return volumen;
 	}
-	public void setVolumen(int volumen) {
+	public void setVolumen(double volumen) {
 		this.volumen = volumen;
 	}
 	public String getDireccion() {
@@ -61,15 +65,23 @@ public class Estante implements VOEstante {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public long getIdCategoria() {
-		return idCategoria;
+	public long getCategoria() {
+		return categoria;
 	}
-	public void setIdCategoria(long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setCategoria(long categoria) {
+		this.categoria = categoria;
 	}
-
-	
-	
+	public long getSucursal() {
+		return sucursal;
+	}
+	public void setSucursal(long sucursal) {
+		this.sucursal = sucursal;
+	}
+	@Override
+	public String toString() 
+	{
+		return "Estante [id=" + id + ", sucursal=" + sucursal + ", tipo=" + categoria + " , direccion=" + direccion + ", volumen=" + volumen + ", peso=" + peso + ", Nivel Abastecimiento: "+ nivelAbastecimiento +"]";
+	}
 	
 	
 }

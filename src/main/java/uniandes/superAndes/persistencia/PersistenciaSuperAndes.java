@@ -25,6 +25,7 @@ import uniandes.superAndes.negocio.Cliente;
 
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.Empresa;
+import uniandes.superAndes.negocio.Estante;
 import uniandes.superAndes.negocio.OrdenPedido;
 import uniandes.superAndes.negocio.OrdenesProductos;
 import uniandes.superAndes.negocio.Pague1Lleve2Porcentaje;
@@ -1143,7 +1144,148 @@ public class PersistenciaSuperAndes {
 		return sqlBodega.darBodegas (pmf.getPersistenceManager());
 	}
 
- 
+
+	
+	
+	/* ****************************************************************
+	 * 			Métodos para manejar los Estantes
+	 *****************************************************************/
+
+	/**
+	 * Método que inserta, de manera transaccional, una tupla en la tabla Bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idCategoria - El identificador del tipo de pproductos de la bodega
+	 * @param direccion - direccion de la bodega
+	 * @param peso - el peso que soporta la bodega
+	 * @param volumen - el volumen que soporta la bodega
+	 * @param idSucursal - el id de la sucursal en la que está la bodega
+	 * @return El objeto Bebida adicionado. null si ocurre alguna Excepción
+	 */
+	public Estante adicionarEstante( long idCategoria, String direccion, double peso, double volumen,long idSucursal, int nivelAbastecimiento) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();            
+			long idEstante = nextval ();
+			long tuplasInsertadas = sqlEstante.adicionarEstante(pm, idEstante, idCategoria, volumen, peso, direccion, nivelAbastecimiento, idSucursal);
+			tx.commit();
+
+			log.trace ("Inserción Estante: " + idEstante +" "+ idSucursal+" "+ direccion+  ": " + tuplasInsertadas + " tuplas insertadas");
+			return new Estante(idEstante, nivelAbastecimiento, peso, volumen, direccion, idCategoria,idSucursal);
+		}
+		catch (Exception e)
+		{
+			        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+	public Estante darEstantePorId(long id) {
+		// TODO Auto-generated method stub
+		return sqlEstante.darEstantePorId(pmf.getPersistenceManager(), id);
+	}
+	
+	
+	public Estante darEstantePorDireccion(String direccion) {
+		// TODO Auto-generated method stub
+		return sqlEstante.darEstantePorDireccion(pmf.getPersistenceManager(), direccion);
+	}
+
+
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idBodega - El identificador de la bodega
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEstantePorId (long idEstante) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEstante.eliminarEstantePorId(pm, idEstante);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	
+	/**
+	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
+	 * Adiciona entradas al log de la aplicación
+	 * @param idBodega - El identificador de la bodega
+	 * @return El número de tuplas eliminadas. -1 si ocurre alguna Excepción
+	 */
+	public long eliminarEstantePorDireccion (String direccion) 
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlEstante.eliminarEstantePorDireccion(pm, direccion);
+			tx.commit();
+
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+
+
+
+
+	/**
+	 * Método que consulta todas las tuplas en la tabla Bodega
+	 * @return La lista de objetos Bodega, construidos con base en las tuplas de la tabla BODEGA
+	 */
+	public List<Estante> darEstantes ()
+	{
+		return sqlEstante.darEstantes(pmf.getPersistenceManager());
+	}
+	
+	
+	
 	/* ****************************************************************
 	 * 			Métodos para manejar los PRODUCTOS
 	 *****************************************************************/

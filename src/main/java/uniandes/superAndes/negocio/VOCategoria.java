@@ -14,6 +14,8 @@ public interface VOCategoria {
 	 */
 	public String getNombre();
 	
+
+	
 	/**
 	 * @return Una cadena de caracteres con la información de la categoria
 	 */

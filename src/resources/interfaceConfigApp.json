@@ -3,11 +3,10 @@
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./src/main/resources/config/logo.png",
-	"menuBar":
-	[
-		{ "menuTitle": "Proveedor",
-		  "options":
-			[
+	"menuBar": [
+		{
+			"menuTitle": "Proveedor",
+			"options": [
 				{
 					"label": "Registrar",
 					"event": "registrarProveedor"
@@ -26,10 +25,9 @@
 				}
 			]
 		},
-		
-		{ "menuTitle": "Sucursal",
-		  "options":
-			[
+		{
+			"menuTitle": "Sucursal",
+			"options": [
 				{
 					"label": "Registrar",
 					"event": "registrarSucursal"
@@ -42,15 +40,15 @@
 					"label": "Borrar por nombre",
 					"event": "eliminarSucursalPorNombre"
 				},
-								{
+				{
 					"label": "Buscar por Nombre",
 					"event": "buscarSucursalPorNombre"
 				}
 			]
 		},
-		{ "menuTitle": "Producto",
-		  "options":
-			[
+		{
+			"menuTitle": "Producto",
+			"options": [
 				{
 					"label": "Registrar",
 					"event": "registrarProducto"
@@ -63,17 +61,15 @@
 					"label": "Borrar por nombre",
 					"event": "eliminarProductoPorNombre"
 				},
-								{
+				{
 					"label": "Buscar por Nombre",
 					"event": "buscarProductoPorNombre"
 				}
 			]
 		},
-		
-	
-		{ "menuTitle": "Cliente",
-				"options":
-			[
+		{
+			"menuTitle": "Cliente",
+			"options": [
 				{
 					"label": "Registrar",
 					"event": "registrarCliente"
@@ -86,16 +82,15 @@
 					"label": "Borrar por correo",
 					"event": "eliminarClientePorCorreo"
 				},
-								{
+				{
 					"label": "Buscar por correo",
-					"event": "buscarClientePorNombre"		
-									}
+					"event": "buscarClientePorNombre"
+				}
 			]
-		},	
-		
-				{ "menuTitle": "Bodega",
-				"options":
-			[
+		},
+		{
+			"menuTitle": "Bodega",
+			"options": [
 				{
 					"label": "Registrar",
 					"event": "registrarBodega"
@@ -105,19 +100,39 @@
 					"event": "listarBodegas"
 				},
 				{
-					"label": "Borrar por correo",
-					"event": "eliminarClientePorCorreo"
+					"label": "Borrar por direccion",
+					"event": "eliminarBodegaPorDireccion"
 				},
-								{
-					"label": "Buscar por correo",
-					"event": "buscarClientePorNombre"		
-									}
+				{
+					"label": "Buscar por direccion",
+					"event": "buscarBodegaPorDireccion"
+				}
 			]
 		},
-		
-		{ "menuTitle": "Mantenimiento",
-		  "options":
-			[
+		{
+			"menuTitle": "Estante",
+			"options": [
+				{
+					"label": "Registrar",
+					"event": "registrarEstante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEstantes"
+				},
+				{
+					"label": "Borrar por direccion",
+					"event": "eliminarEstantePorDireccion"
+				},
+				{
+					"label": "Buscar por direccion",
+					"event": "buscarEstantePorDireccion"
+				}
+			]
+		},
+		{
+			"menuTitle": "Mantenimiento",
+			"options": [
 				{
 					"label": "Mostrar log Parranderos",
 					"event": "mostrarLogParranderos"
@@ -139,10 +154,10 @@
 					"event": "limpiarBD"
 				}
 			]
-		},		
-		{ "menuTitle": "Documentación",
-		  "options":
-			[
+		},
+		{
+			"menuTitle": "Documentación",
+			"options": [
 				{
 					"label": "Presentación general",
 					"event": "mostrarPresentacionGeneral"
@@ -168,16 +183,15 @@
 					"event": "mostrarJavadoc"
 				}
 			]
-		},		
-		{ "menuTitle": "Acerca de ...",
-		  "options":
-			[
+		},
+		{
+			"menuTitle": "Acerca de ...",
+			"options": [
 				{
 					"label": "Acerca de ...",
 					"event": "acercaDe"
 				}
 			]
-		}		
-		
+		}
 	]
 }

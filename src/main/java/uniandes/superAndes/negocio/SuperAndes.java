@@ -316,49 +316,60 @@ public class SuperAndes {
 	
 	
 	//--------------------------------------------------------------------------
-	// Estantes
+	// Estante
 	//--------------------------------------------------------------------------
-	public Proveedor adicionarProveedor(String nombre, String nit, String calificacion)
+	public Estante adicionarEstante( String nombreCategoria, String direccion, double peso, double volumen,String nombreSucursal, int nivelAbastecimiento) 
 	{
-		log.info("Adicionando proveedor: "+nombre);
-		Proveedor proveedor = pp.adicionarProveedor(nombre, nit, calificacion);
-		log.info("/Adicionando proveedor: "+nombre);
-		return proveedor;
+		log.info("Adicionando bodega con direccion : "+direccion);
+		 
+		
+		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
+		Categoria cat = darCategoriaPorNombre("PRUEBA");
+		if(cat==null)
+		{
+			cat =adicionarCategoria("PRUEBA");
+		}
+
+		
+		Estante estante = pp.adicionarEstante(cat.getId(), direccion, peso, volumen, idSucursal, nivelAbastecimiento);
+		log.info("/Adicionando bodega con direccion: "+direccion);
+		return estante;
 	}
 
 	/**
 	 * Elimina un Sucursal por su nombre
 	 * Adiciona entradas al log de la aplicación
-	 * @param nombre - El nombre del Sucursal a eliminar
+	 * @param direccion - El nombre del Sucursal a eliminar
 	 * @return El número de tuplas eliminadas
 	 */
-	public long eliminarProveedor(String nombre)
+	public long eliminarEstante(String direccion)
 	{
-		log.info ("EliminandoProveedor por nombre: " + nombre);
-		long resp = pp.eliminarProveedorPorNombre (nombre);		
-		log.info ("EliminandoProveedor por nombre: " + resp + " tuplas eliminadas");
+		log.info ("Eliminando Bodega por direccion: " + direccion);
+		long resp = pp.eliminarEstantePorDireccion(direccion);
+		log.info ("Eliminando Bodega por direccion: " + resp + " tuplas eliminadas");
 		return resp;
 	}
 
-	public Proveedor darProveedorPorNombre (String nombre) {
+	public Estante darEstantePorDireccion (String direccion) {
 
-		log.info ("Buscando Proveedor por nombre: " + nombre);
-		Proveedor resp = pp.darProveedorPorNombre(nombre);		
-		log.info ("\"Buscando Proveedor por nombre: " + resp );
+		log.info ("Buscando Bodega por direccion: " + direccion);
+		Estante resp = pp.darEstantePorDireccion(direccion);
+		log.info ("\"Buscando Bodega por direccion: " + resp );
 		return resp;
 	}
 
-	public List<VOProveedor> darVOProveedores ()
+	public List<VOEstante> darVOEstantes ()
 	{
-		log.info ("Generando los VO de Proveedores");        
-		List<VOProveedor> vOProveedor = new LinkedList<VOProveedor> ();
-		for (Proveedor tb : pp.darProveedores())
+		log.info ("Generando los VO de Estante");        
+		List<VOEstante> vOProveedor = new LinkedList<VOEstante> ();
+		for (Estante tb : pp.darEstantes())
 		{
 			vOProveedor.add(tb);
 		}
-		log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
+		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
 	}
+
 	
 	
 	
@@ -393,9 +404,9 @@ public class SuperAndes {
 	 */
 	public long eliminarBodega(String direccion)
 	{
-		log.info ("EliminandoProveedor por nombre: " + direccion);
+		log.info ("Eliminando Bodega por direccion: " + direccion);
 		long resp = pp.eliminarBodegaPorDireccion(direccion);
-		log.info ("EliminandoProveedor por nombre: " + resp + " tuplas eliminadas");
+		log.info ("Eliminando Bodega por direccion: " + resp + " tuplas eliminadas");
 		return resp;
 	}
 
