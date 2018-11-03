@@ -15,7 +15,7 @@ import com.google.gson.JsonObject;
 import uniandes.superAndes.persistencia.PersistenciaSuperAndes;
 
 
-public class SuperAndes {
+public class SuperAndes implements Runnable {
 
 	/* ****************************************************************
 	 * 			Constantes
@@ -122,7 +122,11 @@ public class SuperAndes {
 	{
 		log.info ("Generando los VO de Promociones");        
 		List<VOPromocion> voPromociones = new LinkedList<VOPromocion> ();
-		for (Promocion tb : pp.darPromociones())
+		List<Promocion> promos = pp.darPromociones();
+		log.info("Verificando las promociones finalizadas");
+		pp.verificarPromociones(promos);
+		log.info("/Verificando las promociones finalizadas");
+		for (Promocion tb : promos)
 		{
 			voPromociones.add(tb);
 		}
@@ -503,6 +507,12 @@ public class SuperAndes {
 		}
 		log.info ("Generando los VO de Proveedor: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		pp.verificarPromociones(pp.darPromociones());
 	}
 
 	

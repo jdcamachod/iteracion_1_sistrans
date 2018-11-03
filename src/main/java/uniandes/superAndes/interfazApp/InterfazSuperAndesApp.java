@@ -34,6 +34,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.Box;
@@ -435,6 +438,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						}
 						String resultado = "En registrar promocion\n\n";
 						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado+="\n Quedan "+superAndes.darProductoPorId(prom.getIdProducto()).getCantidad()+" productos disponibles para esta promocion";
 						resultado += "\n OperaciÛn terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
@@ -483,6 +487,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						}
 						String resultado = "En registrar promocion\n\n";
 						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado+="\n Quedan "+superAndes.darProductoPorId(prom.getIdProducto()).getCantidad()+" productos disponibles para esta promocion";
 						resultado += "\n OperaciÛn terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
@@ -535,6 +540,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						}
 						String resultado = "En registrar promocion\n\n";
 						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado+="\n Quedan "+superAndes.darProductoPorId(prom.getIdProducto()).getCantidad()+" productos disponibles para esta promocion";
 						resultado += "\n OperaciÛn terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
@@ -587,6 +593,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						}
 						String resultado = "En registrar promocion\n\n";
 						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado+="\n Quedan "+superAndes.darProductoPorId(prom.getIdProducto()).getCantidad()+" productos disponibles para esta promocion";
 						resultado += "\n OperaciÛn terminada";
 						panelDatos.actualizarInterfaz(resultado);
 					}
@@ -1836,17 +1843,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void acercaDe ()
 	{
 		String resultado = "\n\n ************************************\n\n";
-		resultado += " * Universidad	de	los	Andes	(Bogot√°	- Colombia)\n";
-		resultado += " * Departamento	de	Ingenier√≠a	de	Sistemas	y	Computaci√≥n\n";
-		resultado += " * Licenciado	bajo	el	esquema	Academic Free License versi√≥n 2.1\n";
+		resultado += " * Universidad	de	los	Andes	(Bogota	- Colombia)\n";
+		resultado += " * Departamento	de	Ingenier√≠a	de	Sistemas	y	Computacion\n";
+		resultado += " * Licenciado	bajo	el	esquema	Academic Free License version 2.1\n";
 		resultado += " * \n";		
 		resultado += " * Curso: isis2304 - Sistemas Transaccionales\n";
-		resultado += " * Proyecto: Parranderos Uniandes\n";
-		resultado += " * @version 1.0\n";
-		resultado += " * @author Germ√°n Bravo\n";
-		resultado += " * Julio de 2018\n";
+		resultado += " * Proyecto: Super Andes\n";
+		resultado += " * @version 2.0\n";
+		resultado += " * @author Juan Diego Camacho y Kevyn Steve Blanco\n";
+		resultado += " * Noviembre de 2018\n";
 		resultado += " * \n";
-		resultado += " * Revisado por: Claudia Jim√©nez, Christian Ariza\n";
 		resultado += "\n ************************************\n\n";
 
 		panelDatos.actualizarInterfaz(resultado);		
@@ -2036,6 +2042,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
 			InterfazSuperAndesApp interfaz = new InterfazSuperAndesApp( );
 			interfaz.setVisible( true );
+			
+			ScheduledExecutorService scheduler
+            = Executors.newSingleThreadScheduledExecutor();
+
+			Runnable task = new SuperAndes();
+			int initialDelay = 0;
+			int periodicDelay = 1;
+			scheduler.scheduleAtFixedRate(task, initialDelay, periodicDelay,
+            TimeUnit.DAYS
+    );
 		}
 		catch( Exception e )
 		{

@@ -43,7 +43,7 @@ import uniandes.superAndes.negocio.TipoProducto;
 
 
 
-public class PersistenciaSuperAndes {
+public class PersistenciaSuperAndes  {
 
 	/* ****************************************************************
 	 * 			Constantes
@@ -836,6 +836,28 @@ public class PersistenciaSuperAndes {
 	public List<Promocion> darPromociones ()
 	{
 		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
+	}
+	
+	public void verificarPromociones(List<Promocion> promos)
+	{
+		
+		for(Promocion promo:promos)
+		{
+			Date d = new Date();
+			
+			Date da = new Date(promo.getFechaFinal().getTime());
+			System.out.println(d);
+			System.out.println(da);
+			System.out.println(d.after(da));
+			if(d.after(da))
+			{
+				eliminarPromocion(promo.getId());
+			}
+			else if(darProductoPorId(promo.getIdProducto()).getCantidad()==0)
+			{
+				eliminarPromocion(promo.getId());
+			}
+		}
 	}
 
 

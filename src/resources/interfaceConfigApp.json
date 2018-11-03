@@ -140,15 +140,7 @@
 				{
 					"label": "Listar",
 					"event": "listarPromocion"
-				},
-				{
-					"label": "Borrar por correo",
-					"event": "eliminarClientePorCorreo"
-				},
-								{
-					"label": "Buscar por correo",
-					"event": "buscarClientePorNombre"		
-									}
+				}
 			]
 		},	
 		
