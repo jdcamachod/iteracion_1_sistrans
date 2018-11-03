@@ -206,6 +206,11 @@ public class PersistenciaSuperAndes  {
 	 * Atributo para el acceso a la tabla PROMOCION_PAQUETE de la base de datos
 	 */
 	private SQLPromocionPaquete sqlPromocionPaquete;
+	
+	/**
+	 * Atributo para el acceso a la tabla CARRITO de la base de datos
+	 */
+	private SQLCarritoCompras sqlCarritoCompras;
 
 
 	/* ****************************************************************
@@ -249,6 +254,7 @@ public class PersistenciaSuperAndes  {
 		tablas.add ("PROMOCIONES_FACTURAS");
 		tablas.add ("CLIENTES_SUCURSALES");
 		tablas.add("PROMOCION_PAQUETE");
+		tablas.add("CARRITO");
 
 	}
 	/**
@@ -556,6 +562,14 @@ public class PersistenciaSuperAndes  {
 	public String darTablaPromocionPaquete ()
 	{
 		return tablas.get (24);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de CarritoCompras
+	 */
+	public String darTablaCarrito ()
+	{
+		return tablas.get (25);
 	}
 
 
