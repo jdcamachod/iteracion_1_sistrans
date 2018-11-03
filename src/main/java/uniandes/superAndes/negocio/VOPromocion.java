@@ -24,6 +24,10 @@ public interface VOPromocion {
 	 */
 	public double getPrecio();
 	
+	/**
+	 * @return El identificador del producto
+	 */
+	public Long getIdProducto();
 	
 	/**
 	 * @return Una cadena de caracteres con la información de la promocion

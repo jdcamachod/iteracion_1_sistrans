@@ -42,10 +42,10 @@ class SQLPromocion {
 			this.pp = pp;
 		}
 		
-		public Long adicionarPromocion (PersistenceManager pm, long idPromocion, Date fechaInicial, Date fechaFinal, double precio, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY, Long idDescuentoPorcentaje) 
+		public Long adicionarPromocion (PersistenceManager pm, long idPromocion, Date fechaInicial, Date fechaFinal, double precio, Long idPague1Lleve2Porcentaje, Long idPagueNLleveM, Long idPagueXLleveY, Long idDescuentoPorcentaje, Long idProducto) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPromocion() + "(id, fechaInicial, fechaFinal, precio, pague1LleveSegPorcentaje, pagueNLleveM, pagueXLleveY, descuentoPorcentaje) values (?, ?, ?, ?,?, ?, ?, ?)");
-	        q.setParameters(idPromocion, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPromocion() + "(id, fechaInicial, fechaFinal, precio, pague1Lleve2Porcentaje, pagueNLleveM, pagueXLleveY, descuentoPorcentaje, idProducto) values (?, ?, ?, ?,?, ?, ?, ?,?)");
+	        q.setParameters(idPromocion, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje, idProducto);
 	        return (Long) q.executeUnique();
 		}
 
@@ -88,7 +88,14 @@ class SQLPromocion {
 		public List<Promocion> darPromociones (PersistenceManager pm)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPromocion());
-			q.setResultClass(Producto.class);
+			q.setResultClass(Promocion.class);
+			return (List<Promocion>) q.executeList();
+		}
+		
+		public List<Promocion> darPromocionesPorProducto(PersistenceManager pm, Long idProducto)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPromocion()+" WHERE idProducto = ?");
+			q.setResultClass(Promocion.class);
 			return (List<Promocion>) q.executeList();
 		}
 }

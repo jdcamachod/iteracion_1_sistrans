@@ -139,7 +139,7 @@
 				},
 				{
 					"label": "Listar",
-					"event": "listarClientes"
+					"event": "listarPromocion"
 				},
 				{
 					"label": "Borrar por correo",
@@ -156,7 +156,7 @@
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
+					"label": "Mostrar log superAndes",
 					"event": "mostrarLogParranderos"
 				},
 				{
@@ -164,7 +164,7 @@
 					"event": "mostrarLogDatanuecleus"
 				},
 				{
-					"label": "Limpiar log de parranderos",
+					"label": "Limpiar log de superAndes",
 					"event": "limpiarLogParranderos"
 				},
 				{

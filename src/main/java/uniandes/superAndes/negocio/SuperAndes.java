@@ -117,6 +117,18 @@ public class SuperAndes {
 		log.info ("Generando los VO de Sucursales: " + voSucursales.size() + " existentes");
 		return voSucursales;
 	}
+	
+	public List<VOPromocion> darVOPromociones ()
+	{
+		log.info ("Generando los VO de Promociones");        
+		List<VOPromocion> voPromociones = new LinkedList<VOPromocion> ();
+		for (Promocion tb : pp.darPromociones())
+		{
+			voPromociones.add(tb);
+		}
+		log.info ("Generando los VO de Promociones: " + voPromociones.size() + " existentes");
+		return voPromociones;
+	}
 
 	//--------------------------------------------------------------------------
 	// Proveedores
@@ -322,8 +334,49 @@ public class SuperAndes {
 		log.info("/Buscando producto por id");
 		double precio = prp -(prp*porcentaje)/100;
 		DescuentoPorcentaje descuentoPorcentaje = pp.adicionarDescuentoPorcentaje(porcentaje);
-		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, descuentoPorcentaje, null, null, precio);
+		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, descuentoPorcentaje, null, null, precio, idProducto);
 		log.info("/Adicionando promocion de tipo descuento porcentaje");
+		return promocion;
+		
+	}
+	
+	public Promocion adicionarPague1Lleve2Porcentaje(double porcentaje, Date fechaInicial, Date fechaFinal, Long idProducto)
+	{
+		log.info("Adicionando promocion de tipo descuento porcentaje en segundo articulo llevando 1 ");
+		log.info("Buscando producto por id");
+		double prp= pp.darProductoPorId(idProducto).getPrecioUnitario();
+		log.info("/Buscando producto por id");
+		double precio = prp +(prp*porcentaje)/100;
+		Pague1Lleve2Porcentaje pague1Lleve2 = pp.adicionarPague1Lleve2Porcentaje(porcentaje);
+		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, null, null, pague1Lleve2, precio, idProducto);
+		log.info("/Adicionando promocion de tipo descuento porcentaje en segundo articulo llevando 1");
+		return promocion;
+		
+	}
+	
+	public Promocion adicionarPagueNLleveM(int n,int m, Date fechaInicial, Date fechaFinal, Long idProducto)
+	{
+		log.info("Adicionando promocion de tipo pague n lleve m ");
+		log.info("Buscando producto por id");
+		double prp= pp.darProductoPorId(idProducto).getPrecioUnitario();
+		log.info("/Buscando producto por id");
+		double precio = n*prp;
+		PagueNLleveM pagueNLleveM = pp.adicionarPagueNLleveM(n, m);
+		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, pagueNLleveM, null, null, null, precio, idProducto);
+		log.info("/Adicionando promocion de tipo pague n lleve m");
+		return promocion;
+		
+	}
+	public Promocion adicionarPagueXLleveY(int x,int y, Date fechaInicial, Date fechaFinal, Long idProducto)
+	{
+		log.info("Adicionando promocion de tipo pague x lleve y ");
+		log.info("Buscando producto por id");
+		double prp= pp.darProductoPorId(idProducto).getPrecioUnidadMedida();
+		log.info("/Buscando producto por id");
+		double precio = x*prp;
+		PagueXLleveY paguexLlevey = pp.adicionarPagueXLleveY(x,y);
+		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, null, paguexLlevey, null, precio, idProducto);
+		log.info("/Adicionando promocion de tipo pague x lleve y");
 		return promocion;
 		
 	}

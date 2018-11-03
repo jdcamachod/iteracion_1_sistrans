@@ -52,7 +52,7 @@ class SQLPague1Lleve2Porcentaje {
 		 */
 		public long adicionarPague1Lleve2Porcentaje(PersistenceManager pm, Long idPague1Lleve2Porcentaje, double porcentaje ) 
 		{
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPague1Lleve2Porcentaje() + "(id, porcentaje) values (?, ?)");
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPague1Lleve2Porcentaje() + "(idPague1Lleve2Porcentaje, porcentaje) values (?, ?)");
 			q.setParameters(idPague1Lleve2Porcentaje, porcentaje);
 			return (long) q.executeUnique();
 		}

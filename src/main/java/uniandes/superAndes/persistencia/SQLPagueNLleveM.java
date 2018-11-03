@@ -50,7 +50,7 @@ class SQLPagueNLleveM {
 		 */
 		public long adicionarPagueNLleveM (PersistenceManager pm, Long idPagueNLleveM, double m , double n) 
 		{
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPagueNLleveM() + "(id, m,n) values (?, ?. ?)");
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaPagueNLleveM() + "(idPagueNLleveM, m,n) values (?, ?, ?)");
 			q.setParameters(idPagueNLleveM, m,n);
 			return (long) q.executeUnique();
 		}

@@ -78,6 +78,7 @@ import uniandes.superAndes.negocio.SuperAndes;
 import uniandes.superAndes.negocio.VOCliente;
 import uniandes.superAndes.negocio.VOEstante;
 import uniandes.superAndes.negocio.VOProducto;
+import uniandes.superAndes.negocio.VOPromocion;
 import uniandes.superAndes.negocio.VOProveedor;
 import uniandes.superAndes.negocio.VOSucursal;
 
@@ -249,7 +250,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 		else
 		{
-			log.info ( "Se aplica configuraciÃ³n indicada en el archivo de configuraciÃ³n" );
+			log.info ( "Se aplica configuracion indicada en el archivo de configuracion" );
 			titulo = guiConfig.get("title").getAsString();
 			alto= guiConfig.get("frameH").getAsInt();
 			ancho = guiConfig.get("frameW").getAsInt();
@@ -392,65 +393,217 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				"Escoja la promocion", JOptionPane.OK_CANCEL_OPTION);
 		if (res == JOptionPane.OK_OPTION) 
 		{
+			String tipoProm = (String) tipo.getSelectedItem();
 			JTextField dateInicialField = new JTextField(10);
 			JTextField dateFinalField = new JTextField(10);
-			myPanel = new JPanel(new GridLayout(4,2));
-			JTextField porcentajeField = new JTextField(10);
-			myPanel.add(new JLabel("porcentaje"));
-			myPanel.add(porcentajeField);
-			myPanel.add(new JLabel("Fecha inicio Promocion:"));
-			myPanel.add(dateInicialField);
-			myPanel.add(new JLabel("Fecha de finalización de la promocion:"));
-			myPanel.add(dateFinalField);
 			productos = new JComboBox<String>();
 			for(VOProducto p: superAndes.darVOProductos())
 			{
 				productos.addItem(p.getId()+": "+p.getNombre()+", $"+p.getPrecioUnitario());
 			}
-			myPanel.add(new JLabel("Seleccione el producto"));
-			myPanel.add(productos);
-			int result = JOptionPane.showConfirmDialog(null, myPanel, 
-					"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
-			
-
-			if (result == JOptionPane.OK_OPTION) {
-
-				String fechaIn = dateInicialField.getText();
-				String fechaFin = dateFinalField.getText();
-				double porcentaje  = Double.parseDouble(porcentajeField.getText());
-				String ac= (String) productos.getSelectedItem();
-				long id = Long.parseLong(ac.split(":")[0]);
-				Producto producto = superAndes.darProductoPorId(id);
-				
-
-				if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
-				{
-					Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
-					java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
-					Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
-					java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
-					Promocion prom = superAndes.adicionarDescuentoPorcentaje(porcentaje, sqlDateIn, sqlDateFin, producto.getId());
-					if (prom == null)
+			if(tipoProm.equals(TIPO1)) 
+			{
+				myPanel = new JPanel(new GridLayout(4,2));
+				JTextField porcentajeField = new JTextField(10);
+				myPanel.add(new JLabel("porcentaje"));
+				myPanel.add(porcentajeField);
+				myPanel.add(new JLabel("Fecha inicio Promocion:"));
+				myPanel.add(dateInicialField);
+				myPanel.add(new JLabel("Fecha de finalización de la promocion:"));
+				myPanel.add(dateFinalField);
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					String fechaIn = dateInicialField.getText();
+					String fechaFin = dateFinalField.getText();
+					double porcentaje  = Double.parseDouble(porcentajeField.getText());
+					String ac= (String) productos.getSelectedItem();
+					long id = Long.parseLong(ac.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(id);
+					if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
 					{
-						throw new Exception ("No se pudo crear la Promocion ");
+						Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
+						java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
+						Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+						java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
+						Promocion prom = superAndes.adicionarDescuentoPorcentaje(porcentaje, sqlDateIn, sqlDateFin, producto.getId());
+						if (prom == null)
+						{
+							throw new Exception ("No se pudo crear la Promocion ");
+						}
+						String resultado = "En registrar promocion\n\n";
+						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
 					}
-					String resultado = "En registrar promocion\n\n";
-					resultado += "Promocion adicionado exitosamente: " + prom;
-					resultado += "\n Operación terminada";
-					panelDatos.actualizarInterfaz(resultado);
-
+					else
+					{
+						panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
+					}
 
 				}
 				else
 				{
-					panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
-				}
-
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				} 
 			}
-			else
+			else if(tipoProm.equals(TIPO2))
 			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			} 
+				myPanel = new JPanel(new GridLayout(4,2));
+				JTextField porcentajeField = new JTextField(10);
+				myPanel.add(new JLabel("porcentaje de descuento para el segundo producto"));
+				myPanel.add(porcentajeField);
+				myPanel.add(new JLabel("Fecha inicio Promocion:"));
+				myPanel.add(dateInicialField);
+				myPanel.add(new JLabel("Fecha de finalización de la promocion:"));
+				myPanel.add(dateFinalField);
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					String fechaIn = dateInicialField.getText();
+					String fechaFin = dateFinalField.getText();
+					double porcentaje  = Double.parseDouble(porcentajeField.getText());
+					String ac= (String) productos.getSelectedItem();
+					long id = Long.parseLong(ac.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(id);
+					if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
+					{
+						Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
+						java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
+						Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+						java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
+						Promocion prom = superAndes.adicionarPague1Lleve2Porcentaje(porcentaje, sqlDateIn, sqlDateFin, producto.getId());
+						if (prom == null)
+						{
+							throw new Exception ("No se pudo crear la Promocion ");
+						}
+						String resultado = "En registrar promocion\n\n";
+						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					else
+					{
+						panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
+					}
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				} 
+			}
+			else if(tipoProm.equals(TIPO3))
+			{
+				myPanel = new JPanel(new GridLayout(5,2));
+				JTextField nP = new JTextField(10);
+				myPanel.add(new JLabel("Cantidad n de productos (Paga)"));
+				myPanel.add(nP);
+				JTextField mP = new JTextField(10);
+				myPanel.add(new JLabel("Cantidad m de productos (Lleva)"));
+				myPanel.add(mP);
+				myPanel.add(new JLabel("Fecha inicio Promocion:"));
+				myPanel.add(dateInicialField);
+				myPanel.add(new JLabel("Fecha de finalización de la promocion:"));
+				myPanel.add(dateFinalField);
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					String fechaIn = dateInicialField.getText();
+					String fechaFin = dateFinalField.getText();
+					int n = Integer.parseInt(nP.getText());
+					int m = Integer.parseInt(mP.getText());
+					String ac= (String) productos.getSelectedItem();
+					long id = Long.parseLong(ac.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(id);
+					if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
+					{
+						Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
+						java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
+						Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+						java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
+						Promocion prom = superAndes.adicionarPagueNLleveM(n,m, sqlDateIn, sqlDateFin, producto.getId());
+						if (prom == null)
+						{
+							throw new Exception ("No se pudo crear la Promocion ");
+						}
+						String resultado = "En registrar promocion\n\n";
+						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					else
+					{
+						panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
+					}
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				} 
+			}
+			else if(tipoProm.equals(TIPO4))
+			{
+				myPanel = new JPanel(new GridLayout(5,2));
+				JTextField nP = new JTextField(10);
+				myPanel.add(new JLabel("Cantidad x del producto (Paga)"));
+				myPanel.add(nP);
+				JTextField mP = new JTextField(10);
+				myPanel.add(new JLabel("Cantidad y del producto (Lleva)"));
+				myPanel.add(mP);
+				myPanel.add(new JLabel("Fecha inicio Promocion:"));
+				myPanel.add(dateInicialField);
+				myPanel.add(new JLabel("Fecha de finalización de la promocion:"));
+				myPanel.add(dateFinalField);
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Ingrese los datos de la promocion", JOptionPane.OK_CANCEL_OPTION);
+				if (result == JOptionPane.OK_OPTION) {
+					String fechaIn = dateInicialField.getText();
+					String fechaFin = dateFinalField.getText();
+					int n = Integer.parseInt(nP.getText());
+					int m = Integer.parseInt(mP.getText());
+					String ac= (String) productos.getSelectedItem();
+					long id = Long.parseLong(ac.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(id);
+					if (!fechaIn.isEmpty() && !fechaFin.isEmpty())
+					{
+						Date utilDateIn = new SimpleDateFormat("dd/MM/yyyy").parse(fechaIn);
+						java.sql.Date sqlDateIn = new java.sql.Date(utilDateIn.getTime());
+						Date utilDateFin = new SimpleDateFormat("dd/MM/yyyy").parse(fechaFin);
+						java.sql.Date sqlDateFin = new java.sql.Date(utilDateFin.getTime());
+						Promocion prom = superAndes.adicionarPagueXLleveY(n,m, sqlDateIn, sqlDateFin, producto.getId());
+						if (prom == null)
+						{
+							throw new Exception ("No se pudo crear la Promocion ");
+						}
+						String resultado = "En registrar promocion\n\n";
+						resultado += "Promocion adicionado exitosamente: " + prom;
+						resultado += "\n Operación terminada";
+						panelDatos.actualizarInterfaz(resultado);
+					}
+					else
+					{
+						panelDatos.actualizarInterfaz("Ningun campo puede ser vacio o nulo");
+					}
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+				} 
+			}
+			
+			
+			
 		}
 		else
 		{
@@ -466,6 +619,26 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 		
+	}
+	
+	
+	public void listarPromocion( )
+	{
+		try 
+		{
+			List <VOPromocion> lista = superAndes.darVOPromociones();
+
+			String resultado = "En Promociones";
+			resultado +=  "\n" + listarVO(lista);
+			panelDatos.actualizarInterfaz(resultado);
+			resultado += "\n Operación terminada";
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 
 	/**

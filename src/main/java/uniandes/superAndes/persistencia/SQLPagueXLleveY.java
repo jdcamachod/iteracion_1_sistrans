@@ -55,7 +55,7 @@ class SQLPagueXLleveY {
 		 */
 		public long adicionarPagueXLleveY (PersistenceManager pm, Long idPagueXLleveY, int x, int y) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPagueXLleveY() + "(id, x, y) values (?, ?, ?)");
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaPagueXLleveY() + "(idPagueXLleveY, x, y) values (?, ?, ?)");
 	        q.setParameters(idPagueXLleveY, x, y);
 	        return (long) q.executeUnique();
 		}

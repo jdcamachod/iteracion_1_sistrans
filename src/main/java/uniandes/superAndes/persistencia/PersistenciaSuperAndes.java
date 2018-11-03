@@ -170,7 +170,7 @@ public class PersistenciaSuperAndes {
 	/**
 	 * Atributo para el acceso a la tabla PRODUCTOS_PROMOCIONES de la base de datos
 	 */
-	private SQLProductosPromociones sqlProductosPromociones;
+	//private SQLProductosPromociones sqlProductosPromociones;
 
 	/**
 	 * Atributo para el acceso a la tabla PROMOCION de la base de datos
@@ -244,7 +244,7 @@ public class PersistenciaSuperAndes {
 		tablas.add ("PRODUCTOS_BODEGA");
 		tablas.add ("PRODUCTOS_ESTANTE");
 		tablas.add ("PRODUCTOS_FACTURA");
-		tablas.add ("PROMOCIONES_PRODUCTOS");
+		//tablas.add ("PROMOCIONES_PRODUCTOS");
 		tablas.add ("PRODUCTOS_PROVEEDOR");
 		tablas.add ("PROMOCIONES_FACTURAS");
 		tablas.add ("CLIENTES_SUCURSALES");
@@ -344,7 +344,7 @@ public class PersistenciaSuperAndes {
 		sqlProductosBodegas = new SQLProductosBodegas(this);
 		sqlProductosEstantes = new SQLProductosEstantes(this);
 		sqlProductosFacturas = new SQLProductosFacturas(this);
-		sqlProductosPromociones = new SQLProductosPromociones(this);
+		//sqlProductosPromociones = new SQLProductosPromociones(this);
 		sqlPromocionesFacturas = new SQLPromocionesFacturas(this);
 		sqlPromocionPaquete= new SQLPromocionPaquete(this);
 		sqlSucursalesClientes= new SQLSucursalesClientes(this);
@@ -527,11 +527,11 @@ public class PersistenciaSuperAndes {
 
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de ProductosPromociones
-	 */
+	 *//*
 	public String darTablaProductosPromociones ()
 	{
 		return tablas.get (22);
-	}
+	}*/
 
 
 	/**
@@ -539,7 +539,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPromocionesFacturas ()
 	{
-		return tablas.get (23);
+		return tablas.get (22);
 	}
 
 	/**
@@ -547,7 +547,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaSucursalesClientes ()
 	{
-		return tablas.get (24);
+		return tablas.get (23);
 	}
 
 	/**
@@ -555,7 +555,7 @@ public class PersistenciaSuperAndes {
 	 */
 	public String darTablaPromocionPaquete ()
 	{
-		return tablas.get (25);
+		return tablas.get (24);
 	}
 
 
@@ -831,6 +831,11 @@ public class PersistenciaSuperAndes {
 	public List<Sucursal> darSucursales ()
 	{
 		return sqlSucursal.darSucursales(pmf.getPersistenceManager());
+	}
+	
+	public List<Promocion> darPromociones ()
+	{
+		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
 	}
 
 
@@ -1497,7 +1502,91 @@ public class PersistenciaSuperAndes {
 			long tuplasInsertadas = sqlDescuentoPorcentaje.adicionarDescuentoPorcentaje(pm, id, porcentaje);
 			tx.commit();
 			log.trace("Insercion de la promocion descuento porcentaje" + id + ": "+ tuplasInsertadas+" tuplas insertadas");
-			return new DescuentoPorcentaje(0, new Date(), new Date(), 0, porcentaje, id);
+			return new DescuentoPorcentaje(0, new Date(), new Date(), 0, porcentaje, id, null);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public Pague1Lleve2Porcentaje adicionarPague1Lleve2Porcentaje(double porcentaje)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlPague1Lleve2Porcentaje.adicionarPague1Lleve2Porcentaje(pm, id, porcentaje);
+			tx.commit();
+			log.trace("Insercion de la promocion pague 1 lleve 2 por menor precio" + id + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new Pague1Lleve2Porcentaje(0, new Date(), new Date(), 0, id, porcentaje, null);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public PagueNLleveM adicionarPagueNLleveM(int n,int m)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlPagueNLleveM.adicionarPagueNLleveM(pm, id, m, n);
+			tx.commit();
+			log.trace("Insercion de la promocion pague n lleve m" + id + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new PagueNLleveM(0, new Date(), new Date(), 0, id, m, n, null);
+
+		}
+		catch(Exception e)
+		{
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public PagueXLleveY adicionarPagueXLleveY(int x,int y)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			long tuplasInsertadas = sqlPagueXLleveY.adicionarPagueXLleveY(pm, id, x, y);
+			tx.commit();
+			log.trace("Insercion de la promocion pague x lleve y" + id + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new PagueXLleveY(0, new Date(), new Date(), 0, id, x, y, null);
 
 		}
 		catch(Exception e)
@@ -1525,7 +1614,7 @@ public class PersistenciaSuperAndes {
 	 * @param pague1Lleve2Porcentaje tipo de promocion
 	 * @return la promocion junto con su tipo
 	 */
-	public Promocion adicionarPromocion (Date fechaInicial, Date fechaFinal,PagueNLleveM pagueNLleveM, DescuentoPorcentaje descuentoPorcentaje, PagueXLleveY pagueXLleveY , Pague1Lleve2Porcentaje pague1Lleve2Porcentaje, double precio  ) {
+	public Promocion adicionarPromocion (Date fechaInicial, Date fechaFinal,PagueNLleveM pagueNLleveM, DescuentoPorcentaje descuentoPorcentaje, PagueXLleveY pagueXLleveY , Pague1Lleve2Porcentaje pague1Lleve2Porcentaje, double precio, Long idProducto  ) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
@@ -1537,36 +1626,36 @@ public class PersistenciaSuperAndes {
 			Long idPagueXLleveY = null;
 			Long idDescuentoPorcentaje = null;
 			long id = nextval ();
-			long tipoPromocion;
+			
 			String elTipoEs = "";
 
 			Promocion laPromocion = null ;
 			if(pagueNLleveM != null) {
 				elTipoEs = "pagueNLleveM";
-				idPagueNLleveM = pagueNLleveM.getId();
-				tipoPromocion = sqlPagueNLleveM.adicionarPagueNLleveM(pm, idPagueNLleveM, pagueNLleveM.getM(), pagueNLleveM.getN());
-				laPromocion = new PagueNLleveM(id, fechaInicial, fechaFinal, precio, idPagueNLleveM, pagueNLleveM.getM(), pagueNLleveM.getN());
+				idPagueNLleveM = pagueNLleveM.getIdPagueNLleveM();
+				
+				laPromocion = new PagueNLleveM(id, fechaInicial, fechaFinal, precio, idPagueNLleveM, pagueNLleveM.getM(), pagueNLleveM.getN(), idProducto);
 			}else if (pague1Lleve2Porcentaje!= null ) {
 				elTipoEs = "pague1Lleve2Porcentaje";
-				idPague1Lleve2Porcentaje = pague1Lleve2Porcentaje.getId();
-				tipoPromocion = sqlPague1Lleve2Porcentaje.adicionarPague1Lleve2Porcentaje(pm, idPague1Lleve2Porcentaje, pague1Lleve2Porcentaje.getPorcentaje2());
-				laPromocion = new Pague1Lleve2Porcentaje(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, pague1Lleve2Porcentaje.getPorcentaje2());
+				idPague1Lleve2Porcentaje = pague1Lleve2Porcentaje.getIdPague1Lleve2Porcentaje();
+				
+				laPromocion = new Pague1Lleve2Porcentaje(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, pague1Lleve2Porcentaje.getPorcentaje2(), idProducto);
 			}
 			else if (pagueXLleveY!= null ) {
 				elTipoEs = "pagueXLleveY";
-				idPagueXLleveY = pagueXLleveY.getId();
-				tipoPromocion = sqlPagueXLleveY.adicionarPagueXLleveY(pm, idPagueXLleveY, pagueXLleveY.getX(), pagueXLleveY.getY());
-				laPromocion = new PagueXLleveY(id, fechaInicial, fechaFinal, precio, idPagueXLleveY, pagueXLleveY.getX(), pagueXLleveY.getY());
+				idPagueXLleveY = pagueXLleveY.getIdPagueXLleveY();
+				
+				laPromocion = new PagueXLleveY(id, fechaInicial, fechaFinal, precio, idPagueXLleveY, pagueXLleveY.getX(), pagueXLleveY.getY(), idProducto);
 			}else if(descuentoPorcentaje != null) {
 				elTipoEs = "descuentoPorcentaje";
 				idDescuentoPorcentaje = descuentoPorcentaje.getIdDescuentoPorcentaje();
-				laPromocion = new DescuentoPorcentaje(id, fechaInicial, fechaFinal, precio, descuentoPorcentaje.getPorcentaje(), idDescuentoPorcentaje);
+				laPromocion = new DescuentoPorcentaje(id, fechaInicial, fechaFinal, precio, descuentoPorcentaje.getPorcentaje(), idDescuentoPorcentaje, idProducto);
 			}
 			else {
-				tipoPromocion = 0;
+				
 				laPromocion = null;	
 			}
-			long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje);
+			long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje, idProducto);
 			tx.commit();
 
 			log.trace ("Inserción de promocion : " + id + ": " + tuplasInsertadas + " tuplas insertadas");
