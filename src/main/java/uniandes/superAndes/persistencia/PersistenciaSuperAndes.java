@@ -211,6 +211,11 @@ public class PersistenciaSuperAndes  {
 	 * Atributo para el acceso a la tabla CARRITO de la base de datos
 	 */
 	private SQLCarritoCompras sqlCarritoCompras;
+	
+	/**
+	 * Atributo para el acceso a la tabla CARRITO de la base de datos
+	 */
+	private SQLCarritoProductos sqlCarritoProductos;
 
 
 	/* ****************************************************************
@@ -255,6 +260,7 @@ public class PersistenciaSuperAndes  {
 		tablas.add ("CLIENTES_SUCURSALES");
 		tablas.add("PROMOCION_PAQUETE");
 		tablas.add("CARRITO");
+		tablas.add("CARRITO_PRODUCTOS");
 
 	}
 	/**
@@ -354,6 +360,8 @@ public class PersistenciaSuperAndes  {
 		sqlPromocionesFacturas = new SQLPromocionesFacturas(this);
 		sqlPromocionPaquete= new SQLPromocionPaquete(this);
 		sqlSucursalesClientes= new SQLSucursalesClientes(this);
+		sqlCarritoCompras = new SQLCarritoCompras(this);
+		sqlCarritoProductos = new SQLCarritoProductos(this);
 		sqlUtil = new SQLUtil(this);
 	}
 
@@ -570,6 +578,14 @@ public class PersistenciaSuperAndes  {
 	public String darTablaCarrito ()
 	{
 		return tablas.get (25);
+	}
+	
+	/**
+	 * @return La cadena de caracteres con el nombre de la tabla de CarritoCompras
+	 */
+	public String darTablaCarritoProductos ()
+	{
+		return tablas.get (26);
 	}
 
 

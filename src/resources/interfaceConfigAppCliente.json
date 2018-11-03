@@ -1,0 +1,143 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar": [
+		
+		
+		
+		{
+			"menuTitle": "Cliente",
+			"options": [
+				{
+					"label": "Informacion",
+					"event": "mostrarCliente"
+				},
+				{
+					"label": "Mostrar facturas",
+					"event": "mostrarFacturas"
+				}
+			]
+		},
+		{
+			"menuTitle": "Carrito",
+			"options": [
+				{
+					"label": "Solicitar",
+					"event": "solicitarCarrito"
+				},
+				{
+					"label": "Devolver Producto",
+					"event": "devolverProducto"
+				},
+				{
+					"label": "Abandonar carrito",
+					"event": "abandonarCarrito"
+				},
+				{
+					"label": "Buscar por direccion",
+					"event": "buscarBodegaPorDireccion"
+				}
+			]
+		},
+		{
+			"menuTitle": "Estante",
+			"options": [
+				{
+					"label": "Registrar",
+					"event": "registrarEstante"
+				},
+				{
+					"label": "Listar",
+					"event": "listarEstantes"
+				},
+				{
+					"label": "Borrar por direccion",
+					"event": "eliminarEstantePorDireccion"
+				},
+				{
+					"label": "Buscar por direccion",
+					"event": "buscarEstantePorDireccion"
+				}
+			]
+		},
+		{ "menuTitle": "Promocion",
+				"options":
+			[
+				{
+					"label": "Registrar",
+					"event": "registrarPromocion"
+				},
+				{
+					"label": "Listar",
+					"event": "listarPromocion"
+				}
+			]
+		},	
+		
+		{ "menuTitle": "Mantenimiento",
+		  "options":
+			[
+				{
+					"label": "Mostrar log superAndes",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Mostrar log datanucleus",
+					"event": "mostrarLogDatanuecleus"
+				},
+				{
+					"label": "Limpiar log de superAndes",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},
+		{
+			"menuTitle": "Documentación",
+			"options": [
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},
+		{
+			"menuTitle": "Acerca de ...",
+			"options": [
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}
+	]
+}
