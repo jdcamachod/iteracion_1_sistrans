@@ -592,6 +592,7 @@ public class SuperAndes implements Runnable {
 			List<CarritoCompras> carritos = pp.darCarritosSinClientes();
 			CarritoCompras carrito = null;
 			java.util.Date fecha = new java.util.Date();
+			System.out.println(carritos.isEmpty());
 			if(carritos==null || carritos.isEmpty())
 			{
 				carrito = pp.adicionarCarrito(idCliente, fecha);
@@ -621,6 +622,33 @@ public class SuperAndes implements Runnable {
 		CarritoCompras resp = pp.darCarritoPorCliente(idCliente);		
 		log.info ("\"Buscando carrito por idCliente: " + resp );
 		return  resp;
+	}
+	
+	public void vaciarCarritosAbandonados()
+	{
+		System.out.println("revisando carritos abandonados");
+		for(CarritoCompras carrito: pp.darCarritosSinClientes())
+		{
+		
+			System.out.println(darProductosPorCarrito(carrito.getId()).isEmpty());
+			for(Producto producto: darProductosPorCarrito(carrito.getId()))
+			{
+				CarritoProductos relacion = darCarritoProducto(producto.getId(), carrito.getId());
+				boolean eliminado= eliminarProductoCarrito(carrito.getId(), producto.getId());
+				
+				if(eliminado)
+				{
+					
+					
+					devolverCantidadEstante(relacion.getCantidad(), producto.getId(), relacion.getIdEstante());
+					System.out.println("Se elimino el producto "+producto.getNombre()+ " del carrito "+carrito.getId());
+				}
+				else {
+					System.out.println("ocurrio un error eliminando los productos de un carrito");
+				}
+			}
+		}
+		
 	}
 	
 	public CarritoProductos adicionarProductoACarrito(Producto producto, Estante estante, int cantidad, CarritoCompras carrito)
@@ -693,6 +721,15 @@ public class SuperAndes implements Runnable {
 		return pp.darCarritoProducto(idCarrito, idProducto);
 	}
 	
+	public List<Factura> darFacturasPorCliente(Long idCliente)
+	{
+		log.info("Consultando las facturas por cliente "+idCliente );
+		List<Factura> facturas =pp.darFacturasPorCliente(idCliente);
+		log.info("/Consultando las facturas por cliente "+idCliente );
+		return facturas;
+	}
+	
+	
 	public Factura adicionarFactura( java.util.Date fecha, double costoTotal, Long cliente, Long sucursal) 
 	{
 		log.info("Adicionando factura con cliente : "+cliente+ " y fecha: "+fecha);
@@ -706,6 +743,7 @@ public class SuperAndes implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		pp.verificarPromociones(pp.darPromociones());
+		vaciarCarritosAbandonados();
 	}
 
 

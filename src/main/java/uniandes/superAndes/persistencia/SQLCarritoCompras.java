@@ -138,7 +138,7 @@ public class SQLCarritoCompras {
 	 */
 	public List<CarritoCompras> darCarritosSinCliente(PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM "+pp.darTablaCarrito()+" WHERE idCliente IS NULL");
+		Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO WHERE idCliente IS NULL");
 		q.setResultClass(CarritoCompras.class);
 		return (List<CarritoCompras>)q.executeList();
 	}

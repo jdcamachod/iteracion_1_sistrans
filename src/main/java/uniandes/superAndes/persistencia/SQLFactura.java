@@ -100,4 +100,12 @@ class SQLFactura {
 		q.setResultClass(Factura.class);
 		return (List<Factura>) q.executeList();
 	}
+	
+	public List<Factura> darFacturasPorCliente(PersistenceManager pm, Long idCliente)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() +" WHERE cliente = ?");
+		q.setParameters(idCliente);
+		q.setResultClass(Factura.class);
+		return (List<Factura>) q.executeList();
+	}
 }

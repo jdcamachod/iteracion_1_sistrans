@@ -2065,7 +2065,17 @@ public class PersistenciaSuperAndes  {
 		Transaction tx = pm.currentTransaction();
 		try {
 			tx.begin();
-			sqlCarritoCompras.asignarCliente(pm, idCliente, fecha, id);
+			if(fecha!=null)
+			{
+				java.sql.Date date = new java.sql.Date(fecha.getTime());
+				sqlCarritoCompras.asignarCliente(pm, idCliente, date, id);
+			}
+			else
+			{
+				sqlCarritoCompras.asignarCliente(pm, idCliente, null, id);
+			}
+			
+			
 			tx.commit();
 			log.trace("Asignacion del cliente "+idCliente+" al carrito "+ id);
 			return new CarritoCompras(id, idCliente, fecha);
@@ -2264,6 +2274,14 @@ public class PersistenciaSuperAndes  {
 			}
 			pm.close();
 		}
+	}
+	
+	public List<Factura> darFacturasPorCliente(Long cliente)
+	{
+		
+		List<Factura> facturas = new LinkedList<Factura>();
+		facturas = sqlFactura.darFacturasPorCliente(pmf.getPersistenceManager(), cliente);
+		return facturas;
 	}
 
 

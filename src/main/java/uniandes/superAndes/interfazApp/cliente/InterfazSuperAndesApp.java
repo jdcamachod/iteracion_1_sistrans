@@ -626,6 +626,30 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 					+"\nDatos del cliente: "+cliente.getNombre()+", "+cliente.getCorreoElectronico());
 		}
 	}
+	
+	public void mostrarFacturas()
+	{
+		int i =0;
+		for(Factura fac: superAndes.darFacturasPorCliente(cliente.getId()))
+		{
+			panelDatos.actualizarInterfaz("------------------------------------------------------------------"
+					+ "\nFactura #"+i+" \n"
+					+ "Datos de la compra \n"
+					+ "fecha: "+ fac.getFecha()
+					+"\nCosto Total: "+fac.getCostoTotal()
+					+"\nSucursal de la compra: "+fac.getSucursal()
+					+"\nDatos del cliente: "+cliente.getNombre()+", "+cliente.getCorreoElectronico());
+		}
+	}
+	
+	public void abandonarCarrito()
+	{
+		superAndes.eliminarClienteCarrito(carrito);
+		panelDatos.actualizarInterfaz("Se ha eliminado el cliente del carrito");
+		carrito = null;
+	}
+	
+	
 
 
 	
@@ -683,18 +707,23 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 					}
 					else
 					{
-						System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
-						superAndes.restarCantidadEstante(cant, producto.getId(), estante.getId());
-						CarritoProductos relacion = superAndes.adicionarProductoACarrito(producto, estante, cant, carrito);
-						panelDatos.actualizarInterfaz("Se agrega el producto "+producto.getNombre()+" al carrito "+carrito.getId()+ " tomado desde el estante "+estante.getDireccion());
-						System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
-						
-						//TODO Deberia verificarse todos los estantes al final
 						if(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad()<=0)
 						{
-							superAndes.eliminarProductoEstantes(estante.getId(), producto.getId());
-							panelDatos.actualizarInterfaz("Se elimino el producto "+producto.getNombre()+" del estante "+estante.getDireccion()+" ya que este estaba vacio");
+							
+							panelDatos.actualizarInterfaz("En este momento este producto no está disponible, ya que no quedan unidades disponibles");
 						}
+						else
+						{
+							System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
+							superAndes.restarCantidadEstante(cant, producto.getId(), estante.getId());
+							CarritoProductos relacion = superAndes.adicionarProductoACarrito(producto, estante, cant, carrito);
+							panelDatos.actualizarInterfaz("Se agrega el producto "+producto.getNombre()+" al carrito "+carrito.getId()+ " tomado desde el estante "+estante.getDireccion());
+							System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
+						}
+						
+						
+						//TODO Deberia verificarse todos los estantes al final
+						
 					}
 					
 				}
@@ -716,45 +745,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	
 	 
 
-	/**
-	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
-	 */
-	public void buscarProductoPorNombre( )
-	{
-		try 
-		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del producto?", "Buscar Producto por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
-			{
-				List<Producto> producto = superAndes.darProductosPorNombre(nombre);
-				String resultado = "En buscar Producto por nombre\n\n";
-				if (producto != null)
-				{
-					resultado += "La Proveedor es: \n" ;
-					for(VOProducto pr: producto)
-					{
-						resultado +=pr+"\n";
-					}
-				}
-				else
-				{
-					resultado += "Un Producto con nombre: " + nombre + " NO EXISTE\n";    				
-				}
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
-		} 
-		catch (Exception e) 
-	   {
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
+	
 	/* ****************************************************************
 	 * 			CRUD de Cliente
 	 * ****************************************************************
@@ -1423,9 +1414,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 			Runnable task = new SuperAndes();
 			int initialDelay = 0;
-			int periodicDelay = 1;
+			int periodicDelay = 60;
 			scheduler.scheduleAtFixedRate(task, initialDelay, periodicDelay,
-            TimeUnit.DAYS
+            TimeUnit.SECONDS
     );
 		}
 		catch( Exception e )
