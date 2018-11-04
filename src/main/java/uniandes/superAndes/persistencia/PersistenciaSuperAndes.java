@@ -27,6 +27,7 @@ import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
+import uniandes.superAndes.negocio.Factura;
 import uniandes.superAndes.negocio.OrdenPedido;
 import uniandes.superAndes.negocio.OrdenesProductos;
 import uniandes.superAndes.negocio.Pague1Lleve2Porcentaje;
@@ -2223,6 +2224,35 @@ public class PersistenciaSuperAndes  {
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
+	public Factura adicionarFactura(Date fecha, double costoTotal, Long cliente, Long sucursal)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			java.sql.Date date = new java.sql.Date(fecha.getTime());
+			long tuplasInsertadas = sqlFactura.adicionarFactura(pm, id, date, costoTotal, cliente, sucursal);
+			tx.commit();
+			log.trace("Insercion de la factura " + id + ", fecha "+date+" : "+ tuplasInsertadas+" tuplas insertadas");
+			return new Factura(id, fecha, costoTotal, cliente, sucursal);
+
+		}
+		catch(Exception e)
+		{
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}

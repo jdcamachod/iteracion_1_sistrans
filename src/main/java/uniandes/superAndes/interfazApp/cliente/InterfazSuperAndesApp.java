@@ -76,6 +76,7 @@ import uniandes.superAndes.negocio.VOBodega;
 import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
+import uniandes.superAndes.negocio.Factura;
 import uniandes.superAndes.negocio.Persona;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
@@ -592,7 +593,38 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 	public void pagarCompra()
 	{
-		
+		List<Producto> productos = superAndes.darProductosPorCarrito(carrito.getId());
+		if(carrito == null)
+		{
+			panelDatos.actualizarInterfaz("No tiene un carrito de compras");
+		}
+		else if(productos == null || productos.isEmpty())
+		{
+			panelDatos.actualizarInterfaz("No tiene productos que llevar");
+		}
+		else 
+		{
+			Date fecha = new Date();
+			double costoTotal =0;
+			for(Producto p: productos)
+			{
+				
+				CarritoProductos relacion = superAndes.darCarritoProducto(p.getId(), carrito.getId());
+				int cantidad = relacion.getCantidad();
+				superAndes.restarCantidadProductos(cantidad, p.getId());
+				costoTotal += cantidad*p.getPrecioUnitario();
+				superAndes.eliminarProductoCarrito(carrito.getId(), p.getId());	
+			}
+			 superAndes.eliminarClienteCarrito(carrito);
+			 carrito = null;
+			Factura factura = superAndes.adicionarFactura(fecha, costoTotal, cliente.getId(), sucursal.getId());
+			panelDatos.actualizarInterfaz("Compra realizada con exito \n"
+					+ "Datos de la compra \n"
+					+ "fecha: "+ fecha
+					+"\nCosto Total: "+costoTotal
+					+"\nSucursal de la compra: "+sucursal.getNombre()
+					+"\nDatos del cliente: "+cliente.getNombre()+", "+cliente.getCorreoElectronico());
+		}
 	}
 
 

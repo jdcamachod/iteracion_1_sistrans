@@ -586,23 +586,32 @@ public class SuperAndes implements Runnable {
 
 	public CarritoCompras solicitarCarrito(Long idCliente)
 	{
-		log.info("Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
-		List<CarritoCompras> carritos = pp.darCarritosSinClientes();
-		CarritoCompras carrito = null;
-		java.util.Date fecha = new java.util.Date();
-		if(carritos==null || carritos.isEmpty())
-		{
-			carrito = pp.adicionarCarrito(idCliente, fecha);
-		}
-		else {
-			carrito = carritos.get(0);
-			
-			long id = carrito.getId(); 
-			pp.solicitarCarrito(fecha, idCliente, id);
-			carrito = pp.darCarritoPorId(id);
-			
-		}
-		log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+	
+		
+			log.info("Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+			List<CarritoCompras> carritos = pp.darCarritosSinClientes();
+			CarritoCompras carrito = null;
+			java.util.Date fecha = new java.util.Date();
+			if(carritos==null || carritos.isEmpty())
+			{
+				carrito = pp.adicionarCarrito(idCliente, fecha);
+			}
+			else {
+				carrito = carritos.get(0);
+				
+				long id = carrito.getId(); 
+				pp.solicitarCarrito(fecha, idCliente, id);
+				carrito = pp.darCarritoPorId(id);
+				
+			}
+			log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+			return carrito;
+		
+		
+	}
+	public CarritoCompras eliminarClienteCarrito(CarritoCompras carrito)
+	{
+		carrito = pp.solicitarCarrito(null, null, carrito.getId());
 		return carrito;
 	}
 	
@@ -682,6 +691,16 @@ public class SuperAndes implements Runnable {
 	public CarritoProductos darCarritoProducto(Long idProducto, Long idCarrito)
 	{
 		return pp.darCarritoProducto(idCarrito, idProducto);
+	}
+	
+	public Factura adicionarFactura( java.util.Date fecha, double costoTotal, Long cliente, Long sucursal) 
+	{
+		log.info("Adicionando factura con cliente : "+cliente+ " y fecha: "+fecha);
+
+
+		Factura factura = pp.adicionarFactura(fecha, costoTotal, cliente, sucursal);
+		log.info("/Adicionando factura con cliente : "+cliente+ " y fecha: "+fecha);
+		return factura;
 	}
 	@Override
 	public void run() {
