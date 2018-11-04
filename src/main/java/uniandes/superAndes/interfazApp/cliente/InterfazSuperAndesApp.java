@@ -590,6 +590,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	public void pagarCompra()
+	{
+		
+	}
 
 
 	

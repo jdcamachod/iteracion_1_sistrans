@@ -2103,6 +2103,11 @@ public class PersistenciaSuperAndes  {
 		sqlProductosEstantes.restarCantidad(pmf.getPersistenceManager(), cantidad, idProducto, idEstante);
 	}
 	
+	public void restarCantidadProductos(int cantidad, Long idProducto)
+	{
+		sqlProducto.restarCantidad(pmf.getPersistenceManager(), cantidad, idProducto);
+	}
+	
 	public void devolverCantidadEstante(int cantidad, Long idProducto, Long idEstante)
 	{
 		sqlProductosEstantes.devolverCantidad(pmf.getPersistenceManager(), cantidad, idProducto, idEstante);

@@ -18,6 +18,11 @@
 					"label": "Mostrar facturas",
 					"event": "mostrarFacturas"
 				}
+				,
+				{
+					"label": "Pagar la compra",
+					"event": "pagarCompra"
+				}
 			]
 		},
 		{

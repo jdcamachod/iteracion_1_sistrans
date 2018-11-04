@@ -27,8 +27,22 @@ public class Factura implements VOFactura {
 	/**
 	 * Identificador del cliente que tiene la factura
 	 */
-	private long idCliente;
+	private Long cliente;
 	
+	/**
+	 * Indentificador de la sucursal
+	 */
+	private Long sucursal;
+	
+	
+	public Factura()
+	{
+		this.id = 0;
+		this.fecha = new Date();
+		this.costoTotal=0;
+		this.cliente = null;
+		this.sucursal = null;
+	}
 	/**
 	 * Constructor con valores para crear la factura
 	 * @param id Identificador a asignar
@@ -36,12 +50,13 @@ public class Factura implements VOFactura {
 	 * @param costoTotal costo total a asignar
 	 * @param idCliente identificador del cliente a asignar
 	 */
-	public Factura(long id, Date fecha, double costoTotal, long idCliente) {
+	public Factura(long id, Date fecha, double costoTotal, Long cliente, Long sucursal) {
 		
 		this.id = id;
 		this.fecha = fecha;
 		this.costoTotal = costoTotal;
-		this.idCliente = idCliente;
+		this.cliente = cliente;
+		this.sucursal = sucursal;
 	}
 	
 	/**
@@ -92,17 +107,27 @@ public class Factura implements VOFactura {
 	/**
 	 * Retorna el id del cliente
 	 */
-	public long getIdCliente() {
-		return idCliente;
+	public Long getCliente() {
+		return cliente;
 	}
 	
 	/**
 	 * Asigna un cliente con su id a la factura
 	 * @param idCliente id a asignar
 	 */
-	public void setIdCliente(long idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Long idCliente) {
+		this.cliente = idCliente;
 	}
+
+	public Long getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Long sucursal) {
+		this.sucursal = sucursal;
+	}
+	
+	
 	
 	
 	

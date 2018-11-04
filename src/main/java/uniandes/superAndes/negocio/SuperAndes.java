@@ -637,6 +637,13 @@ public class SuperAndes implements Runnable {
 		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
 	}
 	
+	public void restarCantidadProductos(int cantidad, Long idProducto)
+	{
+		log.info("Restando "+cantidad+" cantidad de productos "+idProducto );
+		pp.restarCantidadProductos(cantidad, idProducto);
+		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto);
+	}
+	
 	public void devolverCantidadEstante(int cantidad, Long idProducto, Long idEstante)
 	{
 		log.info("Sumando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
