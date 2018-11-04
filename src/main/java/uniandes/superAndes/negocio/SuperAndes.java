@@ -410,12 +410,12 @@ public class SuperAndes implements Runnable {
 	{
 		log.info("Adicionando bodega con direccion : "+direccion);
 
-
+		
 		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
-		Categoria cat = darCategoriaPorNombre("PRUEBA");
+		Categoria cat = darCategoriaPorNombre(nombreCategoria);
 		if(cat==null)
 		{
-			cat =adicionarCategoria("PRUEBA");
+			cat =adicionarCategoria(nombreCategoria);
 		}
 
 
@@ -457,7 +457,26 @@ public class SuperAndes implements Runnable {
 		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
 	}
+	
+	public List<VOCategoria> darVOCategoria ()
+	{
+		log.info ("Generando los VO de categoria");        
+		List<VOCategoria> vOCategoria = new LinkedList<VOCategoria> ();
+		for (Categoria tb : pp.darCategorias())
+		{
+			vOCategoria.add(tb);
+		}
+		log.info ("Generando los VO de categoria: " + vOCategoria.size() + " existentes");
+		return vOCategoria;
+	}
 
+	public ProductosEstantes asociarEstanteProducto(Producto producto, Estante estante, int cantidad)
+	{
+		log.info("Adicionando un nuevo ProductosEstantes");
+		ProductosEstantes relacion = pp.asociarEstanteProducto(estante.getId(), producto.getId(), cantidad);
+		log.info("/Adicionando un nuevo ProductosEstantes");
+		return relacion;
+	}
 	public List<VOEstante> darVOEstantesPorSucursal (Long sucursal)
 	{
 		log.info ("Generando los VO de Estante");        
@@ -468,6 +487,18 @@ public class SuperAndes implements Runnable {
 		}
 		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
+	}
+	
+	public List<Producto> darProductosPorEstante (Long estante)
+	{
+		log.info ("Generando los VO de Producto");        
+		List<Producto> productos = new LinkedList<Producto> ();
+		for (ProductosEstantes tb : pp.darProductosEstantesPorEstante(estante))
+		{
+			productos.add(pp.darProductoPorId(tb.getIdProducto()));
+		}
+		log.info ("Generando los VO de Producto: " + productos.size() + " existentes");
+		return productos;
 	}
 
 
@@ -581,6 +612,37 @@ public class SuperAndes implements Runnable {
 		CarritoCompras resp = pp.darCarritoPorCliente(idCliente);		
 		log.info ("\"Buscando carrito por idCliente: " + resp );
 		return  resp;
+	}
+	
+	public CarritoProductos adicionarProductoACarrito(Producto producto, Estante estante, int cantidad, CarritoCompras carrito)
+	{
+		log.info("Adicionando un nuevo CarritoProductos");
+		CarritoProductos relacion = pp.adicionarProductoACarrito(carrito.getId(), producto.getId(), cantidad, estante.getId());
+		log.info("/Adicionando un nuevo CarritoProductos");
+		return relacion;
+	}
+	
+	public ProductosEstantes darProductoEstante(Producto producto, Estante estante)
+	{
+		log.info("Buscando una relacion de tipo ProductoEstante");
+		ProductosEstantes relacion = pp.darProductoEstante(producto.getId(), estante.getId());
+		log.info("/Buscando una relacion de tipo ProductoEstante");
+		return relacion;
+	}
+	
+	public void restarCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		log.info("Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+		pp.restarCantidadEstante(cantidad, idProducto, idEstante);
+		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+	}
+	
+	public List<Producto> darProductosPorCarrito(Long idCarrito)
+	{
+		log.info("Consultando los productos en el carrito " +idCarrito );
+		List<Producto> productos = pp.darProductosPorCarrito(idCarrito);
+		log.info("/Consultando los productos en el carrito "+idCarrito);
+		return productos;
 	}
 	@Override
 	public void run() {

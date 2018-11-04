@@ -18,6 +18,11 @@ public class CarritoProductos {
 	private int unidades;
 	
 	/**
+	 * El estante de donde se toma el producto
+	 */
+	private Long idEstante;
+	
+	/**
 	 * Constructor vacío para crear la relacion
 	 */
 	public CarritoProductos()
@@ -25,6 +30,7 @@ public class CarritoProductos {
 		idCarrito = null;
 		idProducto=  null;
 		unidades = 0;
+		idEstante = null;
 	}
 
 	/**
@@ -33,11 +39,12 @@ public class CarritoProductos {
 	 * @param idProducto El identificador del producto
 	 * @param unidades Las unidades disponibles de ese producto
 	 */
-	public CarritoProductos(Long idCarrito, Long idProducto, int unidades) {
+	public CarritoProductos(Long idCarrito, Long idProducto, int unidades, Long idEstante) {
 	
 		this.idCarrito = idCarrito;
 		this.idProducto = idProducto;
 		this.unidades = unidades;
+		this.idEstante= idEstante;
 	}
 
 	/**
@@ -84,6 +91,22 @@ public class CarritoProductos {
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
 	}
+
+	/**
+	 * @return El estante de donde se toma el producto
+	 */
+	public Long getIdEstante() {
+		return idEstante;
+	}
+
+	/**
+	 * Asigna un nuevo estante a la relacion
+	 * @param idEstante el estante a asignar
+	 */
+	public void setIdEstante(Long idEstante) {
+		this.idEstante = idEstante;
+	}
+	
 	
 	
 	

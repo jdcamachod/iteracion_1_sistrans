@@ -61,7 +61,7 @@ class SQLEstante {
 	 * @param idSucursal sucursal asociada al estante
 	 * @return
 	 */
-	public long adicionarEstante (PersistenceManager pm, long idEstante, long tipo, double volumen, double peso, String direccion, int nivelAbastecimiento,long idSucursal) 
+	public long adicionarEstante (PersistenceManager pm, long idEstante, Long tipo, double volumen, double peso, String direccion, int nivelAbastecimiento,Long idSucursal) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaEstante() + "(id, categoria,direccion, peso, volumen, sucursal, nivelAbastecimiento) values (?, ?,?, ?, ?,?, ?)");
         q.setParameters(idEstante, tipo,direccion, peso, volumen, idSucursal, nivelAbastecimiento);

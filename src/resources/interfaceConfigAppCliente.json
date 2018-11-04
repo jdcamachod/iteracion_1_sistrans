@@ -28,6 +28,10 @@
 					"event": "solicitarCarrito"
 				},
 				{
+					"label": "Agregar producto",
+					"event": "agregarProductoAlCarrito"
+				},
+				{
 					"label": "Devolver Producto",
 					"event": "devolverProducto"
 				},

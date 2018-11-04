@@ -64,6 +64,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.CarritoCompras;
+import uniandes.superAndes.negocio.CarritoProductos;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Promocion;
@@ -342,36 +343,44 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			JPanel myPanel = new JPanel(new GridLayout(1,2));
-			sucursales = new JComboBox();
-			List <VOSucursal> lista = superAndes.darVOSucursales();
-			for(VOSucursal suc: lista)
+			if(sucursal!=null && carrito!=null && superAndes.darProductosPorCarrito(carrito.getId())!=null && !superAndes.darProductosPorCarrito(carrito.getId()).isEmpty())
 			{
-				sucursales.addItem(suc.getNombre());
+				panelDatos.actualizarInterfaz("Debe vaciar el carrito antes de cambiar de sucursal");
 			}
-			myPanel.add(new JLabel("Seleccione una sucursal", 10));
-			myPanel.add(sucursales);
-			int result = JOptionPane.showConfirmDialog(null, myPanel, 
-					"Seleccione una sucursal    ", JOptionPane.OK_CANCEL_OPTION);
-			if(result == JOptionPane.OK_OPTION)
-			{
-				String nombre = (String) sucursales.getSelectedItem();
-				sucursal = superAndes.darSucursalPorNombre(nombre);
-				String resultado = "Usted esta en la sucursal "+ sucursal.getNombre();
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-			}
+			else {
+				JPanel myPanel = new JPanel(new GridLayout(1,2));
+				sucursales = new JComboBox();
+				List <VOSucursal> lista = superAndes.darVOSucursales();
+				for(VOSucursal suc: lista)
+				{
+					sucursales.addItem(suc.getNombre());
+				}
+				myPanel.add(new JLabel("Seleccione una sucursal", 10));
+				myPanel.add(sucursales);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Seleccione una sucursal    ", JOptionPane.OK_CANCEL_OPTION);
+				if(result == JOptionPane.OK_OPTION)
+				{
+					String nombre = (String) sucursales.getSelectedItem();
+					sucursal = superAndes.darSucursalPorNombre(nombre);
+					String resultado = "Usted esta en la sucursal "+ sucursal.getNombre();
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}
+				
+			} 
 			
-		} 
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+			
 	}
 
 
@@ -465,15 +474,64 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
 	 */
 
-	public void listarProductos( )
+	public void agregarProductoAlCarrito( )
 	{
 		try 
 		{
-			List <VOProducto> lista = superAndes.darVOProductos();
-			String resultado = "En Productos";
-			resultado +=  "\n" + listarVO(lista);
-			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			if(carrito ==null)
+			{
+				panelDatos.actualizarInterfaz("Debe solicitar un carrito primero");
+			}
+			else if(sucursal == null)
+			{
+				panelDatos.actualizarInterfaz("Debe seleccionar una sucursal primero");
+			}
+			else if(estante == null)
+			{
+				panelDatos.actualizarInterfaz("Debe seleccionar un estante primero");
+			}
+			else
+			{
+				productos = new JComboBox();
+				for(Producto p: superAndes.darProductosPorEstante(estante.getId()))
+				{
+					productos.addItem(p.getId()+ ": "+p.getNombre()+p.getPrecioUnitario());
+				}
+				JPanel myPanel = new JPanel(new GridLayout(2,2));
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				myPanel.add(new JLabel("Seleccione la cantidad de productos de este tipo que va a llevar"));
+				JTextField cantidad = new JTextField();
+				myPanel.add(cantidad);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Seleccione el producto a llevar", JOptionPane.OK_CANCEL_OPTION);
+
+				if (result == JOptionPane.OK_OPTION)
+				{
+					String p = (String) productos.getSelectedItem();
+					Long idP = Long.parseLong(p.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(idP);
+					int cant = Integer.parseInt(cantidad.getText());
+					
+					//verificar la relacion de productosEstantes para que se cumpla la cantidad y restar la cantidad de productos del estante
+					if(superAndes.darProductoEstante(producto, estante).getCantidad()<cant) {
+						panelDatos.actualizarInterfaz("La cantidad de productos solicitada es mayor a la que esta en el estante");
+					}
+					else
+					{
+						System.out.println(superAndes.darProductoEstante(producto, estante).getCantidad());
+						superAndes.restarCantidadEstante(cant, producto.getId(), estante.getId());
+						CarritoProductos relacion = superAndes.adicionarProductoACarrito(producto, estante, cant, carrito);
+						panelDatos.actualizarInterfaz("Se agrega el producto "+producto.getNombre()+" al carrito "+carrito.getId()+ " tomado desde el estante "+estante.getDireccion());
+						System.out.println(superAndes.darProductoEstante(producto, estante).getCantidad());
+					}
+					
+				}
+				else {
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}
+			}
+			
 		} 
 		catch (Exception e) 
 		{

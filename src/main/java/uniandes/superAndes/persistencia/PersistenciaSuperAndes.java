@@ -19,6 +19,7 @@ import com.google.gson.JsonObject;
 
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.CarritoCompras;
+import uniandes.superAndes.negocio.CarritoProductos;
 import uniandes.superAndes.negocio.Categoria;
 
 import uniandes.superAndes.negocio.Cliente;
@@ -33,6 +34,7 @@ import uniandes.superAndes.negocio.PagueNLleveM;
 import uniandes.superAndes.negocio.PagueXLleveY;
 import uniandes.superAndes.negocio.Persona;
 import uniandes.superAndes.negocio.Producto;
+import uniandes.superAndes.negocio.ProductosEstantes;
 import uniandes.superAndes.negocio.Promocion;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
@@ -1207,6 +1209,10 @@ public class PersistenciaSuperAndes  {
 		return sqlBodega.darBodegas (pmf.getPersistenceManager());
 	}
 
+	public List<Categoria> darCategorias ()
+	{
+		return sqlCategoria.darCategorias (pmf.getPersistenceManager());
+	}
 
 
 
@@ -1266,6 +1272,36 @@ public class PersistenciaSuperAndes  {
 	}
 
 
+	public ProductosEstantes asociarEstanteProducto(Long idEstante, Long idProducto, int cantidad)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();            
+			
+			long tuplasInsertadas = sqlProductosEstantes.adicionarProductosEstantes(pm, idProducto, idEstante, cantidad);
+			tx.commit();
+
+			log.trace ("Inserción ProductoEstante: " + idEstante +" "+ idProducto+  ": " + tuplasInsertadas + " tuplas insertadas");
+			return new ProductosEstantes(idEstante, idProducto, cantidad);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
 	 * Adiciona entradas al log de la aplicación
@@ -1345,6 +1381,10 @@ public class PersistenciaSuperAndes  {
 	public List<Estante> darEstantes ()
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
+	}
+	public List<ProductosEstantes> darProductosEstantesPorEstante (Long idEstante)
+	{
+		return sqlProductosEstantes.darProductosEstantesPorEstante(pmf.getPersistenceManager(), idEstante);
 	}
 	
 	public List<Estante> darEstantesPorSucursal(Long sucursal)
@@ -2051,6 +2091,34 @@ public class PersistenciaSuperAndes  {
 		CarritoCompras carrito = sqlCarritoCompras.darCarritoPorCliente(pmf.getPersistenceManager(), idCliente);
 		return carrito;
 	}
+	
+	public ProductosEstantes darProductoEstante(Long idProducto, Long idEstante)
+	{
+		ProductosEstantes relacion = sqlProductosEstantes.darProductoEstante(pmf.getPersistenceManager(), idProducto, idEstante);
+		return relacion;
+	}
+	
+	public void restarCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		sqlProductosEstantes.restarCantidad(pmf.getPersistenceManager(), cantidad, idProducto, idEstante);
+	}
+	public List<CarritoProductos> darCarritoProductosPorCarrito(Long idCarrito)
+	{
+		List<CarritoProductos> lista = sqlCarritoProductos.darCarritoProductosPorCarrito(pmf.getPersistenceManager(), idCarrito);
+		return lista;
+	}
+	
+	public List<Producto> darProductosPorCarrito(Long idCarrito)
+	{
+		List<Producto> productos = new LinkedList<Producto>();
+		for(CarritoProductos cp:  darCarritoProductosPorCarrito(idCarrito))
+		{
+			Producto prod = darProductoPorId(cp.getIdProducto());
+			productos.add(prod);
+		}
+		return productos;
+	}
+	
 
 
 
@@ -2090,6 +2158,34 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 
+	}
+	
+	public CarritoProductos adicionarProductoACarrito(Long idCarrito, Long idProducto, int cantidad, Long idEstante)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			sqlCarritoProductos.adicionarCarritoProductos(pm, idProducto, idCarrito, cantidad, idEstante);
+			tx.commit();
+			log.trace("Producto adicionado "+idProducto+" al carrito "+ idCarrito);
+			return new CarritoProductos(idCarrito, idProducto, cantidad, idEstante);
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
 
 

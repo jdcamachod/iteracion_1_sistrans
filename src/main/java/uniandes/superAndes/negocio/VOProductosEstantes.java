@@ -15,6 +15,8 @@ public interface VOProductosEstantes {
 	/**
 	 * @return Una cadena de caracteres con la información del producto estante
 	 */
+	
+	public int getCantidad();
 	@Override
 	public String toString(); 
 }

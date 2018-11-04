@@ -47,10 +47,10 @@ public class SQLCarritoProductos {
 		 * @param idFactura - El identificador de la factura
 		 * @return EL número de tuplas insertadas
 		 */
-		public long adicionarCarritoProductos(PersistenceManager pm, Long idProducto, Long idCarrito, int cantidad) 
+		public long adicionarCarritoProductos(PersistenceManager pm, Long idProducto, Long idCarrito, int cantidad, Long idEstante) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarritoProductos() + "(idProducto, idCarrito, cantidad) values (?, ?, ?)");
-	        q.setParameters(idProducto, idCarrito, cantidad);
+	        Query q = pm.newQuery(SQL, "INSERT INTO CARRITO_PRODUCTOS (idProducto, idCarrito, cantidad, idEstante) values (?, ?, ?, ?)");
+	        q.setParameters(idProducto, idCarrito, cantidad, idEstante);
 	        return (long) q.executeUnique();
 		}
 
@@ -63,7 +63,7 @@ public class SQLCarritoProductos {
 		 */
 		public long eliminarCarritoProductos (PersistenceManager pm, long idCarrito, long idProducto)
 		{
-	        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarritoProductos() + " WHERE idCarrito = ? AND idProducto = ?");
+	        Query q = pm.newQuery(SQL, "DELETE FROM CARRITO_PRODUCTOS WHERE idCarrito = ? AND idProducto = ?");
 	        q.setParameters(idCarrito, idProducto);
 	        return (long) q.executeUnique();
 		}
@@ -76,7 +76,16 @@ public class SQLCarritoProductos {
 		 */
 		public List<CarritoProductos> darCarritoProductos (PersistenceManager pm)
 		{
-			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarritoProductos());
+			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS");
+			q.setResultClass(CarritoProductos.class);
+			List<CarritoProductos> resp = (List<CarritoProductos>) q.execute();
+			return resp;
+		}
+		
+		public List<CarritoProductos> darCarritoProductosPorCarrito (PersistenceManager pm, Long idCarrito)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS WHERE idCarrito = ?");
+			q.setParameters(idCarrito);
 			q.setResultClass(CarritoProductos.class);
 			List<CarritoProductos> resp = (List<CarritoProductos>) q.execute();
 			return resp;
