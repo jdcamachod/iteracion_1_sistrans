@@ -34,44 +34,32 @@
 				{
 					"label": "Abandonar carrito",
 					"event": "abandonarCarrito"
-				},
-				{
-					"label": "Buscar por direccion",
-					"event": "buscarBodegaPorDireccion"
 				}
 			]
 		},
 		{
-			"menuTitle": "Estante",
+			"menuTitle": "Sucursal",
 			"options": [
 				{
-					"label": "Registrar",
-					"event": "registrarEstante"
+					"label": "Escoger sucursal",
+					"event": "escogerSucursal"
 				},
 				{
-					"label": "Listar",
-					"event": "listarEstantes"
-				},
-				{
-					"label": "Borrar por direccion",
-					"event": "eliminarEstantePorDireccion"
-				},
-				{
-					"label": "Buscar por direccion",
-					"event": "buscarEstantePorDireccion"
+					"label": "Cambiar de sucursal",
+					"event": "escogerSucursal"
 				}
 			]
 		},
-		{ "menuTitle": "Promocion",
+		{ "menuTitle": "Estante",
 				"options":
 			[
 				{
-					"label": "Registrar",
-					"event": "registrarPromocion"
+					"label": "Escoger Estante",
+					"event": "escogerEstante"
 				},
 				{
-					"label": "Listar",
-					"event": "listarPromocion"
+					"label": "Cambiar estante",
+					"event": "escogerEstante"
 				}
 			]
 		},	

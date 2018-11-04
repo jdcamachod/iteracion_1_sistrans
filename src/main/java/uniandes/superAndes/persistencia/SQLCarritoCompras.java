@@ -7,7 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.CarritoCompras;
-import uniandes.superAndes.negocio.Proveedor;
+
 
 public class SQLCarritoCompras {
 

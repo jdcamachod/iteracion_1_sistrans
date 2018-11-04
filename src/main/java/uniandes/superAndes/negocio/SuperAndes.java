@@ -440,9 +440,9 @@ public class SuperAndes implements Runnable {
 
 	public Estante darEstantePorDireccion (String direccion) {
 
-		log.info ("Buscando Bodega por direccion: " + direccion);
+		log.info ("Buscando Estante por direccion: " + direccion);
 		Estante resp = pp.darEstantePorDireccion(direccion);
-		log.info ("\"Buscando Bodega por direccion: " + resp );
+		log.info ("\"Buscando Estante por direccion: " + resp );
 		return resp;
 	}
 
@@ -458,6 +458,17 @@ public class SuperAndes implements Runnable {
 		return vOProveedor;
 	}
 
+	public List<VOEstante> darVOEstantesPorSucursal (Long sucursal)
+	{
+		log.info ("Generando los VO de Estante");        
+		List<VOEstante> vOProveedor = new LinkedList<VOEstante> ();
+		for (Estante tb : pp.darEstantesPorSucursal(sucursal))
+		{
+			vOProveedor.add(tb);
+		}
+		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
+		return vOProveedor;
+	}
 
 
 
@@ -562,6 +573,14 @@ public class SuperAndes implements Runnable {
 		}
 		log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
 		return carrito;
+	}
+	
+	public CarritoCompras darCarritoPorCliente (Long idCliente) {
+
+		log.info ("Buscando carrito por idCliente: " + idCliente);
+		CarritoCompras resp = pp.darCarritoPorCliente(idCliente);		
+		log.info ("\"Buscando carrito por idCliente: " + resp );
+		return  resp;
 	}
 	@Override
 	public void run() {

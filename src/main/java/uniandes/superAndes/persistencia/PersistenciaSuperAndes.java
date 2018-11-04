@@ -1346,6 +1346,11 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
 	}
+	
+	public List<Estante> darEstantesPorSucursal(Long sucursal)
+	{
+		return sqlEstante.darEstantesPorSucursal(pmf.getPersistenceManager(), sucursal);
+	}
 
 
 
@@ -2041,6 +2046,11 @@ public class PersistenciaSuperAndes  {
 		}
 	}
 
+	public CarritoCompras darCarritoPorCliente(Long idCliente)
+	{
+		CarritoCompras carrito = sqlCarritoCompras.darCarritoPorCliente(pmf.getPersistenceManager(), idCliente);
+		return carrito;
+	}
 
 
 

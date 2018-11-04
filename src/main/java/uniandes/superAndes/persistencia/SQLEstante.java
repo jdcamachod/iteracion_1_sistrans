@@ -110,6 +110,14 @@ class SQLEstante {
 		q.setResultClass(Estante.class);
 		return (List<Estante>) q.executeList();
 	}
+	
+	public List<Estante> darEstantesPorSucursal(PersistenceManager pm, Long idSucursal)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM "+ pp.darTablaEstante()+" WHERE sucursal = ?");
+		q.setParameters(idSucursal);
+		q.setResultClass(Estante.class);
+		return (List<Estante>) q.executeList();
+	}
 
 
 
@@ -125,7 +133,7 @@ class SQLEstante {
 	public Estante darEstantePorDireccion(PersistenceManager pm, String direccion) {
 		// TODO Auto-generated method stub
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaEstante()  + " WHERE direccion = ?");
-		q.setResultClass(Bodega.class);
+		q.setResultClass(Estante.class);
 		q.setParameters(direccion);
 		return (Estante) q.executeUnique();
 	}

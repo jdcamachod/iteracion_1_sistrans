@@ -179,7 +179,16 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	private JComboBox productos;
 	
 	private Cliente cliente;
+	
+	private CarritoCompras carrito;
+	
+	private Sucursal sucursal;
+	
+	private JComboBox sucursales;
+	
+	private JComboBox estantes;
 
+	private Estante estante;
 	/* ****************************************************************
 	 * 			MÃ©todos
 	 *****************************************************************/
@@ -206,7 +215,11 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		String path = guiConfig.get("bannerPath").getAsString();
 		panelDatos = new PanelDatos ( );
 		this.cliente = cliente;
-
+		if(cliente!=null)
+		{
+			carrito = superAndes.darCarritoPorCliente(cliente.getId());
+		}
+		
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
 		add( panelDatos, BorderLayout.CENTER );
@@ -325,16 +338,33 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
 	 */
-	public void listarSucursal( )
+	public void escogerSucursal( )
 	{
 		try 
 		{
+			JPanel myPanel = new JPanel(new GridLayout(1,2));
+			sucursales = new JComboBox();
 			List <VOSucursal> lista = superAndes.darVOSucursales();
-
-			String resultado = "En Sucursales";
-			resultado +=  "\n" + listarVO(lista);
-			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			for(VOSucursal suc: lista)
+			{
+				sucursales.addItem(suc.getNombre());
+			}
+			myPanel.add(new JLabel("Seleccione una sucursal", 10));
+			myPanel.add(sucursales);
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Seleccione una sucursal    ", JOptionPane.OK_CANCEL_OPTION);
+			if(result == JOptionPane.OK_OPTION)
+			{
+				String nombre = (String) sucursales.getSelectedItem();
+				sucursal = superAndes.darSucursalPorNombre(nombre);
+				String resultado = "Usted esta en la sucursal "+ sucursal.getNombre();
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+			}
+			
 		} 
 		catch (Exception e) 
 		{
@@ -345,6 +375,48 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	}
 
 
+	public void escogerEstante()
+	{
+		if(sucursal == null)
+		{
+			panelDatos.actualizarInterfaz("Debe seleccionar una sucursal primero");
+		}
+		else{
+			
+			try 
+			{
+				JPanel myPanel = new JPanel(new GridLayout(1,2));
+				estantes = new JComboBox();
+				List <VOEstante> lista = superAndes.darVOEstantesPorSucursal(sucursal.getId());
+				for(VOEstante est: lista)
+				{
+					estantes.addItem(est.getDireccion());
+				}
+				myPanel.add(new JLabel("Seleccione un estante"));
+				myPanel.add(estantes);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Seleccione un estante    ", JOptionPane.OK_CANCEL_OPTION);
+				if(result == JOptionPane.OK_OPTION)
+				{
+					String direccion = (String) estantes.getSelectedItem();
+					estante = superAndes.darEstantePorDireccion(direccion);
+					String resultado = "Usted esta en el estante "+ estante.getDireccion();
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}
+				
+			} 
+			catch (Exception e) 
+			{
+				//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+			}
+		}
+	}
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
@@ -643,16 +715,23 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try
 		{
-			System.out.println("Hola"+ cliente);
-			CarritoCompras carrito = superAndes.solicitarCarrito(cliente.getId());
-			String resultado = "En solicitar carrito \n";
 			if(carrito !=null)
 			{
-				resultado += "A el cliente se le asigno el carrito con identificador "+carrito.getId();
-				panelDatos.actualizarInterfaz(resultado);
+				panelDatos.actualizarInterfaz("Ya solicito un carro, su carro asignado es "+carrito.getId());
 			}
-			else {
-				throw new Exception("No se pudo asignar un carrito de compras al cliente "+ cliente.getId());
+			else
+			{
+				System.out.println("Hola"+ cliente);
+				carrito = superAndes.solicitarCarrito(cliente.getId());
+				String resultado = "En solicitar carrito \n";
+				if(carrito !=null)
+				{
+					resultado += "A el cliente se le asigno el carrito con identificador "+carrito.getId();
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else {
+					throw new Exception("No se pudo asignar un carrito de compras al cliente "+ cliente.getId());
+				}
 			}
 		}
 		catch (Exception e) 
