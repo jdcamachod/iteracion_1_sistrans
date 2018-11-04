@@ -63,6 +63,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import uniandes.superAndes.negocio.Bodega;
+import uniandes.superAndes.negocio.CarritoCompras;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Promocion;
@@ -186,7 +187,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Construye la ventana principal de la aplicaciÃ³n. <br>
 	 * <b>post:</b> Todos los componentes de la interfaz fueron inicializados.
 	 */
-	public InterfazSuperAndesApp(String inter )
+	public InterfazSuperAndesApp(String inter, Cliente cliente )
 	{
 		// Carga la configuraciÃ³n de la interfaz desde un archivo JSON
 		guiConfig = openConfig ("Interfaz", inter);
@@ -204,6 +205,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 		String path = guiConfig.get("bannerPath").getAsString();
 		panelDatos = new PanelDatos ( );
+		this.cliente = cliente;
 
 		setLayout (new BorderLayout());
 		add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
@@ -314,7 +316,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	public void actualizarInterfaz()
 	{
 		interfaz.setVisible(false);
-		interfaz = new InterfazSuperAndesApp(CONFIG_INTERFAZ);
+		interfaz = new InterfazSuperAndesApp(CONFIG_INTERFAZ, cliente);
 		interfaz.setVisible(true);
 		
 	}
@@ -543,6 +545,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 								cliente = superAndes.adicionarCliente(nombre, correoElectronico, puntos, empresa, tipoDocumento,
 										numeroDocumento, direccion, nit);
+								
 
 							}else {
 								panelDatos.actualizarInterfaz("Llene todos los datos");
@@ -565,6 +568,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						{
 							throw new Exception ("No se pudo crear un Cliente con nombre: " + nombre + "Correo: " + correoElectronico);
 						}
+						cliente = superAndes.darClientePorCorreo(correoElectronico);
 						actualizarInterfaz();
 					}
 					else
@@ -635,37 +639,29 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
-	public void buscarClientePorCorreo( )
+	public void solicitarCarrito()
 	{
-		try 
+		try
 		{
-			String correo = JOptionPane.showInputDialog (this, "Correo del Cliente?", "Buscar Cliente por correo", JOptionPane.QUESTION_MESSAGE);
-			if (correo != null)
+			System.out.println("Hola"+ cliente);
+			CarritoCompras carrito = superAndes.solicitarCarrito(cliente.getId());
+			String resultado = "En solicitar carrito \n";
+			if(carrito !=null)
 			{
-				VOCliente sucursal = superAndes.darClientePorCorreo(correo);
-				String resultado = "En buscar Cliente por correo\n\n";
-				if (sucursal != null)
-				{
-					resultado += "El Cliente es: " + sucursal;
-				}
-				else
-				{
-					resultado += "Un Cliente con correo: " + correo + " NO EXISTE\n";    				
-				}
-				resultado += "\n Operación terminada";
+				resultado += "A el cliente se le asigno el carrito con identificador "+carrito.getId();
 				panelDatos.actualizarInterfaz(resultado);
 			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			else {
+				throw new Exception("No se pudo asignar un carrito de compras al cliente "+ cliente.getId());
 			}
-		} 
+		}
 		catch (Exception e) 
 		{
 			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+		
 	}
 
 	
@@ -1111,7 +1107,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 			// Unifica la interfaz para Mac y para Windows.
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName( ) );
-			interfaz = new InterfazSuperAndesApp(CONFIG_INTERFAZNI );
+			interfaz = new InterfazSuperAndesApp(CONFIG_INTERFAZNI, null );
 			interfaz.setVisible( true );
 			
 			ScheduledExecutorService scheduler

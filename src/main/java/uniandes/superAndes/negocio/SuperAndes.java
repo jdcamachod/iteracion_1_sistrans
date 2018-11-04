@@ -509,6 +509,26 @@ public class SuperAndes implements Runnable {
 		return vOProveedor;
 	}
 
+	public CarritoCompras solicitarCarrito(Long idCliente)
+	{
+		log.info("Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+		List<CarritoCompras> carritos = pp.darCarritosSinClientes();
+		CarritoCompras carrito = null;
+		java.util.Date fecha = new java.util.Date();
+		if(carritos==null || carritos.isEmpty())
+		{
+			carrito = pp.adicionarCarrito(idCliente, fecha);
+		}
+		else {
+			carrito = carritos.get(0);
+			long id = carrito.getId();
+			pp.solicitarCarrito(fecha, idCliente, id);
+			carrito = pp.darCarritoPorId(id);
+			
+		}
+		log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+		return carrito;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

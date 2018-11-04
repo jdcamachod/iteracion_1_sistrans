@@ -53,7 +53,7 @@ public class SQLCarritoCompras {
 	 */
 	public long adicionarCarritoCompras (PersistenceManager pm, long idCarrito, Long idCliente, Date fecha) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaCarrito() + "(id, idCliente, fecha) values ( ?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO CARRITO (id, idCliente, fecha) values ( ?, ?, ?)");
         q.setParameters(idCarrito, idCliente, fecha);
         return (long) q.executeUnique();
 	}
@@ -68,7 +68,7 @@ public class SQLCarritoCompras {
 	 */
 	public long eliminarCarrito (PersistenceManager pm, long idCarrito)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pp.darTablaCarrito() + " WHERE id = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM CARRITO WHERE id = ?");
         q.setParameters(idCarrito);
         return (long) q.executeUnique();
 	}
@@ -80,12 +80,12 @@ public class SQLCarritoCompras {
 	 * @param idProveedor - El identificador del proveedor
 	 * @return El objeto PROVEEDOR que tiene el identificador dado
 	 */
-	public Proveedor darCarritoPorId (PersistenceManager pm, long idCarrito) 
+	public CarritoCompras darCarritoPorId (PersistenceManager pm, long idCarrito) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarrito()  + " WHERE id = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO WHERE id = ?");
 		q.setResultClass(CarritoCompras.class);
 		q.setParameters(idCarrito);
-		return (Proveedor) q.executeUnique();
+		return (CarritoCompras) q.executeUnique();
 	}
 
 	/**
@@ -95,12 +95,12 @@ public class SQLCarritoCompras {
 	 * @param nombreProveedor - El nombre de proveedor buscado
 	 * @return Una lista de objetos PROVEEDOR que tienen el nombre dado
 	 */
-	public Proveedor darCarritoPorCliente (PersistenceManager pm, Long idCliente) 
+	public CarritoCompras darCarritoPorCliente (PersistenceManager pm, Long idCliente) 
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarrito()  + " WHERE idCliente = ?");
+		Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO WHERE idCliente = ?");
 		q.setResultClass(CarritoCompras.class);
 		q.setParameters(idCliente);
-		return (Proveedor) q.executeUnique();
+		return (CarritoCompras) q.executeUnique();
 	}
 
 	/**
@@ -111,8 +111,35 @@ public class SQLCarritoCompras {
 	 */
 	public List<CarritoCompras> darCarritos (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCarrito() );
+		Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO" );
 		q.setResultClass(CarritoCompras.class);
 		return (List<CarritoCompras>) q.executeList();
+	}
+	
+	/**
+	 * Le asigna al carrito de compras un cliente recibido por parametro
+	 * @param pm - El manejador de persistencia
+	 * @param idCliente - El identificador del cliente
+	 * @param fecha - La fecha en la que se asigna el carrito
+	 * @param id - El identificador del carrito
+	 * @return Un carrito con la informacion modificada
+	 */
+	public void asignarCliente(PersistenceManager pm, Long idCliente, Date fecha, long id)
+	{
+		Query q = pm.newQuery(SQL, "UPDATE CARRITO SET idCliente = ?, fecha = ? WHERE id = ? ");
+		q.setParameters(idCliente, fecha, id);
+		q.executeUnique();
+	}
+	
+	/**
+	 * Retorna una lista de los carritos que estan sin cliente
+	 * @param pm - El manejador de persistencia
+	 * @return Lista de carritos sin cliente
+	 */
+	public List<CarritoCompras> darCarritosSinCliente(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM "+pp.darTablaCarrito()+" WHERE idCliente IS NULL");
+		q.setResultClass(CarritoCompras.class);
+		return (List<CarritoCompras>)q.executeList();
 	}
 }

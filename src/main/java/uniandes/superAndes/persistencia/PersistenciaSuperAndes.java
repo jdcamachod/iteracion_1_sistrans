@@ -18,7 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import uniandes.superAndes.negocio.Bodega;
-
+import uniandes.superAndes.negocio.CarritoCompras;
 import uniandes.superAndes.negocio.Categoria;
 
 import uniandes.superAndes.negocio.Cliente;
@@ -971,6 +971,12 @@ public class PersistenciaSuperAndes  {
 		Cliente cliente = sqlCliente.darClientesPorCorreo(pmf.getPersistenceManager(), correoCliente);
 		return cliente;
 	}
+	
+	public Cliente darClientePorId(long id)
+	{
+		Cliente cliente = sqlCliente.darClientePorId(pmf.getPersistenceManager(), id);
+		return cliente;
+	}
 
 
 	/**
@@ -1861,6 +1867,102 @@ public class PersistenciaSuperAndes  {
 
 	}
 	
+	/* ****************************************************************
+	 * 			Métodos para manejar los Carritos
+	 *****************************************************************/
+	public CarritoCompras adicionarCarrito(Long idCliente,  Date fecha)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			long id = nextval();
+			java.sql.Date date = new java.sql.Date(fecha.getTime());
+			long tuplasInsertadas = sqlCarritoCompras.adicionarCarritoCompras(pm, id, idCliente, date);
+			tx.commit();
+			log.trace("Insercion del carrito " + id + ": "+ tuplasInsertadas+" tuplas insertadas");
+			return new CarritoCompras(id, idCliente, fecha);
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
+	/**
+	 * Da el carrito con el id recibido por parametro
+	 * @param id - El identificador del carrito
+	 * @return El carrito con el identificador dado
+	 */
+	public CarritoCompras darCarritoPorId(long id)
+	{
+		CarritoCompras carrito = sqlCarritoCompras.darCarritoPorId(pmf.getPersistenceManager(), id);
+		return carrito;
+	}
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<CarritoCompras> darCarritosSinClientes ()
+	{
+		return sqlCarritoCompras.darCarritosSinCliente(pmf.getPersistenceManager());
+	}
+	
+	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public List<CarritoCompras> darCarritos ()
+	{
+		return sqlCarritoCompras.darCarritos(pmf.getPersistenceManager());
+	}
+	
+	/**
+	 * Asigna el cliente y la fecha al carrito recibido por parametro
+	 * @param fecha - La fecha en la que se solicito el carrito
+	 * @param idCliente - El identificador del cliente que solicita el carrito
+	 * @param id - El identificador del carrito
+	 * @return  El carrito con el cliente asignado
+	 */
+	public CarritoCompras solicitarCarrito(Date fecha, Long idCliente, long id)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		try {
+			tx.begin();
+			sqlCarritoCompras.asignarCliente(pm, idCliente, fecha, id);
+			tx.commit();
+			log.trace("Asignacion del cliente "+idCliente+" al carrito "+ id);
+			return new CarritoCompras(id, idCliente, fecha);
+
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+	}
 
 
 
