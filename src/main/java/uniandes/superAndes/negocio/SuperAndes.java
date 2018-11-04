@@ -117,7 +117,7 @@ public class SuperAndes implements Runnable {
 		log.info ("Generando los VO de Sucursales: " + voSucursales.size() + " existentes");
 		return voSucursales;
 	}
-	
+
 	public List<VOPromocion> darVOPromociones ()
 	{
 		log.info ("Generando los VO de Promociones");        
@@ -189,10 +189,10 @@ public class SuperAndes implements Runnable {
 		log.info("Adicionando Cliente: "+nombre);
 		Cliente cliente = null;
 		if (empresa) {
-		 cliente = pp.adicionarClienteEmpresa(nombre, correoElectronico, puntos, direccion, nit);
+			cliente = pp.adicionarClienteEmpresa(nombre, correoElectronico, puntos, direccion, nit);
 		}
 		else {
-			 cliente = pp.adicionarClientePersona(nombre, correoElectronico, puntos, direccion, nit, tipoDocumento, numeroDocumento);
+			cliente = pp.adicionarClientePersona(nombre, correoElectronico, puntos, direccion, nit, tipoDocumento, numeroDocumento);
 		}
 		log.info("/Adicionando Cliente: "+nombre);
 		return cliente;
@@ -211,7 +211,7 @@ public class SuperAndes implements Runnable {
 		log.info ("Eliminando Cliente por nombre: " + resp + " tuplas eliminadas");
 		return resp;
 	}
-		
+
 	public Cliente darClientePorCorreo (String correo) {
 
 		log.info ("Buscando Cliente por correo: " + correo);
@@ -234,24 +234,24 @@ public class SuperAndes implements Runnable {
 
 	public Empresa darEmpresaPorId(long id) {
 		// TODO Auto-generated method stub
-		
+
 
 		log.info ("Buscando Empresa por id: " + id);
 		Empresa resp = pp.darEmpresaPorId(id);
 		log.info ("\"Buscando Empresa por id: " + id );
 		return resp;
-		
+
 	}
-	
+
 	public Persona darPersonaPorId(long id) {
 		// TODO Auto-generated method stub
-		
+
 
 		log.info ("Buscando Persona por id: " + id);
 		Persona resp = pp.darPersonaPorId(id);
 		log.info ("\"Buscando Persona por id: " + id );
 		return resp;
-		
+
 	}
 	//--------------------------------------------------------------------------
 	// Metodos para manejar los productos
@@ -263,7 +263,7 @@ public class SuperAndes implements Runnable {
 		log.info("/Adicionando producto: "+nombre);
 		return producto;
 	}
-	
+
 	/**
 	 * Elimina un Sucursal por su nombre
 	 * Adiciona entradas al log de la aplicación
@@ -273,32 +273,41 @@ public class SuperAndes implements Runnable {
 	public long eliminarProductos(String nombre)
 	{
 		log.info ("Eliminando productos por nombre: " + nombre);
-        long resp = pp.eliminarProductosPorNombre (nombre);		
-        log.info ("Eliminando Productos por nombre: " + resp + " tuplas eliminadas");
-        return resp;
+		long resp = pp.eliminarProductosPorNombre (nombre);		
+		log.info ("Eliminando Productos por nombre: " + resp + " tuplas eliminadas");
+		return resp;
 	}
-	
+
 	public List<Producto> darProductosPorNombre (String nombre) {
-		
+
 		log.info ("Buscando Productos por nombre: " + nombre);
 		List<Producto> resp = new LinkedList<Producto>();
 		resp = (List<Producto>) pp.darProductosPorNombre(nombre);		
-        log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
-        return resp;
+		log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
+		return resp;
 	}
 	
+	public Producto darProductoPorNombreYProveedor (String nombre, long idProveedor) {
+
+		log.info ("Buscando Producto por nombre y idPorveedor: " + nombre + " proveedor: " + idProveedor);
+
+		Producto resp = pp.darProductoPorNombreYProveedor(nombre, idProveedor);	
+		log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
+		return resp;
+	}
+
 	public List<VOProducto> darVOProductos ()
 	{
 		log.info ("Generando los VO de Productos");        
-        List<VOProducto> voProducto = new LinkedList<VOProducto> ();
-        for (Producto tb : pp.darProductos())
-        {
-        	voProducto.add(tb);
-        }
-        log.info ("Generando los VO de Productos: " + voProducto.size() + " existentes");
-        return voProducto;
+		List<VOProducto> voProducto = new LinkedList<VOProducto> ();
+		for (Producto tb : pp.darProductos())
+		{
+			voProducto.add(tb);
+		}
+		log.info ("Generando los VO de Productos: " + voProducto.size() + " existentes");
+		return voProducto;
 	}
-	
+
 	public Categoria adicionarCategoria(String nombre)
 	{
 		log.info("Adicionando categoria: "+nombre);
@@ -306,7 +315,7 @@ public class SuperAndes implements Runnable {
 		log.info("/Adicionando categoria: "+nombre);
 		return categoria;
 	}
-	
+
 	public TipoProducto adicionarTipoProducto(String nombre, long idCategoria)
 	{
 		log.info("Adicionando tipoProducto: "+nombre);
@@ -315,21 +324,21 @@ public class SuperAndes implements Runnable {
 		return tipoProducto;
 	}
 	public Categoria darCategoriaPorNombre (String nombre) {
-		
+
 		log.info ("Buscando categoria por nombre: " + nombre);
 		Categoria resp = pp.darCategoriaPorNombre(nombre);		
-        log.info ("\"Buscando categoria por nombre: " + resp + " tuplas eliminadas");
-        return  resp;
+		log.info ("\"Buscando categoria por nombre: " + resp + " tuplas eliminadas");
+		return  resp;
 	}
-	
+
 	public TipoProducto darTipoProductoPorNombre (String nombre) {
-		
+
 		log.info ("Buscando tipo producto por nombre: " + nombre);
 		TipoProducto resp = pp.darTipoProductoPorNombre(nombre);		
-        log.info ("\"Buscando tipoProducto por nombre: " + resp + " tuplas eliminadas");
-        return  resp;
+		log.info ("\"Buscando tipoProducto por nombre: " + resp + " tuplas eliminadas");
+		return  resp;
 	}
-	
+
 	public Promocion adicionarDescuentoPorcentaje(double porcentaje, Date fechaInicial, Date fechaFinal, Long idProducto)
 	{
 		log.info("Adicionando promocion de tipo descuento porcentaje ");
@@ -341,9 +350,9 @@ public class SuperAndes implements Runnable {
 		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, descuentoPorcentaje, null, null, precio, idProducto);
 		log.info("/Adicionando promocion de tipo descuento porcentaje");
 		return promocion;
-		
+
 	}
-	
+
 	public Promocion adicionarPague1Lleve2Porcentaje(double porcentaje, Date fechaInicial, Date fechaFinal, Long idProducto)
 	{
 		log.info("Adicionando promocion de tipo descuento porcentaje en segundo articulo llevando 1 ");
@@ -355,9 +364,9 @@ public class SuperAndes implements Runnable {
 		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, null, null, pague1Lleve2, precio, idProducto);
 		log.info("/Adicionando promocion de tipo descuento porcentaje en segundo articulo llevando 1");
 		return promocion;
-		
+
 	}
-	
+
 	public Promocion adicionarPagueNLleveM(int n,int m, Date fechaInicial, Date fechaFinal, Long idProducto)
 	{
 		log.info("Adicionando promocion de tipo pague n lleve m ");
@@ -369,7 +378,7 @@ public class SuperAndes implements Runnable {
 		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, pagueNLleveM, null, null, null, precio, idProducto);
 		log.info("/Adicionando promocion de tipo pague n lleve m");
 		return promocion;
-		
+
 	}
 	public Promocion adicionarPagueXLleveY(int x,int y, Date fechaInicial, Date fechaFinal, Long idProducto)
 	{
@@ -382,26 +391,26 @@ public class SuperAndes implements Runnable {
 		Promocion promocion =  pp.adicionarPromocion(fechaInicial, fechaFinal, null, null, paguexLlevey, null, precio, idProducto);
 		log.info("/Adicionando promocion de tipo pague x lleve y");
 		return promocion;
-		
+
 	}
-	
+
 	public Producto darProductoPorId (long id) {
-		
+
 		log.info ("Buscando producto por id: " + id);
 		Producto resp = pp.darProductoPorId(id);		
-        log.info ("\"Buscando producto por id: " + resp );
-        return  resp;
+		log.info ("\"Buscando producto por id: " + resp );
+		return  resp;
 	}
-	
-	
+
+
 	//--------------------------------------------------------------------------
 	// Estante
 	//--------------------------------------------------------------------------
 	public Estante adicionarEstante( String nombreCategoria, String direccion, double peso, double volumen,String nombreSucursal, int nivelAbastecimiento) 
 	{
 		log.info("Adicionando bodega con direccion : "+direccion);
-		 
-		
+
+
 		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
 		Categoria cat = darCategoriaPorNombre("PRUEBA");
 		if(cat==null)
@@ -409,7 +418,7 @@ public class SuperAndes implements Runnable {
 			cat =adicionarCategoria("PRUEBA");
 		}
 
-		
+
 		Estante estante = pp.adicionarEstante(cat.getId(), direccion, peso, volumen, idSucursal, nivelAbastecimiento);
 		log.info("/Adicionando bodega con direccion: "+direccion);
 		return estante;
@@ -449,19 +458,19 @@ public class SuperAndes implements Runnable {
 		return vOProveedor;
 	}
 
-	
-	
-	
-	
-	
+
+
+
+
+
 	//--------------------------------------------------------------------------
 	// Bodega
 	//--------------------------------------------------------------------------
 	public Bodega adicionarBodega( String nombreTipo, String direccion, double peso, double volumen,String nombreSucursal)
 	{
 		log.info("Adicionando bodega con direccion : "+direccion);
-		 
-		
+
+
 		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
 		Categoria cat = darCategoriaPorNombre("PRUEBA");
 		if(cat==null)
@@ -469,7 +478,7 @@ public class SuperAndes implements Runnable {
 			cat =adicionarCategoria("PRUEBA");
 		}
 
-		
+
 		Bodega bodega = pp.adicionarBodega(cat.getId() , direccion, peso, volumen, idSucursal);
 		log.info("/Adicionando bodega con direccion: "+direccion);
 		return bodega;
@@ -509,14 +518,38 @@ public class SuperAndes implements Runnable {
 		return vOProveedor;
 	}
 
+
+
+	public OrdenPedido solicitarProductoProveedor (String nombreProveedor, String nombreProducto, Date fechaEsperadaDeEntrega, double precioProveedor, int cantidad) {
+		log.info ("Creando solicitud de orden a proveedor");  
+		long idProveedor = darProveedorPorNombre(nombreProveedor).getId();
+		long idProducto=  darProductoPorNombreYProveedor(nombreProducto, idProveedor).getId();
+		OrdenPedido orden = pp.solicitarProductoProveedor(idProveedor, idProducto, fechaEsperadaDeEntrega, precioProveedor, cantidad);
+		log.info("solicitud de orden a proveedor creada");
+		return orden;
+
+	}
+
+	public long llegadaOrdenPedido (long idOrden ,double calificacionPedido, int estado, Date fechaEntrega) throws Exception 
+	{
+		
+		OrdenPedido orden = pp.darOrdenPedidoProveedor(idOrden);
+		if (orden == null) {
+			throw new Exception("La orden no es valida o no existe");
+		}
+		List <Producto>  productos = pp.darProductosOrdenPedido(idOrden);
+		return 		pp.llegadaOrdenPedido(orden, calificacionPedido, estado, fechaEntrega, productos);
+
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		pp.verificarPromociones(pp.darPromociones());
 	}
 
-	
-	
-	
+
+
+
 
 }

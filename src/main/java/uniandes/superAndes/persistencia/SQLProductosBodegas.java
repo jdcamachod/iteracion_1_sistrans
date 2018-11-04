@@ -5,6 +5,8 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.superAndes.negocio.Bodega;
+import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.ProductosBodegas;
 import uniandes.superAndes.negocio.SucursalesClientes;
 
@@ -78,6 +80,14 @@ class SQLProductosBodegas {
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosBodegas());
 			q.setResultClass(ProductosBodegas.class);
 			List<ProductosBodegas> resp = (List<ProductosBodegas>) q.execute();
+			return resp;
+		}
+		public List<Long> darProductosDeBodega (PersistenceManager pm, long idBodega)
+		{
+			Query q = pm.newQuery(SQL, "SELECT idproducto FROM " + pp.darTablaProductosBodegas()+ " WHERE idBodega = ? ");
+			q.setResultClass(ProductosBodegas.class);
+			q.setParameters(idBodega);
+			List<Long> resp = (List<Long>) q.executeList();
 			return resp;
 		}
 }

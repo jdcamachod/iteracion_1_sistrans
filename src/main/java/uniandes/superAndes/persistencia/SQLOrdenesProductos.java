@@ -47,10 +47,10 @@ class SQLOrdenesProductos {
 		 * @param idOrdenesProductos - El identificador de la OrdenesProductos	
 		 * @return
 		 */
-		public long adicionarOrdenesProductos (PersistenceManager pm, long idOrdenesProductos, long idProducto, long idOrden, double precioProveedor) 
+		public long adicionarOrdenesProductos (PersistenceManager pm, long idProducto, long idOrden, double precioProveedor, int cantidad) 
 		{
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenesProductos() + "(id, idProducto, idOrden, precioProveedor) values (?, ?, ?, ?)");
-			q.setParameters(idOrdenesProductos, idProducto, idOrden, precioProveedor);
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenesProductos() + "( idProducto, idOrden, precioProveedor, cantidad) values ( ?, ?, ?, ?)");
+			q.setParameters(idProducto, idOrden, precioProveedor, cantidad);
 			return (long) q.executeUnique();
 		}
 
@@ -83,14 +83,15 @@ class SQLOrdenesProductos {
 			return (OrdenesProductos) q.executeUnique();
 		}
 		
-		public List<Object []> darProductosPorOrden (PersistenceManager pm, long idOrden)
+		public List<Long> darProductosPorOrden (PersistenceManager pm, long idOrden)
 		{
-	        String sql = "SELECT idProducto, COUNT(idProducto) ";
+	        String sql = "SELECT idProducto ";
 	        sql += " FROM " + pp.darTablaOrdenesProductos ();
 	        sql += " WHERE idOrden = " + idOrden ;
-	       	sql	+= " GROUP BY idProducto";
+	        
 			Query q = pm.newQuery(SQL, sql);
-			return q.executeList();
+			q.setResultClass(Long.class);
+			return (List<Long>)  q.executeList();
 		}
 
 }

@@ -143,6 +143,19 @@
 				}
 			]
 		},	
+				{ "menuTitle": "Orden a proveedor",
+				"options":
+			[
+				{
+					"label": "Solicitar producto a proveedor",
+					"event": "solicitarProductoProveedor"
+				},
+				{
+					"label": "LLEGADA DE UN PEDIDO DE UN PRODUCTO",
+					"event": "llegadaOrdenPedido"
+				}
+			]
+		},	
 		
 		{ "menuTitle": "Mantenimiento",
 		  "options":

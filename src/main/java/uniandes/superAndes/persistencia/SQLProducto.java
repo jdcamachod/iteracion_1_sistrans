@@ -134,6 +134,21 @@ class SQLProducto {
 			q.setResultClass(Producto.class);
 			return (List<Producto>) q.executeList();
 		}
+		
+		/**
+		 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS PRODUCTOS de la 
+		 * base de datos de SuperAndes, por su nombre
+		 * @param pm - El manejador de persistencia
+		 * @param nombrePro - El nombre de producto buscado
+		 * @return Una lista de objetos PRODUCTO que tienen el nombre dado
+		 */
+		public Producto darProductoPorNombreYProveedor (PersistenceManager pm, String nombrePro, long idProveedor) 
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProducto()  + " WHERE nombre = ? AND idproveedor = ?");
+			q.setResultClass(Producto.class);
+			q.setParameters(nombrePro, idProveedor);
+			return (Producto) q.executeUnique();
+		}
 
 
 }

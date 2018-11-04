@@ -23,18 +23,30 @@ public class OrdenesProductos implements VOOrdenesProductos {
 	 */
 	private int precioProveedor;
 	
+	private int cantidad;
+	
+	public OrdenesProductos () {
+		this.idOrden = 0 ;
+		this.idProducto= 0;
+		this.cantidad =0;
+		
+	}
+	
 	/**
 	 * Constructor con parametros de la creacion de una OrdenesProducto
 	 * @param idProducto El producto asociado a la orden
 	 * @param idOrden El identificador de la orden asociada
 	 * @param precioProveedor El precio del proveedor por el producto
 	 */
-	public OrdenesProductos(long idProducto, long idOrden, int precioProveedor) {
+	public OrdenesProductos(long idProducto, long idOrden, int precioProveedor, int cantidad) {
 		
 		this.idProducto = idProducto;
 		this.idOrden = idOrden;
 		this.precioProveedor = precioProveedor;
+		this.cantidad = cantidad;
 	}
+	
+	
 	
 	/**
 	 * Retorna el identificador del proucto
@@ -82,5 +94,28 @@ public class OrdenesProductos implements VOOrdenesProductos {
 	}
 	
 	
+	
+	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Productos orden [idOrden=" + idOrden + ", idProducto=" + idProducto + ", Precio proveedor=" + precioProveedor + " , cantidad=" + cantidad +  "]";
+	}
+
 	
 }

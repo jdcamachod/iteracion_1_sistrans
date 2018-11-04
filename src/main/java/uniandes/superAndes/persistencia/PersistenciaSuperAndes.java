@@ -206,7 +206,7 @@ public class PersistenciaSuperAndes  {
 	 * Atributo para el acceso a la tabla PROMOCION_PAQUETE de la base de datos
 	 */
 	private SQLPromocionPaquete sqlPromocionPaquete;
-	
+
 	/**
 	 * Atributo para el acceso a la tabla CARRITO de la base de datos
 	 */
@@ -563,7 +563,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return tablas.get (24);
 	}
-	
+
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de CarritoCompras
 	 */
@@ -846,19 +846,19 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlSucursal.darSucursales(pmf.getPersistenceManager());
 	}
-	
+
 	public List<Promocion> darPromociones ()
 	{
 		return sqlPromocion.darPromociones(pmf.getPersistenceManager());
 	}
-	
+
 	public void verificarPromociones(List<Promocion> promos)
 	{
-		
+
 		for(Promocion promo:promos)
 		{
 			Date d = new Date();
-			
+
 			Date da = new Date(promo.getFechaFinal().getTime());
 			System.out.println(d);
 			System.out.println(da);
@@ -1078,7 +1078,7 @@ public class PersistenciaSuperAndes  {
 		}
 		catch (Exception e)
 		{
-			        	e.printStackTrace();
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1096,8 +1096,8 @@ public class PersistenciaSuperAndes  {
 		// TODO Auto-generated method stub
 		return sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), id);
 	}
-	
-	
+
+
 	public Bodega darBodegaPorDireccion(String direccion) {
 		// TODO Auto-generated method stub
 		return sqlBodega.darBodegaPorDireccion(pmf.getPersistenceManager(), direccion);
@@ -1137,8 +1137,8 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
 	 * Adiciona entradas al log de la aplicación
@@ -1186,8 +1186,8 @@ public class PersistenciaSuperAndes  {
 	}
 
 
-	
-	
+
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los Estantes
 	 *****************************************************************/
@@ -1218,7 +1218,7 @@ public class PersistenciaSuperAndes  {
 		}
 		catch (Exception e)
 		{
-			        	e.printStackTrace();
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1236,8 +1236,8 @@ public class PersistenciaSuperAndes  {
 		// TODO Auto-generated method stub
 		return sqlEstante.darEstantePorId(pmf.getPersistenceManager(), id);
 	}
-	
-	
+
+
 	public Estante darEstantePorDireccion(String direccion) {
 		// TODO Auto-generated method stub
 		return sqlEstante.darEstantePorDireccion(pmf.getPersistenceManager(), direccion);
@@ -1277,8 +1277,8 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
-	
+
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Bodega, dado el identificador de la bodega
 	 * Adiciona entradas al log de la aplicación
@@ -1324,9 +1324,9 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
 	}
-	
-	
-	
+
+
+
 	/* ****************************************************************
 	 * 			Métodos para manejar los PRODUCTOS
 	 *****************************************************************/
@@ -1358,7 +1358,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
 	 * @param nombre - El nombre del tipo de bebida
@@ -1369,7 +1369,18 @@ public class PersistenciaSuperAndes  {
 		return sqlProducto.darProductosPorNombre(pmf.getPersistenceManager(), nombreProducto);
 	}
 	
+	/**
+	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
+	 * @param nombre - El nombre del tipo de bebida
+	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
+	 */
+	public Producto darProductoPorNombreYProveedor (String nombreProducto, long idProveedor)
+	{
+		return sqlProducto.darProductoPorNombreYProveedor(pmf.getPersistenceManager(), nombreProducto, idProveedor);
 	
+	}
+
+
 	/**
 	 * Método que elimina, de manera transaccional, una tupla en la tabla Sucursal, dado el nombre del Sucursal
 	 * Adiciona entradas al log de la aplicación
@@ -1379,28 +1390,28 @@ public class PersistenciaSuperAndes  {
 	public long  eliminarProductosPorNombre(String nombreProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlProducto.eliminarProductosPorNombre(pm, nombreProducto);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlProducto.eliminarProductosPorNombre(pm, nombreProducto);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
 
 	/**
@@ -1412,30 +1423,30 @@ public class PersistenciaSuperAndes  {
 	public long eliminarProductoPorId (long idProducto) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlProducto.eliminarProductoPorId(pm, idProducto);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
+		Transaction tx=pm.currentTransaction();
+		try
+		{
+			tx.begin();
+			long resp = sqlProducto.eliminarProductoPorId(pm, idProducto);
+			tx.commit();
+			return resp;
+		}
+		catch (Exception e)
+		{
+			//        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return -1;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida
 	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
@@ -1444,7 +1455,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlProducto.darProductos(pmf.getPersistenceManager());
 	}
-	
+
 	public Categoria adicionarCategoria(String nombre)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1472,7 +1483,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	public TipoProducto adicionarTipoProducto(String nombre, long idCategoria)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1500,7 +1511,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
 	 * @param nombre - El nombre del tipo de bebida
@@ -1510,7 +1521,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlCategoria.darCategoriaPorNombre(pmf.getPersistenceManager(), nombreCategoria);
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
 	 * @param nombre - El nombre del tipo de bebida
@@ -1520,14 +1531,14 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlTipoProducto.darTipoProductoPorNombre(pmf.getPersistenceManager(), nombreTipoProducto);
 	}
-	
+
 	public Producto darProductoPorId(long id)
 	{
 		return sqlProducto.darProductoPorId(pmf.getPersistenceManager(), id);
 	}
-	
-	
-	
+
+
+
 	public DescuentoPorcentaje adicionarDescuentoPorcentaje(double porcentaje)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1555,7 +1566,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	public Pague1Lleve2Porcentaje adicionarPague1Lleve2Porcentaje(double porcentaje)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1583,7 +1594,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	public PagueNLleveM adicionarPagueNLleveM(int n,int m)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1611,7 +1622,7 @@ public class PersistenciaSuperAndes  {
 			pm.close();
 		}
 	}
-	
+
 	public PagueXLleveY adicionarPagueXLleveY(int x,int y)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1662,25 +1673,25 @@ public class PersistenciaSuperAndes  {
 			Long idPagueXLleveY = null;
 			Long idDescuentoPorcentaje = null;
 			long id = nextval ();
-			
+
 			String elTipoEs = "";
 
 			Promocion laPromocion = null ;
 			if(pagueNLleveM != null) {
 				elTipoEs = "pagueNLleveM";
 				idPagueNLleveM = pagueNLleveM.getIdPagueNLleveM();
-				
+
 				laPromocion = new PagueNLleveM(id, fechaInicial, fechaFinal, precio, idPagueNLleveM, pagueNLleveM.getM(), pagueNLleveM.getN(), idProducto);
 			}else if (pague1Lleve2Porcentaje!= null ) {
 				elTipoEs = "pague1Lleve2Porcentaje";
 				idPague1Lleve2Porcentaje = pague1Lleve2Porcentaje.getIdPague1Lleve2Porcentaje();
-				
+
 				laPromocion = new Pague1Lleve2Porcentaje(id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, pague1Lleve2Porcentaje.getPorcentaje2(), idProducto);
 			}
 			else if (pagueXLleveY!= null ) {
 				elTipoEs = "pagueXLleveY";
 				idPagueXLleveY = pagueXLleveY.getIdPagueXLleveY();
-				
+
 				laPromocion = new PagueXLleveY(id, fechaInicial, fechaFinal, precio, idPagueXLleveY, pagueXLleveY.getX(), pagueXLleveY.getY(), idProducto);
 			}else if(descuentoPorcentaje != null) {
 				elTipoEs = "descuentoPorcentaje";
@@ -1688,7 +1699,7 @@ public class PersistenciaSuperAndes  {
 				laPromocion = new DescuentoPorcentaje(id, fechaInicial, fechaFinal, precio, descuentoPorcentaje.getPorcentaje(), idDescuentoPorcentaje, idProducto);
 			}
 			else {
-				
+
 				laPromocion = null;	
 			}
 			long tuplasInsertadas = sqlPromocion.adicionarPromocion(pm, id, fechaInicial, fechaFinal, precio, idPague1Lleve2Porcentaje, idPagueNLleveM, idPagueXLleveY, idDescuentoPorcentaje, idProducto);
@@ -1755,30 +1766,29 @@ public class PersistenciaSuperAndes  {
 	 * @param precioProveedor el precio que el proveedor acordo para la compra
 	 * @return
 	 */
-	public OrdenPedido solicitarProductoProveedor (long idProveedor, long idProducto, Date fechaEsperadaDeEntrega, double precioProveedor) {
+	public OrdenPedido solicitarProductoProveedor (long idProveedor, long idProducto, java.sql.Date fechaEsperadaDeEntrega, double precioProveedor, int cantidad) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
 		try
 		{
 			tx.begin();
 			long idOrdenPedido = nextval();
-			String calificacionPedido= "En proceso";
+			int calificacionPedido= 0;
 			long creacionOrden = sqlOrdenPedido.adicionarOrdenPedido(pm, idOrdenPedido,calificacionPedido ,fechaEsperadaDeEntrega, 0, idProveedor);
 
-			long idOrdenesProductos = nextval();
-			long creacionProductosOrden = sqlOrdenesProducto.adicionarOrdenesProductos(pm, idOrdenesProductos , idProducto, idOrdenPedido,precioProveedor);
+			long creacionProductosOrden = sqlOrdenesProducto.adicionarOrdenesProductos(pm , idProducto, idOrdenPedido,precioProveedor, cantidad);
 
 			tx.commit();
 
-			log.trace ("Inserción de Orden Pedido: " + idOrdenesProductos + ". " + creacionOrden + " tuplas insertadas");
-			log.trace ("Inserción de Productos Orden: " + idOrdenesProductos + ". " + creacionProductosOrden + " tuplas insertadas");
+			log.trace ("Inserción de Orden Pedido: " + idOrdenPedido + ". " + creacionOrden + " tuplas insertadas");
+			log.trace ("Inserción de Productos Orden: " + idOrdenPedido + ". " + creacionProductosOrden + " tuplas insertadas");
 
 
-			return new OrdenPedido(idOrdenPedido, calificacionPedido, 0 , fechaEsperadaDeEntrega, null, idProveedor);
+			return new OrdenPedido(idOrdenPedido, calificacionPedido, "En proceso" , fechaEsperadaDeEntrega, null, idProveedor);
 		}
 		catch (Exception e)
 		{
-			//	        	e.printStackTrace();
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -1804,7 +1814,7 @@ public class PersistenciaSuperAndes  {
 	 * @param bodegasDisponibles las bodegas relacionadas para el almacenamiento
 	 * @return
 	 */
-	public long llegadaOrdenPedido (OrdenPedido orden,String calificacionPedido, int estado, Date fechaEntrega, List <OrdenesProductos> productosEnLaOrden, List<Bodega> bodegasDisponibles) 
+	public long llegadaOrdenPedido (OrdenPedido orden,double calificacionPedido, int estado, Date fechaEntrega, List <Producto> productosEnLaOrden) 
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx=pm.currentTransaction();
@@ -1817,8 +1827,8 @@ public class PersistenciaSuperAndes  {
 
 			for (int i = 0; i < productosEnLaOrden.size(); i++) {
 
-				long actualizarBodega = sqlProductosBodegas.adicionarProductoBodega(pm, productosEnLaOrden.get(i).getIdOrden(), bodegasDisponibles.get(i).getId());
-				log.trace ("Actualizar bodega  : " +  bodegasDisponibles.get(i).getId() + ". " + actualizarBodega + " tuplas insertadas");
+				long actualizarBodega = AdicionarProductoABodegaDisponible(productosEnLaOrden.get(i));
+				log.trace ("Actualizar bodega  : "  + actualizarBodega + " tuplas insertadas");
 			}
 			tx.commit();
 
@@ -1828,7 +1838,7 @@ public class PersistenciaSuperAndes  {
 		}
 		catch (Exception e)
 		{
-			//	        	e.printStackTrace();
+				        	e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return 0;
 		}
@@ -1844,8 +1854,113 @@ public class PersistenciaSuperAndes  {
 
 
 	}
-	
 
+	private long AdicionarProductoABodega(long idProducto, long idBodega) {
+		long resp = 0;
+		
+		Producto elProductoAAgregar = sqlProducto.darProductoPorId(pmf.getPersistenceManager(), idProducto);
+		Bodega bodega = sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), idBodega);
+ 		List<Long> productos = sqlProductosBodegas.darProductosDeBodega(pmf.getPersistenceManager(), idBodega);
+		double volumenQueHay = 0;
+		double pesoQueHay = 0 ;
+		for (int i = 0; i < productos.size(); i++) {
+			
+			Producto producto = darProductoPorId(productos.get(i));
+			volumenQueHay =+ producto.getVolumen();
+			pesoQueHay =+ producto.getPeso();
+		}
+		if (volumenQueHay + elProductoAAgregar.getVolumen() <= bodega.getVolumen() && pesoQueHay + elProductoAAgregar.getPeso() <= bodega.getPeso()) {
+			resp = sqlProductosBodegas.adicionarProductoBodega(pmf.getPersistenceManager(), idProducto, idBodega);
+		}
+
+		return resp;
+	}
+	
+	private long AdicionarProductoABodegaDisponible (Producto producto) {
+		
+		long resp = 0;
+		List<Bodega> bodegasConTipo = sqlBodega.darBodegasConCategoria(pmf.getPersistenceManager(), producto.getCategoria());
+		for (int i = 0; i < bodegasConTipo.size(); i++) {
+			 resp = AdicionarProductoABodega(producto.getId(), bodegasConTipo.get(i).getId());
+			 
+			 if (resp!= 0) {
+				 return resp;
+			 }
+		}
+		return resp;
+		
+		
+	}
+	public OrdenPedido darOrdenPedidoProveedor (long idOrden) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar orden proveedor con id  " + idOrden);
+
+			OrdenPedido orden = sqlOrdenPedido.darOrdenPedidoPorId(pm, idOrden);
+			log.trace (" se dio orden proveedor con id  " + idOrden);
+
+			tx.commit();
+
+			return orden;
+		}
+		catch (Exception e)
+		{
+			//	        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+
+
+	public List<Producto> darProductosOrdenPedido (long idOrden) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar productos orden proveedor con id  " + idOrden);
+			List <Long> productosid = sqlOrdenesProducto.darProductosPorOrden(pm, idOrden);
+			ArrayList <Producto> productos = new  ArrayList<Producto>();
+			
+			for (int i = 0; i < productosid.size(); i++) {
+				
+				long idProducto = productosid.get(i).longValue();
+				productos.add(darProductoPorId(idProducto));
+				
+			}
+			log.trace ("se dieroon productos orden proveedor con id  " + idOrden);
+
+			return productos;
+
+		}
+		catch (Exception e)
+		{
+			        	e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 
 
 }

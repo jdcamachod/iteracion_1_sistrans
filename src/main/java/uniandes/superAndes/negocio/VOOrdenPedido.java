@@ -12,17 +12,17 @@ public interface VOOrdenPedido {
 	/**
 	 * @return la calificacion del pedido
 	 */
-	public String getCalificacionPedido();
+	public int getCalificacionPedido();
 	
 	/**
 	 * @return El estado del pedido
 	 */
-	public int getEstado();
+	public String getEstado();
 	
 	/**
 	 * @return La fecha esperada de entrega
 	 */
-	public Date getFechaEsperadaEntrega();
+	public Date getFechaEsperadaDeEntrega();
 	
 	/**
 	 * @return La fecha real de entrega
@@ -32,7 +32,7 @@ public interface VOOrdenPedido {
 	/**
 	 * @return El identificador del proveedor
 	 */
-	public long getIdProveedor();
+	public long getProveedor();
 	
 	/**
 	 * @return Una cadena de caracteres con la información de la orden pedido

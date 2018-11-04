@@ -46,10 +46,10 @@ class SQLProductosFacturas {
 		 * @param idCliente - El identificador del cliente
 		 * @return EL número de tuplas insertadas
 		 */
-		public long adicionarProductoFactura(PersistenceManager pm, long idProducto, long idFactura) 
+		public long adicionarProductoFactura(PersistenceManager pm, long idProducto, long idFactura, int cantidad) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosFacturas() + "(idProduco, idFactura) values (?, ?)");
-	        q.setParameters(idProducto, idFactura);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosFacturas() + "(idProduco, idFactura, cantidad) values (?, ?, ?)");
+	        q.setParameters(idProducto, idFactura, cantidad);
 	        return (long) q.executeUnique();
 		}
 

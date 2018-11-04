@@ -5,20 +5,31 @@ import java.util.Date;
 public class OrdenPedido implements VOOrdenPedido {
 
 	private long id;
-	private String calificacionPedido;
-	private int estado;
-	private Date fechaEsperadaEntrega;
+	private int calificacionPedido;
+	private String estado;
+	private Date fechaEsperadaDeEntrega;
 	private Date fechaEntrega;
-	private long idProveedor;
-	public OrdenPedido(long id, String calificacionPedido, int estado, Date fechaEsperadaEntrega, Date fechaEntrega,
+	private long proveedor;
+	
+	public OrdenPedido () {
+		this.id = 0;
+		this.calificacionPedido=0;
+		this.estado="DEFAULT";
+		fechaEntrega = new Date();
+		fechaEsperadaDeEntrega = new Date();
+		proveedor = 0;		
+		
+	}
+	
+	public OrdenPedido(long id, int calificacionPedido, String estado, Date fechaEsperadaEntrega, Date fechaEntrega,
 			long idProveedor) {
 		
 		this.id = id;
 		this.calificacionPedido = calificacionPedido;
 		this.estado = estado;
-		this.fechaEsperadaEntrega = fechaEsperadaEntrega;
+		this.fechaEsperadaDeEntrega = fechaEsperadaEntrega;
 		this.fechaEntrega = fechaEntrega;
-		this.idProveedor = idProveedor;
+		this.proveedor = idProveedor;
 	}
 	public long getId() {
 		return id;
@@ -26,37 +37,50 @@ public class OrdenPedido implements VOOrdenPedido {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCalificacionPedido() {
+	
+	public int getCalificacionPedido() {
 		return calificacionPedido;
 	}
-	public void setCalificacionPedido(String calificacionPedido) {
+	public void setCalificacionPedido(int calificacionPedido) {
 		this.calificacionPedido = calificacionPedido;
 	}
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Date getFechaEsperadaEntrega() {
-		return fechaEsperadaEntrega;
+
+	public Date getFechaEsperadaDeEntrega() {
+		return fechaEsperadaDeEntrega;
 	}
-	public void setFechaEsperadaEntrega(Date fechaEsperadaEntrega) {
-		this.fechaEsperadaEntrega = fechaEsperadaEntrega;
+
+	public void setFechaEsperadaDeEntrega(Date fechaEsperadaDeEntrega) {
+		this.fechaEsperadaDeEntrega = fechaEsperadaDeEntrega;
 	}
+
 	public Date getFechaEntrega() {
 		return fechaEntrega;
 	}
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-	public long getIdProveedor() {
-		return idProveedor;
+	public long getProveedor() {
+		return proveedor;
 	}
-	public void setIdProveedor(long idProveedor) {
-		this.idProveedor = idProveedor;
+	public void setProveedor(long idProveedor) {
+		this.proveedor = idProveedor;
 	}
 	
-	
+	/**
+	 * @return Una cadena de caracteres con la información del tipo de bebida
+	 */
+	@Override
+	public String toString() 
+	{
+		return "Orden [id=" + id + ", idProveedor= " + proveedor + ", estado=" + estado + " , fechaEsperada=" + fechaEsperadaDeEntrega +
+				", fechadeEntrega= " + fechaEntrega + ", calificacion="  + calificacionPedido + "]";
+	}
+
 	
 }

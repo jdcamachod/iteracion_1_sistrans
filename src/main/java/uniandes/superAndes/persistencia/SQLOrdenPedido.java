@@ -50,18 +50,19 @@ class SQLOrdenPedido {
 		 * @param nombre nombre que se desea adicionar a la categoria
 		 * @return
 		 */
-		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido,java.util.Date fechaEsperadaDeEntrega, int estado  , long proveedor) 
+		public long adicionarOrdenPedido (PersistenceManager pm, long idOrdenPedido,int calificacionPedido,java.util.Date fechaEsperadaDeEntrega, int estado  , long proveedor) 
 		{
 			java.sql.Date sqlDate = new java.sql.Date(fechaEsperadaDeEntrega.getTime());
-			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenPedido() + "(id, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor) values (?, ?,?,?,?)");
+			Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaOrdenPedido() + "(id, estado, fechaEsperadaDeEntrega, calificacionPedido, proveedor) values (?,?,?,?,?)");
 			q.setParameters(idOrdenPedido, estado, sqlDate, calificacionPedido, proveedor);
 			return (long) q.executeUnique();
 		}
 
 
-		public long registrarLlegadaOrdenPedido (PersistenceManager pm, long idOrdenPedido,String calificacionPedido, int estado, Date fechaEntrega) 
+		public long registrarLlegadaOrdenPedido (PersistenceManager pm, long idOrdenPedido,double calificacionPedido, int estado, Date fechaEntrega) 
 		{
-			Query q = pm.newQuery(SQL, "UPDATE " +  pp.darTablaOrdenPedido() + " SET estado="+ estado +", calificacionPedido="+calificacionPedido+ ", fechaentrega="+fechaEntrega+" WHERE id = "+idOrdenPedido);
+			Query q = pm.newQuery(SQL, "UPDATE " +  pp.darTablaOrdenPedido() + " SET estado="+ estado +", calificacionPedido="+calificacionPedido+ ", fechaentrega= ?"+" WHERE id = "+idOrdenPedido);
+			q.setParameters(fechaEntrega);
 			return (long) q.executeUnique();
 		}
 
