@@ -15,7 +15,7 @@ public class CarritoProductos {
 	/**
 	 * La cantidad de unidades de este producto en el carrito
 	 */
-	private int unidades;
+	private int cantidad;
 	
 	/**
 	 * El estante de donde se toma el producto
@@ -29,7 +29,7 @@ public class CarritoProductos {
 	{
 		idCarrito = null;
 		idProducto=  null;
-		unidades = 0;
+		cantidad = 0;
 		idEstante = null;
 	}
 
@@ -43,7 +43,7 @@ public class CarritoProductos {
 	
 		this.idCarrito = idCarrito;
 		this.idProducto = idProducto;
-		this.unidades = unidades;
+		this.cantidad = unidades;
 		this.idEstante= idEstante;
 	}
 
@@ -80,16 +80,16 @@ public class CarritoProductos {
 	/**
 	 * @return Las unidades en el carrito de este producto
 	 */
-	public int getUnidades() {
-		return unidades;
+	public int getCantidad() {
+		return cantidad;
 	}
 
 	/**
 	 * Asigna un numero de unidades recibida por parametro
 	 * @param unidades
 	 */
-	public void setUnidades(int unidades) {
-		this.unidades = unidades;
+	public void setCantidad(int unidades) {
+		this.cantidad = unidades;
 	}
 
 	/**

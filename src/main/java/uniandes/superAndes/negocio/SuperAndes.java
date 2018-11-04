@@ -622,10 +622,10 @@ public class SuperAndes implements Runnable {
 		return relacion;
 	}
 	
-	public ProductosEstantes darProductoEstante(Producto producto, Estante estante)
+	public ProductosEstantes darProductoEstante(Long producto, Long estante)
 	{
 		log.info("Buscando una relacion de tipo ProductoEstante");
-		ProductosEstantes relacion = pp.darProductoEstante(producto.getId(), estante.getId());
+		ProductosEstantes relacion = pp.darProductoEstante(producto, estante);
 		log.info("/Buscando una relacion de tipo ProductoEstante");
 		return relacion;
 	}
@@ -637,12 +637,44 @@ public class SuperAndes implements Runnable {
 		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
 	}
 	
+	public void devolverCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		log.info("Sumando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+		pp.devolverCantidadEstante(cantidad, idProducto, idEstante);
+		log.info("/Sumando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+	}
+	
 	public List<Producto> darProductosPorCarrito(Long idCarrito)
 	{
 		log.info("Consultando los productos en el carrito " +idCarrito );
 		List<Producto> productos = pp.darProductosPorCarrito(idCarrito);
 		log.info("/Consultando los productos en el carrito "+idCarrito);
 		return productos;
+	}
+	
+	public boolean eliminarProductoCarrito(Long idCarrito, Long idProducto)
+	{
+		log.info("Eliminando el producto "+ idProducto+" del carrito "+idCarrito);
+		boolean eliminado = pp.eliminarProductoCarrito(idProducto, idCarrito);
+		log.info("/Eliminando el producto "+ idProducto +" del carrito "+idCarrito);
+		return eliminado;
+	}
+	public void eliminarProductoEstantes(Long idEstante, Long idProducto)
+	{
+		log.info("Eliminando el producto "+ idProducto+" del estante "+idEstante);
+		 pp.eliminarProductoEstante(idProducto, idEstante);
+		log.info("/Eliminando el producto "+ idProducto +" del estante "+idEstante);
+		
+	}
+	public void quitarUnidadesProducto(Long idProducto, Long idCarrito, int cantidad)
+	{
+		log.info("Quitando "+ cantidad+" unidades del producto "+idProducto+" del carrito "+idCarrito);
+		pp.quitarUnidadesCarrito(idProducto, idCarrito, cantidad);
+		log.info("/Quitando "+ cantidad+" unidades del producto "+idProducto+" del carrito "+idCarrito);
+	}
+	public CarritoProductos darCarritoProducto(Long idProducto, Long idCarrito)
+	{
+		return pp.darCarritoProducto(idCarrito, idProducto);
 	}
 	@Override
 	public void run() {

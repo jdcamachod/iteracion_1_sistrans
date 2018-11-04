@@ -95,6 +95,13 @@ class SQLProductosEstantes {
 			q.setParameters(cantidad, idProducto, idEstante);
 			q.executeUnique();
 		}
+		
+		public void devolverCantidad(PersistenceManager pm, int cantidad, Long idProducto, Long idEstante)
+		{
+			Query q = pm.newQuery(SQL, "UPDATE "+pp.darTablaProductosEstantes()+" SET cantidad = cantidad + ?  WHERE idProducto = ? AND idEstante = ?");
+			q.setParameters(cantidad, idProducto, idEstante);
+			q.executeUnique();
+		}
 		public List<ProductosEstantes> darProductosEstantesPorEstante (PersistenceManager pm, Long idEstante)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosEstantes()+" WHERE idEstante = ?");

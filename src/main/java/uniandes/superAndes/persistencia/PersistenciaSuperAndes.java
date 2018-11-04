@@ -2102,14 +2102,29 @@ public class PersistenciaSuperAndes  {
 	{
 		sqlProductosEstantes.restarCantidad(pmf.getPersistenceManager(), cantidad, idProducto, idEstante);
 	}
+	
+	public void devolverCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		sqlProductosEstantes.devolverCantidad(pmf.getPersistenceManager(), cantidad, idProducto, idEstante);
+	}
 	public List<CarritoProductos> darCarritoProductosPorCarrito(Long idCarrito)
 	{
+		
 		List<CarritoProductos> lista = sqlCarritoProductos.darCarritoProductosPorCarrito(pmf.getPersistenceManager(), idCarrito);
 		return lista;
 	}
+	public CarritoProductos darCarritoProducto(Long idCarrito, Long idProducto)
+	{
+		
+		CarritoProductos lista = sqlCarritoProductos.darCarritoProducto(pmf.getPersistenceManager(), idCarrito, idProducto);
+		return lista;
+	}
+	
+	
 	
 	public List<Producto> darProductosPorCarrito(Long idCarrito)
 	{
+		
 		List<Producto> productos = new LinkedList<Producto>();
 		for(CarritoProductos cp:  darCarritoProductosPorCarrito(idCarrito))
 		{
@@ -2119,7 +2134,35 @@ public class PersistenciaSuperAndes  {
 		return productos;
 	}
 	
-
+	public boolean vaciarCarrito(Long idCarrito)
+	{
+		for(CarritoProductos cp:  darCarritoProductosPorCarrito(idCarrito))
+		{
+			eliminarProductoCarrito(cp.getIdProducto(), idCarrito);
+		}
+		return darProductosPorCarrito(idCarrito).isEmpty();
+	}
+	
+	public boolean eliminarProductoCarrito(Long idProducto, Long idCarrito)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		sqlCarritoProductos.eliminarCarritoProductos(pm, idCarrito, idProducto);
+		return sqlCarritoProductos.darCarritoProducto(pm, idCarrito, idProducto)==null;
+		
+	}
+	public void eliminarProductoEstante(Long idProducto, Long idEstante)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		sqlProductosEstantes.eliminarProductosEstante(pm, idProducto, idEstante);
+		
+		
+	}
+	
+	public void quitarUnidadesCarrito(Long idProducto, Long idCarrito, int cantidad)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+		sqlCarritoProductos.quitarUnidades(pm, idCarrito, idProducto, cantidad);
+	}
 
 
 	public List<Producto> darProductosOrdenPedido (long idOrden) {

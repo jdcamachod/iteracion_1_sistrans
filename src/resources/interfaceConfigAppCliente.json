@@ -32,8 +32,16 @@
 					"event": "agregarProductoAlCarrito"
 				},
 				{
+					"label": "Devolver unidades de un producto",
+					"event": "quitarUnidadesProducto"
+				},
+				{
 					"label": "Devolver Producto",
 					"event": "devolverProducto"
+				},
+				{
+					"label": "Vaciar carrito",
+					"event": "vaciarCarrito"
 				},
 				{
 					"label": "Abandonar carrito",

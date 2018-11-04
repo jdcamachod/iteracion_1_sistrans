@@ -78,16 +78,28 @@ public class SQLCarritoProductos {
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS");
 			q.setResultClass(CarritoProductos.class);
-			List<CarritoProductos> resp = (List<CarritoProductos>) q.execute();
+			List<CarritoProductos> resp = (List<CarritoProductos>) q.executeList();
 			return resp;
 		}
 		
 		public List<CarritoProductos> darCarritoProductosPorCarrito (PersistenceManager pm, Long idCarrito)
 		{
-			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS WHERE idCarrito = ?");
-			q.setParameters(idCarrito);
+			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS WHERE idCarrito = "+idCarrito);
 			q.setResultClass(CarritoProductos.class);
-			List<CarritoProductos> resp = (List<CarritoProductos>) q.execute();
+			List<CarritoProductos> resp = (List<CarritoProductos>) q.executeList();
 			return resp;
+		}
+		public CarritoProductos darCarritoProducto(PersistenceManager pm, Long idCarrito, Long idProducto)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM CARRITO_PRODUCTOS WHERE idCarrito = "+idCarrito+ " AND idProducto = "+idProducto);
+			q.setResultClass(CarritoProductos.class);
+			CarritoProductos resp = (CarritoProductos) q.executeUnique();
+			return resp;
+		}
+		
+		public void quitarUnidades(PersistenceManager pm, Long idCarrito, Long idProducto, int cantidad)
+		{
+			Query q = pm.newQuery(SQL, "UPDATE CARRITO_PRODUCTOS SET cantidad = cantidad - "+cantidad +" WHERE idCarrito = "+idCarrito+" AND idProducto = "+idProducto);
+			q.executeUnique();
 		}
 }
