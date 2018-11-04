@@ -554,7 +554,8 @@ public class SuperAndes implements Runnable {
 		}
 		else {
 			carrito = carritos.get(0);
-			long id = carrito.getId();
+			
+			long id = carrito.getId(); 
 			pp.solicitarCarrito(fecha, idCliente, id);
 			carrito = pp.darCarritoPorId(id);
 			
