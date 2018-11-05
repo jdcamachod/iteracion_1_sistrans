@@ -286,7 +286,7 @@ public class SuperAndes implements Runnable {
 		log.info ("\"Buscando Productos por nombre: " + resp + " tuplas eliminadas");
 		return resp;
 	}
-	
+
 	public Producto darProductoPorNombreYProveedor (String nombre, long idProveedor) {
 
 		log.info ("Buscando Producto por nombre y idPorveedor: " + nombre + " proveedor: " + idProveedor);
@@ -543,7 +543,7 @@ public class SuperAndes implements Runnable {
 
 	public long llegadaOrdenPedido (long idOrden ,double calificacionPedido, int estado, Date fechaEntrega) throws Exception 
 	{
-		
+
 		OrdenPedido orden = pp.darOrdenPedidoProveedor(idOrden);
 		if (orden == null) {
 			throw new Exception("La orden no es valida o no existe");
@@ -565,16 +565,16 @@ public class SuperAndes implements Runnable {
 		}
 		else {
 			carrito = carritos.get(0);
-			
+
 			long id = carrito.getId(); 
 			pp.solicitarCarrito(fecha, idCliente, id);
 			carrito = pp.darCarritoPorId(id);
-			
+
 		}
 		log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
 		return carrito;
 	}
-	
+
 	public CarritoCompras darCarritoPorCliente (Long idCliente) {
 
 		log.info ("Buscando carrito por idCliente: " + idCliente);
@@ -582,6 +582,47 @@ public class SuperAndes implements Runnable {
 		log.info ("\"Buscando carrito por idCliente: " + resp );
 		return  resp;
 	}
+
+	public String analizarLaOperacionDeSuperAndes(String categoria, Date fechaInicial, Date fechaFinal) {
+
+		List<Sucursal> sucursales = pp.darSucursales();
+		List<FechasDemanda> fechasDemanda = null;
+		List<FechasDemanda> fechasMenorDemanda = null;
+		List<FechasIngresos> fechasIngresos = null;
+		String resp = "";
+		Categoria laCategoria = pp.darCategoriaPorNombre(categoria);
+
+		for (int i = 0; i < sucursales.size(); i++) {
+			 fechasDemanda = pp.darFechasConDemandaDeSucursal(sucursales.get(i).getId(), fechaInicial, fechaFinal, laCategoria.getId());
+			 for (int j = 0; j < fechasDemanda.size(); j++) {
+				resp += fechasDemanda.get(j).toString();
+			}
+		}
+		
+		for (int i = 0; i < sucursales.size(); i++) {
+			  fechasMenorDemanda = pp.darFechasConMenorDemandaDeSucursal(sucursales.get(i).getId(), fechaInicial, fechaFinal, laCategoria.getId());
+				 for (int j = 0; j < fechasMenorDemanda.size(); j++) {
+						resp += fechasMenorDemanda.get(j).toString();
+					}
+		}
+		
+		for (int i = 0; i < sucursales.size(); i++) {
+			 fechasIngresos = pp.darFechasConIngresosDeSucursal(sucursales.get(i).getId(), fechaInicial, fechaFinal, laCategoria.getId());
+			 for (int j = 0; j < fechasIngresos.size(); j++) {
+					resp += fechasIngresos.get(j).toString();
+				}
+		}
+		
+		
+		return resp;
+	}
+	
+	public List<Cliente> encontrarLosClientesFrecuentes (String sucursal){
+	
+		return pp.encontrarLosClientesFrecuentesDeLaSucursal(pp.darSucursalPorNombre(sucursal).getId());
+		
+	}
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

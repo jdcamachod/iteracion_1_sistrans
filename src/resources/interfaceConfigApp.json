@@ -157,6 +157,25 @@
 			]
 		},	
 		
+				{
+			"menuTitle": "Consulta",
+			"options": [
+				{
+					"label": "Analizar La Operacion De SuperAndes",
+					"event": "analizarLaOperacionDeSuperAndes"
+				},
+				{
+					"label": "Clientes frecuentes",
+					"event": "clientesFrecuente"
+				},
+				{
+					"label": "Borrar por direccion",
+					"event": "eliminarEstantePorDireccion"
+				}
+
+			]
+		},
+		
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[

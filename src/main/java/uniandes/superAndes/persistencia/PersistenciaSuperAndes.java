@@ -26,6 +26,9 @@ import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
+import uniandes.superAndes.negocio.Factura;
+import uniandes.superAndes.negocio.FechasDemanda;
+import uniandes.superAndes.negocio.FechasIngresos;
 import uniandes.superAndes.negocio.OrdenPedido;
 import uniandes.superAndes.negocio.OrdenesProductos;
 import uniandes.superAndes.negocio.Pague1Lleve2Porcentaje;
@@ -33,6 +36,7 @@ import uniandes.superAndes.negocio.PagueNLleveM;
 import uniandes.superAndes.negocio.PagueXLleveY;
 import uniandes.superAndes.negocio.Persona;
 import uniandes.superAndes.negocio.Producto;
+import uniandes.superAndes.negocio.ProductosFacturas;
 import uniandes.superAndes.negocio.Promocion;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
@@ -211,7 +215,7 @@ public class PersistenciaSuperAndes  {
 	 * Atributo para el acceso a la tabla CARRITO de la base de datos
 	 */
 	private SQLCarritoCompras sqlCarritoCompras;
-	
+
 	/**
 	 * Atributo para el acceso a la tabla CARRITO de la base de datos
 	 */
@@ -579,7 +583,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return tablas.get (25);
 	}
-	
+
 	/**
 	 * @return La cadena de caracteres con el nombre de la tabla de CarritoCompras
 	 */
@@ -971,7 +975,7 @@ public class PersistenciaSuperAndes  {
 		Cliente cliente = sqlCliente.darClientesPorCorreo(pmf.getPersistenceManager(), correoCliente);
 		return cliente;
 	}
-	
+
 	public Cliente darClientePorId(long id)
 	{
 		Cliente cliente = sqlCliente.darClientePorId(pmf.getPersistenceManager(), id);
@@ -1346,7 +1350,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlEstante.darEstantes(pmf.getPersistenceManager());
 	}
-	
+
 	public List<Estante> darEstantesPorSucursal(Long sucursal)
 	{
 		return sqlEstante.darEstantesPorSucursal(pmf.getPersistenceManager(), sucursal);
@@ -1395,7 +1399,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlProducto.darProductosPorNombre(pmf.getPersistenceManager(), nombreProducto);
 	}
-	
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida que tienen el nombre dado
 	 * @param nombre - El nombre del tipo de bebida
@@ -1404,7 +1408,7 @@ public class PersistenciaSuperAndes  {
 	public Producto darProductoPorNombreYProveedor (String nombreProducto, long idProveedor)
 	{
 		return sqlProducto.darProductoPorNombreYProveedor(pmf.getPersistenceManager(), nombreProducto, idProveedor);
-	
+
 	}
 
 
@@ -1865,7 +1869,7 @@ public class PersistenciaSuperAndes  {
 		}
 		catch (Exception e)
 		{
-				        	e.printStackTrace();
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return 0;
 		}
@@ -1884,14 +1888,14 @@ public class PersistenciaSuperAndes  {
 
 	private long AdicionarProductoABodega(long idProducto, long idBodega) {
 		long resp = 0;
-		
+
 		Producto elProductoAAgregar = sqlProducto.darProductoPorId(pmf.getPersistenceManager(), idProducto);
 		Bodega bodega = sqlBodega.darBodegaPorId(pmf.getPersistenceManager(), idBodega);
- 		List<Long> productos = sqlProductosBodegas.darProductosDeBodega(pmf.getPersistenceManager(), idBodega);
+		List<Long> productos = sqlProductosBodegas.darProductosDeBodega(pmf.getPersistenceManager(), idBodega);
 		double volumenQueHay = 0;
 		double pesoQueHay = 0 ;
 		for (int i = 0; i < productos.size(); i++) {
-			
+
 			Producto producto = darProductoPorId(productos.get(i));
 			volumenQueHay =+ producto.getVolumen();
 			pesoQueHay =+ producto.getPeso();
@@ -1902,21 +1906,21 @@ public class PersistenciaSuperAndes  {
 
 		return resp;
 	}
-	
+
 	private long AdicionarProductoABodegaDisponible (Producto producto) {
-		
+
 		long resp = 0;
 		List<Bodega> bodegasConTipo = sqlBodega.darBodegasConCategoria(pmf.getPersistenceManager(), producto.getCategoria());
 		for (int i = 0; i < bodegasConTipo.size(); i++) {
-			 resp = AdicionarProductoABodega(producto.getId(), bodegasConTipo.get(i).getId());
-			 
-			 if (resp!= 0) {
-				 return resp;
-			 }
+			resp = AdicionarProductoABodega(producto.getId(), bodegasConTipo.get(i).getId());
+
+			if (resp!= 0) {
+				return resp;
+			}
 		}
 		return resp;
-		
-		
+
+
 	}
 	public OrdenPedido darOrdenPedidoProveedor (long idOrden) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -1951,7 +1955,7 @@ public class PersistenciaSuperAndes  {
 	/* ****************************************************************
 	 * 			Métodos para manejar los Carritos
 	 *****************************************************************/
-			
+
 	public CarritoCompras adicionarCarrito(Long idCliente,  Date fecha)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -2000,8 +2004,8 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlCarritoCompras.darCarritosSinCliente(pmf.getPersistenceManager());
 	}
-	
-	
+
+
 	/**
 	 * Método que consulta todas las tuplas en la tabla TipoBebida
 	 * @return La lista de objetos TipoBebida, construidos con base en las tuplas de la tabla TIPOBEBIDA
@@ -2010,7 +2014,7 @@ public class PersistenciaSuperAndes  {
 	{
 		return sqlCarritoCompras.darCarritos(pmf.getPersistenceManager());
 	}
-	
+
 	/**
 	 * Asigna el cliente y la fecha al carrito recibido por parametro
 	 * @param fecha - La fecha en la que se solicito el carrito
@@ -2063,12 +2067,13 @@ public class PersistenciaSuperAndes  {
 			log.trace ("dar productos orden proveedor con id  " + idOrden);
 			List <Long> productosid = sqlOrdenesProducto.darProductosPorOrden(pm, idOrden);
 			ArrayList <Producto> productos = new  ArrayList<Producto>();
-			
+			tx.commit();
+
 			for (int i = 0; i < productosid.size(); i++) {
-				
+
 				long idProducto = productosid.get(i).longValue();
 				productos.add(darProductoPorId(idProducto));
-				
+
 			}
 			log.trace ("se dieroon productos orden proveedor con id  " + idOrden);
 
@@ -2077,7 +2082,7 @@ public class PersistenciaSuperAndes  {
 		}
 		catch (Exception e)
 		{
-			        	e.printStackTrace();
+			e.printStackTrace();
 			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
 			return null;
 		}
@@ -2091,6 +2096,231 @@ public class PersistenciaSuperAndes  {
 		}
 
 	}
+	public List<Factura> darFacturasPorTiempo(java.sql.Date fechaInicial, java.sql.Date fechaFinal) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar facturas  por fecha  " + fechaInicial + " fecha final " + fechaFinal );
+			List<Factura> facturas = sqlFactura.darFacturasEntreFechas(pmf.getPersistenceManager() ,fechaInicial, fechaFinal);
+			tx.commit();
+
+			return facturas;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+
+	}
+
+	public List<Factura> darFacturasPorTiempoYSucursal(java.sql.Date fechaInicial, java.sql.Date fechaFinal, long idSucursal) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar facturas  por fecha  " + fechaInicial + " fecha final " + fechaFinal );
+			List<Factura> facturas = sqlFactura.darFacturasEntreFechasYSucursal(pmf.getPersistenceManager() ,fechaInicial, fechaFinal, idSucursal);
+			tx.commit();
+
+			return facturas;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+
+	}
+
+	public List<ProductosFacturas> darProductosFactura(long idFactura) {
+		// TODO Auto-generated method stub
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar Productos  de factura " + idFactura );
+			List<ProductosFacturas> productos = sqlProductosFacturas.darProductosFactura(pm, idFactura);
+			tx.commit();
+
+			return productos;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+	public List<FechasDemanda> darFechasConDemandaDeSucursal(long id, java.sql.Date fechaInicial, java.sql.Date fechaFinal, long categoria) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar Fechas demanda  de sucural " + id );
+			List<FechasDemanda> fechasDemanda = sqlFactura.darFechasConDemandaDeSucursal(pm,categoria , id, fechaInicial, fechaFinal);
+			tx.commit();
+
+			return fechasDemanda;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+
+	public List<FechasDemanda> darFechasConMenorDemandaDeSucursal(long id, java.sql.Date fechaInicial, java.sql.Date fechaFinal, long categoria) {
+
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar Fechas demanda menor  de sucural " + id );
+			List<FechasDemanda> fechasDemanda = sqlFactura.darFechasConMenorDemandaDeSucursal(pm,categoria, id, fechaInicial, fechaFinal);
+			tx.commit();
+
+			return fechasDemanda;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+	public List<FechasIngresos> darFechasConIngresosDeSucursal(long id, java.sql.Date fechaInicial, java.sql.Date fechaFinal, long categoria) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar Fechas ingresos  de sucural " + id );
+			List<FechasIngresos> fechasDemanda = sqlFactura.darFechasConMayoresIngresos(pm,categoria, id, fechaInicial, fechaFinal);
+			tx.commit();
+
+			return fechasDemanda;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}	
+	
+	public List<Cliente> encontrarLosClientesFrecuentesDeLaSucursal (long id) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar CLientes frecuentes de sucural " + id );
+			List<Cliente> clientes = sqlCliente.encontrarLosClientesFrecuentesDeLaSucursal(pm, id);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}	
+
 
 
 }
