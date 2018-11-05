@@ -7,7 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.PromocionPaquete;
-import uniandes.superAndes.negocio.SucursalesClientes;
+
 
 class SQLPromocionPaquete {
 
@@ -77,7 +77,7 @@ class SQLPromocionPaquete {
 		public List<PromocionPaquete> darPromocionesPaquetes (PersistenceManager pm)
 		{
 			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaPromocionPaquete());
-			q.setResultClass(SucursalesClientes.class);
+			q.setResultClass(PromocionPaquete.class);
 			List<PromocionPaquete> resp = (List<PromocionPaquete>) q.execute();
 			return resp;
 		}

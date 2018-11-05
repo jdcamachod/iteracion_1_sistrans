@@ -198,7 +198,7 @@ public class PersistenciaSuperAndes  {
 	/**
 	 * Atributo para el acceso a la tabla SUCURSALES_CLIENTES de la base de datos
 	 */
-	private SQLSucursalesClientes sqlSucursalesClientes;
+	//private SQLSucursalesClientes sqlSucursalesClientes;
 
 	/**
 	 * Atributo para el acceso a la tabla TIPO_PRODUCTO de la base de datos
@@ -362,7 +362,7 @@ public class PersistenciaSuperAndes  {
 		//sqlProductosPromociones = new SQLProductosPromociones(this);
 		sqlPromocionesFacturas = new SQLPromocionesFacturas(this);
 		sqlPromocionPaquete= new SQLPromocionPaquete(this);
-		sqlSucursalesClientes= new SQLSucursalesClientes(this);
+		//sqlSucursalesClientes= new SQLSucursalesClientes(this);
 		sqlCarritoCompras = new SQLCarritoCompras(this);
 		sqlCarritoProductos = new SQLCarritoProductos(this);
 		sqlUtil = new SQLUtil(this);

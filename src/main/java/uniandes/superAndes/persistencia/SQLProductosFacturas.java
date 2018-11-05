@@ -6,7 +6,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.ProductosFacturas;
-import uniandes.superAndes.negocio.SucursalesClientes;
+
 
 class SQLProductosFacturas {
 
