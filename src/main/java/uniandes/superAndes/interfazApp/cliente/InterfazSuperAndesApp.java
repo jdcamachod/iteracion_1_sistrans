@@ -64,6 +64,7 @@ import com.google.gson.stream.JsonReader;
 
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.CarritoCompras;
+import uniandes.superAndes.negocio.CarritoProductos;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Promocion;
@@ -75,6 +76,7 @@ import uniandes.superAndes.negocio.VOBodega;
 import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
+import uniandes.superAndes.negocio.Factura;
 import uniandes.superAndes.negocio.Persona;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
@@ -342,36 +344,44 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	{
 		try 
 		{
-			JPanel myPanel = new JPanel(new GridLayout(1,2));
-			sucursales = new JComboBox();
-			List <VOSucursal> lista = superAndes.darVOSucursales();
-			for(VOSucursal suc: lista)
+			if(sucursal!=null && carrito!=null && superAndes.darProductosPorCarrito(carrito.getId())!=null && !superAndes.darProductosPorCarrito(carrito.getId()).isEmpty())
 			{
-				sucursales.addItem(suc.getNombre());
+				panelDatos.actualizarInterfaz("Debe vaciar el carrito antes de cambiar de sucursal");
 			}
-			myPanel.add(new JLabel("Seleccione una sucursal", 10));
-			myPanel.add(sucursales);
-			int result = JOptionPane.showConfirmDialog(null, myPanel, 
-					"Seleccione una sucursal    ", JOptionPane.OK_CANCEL_OPTION);
-			if(result == JOptionPane.OK_OPTION)
-			{
-				String nombre = (String) sucursales.getSelectedItem();
-				sucursal = superAndes.darSucursalPorNombre(nombre);
-				String resultado = "Usted esta en la sucursal "+ sucursal.getNombre();
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
-			}
+			else {
+				JPanel myPanel = new JPanel(new GridLayout(1,2));
+				sucursales = new JComboBox();
+				List <VOSucursal> lista = superAndes.darVOSucursales();
+				for(VOSucursal suc: lista)
+				{
+					sucursales.addItem(suc.getNombre());
+				}
+				myPanel.add(new JLabel("Seleccione una sucursal", 10));
+				myPanel.add(sucursales);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Seleccione una sucursal    ", JOptionPane.OK_CANCEL_OPTION);
+				if(result == JOptionPane.OK_OPTION)
+				{
+					String nombre = (String) sucursales.getSelectedItem();
+					sucursal = superAndes.darSucursalPorNombre(nombre);
+					String resultado = "Usted esta en la sucursal "+ sucursal.getNombre();
+					panelDatos.actualizarInterfaz(resultado);
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}
+				
+			} 
 			
-		} 
+		}
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+			
 	}
 
 
@@ -417,6 +427,134 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			}
 		}
 	}
+	
+	public void quitarUnidadesProducto()
+	{
+		try {
+			JPanel myPanel = new JPanel(new GridLayout(2,2));
+			JComboBox productos = new JComboBox();
+			for(Producto p: superAndes.darProductosPorCarrito(carrito.getId()))
+			{
+				productos.addItem(p.getId()+": "+p.getNombre()+p.getPrecioUnitario());
+			}
+			JTextField cant = new JTextField(10);
+			myPanel.add(new JLabel("Seleccione el producto que quiere devolver   "));
+			myPanel.add(productos);
+			myPanel.add(new JLabel("Seleccione las unidades del producto   "));
+			myPanel.add(cant);
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Seleccione el producto a devolver ", JOptionPane.OK_CANCEL_OPTION);
+			if(result == JOptionPane.OK_OPTION)
+			{
+				String p = (String) productos.getSelectedItem();
+				Long idP = Long.parseLong(p.split(":")[0]);
+				Producto producto = superAndes.darProductoPorId(idP);
+				int cantidad = Integer.parseInt(cant.getText());
+				
+				CarritoProductos relacion = superAndes.darCarritoProducto(producto.getId(), carrito.getId());
+				System.out.println(relacion.getCantidad());
+				
+				
+				if(cantidad>relacion.getCantidad())
+				{
+					
+					panelDatos.actualizarInterfaz("La cantidad de productos que se quieren quitar es mayor a la que hay en el carrito");
+				}
+				else if(cantidad == relacion.getCantidad())
+				{
+					
+					boolean eliminado= superAndes.eliminarProductoCarrito(carrito.getId(), producto.getId());
+					if(eliminado)
+					{
+						panelDatos.actualizarInterfaz("Se elimino el producto ya que la cantidad era la mmisma que la que habia en el carrito");
+						superAndes.devolverCantidadEstante(cantidad, producto.getId(), relacion.getIdEstante());
+					}
+					else {
+						panelDatos.actualizarInterfaz("Ocurrio un error eliminando el producto "+ producto.getNombre()+ " del carrito "+carrito.getId());
+					}
+				}
+				else
+				{
+					System.out.println(superAndes.darProductoEstante(producto.getId(), relacion.getIdEstante()).getCantidad());
+					superAndes.quitarUnidadesProducto(producto.getId(), carrito.getId(), cantidad);
+					panelDatos.actualizarInterfaz("Se devolvieron al estante "+ cantidad+ " unidades del producto "+producto.getNombre()+"\n"
+							+ "cantidad antigua: "+relacion.getCantidad()+" cantidad actual: "+superAndes.darCarritoProducto(producto.getId(), carrito.getId()).getCantidad());
+					superAndes.devolverCantidadEstante(cantidad, producto.getId(), relacion.getIdEstante());
+					System.out.println(superAndes.darProductoEstante(producto.getId(), relacion.getIdEstante()).getCantidad());
+				}
+			}
+			
+		}
+		catch(Exception e)
+		{
+//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void devolverProducto()
+	{
+		try {
+			JPanel myPanel = new JPanel(new GridLayout(1,2));
+			JComboBox productos = new JComboBox();
+			for(Producto p: superAndes.darProductosPorCarrito(carrito.getId()))
+			{
+				productos.addItem(p.getId()+": "+p.getNombre()+p.getPrecioUnitario());
+			}
+			JTextField cant = new JTextField(10);
+			myPanel.add(new JLabel("Seleccione el producto que quiere devolver   "));
+			myPanel.add(productos);
+			
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Seleccione el producto a devolver ", JOptionPane.OK_CANCEL_OPTION);
+			if(result == JOptionPane.OK_OPTION)
+			{
+				String p = (String) productos.getSelectedItem();
+				Long idP = Long.parseLong(p.split(":")[0]);
+				Producto producto = superAndes.darProductoPorId(idP);
+				
+				
+				CarritoProductos relacion = superAndes.darCarritoProducto(producto.getId(), carrito.getId());
+				
+				
+					boolean eliminado= superAndes.eliminarProductoCarrito(carrito.getId(), producto.getId());
+					if(eliminado)
+					{
+						panelDatos.actualizarInterfaz("Se elimino el producto "+ producto.getNombre());
+						superAndes.devolverCantidadEstante(relacion.getCantidad(), producto.getId(), relacion.getIdEstante());
+					}
+					else {
+						panelDatos.actualizarInterfaz("Ocurrio un error eliminando el producto "+ producto.getNombre()+ " del carrito "+carrito.getId());
+					}	
+			}
+			
+		}
+		catch(Exception e)
+		{
+//			e.printStackTrace();
+				String resultado = generarMensajeError(e);
+				panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	public void vaciarCarrito()
+	{
+		for(Producto producto: superAndes.darProductosPorCarrito(carrito.getId()))
+		{
+			
+			boolean eliminado= superAndes.eliminarProductoCarrito(carrito.getId(), producto.getId());
+			if(eliminado)
+			{
+				CarritoProductos relacion = superAndes.darCarritoProducto(producto.getId(), carrito.getId());
+				panelDatos.actualizarInterfaz("Se elimino el producto "+ producto.getNombre());
+				superAndes.devolverCantidadEstante(relacion.getCantidad(), producto.getId(), relacion.getIdEstante());
+			}
+			else {
+				panelDatos.actualizarInterfaz("Ocurrio un error eliminando el producto "+ producto.getNombre()+ " del carrito "+carrito.getId());
+			}
+		}
+	}
 	/**
 	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
 	 */
@@ -453,6 +591,65 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	public void pagarCompra()
+	{
+		List<Producto> productos = superAndes.darProductosPorCarrito(carrito.getId());
+		if(carrito == null)
+		{
+			panelDatos.actualizarInterfaz("No tiene un carrito de compras");
+		}
+		else if(productos == null || productos.isEmpty())
+		{
+			panelDatos.actualizarInterfaz("No tiene productos que llevar");
+		}
+		else 
+		{
+			Date fecha = new Date();
+			double costoTotal =0;
+			for(Producto p: productos)
+			{
+				
+				CarritoProductos relacion = superAndes.darCarritoProducto(p.getId(), carrito.getId());
+				int cantidad = relacion.getCantidad();
+				superAndes.restarCantidadProductos(cantidad, p.getId());
+				costoTotal += cantidad*p.getPrecioUnitario();
+				superAndes.eliminarProductoCarrito(carrito.getId(), p.getId());	
+			}
+			 superAndes.eliminarClienteCarrito(carrito);
+			 carrito = null;
+			Factura factura = superAndes.adicionarFactura(fecha, costoTotal, cliente.getId(), sucursal.getId());
+			panelDatos.actualizarInterfaz("Compra realizada con exito \n"
+					+ "Datos de la compra \n"
+					+ "fecha: "+ fecha
+					+"\nCosto Total: "+costoTotal
+					+"\nSucursal de la compra: "+sucursal.getNombre()
+					+"\nDatos del cliente: "+cliente.getNombre()+", "+cliente.getCorreoElectronico());
+		}
+	}
+	
+	public void mostrarFacturas()
+	{
+		int i =0;
+		for(Factura fac: superAndes.darFacturasPorCliente(cliente.getId()))
+		{
+			panelDatos.actualizarInterfaz("------------------------------------------------------------------"
+					+ "\nFactura #"+i+" \n"
+					+ "Datos de la compra \n"
+					+ "fecha: "+ fac.getFecha()
+					+"\nCosto Total: "+fac.getCostoTotal()
+					+"\nSucursal de la compra: "+fac.getSucursal()
+					+"\nDatos del cliente: "+cliente.getNombre()+", "+cliente.getCorreoElectronico());
+		}
+	}
+	
+	public void abandonarCarrito()
+	{
+		superAndes.eliminarClienteCarrito(carrito);
+		panelDatos.actualizarInterfaz("Se ha eliminado el cliente del carrito");
+		carrito = null;
+	}
+	
+	
 
 
 	
@@ -465,15 +662,76 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	 * Consulta en la base de datos las sucursales existentes y los muestra en el panel de datos de la aplicación
 	 */
 
-	public void listarProductos( )
+	public void agregarProductoAlCarrito( )
 	{
 		try 
 		{
-			List <VOProducto> lista = superAndes.darVOProductos();
-			String resultado = "En Productos";
-			resultado +=  "\n" + listarVO(lista);
-			panelDatos.actualizarInterfaz(resultado);
-			resultado += "\n Operación terminada";
+			if(carrito ==null)
+			{
+				panelDatos.actualizarInterfaz("Debe solicitar un carrito primero");
+			}
+			else if(sucursal == null)
+			{
+				panelDatos.actualizarInterfaz("Debe seleccionar una sucursal primero");
+			}
+			else if(estante == null)
+			{
+				panelDatos.actualizarInterfaz("Debe seleccionar un estante primero");
+			}
+			else
+			{
+				productos = new JComboBox();
+				for(Producto p: superAndes.darProductosPorEstante(estante.getId()))
+				{
+					productos.addItem(p.getId()+ ": "+p.getNombre()+p.getPrecioUnitario());
+				}
+				JPanel myPanel = new JPanel(new GridLayout(2,2));
+				myPanel.add(new JLabel("Seleccione el producto"));
+				myPanel.add(productos);
+				myPanel.add(new JLabel("Seleccione la cantidad de productos de este tipo que va a llevar"));
+				JTextField cantidad = new JTextField();
+				myPanel.add(cantidad);
+				int result = JOptionPane.showConfirmDialog(null, myPanel, 
+						"Seleccione el producto a llevar", JOptionPane.OK_CANCEL_OPTION);
+
+				if (result == JOptionPane.OK_OPTION)
+				{
+					String p = (String) productos.getSelectedItem();
+					Long idP = Long.parseLong(p.split(":")[0]);
+					Producto producto = superAndes.darProductoPorId(idP);
+					int cant = Integer.parseInt(cantidad.getText());
+					
+					//verificar la relacion de productosEstantes para que se cumpla la cantidad y restar la cantidad de productos del estante
+					if(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad()<cant) {
+						panelDatos.actualizarInterfaz("La cantidad de productos solicitada es mayor a la que esta en el estante");
+					}
+					else
+					{
+						if(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad()<=0)
+						{
+							
+							panelDatos.actualizarInterfaz("En este momento este producto no está disponible, ya que no quedan unidades disponibles");
+						}
+						else
+						{
+							System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
+							superAndes.restarCantidadEstante(cant, producto.getId(), estante.getId());
+							CarritoProductos relacion = superAndes.adicionarProductoACarrito(producto, estante, cant, carrito);
+							panelDatos.actualizarInterfaz("Se agrega el producto "+producto.getNombre()+" al carrito "+carrito.getId()+ " tomado desde el estante "+estante.getDireccion());
+							System.out.println(superAndes.darProductoEstante(producto.getId(), estante.getId()).getCantidad());
+						}
+						
+						
+						//TODO Deberia verificarse todos los estantes al final
+						
+					}
+					
+				}
+				else {
+					panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				}
+			}
+			
 		} 
 		catch (Exception e) 
 		{
@@ -487,45 +745,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 	
 	 
 
-	/**
-	 * Busca la Sucursal con el nombre indicado por el usuario y lo muestra en el panel de datos
-	 */
-	public void buscarProductoPorNombre( )
-	{
-		try 
-		{
-			String nombre = JOptionPane.showInputDialog (this, "Nombre del producto?", "Buscar Producto por nombre", JOptionPane.QUESTION_MESSAGE);
-			if (nombre != null)
-			{
-				List<Producto> producto = superAndes.darProductosPorNombre(nombre);
-				String resultado = "En buscar Producto por nombre\n\n";
-				if (producto != null)
-				{
-					resultado += "La Proveedor es: \n" ;
-					for(VOProducto pr: producto)
-					{
-						resultado +=pr+"\n";
-					}
-				}
-				else
-				{
-					resultado += "Un Producto con nombre: " + nombre + " NO EXISTE\n";    				
-				}
-				resultado += "\n Operación terminada";
-				panelDatos.actualizarInterfaz(resultado);
-			}
-			else
-			{
-				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
-			}
-		} 
-		catch (Exception e) 
-	   {
-			e.printStackTrace();
-			String resultado = generarMensajeError(e);
-			panelDatos.actualizarInterfaz(resultado);
-		}
-	}
+	
 	/* ****************************************************************
 	 * 			CRUD de Cliente
 	 * ****************************************************************
@@ -1194,9 +1414,9 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 			Runnable task = new SuperAndes();
 			int initialDelay = 0;
-			int periodicDelay = 1;
+			int periodicDelay = 60;
 			scheduler.scheduleAtFixedRate(task, initialDelay, periodicDelay,
-            TimeUnit.DAYS
+            TimeUnit.SECONDS
     );
 		}
 		catch( Exception e )

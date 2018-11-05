@@ -22,7 +22,9 @@ public interface VOFactura {
 	/**
 	 * @return el identificador del cliente
 	 */
-	public long getIdCliente();
+	public Long getCliente();
+	
+	public Long getSucursal();
 	
 	/**
 	 * @return Una cadena de caracteres con la información de la factura

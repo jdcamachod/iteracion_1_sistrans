@@ -149,6 +149,13 @@ class SQLProducto {
 			q.setParameters(nombrePro, idProveedor);
 			return (Producto) q.executeUnique();
 		}
+		
+		public void restarCantidad(PersistenceManager pm, int cantidad, Long idProducto)
+		{
+			Query q = pm.newQuery(SQL, "UPDATE "+pp.darTablaProducto()+" SET cantidad = cantidad - ?  WHERE id = ? ");
+			q.setParameters(cantidad, idProducto);
+			q.executeUnique();
+		}
 
 
 }

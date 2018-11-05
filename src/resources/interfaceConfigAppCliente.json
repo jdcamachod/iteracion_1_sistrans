@@ -18,6 +18,11 @@
 					"label": "Mostrar facturas",
 					"event": "mostrarFacturas"
 				}
+				,
+				{
+					"label": "Pagar la compra",
+					"event": "pagarCompra"
+				}
 			]
 		},
 		{
@@ -28,8 +33,20 @@
 					"event": "solicitarCarrito"
 				},
 				{
+					"label": "Agregar producto",
+					"event": "agregarProductoAlCarrito"
+				},
+				{
+					"label": "Devolver unidades de un producto",
+					"event": "quitarUnidadesProducto"
+				},
+				{
 					"label": "Devolver Producto",
 					"event": "devolverProducto"
+				},
+				{
+					"label": "Vaciar carrito",
+					"event": "vaciarCarrito"
 				},
 				{
 					"label": "Abandonar carrito",

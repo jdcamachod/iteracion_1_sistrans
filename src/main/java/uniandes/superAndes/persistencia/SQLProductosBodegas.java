@@ -8,7 +8,7 @@ import javax.jdo.Query;
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.ProductosBodegas;
-import uniandes.superAndes.negocio.SucursalesClientes;
+
 
 class SQLProductosBodegas {
 

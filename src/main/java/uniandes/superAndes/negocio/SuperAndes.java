@@ -410,12 +410,12 @@ public class SuperAndes implements Runnable {
 	{
 		log.info("Adicionando bodega con direccion : "+direccion);
 
-
+		
 		long idSucursal = darSucursalPorNombre(nombreSucursal).getId();
-		Categoria cat = darCategoriaPorNombre("PRUEBA");
+		Categoria cat = darCategoriaPorNombre(nombreCategoria);
 		if(cat==null)
 		{
-			cat =adicionarCategoria("PRUEBA");
+			cat =adicionarCategoria(nombreCategoria);
 		}
 
 
@@ -457,7 +457,26 @@ public class SuperAndes implements Runnable {
 		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
 	}
+	
+	public List<VOCategoria> darVOCategoria ()
+	{
+		log.info ("Generando los VO de categoria");        
+		List<VOCategoria> vOCategoria = new LinkedList<VOCategoria> ();
+		for (Categoria tb : pp.darCategorias())
+		{
+			vOCategoria.add(tb);
+		}
+		log.info ("Generando los VO de categoria: " + vOCategoria.size() + " existentes");
+		return vOCategoria;
+	}
 
+	public ProductosEstantes asociarEstanteProducto(Producto producto, Estante estante, int cantidad)
+	{
+		log.info("Adicionando un nuevo ProductosEstantes");
+		ProductosEstantes relacion = pp.asociarEstanteProducto(estante.getId(), producto.getId(), cantidad);
+		log.info("/Adicionando un nuevo ProductosEstantes");
+		return relacion;
+	}
 	public List<VOEstante> darVOEstantesPorSucursal (Long sucursal)
 	{
 		log.info ("Generando los VO de Estante");        
@@ -468,6 +487,18 @@ public class SuperAndes implements Runnable {
 		}
 		log.info ("Generando los VO de Estante: " + vOProveedor.size() + " existentes");
 		return vOProveedor;
+	}
+	
+	public List<Producto> darProductosPorEstante (Long estante)
+	{
+		log.info ("Generando los VO de Producto");        
+		List<Producto> productos = new LinkedList<Producto> ();
+		for (ProductosEstantes tb : pp.darProductosEstantesPorEstante(estante))
+		{
+			productos.add(pp.darProductoPorId(tb.getIdProducto()));
+		}
+		log.info ("Generando los VO de Producto: " + productos.size() + " existentes");
+		return productos;
 	}
 
 
@@ -555,23 +586,33 @@ public class SuperAndes implements Runnable {
 
 	public CarritoCompras solicitarCarrito(Long idCliente)
 	{
-		log.info("Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
-		List<CarritoCompras> carritos = pp.darCarritosSinClientes();
-		CarritoCompras carrito = null;
-		java.util.Date fecha = new java.util.Date();
-		if(carritos==null || carritos.isEmpty())
-		{
-			carrito = pp.adicionarCarrito(idCliente, fecha);
-		}
-		else {
-			carrito = carritos.get(0);
-
-			long id = carrito.getId(); 
-			pp.solicitarCarrito(fecha, idCliente, id);
-			carrito = pp.darCarritoPorId(id);
-
-		}
-		log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+	
+		
+			log.info("Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+			List<CarritoCompras> carritos = pp.darCarritosSinClientes();
+			CarritoCompras carrito = null;
+			java.util.Date fecha = new java.util.Date();
+			System.out.println(carritos.isEmpty());
+			if(carritos==null || carritos.isEmpty())
+			{
+				carrito = pp.adicionarCarrito(idCliente, fecha);
+			}
+			else {
+				carrito = carritos.get(0);
+				
+				long id = carrito.getId(); 
+				pp.solicitarCarrito(fecha, idCliente, id);
+				carrito = pp.darCarritoPorId(id);
+				
+			}
+			log.info("/Solicitando carrito para el cliente: "+pp.darClientePorId(idCliente).getNombre());
+			return carrito;
+		
+		
+	}
+	public CarritoCompras eliminarClienteCarrito(CarritoCompras carrito)
+	{
+		carrito = pp.solicitarCarrito(null, null, carrito.getId());
 		return carrito;
 	}
 
@@ -623,10 +664,127 @@ public class SuperAndes implements Runnable {
 		
 	}
 
+	
+	public void vaciarCarritosAbandonados()
+	{
+		System.out.println("revisando carritos abandonados");
+		for(CarritoCompras carrito: pp.darCarritosSinClientes())
+		{
+		
+			System.out.println(darProductosPorCarrito(carrito.getId()).isEmpty());
+			for(Producto producto: darProductosPorCarrito(carrito.getId()))
+			{
+				CarritoProductos relacion = darCarritoProducto(producto.getId(), carrito.getId());
+				boolean eliminado= eliminarProductoCarrito(carrito.getId(), producto.getId());
+				
+				if(eliminado)
+				{
+					
+					
+					devolverCantidadEstante(relacion.getCantidad(), producto.getId(), relacion.getIdEstante());
+					System.out.println("Se elimino el producto "+producto.getNombre()+ " del carrito "+carrito.getId());
+				}
+				else {
+					System.out.println("ocurrio un error eliminando los productos de un carrito");
+				}
+			}
+		}
+		
+	}
+	
+	public CarritoProductos adicionarProductoACarrito(Producto producto, Estante estante, int cantidad, CarritoCompras carrito)
+	{
+		log.info("Adicionando un nuevo CarritoProductos");
+		CarritoProductos relacion = pp.adicionarProductoACarrito(carrito.getId(), producto.getId(), cantidad, estante.getId());
+		log.info("/Adicionando un nuevo CarritoProductos");
+		return relacion;
+	}
+	
+	public ProductosEstantes darProductoEstante(Long producto, Long estante)
+	{
+		log.info("Buscando una relacion de tipo ProductoEstante");
+		ProductosEstantes relacion = pp.darProductoEstante(producto, estante);
+		log.info("/Buscando una relacion de tipo ProductoEstante");
+		return relacion;
+	}
+	
+	public void restarCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		log.info("Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+		pp.restarCantidadEstante(cantidad, idProducto, idEstante);
+		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+	}
+	
+	public void restarCantidadProductos(int cantidad, Long idProducto)
+	{
+		log.info("Restando "+cantidad+" cantidad de productos "+idProducto );
+		pp.restarCantidadProductos(cantidad, idProducto);
+		log.info("/Restando "+cantidad+" cantidad de productos "+idProducto);
+	}
+	
+	public void devolverCantidadEstante(int cantidad, Long idProducto, Long idEstante)
+	{
+		log.info("Sumando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+		pp.devolverCantidadEstante(cantidad, idProducto, idEstante);
+		log.info("/Sumando "+cantidad+" cantidad de productos "+idProducto+" del estante +"+idEstante);
+	}
+	
+	public List<Producto> darProductosPorCarrito(Long idCarrito)
+	{
+		log.info("Consultando los productos en el carrito " +idCarrito );
+		List<Producto> productos = pp.darProductosPorCarrito(idCarrito);
+		log.info("/Consultando los productos en el carrito "+idCarrito);
+		return productos;
+	}
+	
+	public boolean eliminarProductoCarrito(Long idCarrito, Long idProducto)
+	{
+		log.info("Eliminando el producto "+ idProducto+" del carrito "+idCarrito);
+		boolean eliminado = pp.eliminarProductoCarrito(idProducto, idCarrito);
+		log.info("/Eliminando el producto "+ idProducto +" del carrito "+idCarrito);
+		return eliminado;
+	}
+	public void eliminarProductoEstantes(Long idEstante, Long idProducto)
+	{
+		log.info("Eliminando el producto "+ idProducto+" del estante "+idEstante);
+		 pp.eliminarProductoEstante(idProducto, idEstante);
+		log.info("/Eliminando el producto "+ idProducto +" del estante "+idEstante);
+		
+	}
+	public void quitarUnidadesProducto(Long idProducto, Long idCarrito, int cantidad)
+	{
+		log.info("Quitando "+ cantidad+" unidades del producto "+idProducto+" del carrito "+idCarrito);
+		pp.quitarUnidadesCarrito(idProducto, idCarrito, cantidad);
+		log.info("/Quitando "+ cantidad+" unidades del producto "+idProducto+" del carrito "+idCarrito);
+	}
+	public CarritoProductos darCarritoProducto(Long idProducto, Long idCarrito)
+	{
+		return pp.darCarritoProducto(idCarrito, idProducto);
+	}
+	
+	public List<Factura> darFacturasPorCliente(Long idCliente)
+	{
+		log.info("Consultando las facturas por cliente "+idCliente );
+		List<Factura> facturas =pp.darFacturasPorCliente(idCliente);
+		log.info("/Consultando las facturas por cliente "+idCliente );
+		return facturas;
+	}
+	
+	
+	public Factura adicionarFactura( java.util.Date fecha, double costoTotal, Long cliente, Long sucursal) 
+	{
+		log.info("Adicionando factura con cliente : "+cliente+ " y fecha: "+fecha);
+
+
+		Factura factura = pp.adicionarFactura(fecha, costoTotal, cliente, sucursal);
+		log.info("/Adicionando factura con cliente : "+cliente+ " y fecha: "+fecha);
+		return factura;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		pp.verificarPromociones(pp.darPromociones());
+		vaciarCarritosAbandonados();
 	}
 
 

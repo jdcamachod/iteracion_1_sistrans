@@ -5,7 +5,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import uniandes.superAndes.negocio.SucursalesClientes;
+import uniandes.superAndes.negocio.ProductosEstantes;
+
+
 
 class SQLProductosEstantes {
 
@@ -45,15 +47,15 @@ class SQLProductosEstantes {
 		 * @param idCliente - El identificador del cliente
 		 * @return EL número de tuplas insertadas
 		 */
-		public long adicionarProductosEstantes(PersistenceManager pm, long idProducto, long idEstante) 
+		public long adicionarProductosEstantes(PersistenceManager pm, long idProducto, long idEstante, int cantidad) 
 		{
-	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosEstantes() + "(idProducto, idEstante) values (?, ?)");
-	        q.setParameters(idProducto, idEstante);
+	        Query q = pm.newQuery(SQL, "INSERT INTO " + pp.darTablaProductosEstantes() + "(idProducto, idEstante, cantidad) values (?, ?,?)");
+	        q.setParameters(idProducto, idEstante, cantidad);
 	        return (long) q.executeUnique();
 		}
 
 		/**
-		 * Crea y ejecuta la sentencia SQL para eliminar UN SucursalesClientes de la base de datos de SuperAndes, por sus identificador
+		 * Crea y ejecuta la sentencia SQL para eliminar UN SucursalesClientes de la base de datos de SuperAndes, por sus identificad
 		 * @param pm - El manejador de persistencia
 		 * @param idCliente - El identificador del cliente
 		 * @param idSucursal - El identificador de la sucursal
@@ -72,11 +74,41 @@ class SQLProductosEstantes {
 		 * @param pm - El manejador de persistencia
 		 * @return Una lista de objetos SucursalesClientes
 		 */
-		public List<SucursalesClientes> darSucursalesClientes (PersistenceManager pm)
+		public List<ProductosEstantes> darProductosEstantes (PersistenceManager pm)
 		{
-			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaSucursalesClientes());
-			q.setResultClass(SucursalesClientes.class);
-			List<SucursalesClientes> resp = (List<SucursalesClientes>) q.execute();
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosEstantes());
+			q.setResultClass(ProductosEstantes.class);
+			List<ProductosEstantes> resp = (List<ProductosEstantes>) q.executeList();
+			return resp;
+		}
+		
+		public ProductosEstantes darProductoEstante(PersistenceManager pm, Long idProducto, Long idEstante)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM "+ pp.darTablaProductosEstantes()+" WHERE idProducto = ? AND idEstante = ? ");
+			q.setParameters(idProducto, idEstante);
+			q.setResultClass(ProductosEstantes.class);
+			return (ProductosEstantes)q.executeUnique();
+		}
+		
+		public void restarCantidad(PersistenceManager pm, int cantidad, Long idProducto, Long idEstante)
+		{
+			Query q = pm.newQuery(SQL, "UPDATE "+pp.darTablaProductosEstantes()+" SET cantidad = cantidad - ?  WHERE idProducto = ? AND idEstante = ?");
+			q.setParameters(cantidad, idProducto, idEstante);
+			q.executeUnique();
+		}
+		
+		public void devolverCantidad(PersistenceManager pm, int cantidad, Long idProducto, Long idEstante)
+		{
+			Query q = pm.newQuery(SQL, "UPDATE "+pp.darTablaProductosEstantes()+" SET cantidad = cantidad + ?  WHERE idProducto = ? AND idEstante = ?");
+			q.setParameters(cantidad, idProducto, idEstante);
+			q.executeUnique();
+		}
+		public List<ProductosEstantes> darProductosEstantesPorEstante (PersistenceManager pm, Long idEstante)
+		{
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosEstantes()+" WHERE idEstante = ?");
+			q.setParameters(idEstante);
+			q.setResultClass(ProductosEstantes.class);
+			List<ProductosEstantes> resp = (List<ProductosEstantes>) q.executeList();
 			return resp;
 		}
 }

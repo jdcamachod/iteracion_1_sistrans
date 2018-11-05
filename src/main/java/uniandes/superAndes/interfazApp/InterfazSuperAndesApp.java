@@ -65,12 +65,14 @@ import com.google.gson.stream.JsonReader;
 import uniandes.superAndes.negocio.Bodega;
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Producto;
+import uniandes.superAndes.negocio.ProductosEstantes;
 import uniandes.superAndes.negocio.Promocion;
 import uniandes.superAndes.negocio.Proveedor;
 import uniandes.superAndes.negocio.Sucursal;
 import uniandes.superAndes.negocio.SuperAndes;
 import uniandes.superAndes.negocio.TipoProducto;
 import uniandes.superAndes.negocio.VOBodega;
+import uniandes.superAndes.negocio.VOCategoria;
 import uniandes.superAndes.negocio.Cliente;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
@@ -1384,20 +1386,28 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		{
 
 			JTextField direccionField = new JTextField(10);
-			JTextField categoriaField = new JTextField(10);
+			JComboBox categorias = new JComboBox();
 			JTextField volumenField = new JTextField(10);
 			JTextField pesoField = new JTextField(10);
 			JTextField nivelAbastecimientoField = new JTextField(10);
-			JTextField sucursalField = new JTextField(10);	
+			JComboBox sucursales = new JComboBox();	
 
+			for(VOCategoria cat: superAndes.darVOCategoria())
+			{
+				categorias.addItem(cat.getNombre());
+			}
+			for(VOSucursal suc: superAndes.darVOSucursales())
+			{
+				sucursales.addItem(suc.getNombre());
+			}
 
 			JPanel myPanel = new JPanel(new GridLayout(6,2));
 			myPanel.add(new JLabel("Sucursal:"));
-			myPanel.add(sucursalField);
+			myPanel.add(sucursales);
 			myPanel.add(new JLabel("Direccion:"));
 			myPanel.add(direccionField);
 			myPanel.add(new JLabel("Categoria:"));
-			myPanel.add(categoriaField);
+			myPanel.add(categorias);
 			myPanel.add(new JLabel("Volumen:"));
 			myPanel.add(volumenField);
 			myPanel.add(new JLabel("Peso:"));
@@ -1406,13 +1416,13 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			myPanel.add(nivelAbastecimientoField);			
 
 			int result = JOptionPane.showConfirmDialog(null, myPanel, 
-					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+					"Ingrese los datos del estante", JOptionPane.OK_CANCEL_OPTION);
 
 			if (result == JOptionPane.OK_OPTION) {
 
-				String nombreSucursal = sucursalField.getText();
+				String nombreSucursal = (String) sucursales.getSelectedItem();
 				String direccion = direccionField.getText();
-				String nombreCategoria = categoriaField.getText();
+				String nombreCategoria = (String) categorias.getSelectedItem();
 				String volumen = volumenField.getText();
 				String peso = pesoField.getText();
 				String nivelAbastecimiento = nivelAbastecimientoField.getText();
@@ -1478,6 +1488,61 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		catch (Exception e) 
 		{
 			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void registrarProductoAEstante()
+	{
+		try {
+			productos = new JComboBox<String>();
+			for(VOProducto p: superAndes.darVOProductos())
+			{
+				productos.addItem(p.getId()+": "+p.getNombre()+", $"+p.getPrecioUnitario());
+			}
+			JComboBox estantes = new JComboBox<String>();
+			for(VOEstante p: superAndes.darVOEstantes())
+			{
+				estantes.addItem(p.getDireccion());
+			}
+			JPanel myPanel = new JPanel(new GridLayout(3,2));
+			myPanel.add(new JLabel("Seleccione el prooducto"));
+			myPanel.add(productos);
+			myPanel.add(new JLabel("Seleccione el estante"));
+			myPanel.add(estantes);
+			myPanel.add(new JLabel("Digite la cantidad de productos destinados a este estante"));
+			JTextField cant = new JTextField(10);
+			myPanel.add(cant);
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese los datos del estante y el producto", JOptionPane.OK_CANCEL_OPTION);
+			if (result == JOptionPane.OK_OPTION)
+			{
+				String prod = (String) productos.getSelectedItem();
+				Long idProducto =Long.parseLong( prod.split(":")[0]);
+				String direccion = (String) estantes.getSelectedItem();
+				int cantidad = Integer.parseInt(cant.getText());
+				Estante estante = superAndes.darEstantePorDireccion(direccion);
+				Producto producto = superAndes.darProductoPorId(idProducto);
+				if(cantidad > producto.getCantidad())
+				{
+					panelDatos.actualizarInterfaz("La cantidad de productos disponibles");
+				}
+				else {
+					ProductosEstantes relacion = superAndes.asociarEstanteProducto(producto, estante, cantidad);
+					panelDatos.actualizarInterfaz("Se asocio el producto "+producto.getNombre()+" con el estante "+estante.getDireccion());
+				}
+				
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operacion cancelada por el usuario");
+				
+			}
+			
+		}
+		catch(Exception e)
+		{
+//			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}

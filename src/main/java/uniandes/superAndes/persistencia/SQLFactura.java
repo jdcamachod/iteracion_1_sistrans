@@ -53,9 +53,9 @@ class SQLFactura {
 	 * @param idCliente cliente asociado a la factura
 	 * @return
 	 */
-	public long adicionarCategoria (PersistenceManager pm, long idFactura, Date fecha, double costoTotal, long idCliente) 
+	public long adicionarFactura (PersistenceManager pm, long idFactura, Date fecha, double costoTotal, Long idCliente, Long sucursal) 
 	{
-		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaFactura() + "(id, fecha, costototal, idcliente) values (?, ?, ?, ?)");
+		Query q = pm.newQuery(SQL, "INSERT INTO " +  pp.darTablaFactura() + "(id, fecha, costototal, cliente, sucursal) values (?, ?, ?, ?, ?)");
 		q.setParameters(idFactura, fecha, costoTotal, idCliente);
 		return (long) q.executeUnique();
 	}
@@ -96,7 +96,7 @@ class SQLFactura {
 	 * @param pm - El manejador de persistencia
 	 * @return Una lista de objetos Factura
 	 */
-	public List<Factura> darFactura(PersistenceManager pm)
+	public List<Factura> darFacturas(PersistenceManager pm)
 	{
 		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() );
 		q.setResultClass(Factura.class);
@@ -142,5 +142,13 @@ class SQLFactura {
 		q.setResultClass(FechasDemanda.class);
 		q.setParameters(categoria ,idSucursal, fechaInicial, fechaFinal);
 		return (List<FechasIngresos>) q.executeList();
+	}
+	
+	public List<Factura> darFacturasPorCliente(PersistenceManager pm, Long idCliente)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() +" WHERE cliente = ?");
+		q.setParameters(idCliente);
+		q.setResultClass(Factura.class);
+		return (List<Factura>) q.executeList();
 	}
 }
