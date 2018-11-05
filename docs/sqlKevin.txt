@@ -1,0 +1,4 @@
+select cliente.id FROM cliente, factura WHERE cliente.id = factura.cliente group by cliente.id having count(cliente.nombre) > 2
+
+select factura.fecha,factura.sucursal, sum(producto.preciounitario)as sumaprecio  from factura, productos_factura, producto WHERE factura.sucursal = 62 and factura.id = productos_factura.idfactura and producto.id = productos_factura.idproducto 
+and factura.fecha BETWEEN '11/09/18' AND '13/12/18' group by factura.fecha, factura.sucursal order by sumaprecio desc;
