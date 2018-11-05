@@ -1878,12 +1878,12 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
-					e.printStackTrace();
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+
 	public void llegadaOrdenPedido () {
 		try 
 		{
@@ -1920,10 +1920,10 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 						java.sql.Date fechaEsperadaDeEntrega = new java.sql.Date(date.getTime());
 						double calificacionNumero = Double.parseDouble(calificacion);
 						long idOrdenNumero = Long.parseLong(idOrden);
-						
-						
+
+
 						long algo = superAndes.llegadaOrdenPedido(idOrdenNumero, calificacionNumero, 1, fechaEsperadaDeEntrega);
-						
+
 						if (algo == 0)
 						{
 							throw new Exception ("No se pudo Llegar la orden " + idOrden);
@@ -1952,12 +1952,120 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		} 
 		catch (Exception e) 
 		{
-					e.printStackTrace();
+			e.printStackTrace();
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
-		
-		
+
+
+	}
+
+	public void analizarLaOperacionDeSuperAndes( )
+	{
+		try 
+		{
+
+			JTextField fechaInicialField = new JTextField(10);
+			JTextField fechaFinalField = new JTextField(10);
+			JTextField categoriaField = new JTextField(10);
+
+			JPanel myPanel = new JPanel(new GridLayout(3,2));
+			myPanel.add(new JLabel("Categoria:"));
+			myPanel.add(categoriaField);
+			myPanel.add(new JLabel("Fecha Inicial:"));
+			myPanel.add(fechaInicialField);
+			myPanel.add(new JLabel("Fecha Final:"));
+			myPanel.add(fechaFinalField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Please Enter X and Y Values", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String fechaInicial = fechaInicialField.getText();
+				String fechaFinal = fechaFinalField.getText();
+				String categoria = categoriaField.getText();
+
+
+				if (!fechaInicial.isEmpty() && !fechaFinal.isEmpty() && !categoria.isEmpty())
+				{
+
+					String pattern = "yyyy-MM-dd";
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date1 = simpleDateFormat.parse(fechaInicial);
+					java.sql.Date fechaInicialEs = new java.sql.Date(date1.getTime());
+
+					pattern = "yyyy-MM-dd";
+					simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date2 = simpleDateFormat.parse(fechaFinal);
+					java.sql.Date fechaFinalEs = new java.sql.Date(date2.getTime());
+
+
+					String prov = superAndes.analizarLaOperacionDeSuperAndes(categoria, fechaInicialEs, fechaFinalEs);
+					if (prov == null)
+					{
+						throw new Exception ("No se pudo crear el analisis con nombre: " + fechaInicial);
+					}
+					String resultado = "En analisis\n\n";
+					resultado += "analisis  exitosamente: " + prov;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+
+	public void clientesFrecuente()
+	{
+		try 
+		{
+			String direccion = JOptionPane.showInputDialog (this, "Sucursal?", "cliente frecuente de sucursal ", JOptionPane.QUESTION_MESSAGE);
+			if (direccion != null)
+			{
+				 List<Cliente> clientes = superAndes.encontrarLosClientesFrecuentes(direccion);
+				String resultado = "En buscar Bodega por direccion\n\n";
+				if (clientes != null)
+				{
+					for (int i = 0; i < clientes.size(); i++) {
+						resultado += "Los clientes son : " + clientes.get(i).toString();
+
+					}
+				}
+				else
+				{
+					resultado += "No existen clientes: " + direccion + " NO EXISTE\n";    				
+				}
+				resultado += "\n Operación terminada";
+				panelDatos.actualizarInterfaz(resultado);
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
 	}
 
 

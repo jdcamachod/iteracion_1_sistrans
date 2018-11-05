@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
+import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.ProductosFacturas;
 
 
@@ -79,5 +80,15 @@ class SQLProductosFacturas {
 			q.setResultClass(ProductosFacturas.class);
 			List<ProductosFacturas> resp = (List<ProductosFacturas>) q.execute();
 			return resp;
+		}
+
+		public List<ProductosFacturas> darProductosFactura(PersistenceManager pm, long idFactura) {
+			// TODO Auto-generated method stub
+			Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaProductosFacturas() + " WHERE idFactura = ?");
+			q.setResultClass(ProductosFacturas.class);
+			q.setParameters(idFactura);
+			List<ProductosFacturas> resp = (List<ProductosFacturas>) q.executeList();
+			return resp;		
+			
 		}
 }

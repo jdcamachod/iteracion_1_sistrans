@@ -8,6 +8,8 @@ import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.Categoria;
 import uniandes.superAndes.negocio.Factura;
+import uniandes.superAndes.negocio.FechasDemanda;
+import uniandes.superAndes.negocio.FechasIngresos;
 
 class SQLFactura {
 	/* ****************************************************************
@@ -99,6 +101,47 @@ class SQLFactura {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() );
 		q.setResultClass(Factura.class);
 		return (List<Factura>) q.executeList();
+	}
+
+
+	public List<Factura> darFacturasEntreFechasYSucursal(PersistenceManager pm , Date fechaInicial, Date fechaFinal, long idSucursal) {
+		// TODO Auto-generated method stub
+		
+		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() + " WHERE sucursal = ? AND fecha BETWEEN ? AND ?" );
+		q.setResultClass(Factura.class);
+		q.setParameters(idSucursal,fechaInicial, fechaFinal);
+		return (List<Factura>) q.executeList();
+	}
+	
+	public List<Factura> darFacturasEntreFechas(PersistenceManager pm , Date fechaInicial, Date fechaFinal) {
+		// TODO Auto-generated method stub
+		
+		Query q = pm.newQuery(SQL, "SELECT * FROM " +  pp.darTablaFactura() + " WHERE fecha BETWEEN ? AND ?" );
+		q.setResultClass(Factura.class);
+		q.setParameters(fechaInicial, fechaFinal);
+		return (List<Factura>) q.executeList();
+	}
+	
+	public List <FechasDemanda> darFechasConDemandaDeSucursal (PersistenceManager pm,long categoria,long idSucursal, Date fechaInicial, Date fechaFinal) {
+		Query q = pm.newQuery(SQL, "SELECT factura.fecha,factura.sucursal, sum(productos_factura.cantidad)as sumacantidades  FROM factura, productos_factura, producto WHERE producto.id = productos_factura.idproducto and producto.categoria = ? and factura.sucursal = ? AND factura.id = productos_factura.idfactura AND fecha BETWEEN ? AND ? group by factura.fecha, factura.sucursal order by sumacantidades desc" );
+		q.setResultClass(FechasDemanda.class);
+		q.setParameters(categoria,idSucursal, fechaInicial, fechaFinal);
+		return (List<FechasDemanda>) q.executeList();
+	}
+	
+	public List <FechasDemanda> darFechasConMenorDemandaDeSucursal (PersistenceManager pm,long categoria,long idSucursal, Date fechaInicial, Date fechaFinal) {
+		Query q = pm.newQuery(SQL, "SELECT factura.fecha,factura.sucursal, sum(productos_factura.cantidad)as sumacantidades  FROM factura, productos_factura, producto WHERE producto.id = productos_factura.idproducto and producto.categoria = ? and factura.sucursal = ? AND factura.id = productos_factura.idfactura AND fecha BETWEEN ? AND ? group by factura.fecha, factura.sucursal order by sumacantidades asc" );
+		q.setResultClass(FechasDemanda.class);
+		q.setParameters(categoria,idSucursal, fechaInicial, fechaFinal);
+		return (List<FechasDemanda>) q.executeList();
+	}
+	
+	public List <FechasIngresos> darFechasConMayoresIngresos (PersistenceManager pm,long categoria,long idSucursal, Date fechaInicial, Date fechaFinal) {
+		Query q = pm.newQuery(SQL, "SELECT factura.fecha,factura.sucursal, sum(producto.preciounitario)as sumaprecio  FROM factura, productos_factura, producto WHERE producto.categoria = ? and factura.sucursal = ? AND factura.id = productos_factura.idfactura AND producto.id = productos_factura.idproducto"
+				+ " AND fecha BETWEEN ? AND ? group by factura.fecha, factura.sucursal order by sumaprecio desc" );
+		q.setResultClass(FechasDemanda.class);
+		q.setParameters(categoria ,idSucursal, fechaInicial, fechaFinal);
+		return (List<FechasIngresos>) q.executeList();
 	}
 	
 	public List<Factura> darFacturasPorCliente(PersistenceManager pm, Long idCliente)

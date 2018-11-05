@@ -1,5 +1,6 @@
 package uniandes.superAndes.persistencia;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -134,5 +135,21 @@ class SQLCliente {
 		Query q = pm.newQuery(SQL, "SELECT * FROM " + pp.darTablaCliente() );
 		q.setResultClass(Cliente.class);
 		return (List<Cliente>) q.executeList();
+	}
+	
+	public List<Cliente> encontrarLosClientesFrecuentesDeLaSucursal (PersistenceManager pm,long idSucursal) {
+		//select cliente.id FROM cliente, factura WHERE cliente.id = factura.cliente group by cliente.id having count(cliente.nombre) > 2
+		Query q = pm.newQuery(SQL, "SELECT cliente.id FROM " + pp.darTablaCliente() +", " + pp.darTablaFactura() + " WHERE factura.sucursal = ? AND cliente.id = factura.cliente group by cliente.id having count(cliente.nombre) > 2");
+		q.setResultClass(Long.class);
+		q.setParameters(idSucursal);
+		List<Long> clientes = (List<Long>)    q.executeList();
+		List<Cliente> losClientes = new ArrayList<Cliente>();
+		for (int i = 0; i < clientes.size(); i++) {
+			
+			losClientes.add(darClientePorId(pm, clientes.get(i).longValue()));
+		}
+		
+		return losClientes;
+				
 	}
 }
