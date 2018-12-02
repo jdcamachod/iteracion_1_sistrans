@@ -2480,6 +2480,69 @@ public class PersistenciaSuperAndes  {
 
 	}	
 	
+	public List<Cliente> darClientesConsumoSuperAndes (Date fechaInicial, Date fechaFinal, String nombreProd, String param) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar CLientes que compraron el producto "+nombreProd+" en un rango de fechas" );
+			List<Cliente> clientes = sqlCliente.darClientesComsumoSuperAndes(pm, fechaInicial, fechaFinal, nombreProd, param);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}	
+	
+	public List<Cliente> darClientesConsumoSuperAndesv2 (Date fechaInicial, Date fechaFinal, String nombreProd, String param) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar CLientes que no compraron el producto "+nombreProd+" en un rango de fechas" );
+			List<Cliente> clientes = sqlCliente.darClientesComsumoSuperAndesv2(pm, fechaInicial, fechaFinal, nombreProd, param);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}	
 	public List<Cliente> encontrarLosClientesFrecuentesDeLaSucursal (long id) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();

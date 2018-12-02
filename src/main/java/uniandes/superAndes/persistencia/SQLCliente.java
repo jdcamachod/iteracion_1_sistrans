@@ -137,6 +137,48 @@ class SQLCliente {
 		return (List<Cliente>) q.executeList();
 	}
 	
+	public List<Cliente> darClientesComsumoSuperAndes (PersistenceManager pm, Date fechaInicial, Date fechaFinal, String nombreProd, String param)
+	{
+		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"WHERE p.nombre = ? AND  F.fecha BETWEEN ? AND ? ORDER BY ?");
+		q.setParameters(nombreProd, fechaInicial, fechaFinal, param);
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>)q.executeList();
+		
+	}
+	
+	public List<Cliente> darClientesComsumoSuperAndesv2 (PersistenceManager pm, Date fechaInicial, Date fechaFinal, String nombreProd, String param)
+	{
+		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id <> f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"WHERE p.nombre = ? AND  F.fecha BETWEEN ? AND ? ORDER BY ?");
+		q.setParameters(nombreProd, fechaInicial, fechaFinal, param);
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>)q.executeList();
+		
+	}
+	
+	public List<Cliente> darClientesComsumoSuperAndesGerente (PersistenceManager pm, Date fechaInicial, Date fechaFinal, String nombreProd, String param, Long sucursal)
+	{
+		Query q = pm.newQuery(SQL, "SELECT distinct(c.id),c.nombre , c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"INNER JOIN SUCURSAL S ON s.id = f.sucursal"
+				+ "WHERE p.nombre = ? AND  F.fecha BETWEEN ? AND ? AND s.id = ? "
+				+ " ORDER BY ?");
+		q.setParameters(nombreProd, fechaInicial, fechaFinal, sucursal, param);
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>)q.executeList();
+		
+	}
+	
+	
 	public List<Cliente> encontrarLosClientesFrecuentesDeLaSucursal (PersistenceManager pm,long idSucursal) {
 		//select cliente.id FROM cliente, factura WHERE cliente.id = factura.cliente group by cliente.id having count(cliente.nombre) > 2
 		Query q = pm.newQuery(SQL, "SELECT cliente.id FROM " + pp.darTablaCliente() +", " + pp.darTablaFactura() + " WHERE factura.sucursal = ? AND cliente.id = factura.cliente group by cliente.id having count(cliente.nombre) > 2");

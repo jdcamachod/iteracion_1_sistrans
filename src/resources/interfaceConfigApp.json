@@ -181,6 +181,24 @@
 			]
 		},
 		
+		{
+			"menuTitle": "Iteracion 3",
+			"options": [
+				{
+					"label": "Consumo en SuperAndes",
+					"event": "consumoSuperAndes"
+				},
+				{
+					"label": "Consumo en SuperAndes v2",
+					"event": "consumoSuperAndesv2"
+				},
+				{
+					"label": "Borrar por direccion",
+					"event": "eliminarEstantePorDireccion"
+				}
+
+			]
+		},
 		{ "menuTitle": "Mantenimiento",
 		  "options":
 			[
@@ -199,10 +217,6 @@
 				{
 					"label": "Limpiar log de datanucleus",
 					"event": "limpiarLogDatanucleus"
-				},
-				{
-					"label": "Limpiar Base de Datos",
-					"event": "limpiarBD"
 				}
 			]
 		},

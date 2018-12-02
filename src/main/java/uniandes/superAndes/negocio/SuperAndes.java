@@ -663,6 +663,17 @@ public class SuperAndes implements Runnable {
 		return pp.encontrarLosClientesFrecuentesDeLaSucursal(pp.darSucursalPorNombre(sucursal).getId());
 		
 	}
+	public List<Cliente> darClientesConsumoSuperAndes(Date fechaInicial, Date fechaFinal,String nombreProd, String param)
+	{
+		return pp.darClientesConsumoSuperAndes(fechaInicial, fechaFinal, nombreProd, param);
+	}
+	
+	public List<Cliente> darClientesConsumoSuperAndesv2(Date fechaInicial, Date fechaFinal,String nombreProd, String param)
+	{
+		return pp.darClientesConsumoSuperAndesv2(fechaInicial, fechaFinal, nombreProd, param);
+	}
+	
+	
 
 	
 	public void vaciarCarritosAbandonados()

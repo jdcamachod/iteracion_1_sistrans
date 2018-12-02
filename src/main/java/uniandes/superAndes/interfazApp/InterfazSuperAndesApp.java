@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -2031,6 +2032,152 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void consumoSuperAndes( )
+	{
+		try 
+		{
+
+			JTextField fechaInicialField = new JTextField(10);
+			JTextField fechaFinalField = new JTextField(10);
+			JTextField nombreProdField = new JTextField(10);
+			JTextField paramField = new JTextField(10);
+			
+
+			JPanel myPanel = new JPanel(new GridLayout(4,2));
+			myPanel.add(new JLabel("Nombre del producto: "));
+			myPanel.add(nombreProdField);
+			myPanel.add(new JLabel("Fecha Inicial (yyyy-MM-dd):"));
+			myPanel.add(fechaInicialField);
+			myPanel.add(new JLabel("Fecha Final (yyyy-MM-dd):"));
+			myPanel.add(fechaFinalField);
+			myPanel.add(new JLabel("Parametro de ordenamiento (puntos, correo, nombre, id): "));
+			myPanel.add(paramField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese los datos del producto y la fecha", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String fechaInicial = fechaInicialField.getText();
+				String fechaFinal = fechaFinalField.getText();
+				String nombreProd = nombreProdField.getText();
+				String param = paramField.getText();
+
+
+				if (!fechaInicial.isEmpty() && !fechaFinal.isEmpty() && !nombreProd.isEmpty() && !param.isEmpty())
+				{
+
+					String pattern = "yyyy-MM-dd";
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date1 = simpleDateFormat.parse(fechaInicial);
+					java.sql.Date fechaInicialEs = new java.sql.Date(date1.getTime());
+
+					pattern = "yyyy-MM-dd";
+					simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date2 = simpleDateFormat.parse(fechaFinal);
+					java.sql.Date fechaFinalEs = new java.sql.Date(date2.getTime());
+
+					
+					List<Cliente> lista = superAndes.darClientesConsumoSuperAndes(fechaInicialEs, fechaFinalEs, nombreProd, param);
+					String resultado = "En Clientes";
+					resultado +=  "\n" + listarVO(lista);
+					panelDatos.actualizarInterfaz(resultado);
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		
+		
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	public void consumoSuperAndesv2( )
+	{
+		try 
+		{
+
+			JTextField fechaInicialField = new JTextField(10);
+			JTextField fechaFinalField = new JTextField(10);
+			JTextField nombreProdField = new JTextField(10);
+			JTextField paramField = new JTextField(10);
+			
+
+			JPanel myPanel = new JPanel(new GridLayout(4,2));
+			myPanel.add(new JLabel("Nombre del producto: "));
+			myPanel.add(nombreProdField);
+			myPanel.add(new JLabel("Fecha Inicial (yyyy-MM-dd):"));
+			myPanel.add(fechaInicialField);
+			myPanel.add(new JLabel("Fecha Final (yyyy-MM-dd):"));
+			myPanel.add(fechaFinalField);
+			myPanel.add(new JLabel("Parametro de ordenamiento (puntos, correo, nombre, id): "));
+			myPanel.add(paramField);
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese los datos del producto y la fecha", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String fechaInicial = fechaInicialField.getText();
+				String fechaFinal = fechaFinalField.getText();
+				String nombreProd = nombreProdField.getText();
+				String param = paramField.getText();
+
+
+				if (!fechaInicial.isEmpty() && !fechaFinal.isEmpty() && !nombreProd.isEmpty() && !param.isEmpty())
+				{
+
+					String pattern = "yyyy-MM-dd";
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date1 = simpleDateFormat.parse(fechaInicial);
+					java.sql.Date fechaInicialEs = new java.sql.Date(date1.getTime());
+
+					pattern = "yyyy-MM-dd";
+					simpleDateFormat = new SimpleDateFormat(pattern);
+					Date date2 = simpleDateFormat.parse(fechaFinal);
+					java.sql.Date fechaFinalEs = new java.sql.Date(date2.getTime());
+
+					
+					List<Cliente> lista = superAndes.darClientesConsumoSuperAndesv2(fechaInicialEs, fechaFinalEs, nombreProd, param);
+					String resultado = "En Clientes";
+					resultado +=  "\n" + listarVO(lista);
+					panelDatos.actualizarInterfaz(resultado);
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		
+		
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
 
 	public void clientesFrecuente()
 	{
