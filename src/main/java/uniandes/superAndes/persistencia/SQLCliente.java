@@ -139,7 +139,7 @@ class SQLCliente {
 	
 	public List<Cliente> darClientesComsumoSuperAndes (PersistenceManager pm, Date fechaInicial, Date fechaFinal, String nombreProd, String param)
 	{
-		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos, c.personanatural,c.nombre, c.empresa\r\n" + 
 				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
 				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
 				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
@@ -152,7 +152,7 @@ class SQLCliente {
 	
 	public List<Cliente> darClientesComsumoSuperAndesv2 (PersistenceManager pm, Date fechaInicial, Date fechaFinal, String nombreProd, String param)
 	{
-		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+		Query q = pm.newQuery(SQL, "SELECT distinct(c.id), c.correoelectronico, c.puntos,c.nombre, c.personanatural, c.empresa\r\n" + 
 				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id <> f.cliente \r\n" + 
 				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
 				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 

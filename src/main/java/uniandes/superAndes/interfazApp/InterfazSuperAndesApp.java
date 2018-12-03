@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
@@ -1988,16 +1989,31 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 					Integer ano = Integer.parseInt(anio);
 
-
-					String funcionamiento = superAndes.consultarFuncionamiento(ano);
-					if (funcionamiento == null)
-					{
-						throw new Exception ("No se pudo crear el analisis ");
-					}
-					String resultado = "En analisis\n\n";
-					resultado += "analisis  exitosamente:\n " + funcionamiento;
-					resultado += "\n Operación terminada";
+					String resultado = "El analisis fue\n\n";
+					
 					panelDatos.actualizarInterfaz(resultado);
+					
+					
+					java.sql.Date date;
+					java.sql.Date datea;
+					Calendar c = Calendar.getInstance();
+					c.set(ano, 12, 31);
+					Calendar d =  Calendar.getInstance();
+					d.set(ano, 1,1);
+					int semana = 1;
+					while(d.compareTo(c)<=0)
+					{
+						datea=new java.sql.Date(d.getTime().getTime());
+						d.add(Calendar.WEEK_OF_YEAR, 1);
+						date = new java.sql.Date(d.getTime().getTime());
+						String respuesta = superAndes.consultarFuncionamiento(semana, datea, date);
+						semana++;
+						panelDatos.agregarAInterfaz(respuesta);
+					}
+					
+					
+					panelDatos.actualizarInterfaz("Termino el proceso");
+
 
 
 				}

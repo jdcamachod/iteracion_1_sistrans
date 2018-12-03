@@ -12,7 +12,8 @@ import javax.jdo.Transaction;
 import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
-
+import uniandes.superAndes.interfazApp.cliente.InterfazSuperAndesApp;
+import uniandes.superAndes.interfazApp.cliente.PanelDatos;
 import uniandes.superAndes.persistencia.PersistenciaSuperAndes;
 
 
@@ -35,6 +36,8 @@ public class SuperAndes implements Runnable {
 	 */
 	private PersistenciaSuperAndes pp;
 
+	private InterfazSuperAndesApp interfaceSuper;
+
 	/* ****************************************************************
 	 * 			Métodos
 	 *****************************************************************/
@@ -50,7 +53,7 @@ public class SuperAndes implements Runnable {
 	 * El constructor qye recibe los nombres de las tablas en tableConfig
 	 * @param tableConfig - Objeto Json con los nombres de las tablas y de la unidad de persistencia
 	 */
-	public SuperAndes (JsonObject tableConfig)
+	public SuperAndes (JsonObject tableConfig )
 	{
 		pp = PersistenciaSuperAndes.getInstance (tableConfig);
 	}
@@ -625,22 +628,10 @@ public class SuperAndes implements Runnable {
 		return  resp;
 	}
 
-	public String consultarFuncionamiento(int anio)
+	public String consultarFuncionamiento(int semana,java.sql.Date datea, java.sql.Date date )
 	{
-		java.sql.Date date;
-		java.sql.Date datea;
-		Calendar c = Calendar.getInstance();
-		c.set(anio, 12, 31);
-		Calendar d =  Calendar.getInstance();
-		d.set(anio, 1,1);
-		String respuesta ="";
-		int semana = 1;
-		while(d.compareTo(c)<=0)
-		{
-			respuesta+="Semana "+semana+"\n";
-			datea=new java.sql.Date(d.getTime().getTime());
-			d.add(Calendar.WEEK_OF_YEAR, 1);
-			date = new java.sql.Date(d.getTime().getTime());
+		
+			String respuesta ="Semana "+semana+"\n";
 			List<Consulta> consultas=pp.darIdentificadoresExtremosProductos(datea, date);
 			List<Consulta> proveedores =pp.darProveedoresSemana(datea, date);
 			respuesta+="Productos menos vendidos= \n";
@@ -675,9 +666,7 @@ public class SuperAndes implements Runnable {
 				 respuesta +="numero de solicitaciones "+con.getCuenta()+", nombre proveedor "+con.getNombre()+"\n";
 				
 			}
-			semana++;
-			
-		}
+			System.out.println(respuesta);
 		return respuesta;
 		
 		
