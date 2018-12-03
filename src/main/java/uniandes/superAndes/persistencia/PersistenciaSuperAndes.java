@@ -2639,6 +2639,101 @@ public class PersistenciaSuperAndes  {
 
 	}	
 
+	public List<Cliente> darClientesCompraMes () {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar clientes que hacen una compra al mes" );
+			List<Cliente> clientes = sqlCliente.darClientesCompraMes(pm);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+	
+	public List<Cliente> darClientesProductoCostoso () {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar CLientes que compraron un producto costoso" );
+			List<Cliente> clientes = sqlCliente.darClientesConProductoMay(pm);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
+	
+	public List<Cliente> darClientesProductoHerrYTec () {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("dar CLientes que compraron herramientas o tecnologia" );
+			List<Cliente> clientes = sqlCliente.darClientesHerrYTec(pm);
+			tx.commit();
+
+			return clientes;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 
 
 }

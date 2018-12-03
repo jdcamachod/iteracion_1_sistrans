@@ -839,7 +839,19 @@ public class SuperAndes implements Runnable {
 		log.info("/Consultando las facturas por cliente "+idCliente );
 		return facturas;
 	}
+	public List<Cliente> darClientesHerrYTec()
+	{
+		return pp.darClientesProductoHerrYTec();
+	}
+	public List<Cliente> darClientesCompraMes()
+	{
+		return pp.darClientesCompraMes();
+	}
 	
+	public List<Cliente> darClientesProdCotoso()
+	{
+		return pp.darClientesProductoCostoso();
+	}
 	
 	public Factura adicionarFactura( java.util.Date fecha, double costoTotal, Long cliente, Long sucursal) 
 	{

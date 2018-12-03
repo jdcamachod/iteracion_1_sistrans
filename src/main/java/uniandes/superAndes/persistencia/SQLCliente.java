@@ -194,4 +194,39 @@ class SQLCliente {
 		return losClientes;
 				
 	}
+	
+	public List<Cliente> darClientesConProductoMay(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT  distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"WHERE p.preciounitario > 100000");
+		q.setResultClass(Cliente.class);
+		return(List<Cliente>) q.executeList();
+	}
+	
+	public List<Cliente> darClientesHerrYTec(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT  distinct(c.id), c.correoelectronico, c.puntos, c.personanatural, c.empresa\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"WHERE p.categoria = 14 OR p.categoria = 1");
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>) q.executeList();
+	}
+	
+	public List<Cliente> darClientesCompraMes(PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT  Distinct(c.id),COUNT(*)\r\n" + 
+				"FROM CLIENTE C INNER JOIN FACTURA F ON c.id = f.cliente \r\n" + 
+				"INNER JOIN PRODUCTOS_FACTURA PF ON pf.idfactura = f.id\r\n" + 
+				"INNER JOIN PRODUCTO P ON p.id = pf.idproducto\r\n" + 
+				"WHERE f.fecha BETWEEN '01/01/2018'AND '31/12/2018'\r\n" + 
+				"GROUP BY c.id\r\n" + 
+				"HAVING COUNT(c.id)>12");
+		q.setResultClass(Cliente.class);
+		return (List<Cliente>)q.executeList();
+	}
 }

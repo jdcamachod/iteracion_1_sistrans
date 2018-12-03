@@ -195,6 +195,10 @@
 				{
 					"label": "Consultar funcionamiento",
 					"event": "consultarFuncionamiento"
+				},
+				{
+					"label": "Dar buenos clientes",
+					"event": "darBuenosClientes"
 				}
 
 			]

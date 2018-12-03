@@ -2272,6 +2272,30 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
+	
+	public void darBuenosClientes()
+	{
+		try {
+			List<Cliente> lista  = superAndes.darClientesCompraMes();
+			List<Cliente> lista2= superAndes.darClientesHerrYTec();
+			List<Cliente> lista3 = superAndes.darClientesProdCotoso();
+			
+			String resultado = "Clientes que compran una vez al mes \n";
+			resultado += listarVO(lista);
+			resultado+= "\n Clientes que compran producto costoso";
+			resultado+= "\n"+ listarVO(lista3);
+			resultado+="\n Clientes que compran pproductos de herramientas o tecnologia";
+			resultado+= "\n"+listarVO(lista2);
+			resultado += "\n Operación terminada";
+			panelDatos.actualizarInterfaz(resultado);
+			
+		}
+		catch(Exception e)
+		{
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 
 
 

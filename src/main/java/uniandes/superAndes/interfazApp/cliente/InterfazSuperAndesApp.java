@@ -990,6 +990,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 		}
 	}
 
+	
 
 	
 
@@ -1007,6 +1008,7 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 				VOEstante sucursal = superAndes.darEstantePorDireccion(direccion);
 				String resultado = "En buscar Bodega por direccion\n\n";
 				if (sucursal != null)
+					
 				{
 					resultado += "El Estante es: " + sucursal;
 				}
