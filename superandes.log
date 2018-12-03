@@ -83,3 +83,10 @@
 21:07:25,368 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Consultando los productos en el carrito 312
 21:07:25,368 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - Consultando los productos en el carrito 312
 21:07:25,545 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Consultando los productos en el carrito 312
+21:25:38,571 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Interfaz
+21:25:38,572 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se aplica configuracion indicada en el archivo de configuracion
+21:25:38,618 (main) INFO  [uniandes.superAndes.interfazApp.InterfazSuperAndesApp] - Se encontró un archivo de configuración válido: Tablas BD_A
+21:25:46,279 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - Consultando los productos en el carrito 312
+21:25:46,438 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Consultando los productos en el carrito 312
+21:25:46,440 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - Consultando los productos en el carrito 312
+21:25:46,646 (pool-1-thread-1) INFO  [uniandes.superAndes.negocio.SuperAndes] - /Consultando los productos en el carrito 312
