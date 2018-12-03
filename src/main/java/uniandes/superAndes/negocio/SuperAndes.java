@@ -2,6 +2,7 @@ package uniandes.superAndes.negocio;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -624,6 +625,64 @@ public class SuperAndes implements Runnable {
 		return  resp;
 	}
 
+	public String consultarFuncionamiento(int anio)
+	{
+		java.sql.Date date;
+		java.sql.Date datea;
+		Calendar c = Calendar.getInstance();
+		c.set(anio, 12, 31);
+		Calendar d =  Calendar.getInstance();
+		d.set(anio, 1,1);
+		String respuesta ="";
+		int semana = 1;
+		while(d.compareTo(c)<=0)
+		{
+			respuesta+="Semana "+semana+"\n";
+			datea=new java.sql.Date(d.getTime().getTime());
+			d.add(Calendar.WEEK_OF_YEAR, 1);
+			date = new java.sql.Date(d.getTime().getTime());
+			List<Consulta> consultas=pp.darIdentificadoresExtremosProductos(datea, date);
+			List<Consulta> proveedores =pp.darProveedoresSemana(datea, date);
+			respuesta+="Productos menos vendidos= \n";
+			int cuenta=-1;
+			int cuenta2 = -1;
+			if(!consultas.isEmpty())
+				{
+					cuenta=consultas.get(0).getCuenta();
+				}
+			if(!proveedores.isEmpty())
+			{
+				cuenta2=proveedores.get(0).getCuenta();
+			}
+			for(Consulta con: consultas)
+			{
+				if(con.getCuenta()!=cuenta)
+				{
+					respuesta+="Productos mas vendidos= \n";
+					cuenta = con.getCuenta();
+				}
+				 respuesta +="numero vendido "+con.getCuenta()+", nombre producto "+con.getNombre()+"\n";
+				
+			}
+			respuesta+="Proveedores menos solicitados: \n";
+			for(Consulta con: proveedores)
+			{
+				if(con.getCuenta()!=cuenta)
+				{
+					respuesta+="Proveedores mas solicitados= \n";
+					cuenta = con.getCuenta();
+				}
+				 respuesta +="numero de solicitaciones "+con.getCuenta()+", nombre proveedor "+con.getNombre()+"\n";
+				
+			}
+			semana++;
+			
+		}
+		return respuesta;
+		
+		
+		
+	}
 	public String analizarLaOperacionDeSuperAndes(String categoria, Date fechaInicial, Date fechaFinal) {
 
 		List<Sucursal> sucursales = pp.darSucursales();
@@ -674,7 +733,7 @@ public class SuperAndes implements Runnable {
 	}
 	
 	
-
+	
 	
 	public void vaciarCarritosAbandonados()
 	{

@@ -18,7 +18,7 @@ public class Producto implements VOProducto {
 	private double precioUnidadMedida;
 	private Long categoria;
 	private Date fechaVencimiento;
-	private int cantidad;
+	private Integer cantidad;
 	private double cantidadEnLaPresentacion;
 	private Long idProveedor;
 	private String unidadMedida;
@@ -45,7 +45,7 @@ public class Producto implements VOProducto {
 		this.unidadMedida= "";
 		this.calidad = "";
 	}
-	public Producto(long id, int cantidad, String codigoBarras, double peso, double volumen, String marca,
+	public Producto(long id, Integer cantidad, String codigoBarras, double peso, double volumen, String marca,
 			int nivelReorden, String nombre, double precioUnitario, String presentacion, 
 			Long idCategoria, Date fechaVencimiento, double precioUnidadMedida, double cantidadPresentacion, Long idProveedor, String unidadMedida) {
 	
@@ -73,10 +73,10 @@ public class Producto implements VOProducto {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public int getCantidad() {
+	public Integer getCantidad() {
 		return cantidad;
 	}
-	public void setCantidad(int cantidad) {
+	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
 	public String getCodigoBarras() {

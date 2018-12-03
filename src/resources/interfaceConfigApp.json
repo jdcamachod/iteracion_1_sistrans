@@ -193,8 +193,8 @@
 					"event": "consumoSuperAndesv2"
 				},
 				{
-					"label": "Borrar por direccion",
-					"event": "eliminarEstantePorDireccion"
+					"label": "Consultar funcionamiento",
+					"event": "consultarFuncionamiento"
 				}
 
 			]

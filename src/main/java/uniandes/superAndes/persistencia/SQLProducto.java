@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-
+import uniandes.superAndes.negocio.Consulta;
 import uniandes.superAndes.negocio.Producto;
 
 class SQLProducto {
@@ -134,6 +134,29 @@ class SQLProducto {
 			q.setResultClass(Producto.class);
 			return (List<Producto>) q.executeList();
 		}
+		
+		public List<Consulta> darIdProductoMasYMenos(PersistenceManager pm, Date fechaInicial, Date fechaFinal)
+		{
+			Query q = pm.newQuery(SQL, "SELECT count(*) AS cuenta , p.nombre\r\n" + 
+					"FROM PRODUCTO P \r\n" + 
+					"INNER JOIN PRODUCTOS_FACTURA PF ON p.id= pf.idproducto\r\n" + 
+					"INNER JOIN FACTURA F ON pf.idfactura = f.id\r\n" + 
+					"WHERE F.fecha BETWEEN ? AND ? GROUP BY p.nombre\r\n" + 
+					"HAVING count(p.nombre)=(SELECT MAX(COUNT(p.nombre)) FROM PRODUCTO T\r\n" + 
+					"INNER JOIN PRODUCTOS_FACTURA TF ON t.id= tf.idproducto\r\n" + 
+					"INNER JOIN FACTURA E ON tf.idfactura = e.id\r\n" + 
+					"WHERE E.fecha BETWEEN ? AND ?\r\n" + 
+					"GROUP BY t.nombre) OR count(p.nombre)=(SELECT MIN(COUNT(p.nombre)) FROM PRODUCTO T\r\n" + 
+					"INNER JOIN PRODUCTOS_FACTURA TF ON t.id= tf.idproducto\r\n" + 
+					"INNER JOIN FACTURA E ON tf.idfactura = e.id\r\n" + 
+					"WHERE E.fecha BETWEEN ? AND ?\r\n" + 
+					"GROUP BY t.nombre) ORDER  BY CUENTA");
+			q.setParameters(fechaInicial, fechaFinal,fechaInicial,fechaFinal,fechaInicial, fechaFinal);
+			q.setResultClass(Consulta.class);
+			return (List<Consulta>)q.executeList();
+		}
+		
+		
 		
 		/**
 		 * Crea y ejecuta la sentencia SQL para encontrar la información de LOS PRODUCTOS de la 

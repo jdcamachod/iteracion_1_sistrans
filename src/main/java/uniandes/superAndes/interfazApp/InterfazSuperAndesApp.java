@@ -1960,7 +1960,65 @@ public class InterfazSuperAndesApp extends JFrame implements ActionListener
 
 
 	}
+	
+	public void consultarFuncionamiento( )
+	{
+		try 
+		{
 
+			JTextField anioField = new JTextField(10);
+			
+
+			JPanel myPanel = new JPanel(new GridLayout(1,2));
+			myPanel.add(new JLabel("Año de la consulta:"));
+			myPanel.add(anioField);
+			
+
+			int result = JOptionPane.showConfirmDialog(null, myPanel, 
+					"Ingrese el año para consultar", JOptionPane.OK_CANCEL_OPTION);
+
+			if (result == JOptionPane.OK_OPTION) {
+
+				String anio = anioField.getText();
+				
+
+
+				if (!anio.isEmpty() )
+				{
+
+					Integer ano = Integer.parseInt(anio);
+
+
+					String funcionamiento = superAndes.consultarFuncionamiento(ano);
+					if (funcionamiento == null)
+					{
+						throw new Exception ("No se pudo crear el analisis ");
+					}
+					String resultado = "En analisis\n\n";
+					resultado += "analisis  exitosamente:\n " + funcionamiento;
+					resultado += "\n Operación terminada";
+					panelDatos.actualizarInterfaz(resultado);
+
+
+				}
+				else
+				{
+					panelDatos.actualizarInterfaz("Nombre no se permite vacio");
+				}
+
+			}
+			else
+			{
+				panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+			}
+		} 
+		catch (Exception e) 
+		{
+			//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
 	public void analizarLaOperacionDeSuperAndes( )
 	{
 		try 

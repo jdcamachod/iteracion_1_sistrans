@@ -23,7 +23,7 @@ import uniandes.superAndes.negocio.CarritoProductos;
 import uniandes.superAndes.negocio.Categoria;
 
 import uniandes.superAndes.negocio.Cliente;
-
+import uniandes.superAndes.negocio.Consulta;
 import uniandes.superAndes.negocio.DescuentoPorcentaje;
 import uniandes.superAndes.negocio.Empresa;
 import uniandes.superAndes.negocio.Estante;
@@ -2543,6 +2543,70 @@ public class PersistenciaSuperAndes  {
 		}
 
 	}	
+	
+	public List<Consulta> darIdentificadoresExtremosProductos (Date fechaInicial, Date fechaFinal) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("Dar productos mas vendidos y menos vendidos en un rango de fechas" );
+			List<Consulta> consultas = sqlProducto.darIdProductoMasYMenos(pm, fechaInicial, fechaFinal);
+			tx.commit();
+
+			return consultas;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}	
+	
+	public List<Consulta> darProveedoresSemana (Date fechaInicial, Date fechaFinal) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Transaction tx=pm.currentTransaction();
+
+		try
+		{ 
+			tx.begin();
+			log.trace ("Dar proveedores mas solicitados y menos solicitados en un rango de fechas" );
+			List<Consulta> consultas = sqlProveedor.darProveedoresSemana(pm, fechaInicial, fechaFinal);
+			tx.commit();
+
+			return consultas;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+			return null;
+		}
+		finally
+		{
+			if (tx.isActive())
+			{
+				tx.rollback();
+			}
+			pm.close();
+		}
+
+	}
 	public List<Cliente> encontrarLosClientesFrecuentesDeLaSucursal (long id) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm = pmf.getPersistenceManager();

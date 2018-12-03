@@ -63,7 +63,7 @@ public interface VOProducto {
 	 * @return fecha de vencimiento del producto
 	 */
 	public Date getFechaVencimiento();
-	public int getCantidad();
+	public Integer getCantidad();
 	public double getCantidadEnLaPresentacion();
 	public long getIdProveedor();
 	

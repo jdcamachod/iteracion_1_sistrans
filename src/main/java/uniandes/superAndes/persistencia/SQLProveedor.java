@@ -1,11 +1,13 @@
 package uniandes.superAndes.persistencia;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import uniandes.superAndes.negocio.Cliente;
+import uniandes.superAndes.negocio.Consulta;
 import uniandes.superAndes.negocio.Producto;
 import uniandes.superAndes.negocio.Proveedor;
 
@@ -112,6 +114,24 @@ class SQLProveedor {
 			q.setResultClass(Proveedor.class);
 			q.setParameters(nombreProveedor);
 			return (Proveedor) q.executeUnique();
+		}
+		
+		public List<Consulta> darProveedoresSemana(PersistenceManager pm, Date fechaInicial, Date fechaFinal)
+		{
+			Query q = pm.newQuery(SQL, "SELECT count(*) AS CUENTA, p.nombre\r\n" + 
+					"FROM PROVEEDOR P \r\n" + 
+					"INNER JOIN ORDEN_PEDIDO OP ON p.id= op.proveedor\r\n" + 
+					"WHERE op.fechaesperadadeentrega BETWEEN ? AND ? GROUP BY p.nombre\r\n" + 
+					"HAVING count(p.nombre)=(SELECT MAX(COUNT(p.nombre)) FROM PROVEEDOR T\r\n" + 
+					"INNER JOIN ORDEN_PEDIDO TP ON t.id= tp.proveedor\r\n" + 
+					"WHERE tp.fechaesperadadeentrega BETWEEN ? AND ?\r\n" + 
+					"GROUP BY t.nombre) OR count(p.nombre)=(SELECT MIN(COUNT(p.nombre)) FROM PROVEEDOR T\r\n" + 
+					"INNER JOIN ORDEN_PEDIDO TP ON t.id= tp.proveedor\r\n" + 
+					"WHERE tp.fechaesperadadeentrega BETWEEN ? AND ?\r\n" + 
+					"GROUP BY t.nombre) ORDER BY CUENTA");
+			q.setParameters(fechaInicial, fechaFinal, fechaInicial, fechaFinal, fechaInicial, fechaFinal);
+			q.setResultClass(Consulta.class);
+			return (List<Consulta>) q.executeList();
 		}
 
 		/**
